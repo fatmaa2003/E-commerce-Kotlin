@@ -6,4 +6,18 @@
     </style>
 
     <style name="Theme.EcommerceKotlin" parent="Base.Theme.EcommerceKotlin" />
+
+    <style name="app_theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dark_surface</item>
+        <item name="android:fontFamily">@font/regular</item>
+
+    </style>
+
+    <style name="product_price">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dark_surface</item>
+        <item name="android:fontFamily">@font/semibold</item>
+    </style>
+
 </resources>
