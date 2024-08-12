@@ -9,7 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.UserRole
+import com.example.e_commercekotlin.domain.Repository
 import com.example.e_commercekotlin.presentation.viewmodels.LoginViewModel
+import com.example.e_commercekotlin.presentation.screens.HomeActivity // Assuming HomeActivity is in the same package
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
