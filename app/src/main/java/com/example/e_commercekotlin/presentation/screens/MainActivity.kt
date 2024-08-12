@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         replaceFragment(FeedFragment())
-
+        setSupportActionBar(binding.toolbar.root)
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(FeedFragment())
