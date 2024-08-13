@@ -1,8 +1,5 @@
 package com.example.e_commercekotlin.presentation.screens
 
-
-
-
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -12,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
-
-import com.example.e_commercekotlin.data.model.SignupRequest
+import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.domain.Repository
 import com.example.e_commercekotlin.presentation.viewmodels.SignupViewModel
 import kotlinx.coroutines.launch
 
-class SignupFragment : Fragment(R.layout.signup) {
+class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private lateinit var signupViewModel: SignupViewModel
 
@@ -35,13 +31,12 @@ class SignupFragment : Fragment(R.layout.signup) {
             val password = view.findViewById<EditText>(R.id.passwordEditText).text.toString()
 
             signupViewModel.signup(signupRequest = SignupRequest(
-                firstName= firstName ,
-                lastName= lastName ,
-                email= email ,
-                username= username ,
-                password= password
-            )
-            )
+                     firstName= firstName ,
+                     lastName= lastName ,
+                 email= email ,
+                 username= username ,
+                 password= password
+            ))
         }
 
         signUpObserver()
@@ -68,4 +63,3 @@ class SignupFragment : Fragment(R.layout.signup) {
         }
     }
 }
-

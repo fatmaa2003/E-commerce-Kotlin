@@ -1,14 +1,11 @@
 package com.example.e_commercekotlin.presentation.viewmodels
 
-
-
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.SignupRequest
+import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch

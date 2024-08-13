@@ -1,5 +1,4 @@
-package com.example.e_commercekotlin.data.model
-
+package com.example.e_commercekotlin.data
 data class SignupRequest(
     val firstName: String,
     val lastName: String,
@@ -7,4 +6,3 @@ data class SignupRequest(
     val username: String,
     val password: String
 )
-
