@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,13 +10,24 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN-UP"
+            android:fontFamily="@font/extrabold"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#614FE0"
+            android:layout_gravity="center"
+            android:paddingBottom="16dp" />
         <EditText
             android:id="@+id/firstNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="First Name"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <EditText
             android:id="@+id/lastNameEditText"
@@ -23,7 +35,8 @@
             android:layout_height="wrap_content"
             android:hint="Last Name"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <EditText
             android:id="@+id/emailEditText"
@@ -31,7 +44,8 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <EditText
             android:id="@+id/usernameEditText"
@@ -39,7 +53,8 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -48,7 +63,8 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <EditText
             android:id="@+id/confirmPasswordEditText"
@@ -57,7 +73,8 @@
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext" />
 
         <Button
             android:id="@+id/signupButton"
@@ -65,15 +82,17 @@
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:minHeight="48dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:backgroundTint="#614FE0"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/goToLoginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? Login here."
-            android:textColor="@android:color/holo_blue_dark"
-            android:paddingTop="16dp"
-            />
+            android:textColor="#614FE0"
+            android:paddingTop="16dp" />
     </LinearLayout>
 </ScrollView>
+

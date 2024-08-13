@@ -6,6 +6,17 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG-IN"
+        android:fontFamily="@font/extrabold"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#614FE0"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
@@ -13,7 +24,7 @@
         android:hint="Username"
         android:minHeight="48dp"
         android:padding="12dp"
-    />
+        android:background="@drawable/rounded_edittext" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -23,7 +34,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="12dp"
-    />
+        android:background="@drawable/rounded_edittext" />
 
     <Button
         android:id="@+id/loginButton"
@@ -32,13 +43,14 @@
         android:text="Login"
         android:minHeight="48dp"
         android:padding="12dp"
-    />
+        android:backgroundTint="#614FE0"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/goToSignupTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account? Sign up here."
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="#614FE0"
         android:paddingTop="16dp"/>
 </LinearLayout>
