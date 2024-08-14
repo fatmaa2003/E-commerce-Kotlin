@@ -4,3 +4,4 @@ sealed class Resource<out T> {
     data class Error(val message: String) : Resource<Nothing>()
     object Loading : Resource<Nothing>()
 }
+
