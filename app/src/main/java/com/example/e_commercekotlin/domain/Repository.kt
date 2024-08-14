@@ -1,13 +1,11 @@
 package com.example.e_commercekotlin.domain
 
-import com.example.e_commercekotlin.data.ApiService
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.model.SignupResponse
-import com.google.android.gms.common.api.Api
 
 
 class Repository() {
