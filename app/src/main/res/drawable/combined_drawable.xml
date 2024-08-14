@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Horizontal line -->
+    <item>
+        <bitmap
+            android:src="@drawable/horizontal_plus"
+            android:gravity="center_horizontal"/>
+    </item>
+    <!-- Vertical line -->
+    <item>
+        <bitmap
+            android:src="@drawable/vertical_plus"
+            android:gravity="center"/>
+    </item>
+</layer-list>
