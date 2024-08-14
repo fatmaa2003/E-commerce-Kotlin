@@ -28,7 +28,6 @@
             android:minHeight="48dp"
             android:padding="12dp"
             android:background="@drawable/rounded_edittext" />
-
         <EditText
             android:id="@+id/lastNameEditText"
             android:layout_width="match_parent"
@@ -37,7 +36,6 @@
             android:minHeight="48dp"
             android:padding="12dp"
             android:background="@drawable/rounded_edittext" />
-
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
@@ -46,7 +44,6 @@
             android:minHeight="48dp"
             android:padding="12dp"
             android:background="@drawable/rounded_edittext" />
-
         <EditText
             android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
@@ -55,7 +52,6 @@
             android:minHeight="48dp"
             android:padding="12dp"
             android:background="@drawable/rounded_edittext" />
-
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
@@ -65,7 +61,6 @@
             android:minHeight="48dp"
             android:padding="12dp"
             android:background="@drawable/rounded_edittext" />
-
         <EditText
             android:id="@+id/confirmPasswordEditText"
             android:layout_width="match_parent"
@@ -85,8 +80,8 @@
             android:padding="12dp"
             android:backgroundTint="#614FE0"
             android:textColor="@android:color/white" />
-
         <TextView
+
             android:id="@+id/goToLoginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
