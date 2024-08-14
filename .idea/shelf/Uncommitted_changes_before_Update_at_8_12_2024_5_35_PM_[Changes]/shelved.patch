@@ -1,0 +1,41 @@
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n\r\n    android:padding=\"16dp\">\r\n\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:id=\"@+id/tv\"\r\n        android:text=\"hello\"\r\n        />\r\n\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home.xml b/app/src/main/res/layout/activity_home.xml
+--- a/app/src/main/res/layout/activity_home.xml	
++++ b/app/src/main/res/layout/activity_home.xml	
+@@ -9,7 +9,7 @@
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:id="@+id/tv"
++        android:id="@+id/welcomeMessage"
+         android:text="hello"
+         />
+ 
+Index: app/src/main/java/com/example/e_commercekotlin/presentation/viewmodels/LoginViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.presentation.viewmodels\r\n\r\nimport androidx.lifecycle.LiveData\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport com.example.e_commercekotlin.data.Resource\r\nimport com.example.e_commercekotlin.data.model.LoginResponse\r\nimport com.example.e_commercekotlin.domain.Repository\r\nimport com.example.e_commercekotlin.data.model.UserRole\r\nimport kotlinx.coroutines.flow.MutableStateFlow\r\nimport kotlinx.coroutines.flow.StateFlow\r\nimport kotlinx.coroutines.launch\r\n\r\nclass LoginViewModel(private val repository: Repository) : ViewModel() {\r\n\r\n    private val _loginState = MutableLiveData<Resource<LoginResponse>>(Resource.Loading)\r\n    val loginState: LiveData<Resource<LoginResponse>> get() = _loginState\r\n\r\n    fun login(username: String, password: String) {\r\n        viewModelScope.launch {\r\n            _loginState.postValue(Resource.Loading)\r\n            val result = repository.login(username,password)\r\n            _loginState.postValue(result)\r\n\r\n//            when (val result = repository.login(username, password)) {\r\n//                is Resource.Success -> {\r\n//                    result.\r\n//                    val userRole = if (result.data.role == \"ADMIN\") UserRole.ADMIN else UserRole.USER\r\n//                    _loginState.value = Resource.Success(userRole)\r\n//                    //check eza kan admin wla user\r\n//                }\r\n//                is Resource.Error -> _loginState.value = Resource.Error(result.message)\r\n//                else -> _loginState.value = Resource.Error(\"Unknown error\")\r\n//            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/presentation/viewmodels/LoginViewModel.kt b/app/src/main/java/com/example/e_commercekotlin/presentation/viewmodels/LoginViewModel.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/presentation/viewmodels/LoginViewModel.kt	
++++ b/app/src/main/java/com/example/e_commercekotlin/presentation/viewmodels/LoginViewModel.kt	
+@@ -7,11 +7,7 @@
+ import com.example.e_commercekotlin.data.Resource
+ import com.example.e_commercekotlin.data.model.LoginResponse
+ import com.example.e_commercekotlin.domain.Repository
+-import com.example.e_commercekotlin.data.model.UserRole
+-import kotlinx.coroutines.flow.MutableStateFlow
+-import kotlinx.coroutines.flow.StateFlow
+ import kotlinx.coroutines.launch
+-
+ class LoginViewModel(private val repository: Repository) : ViewModel() {
+ 
+     private val _loginState = MutableLiveData<Resource<LoginResponse>>(Resource.Loading)
