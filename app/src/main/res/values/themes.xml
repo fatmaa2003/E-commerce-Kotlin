@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.EcommerceKotlin" parent="Base.Theme.EcommerceKotlin" />
+    <style name="CornerCut" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>
