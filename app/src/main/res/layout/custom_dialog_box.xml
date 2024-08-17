@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/transparent"
+    android:elevation="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/itemBrandAndTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp"
+        android:text="ABO TREKAAA"
+        android:fontFamily="@font/extrabold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="20dp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/itemImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/itemBrandAndTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/treka"
+        app:shapeAppearanceOverlay="@style/CornerCut"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/itemBrandAndTitle"
+        android:layout_marginStart="8dp"
+        android:cardBackgroundColor="@android:color/white"
+        android:cardCornerRadius="8dp"
+        android:elevation="4dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_dark"
+                android:src="@drawable/bookmark"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/share"
+                android:padding="8dp"
+                android:layout_marginTop="8dp" />
+
+            <ImageButton
+                android:id="@+id/confirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/check"
+                android:padding="8dp"
+                android:layout_marginTop="8dp" />
+
+            <ImageButton
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/minus"
+                android:padding="8dp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/itemImage"
+        android:layout_marginTop="16dp"
+        android:paddingVertical="18dp"
+        app:shapeAppearanceOverlay="@style/CornerCut"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bershka mom jeans"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bershka"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Bershka"
+                        android:fontFamily="@font/extrabold"
+                        android:textColor="@android:color/black"
+                        android:textSize="10sp"
+                    android:background="@android:color/transparent"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

@@ -51,7 +51,7 @@ dependencies {
 //    implementation(libs.mediation.test.suite)
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation ("androidx.activity:activity-ktx:1.7.2" )
-
+    implementation ("com.google.android.material:material:latest_version")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
