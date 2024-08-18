@@ -1,10 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    android:background="@color/transparent"
-    android:elevation="8dp"
+    android:background="@color/grey"
     android:orientation="vertical">
 
     <TextView
@@ -19,105 +18,101 @@
         android:layout_marginTop="8dp"
         android:paddingBottom="20dp"/>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/itemImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_below="@id/itemBrandAndTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="8dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/treka"
-        app:shapeAppearanceOverlay="@style/CornerCut"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/treka"
+            app:shapeAppearanceOverlay="@style/CornerCut"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bookmark"
+                    android:background="@drawable/dialog_button_background_shape"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/share"                    android:background="@drawable/dialog_button_background_shape"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/confirmButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_button_background_shape"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:src="@drawable/check"
+                   android:layout_marginTop="8dp"
+                />
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_button_background_shape"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp"
+                    android:src="@drawable/minus"
+                    android:layout_marginTop="8dp"
+                    />
+            </LinearLayout>
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/itemBrandAndTitle"
-        android:layout_marginStart="8dp"
-        android:cardBackgroundColor="@android:color/white"
-        android:cardCornerRadius="8dp"
-        android:elevation="4dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
-                android:src="@drawable/bookmark"
-                android:padding="8dp" />
-
-            <ImageButton
-                android:id="@+id/shareButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/share"
-                android:padding="8dp"
-                android:layout_marginTop="8dp" />
-
-            <ImageButton
-                android:id="@+id/confirmButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/check"
-                android:padding="8dp"
-                android:layout_marginTop="8dp" />
-
-            <ImageButton
-                android:id="@+id/deleteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/minus"
-                android:padding="8dp"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/itemImage"
+        android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:paddingVertical="18dp"
         app:shapeAppearanceOverlay="@style/CornerCut"
-        android:background="@color/white">
+        app:cardCornerRadius="20dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Bershka mom jeans"
-                    android:textAlignment="center"
+                    android:text="Bershka Mom Jeans"
+                    android:paddingStart="10dp"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -142,10 +137,9 @@
 
                 </FrameLayout>
 
-            </LinearLayout>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>
