@@ -27,12 +27,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, LoginFragment())
-//                .commit()
-//        }
     }
+
+
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
