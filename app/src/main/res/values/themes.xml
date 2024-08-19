@@ -8,13 +8,17 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/dark_surface</item>
         <item name="android:fontFamily">@font/regular</item>
-
     </style>
 
     <style name="product_price">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/dark_surface</item>
         <item name="android:fontFamily">@font/semibold</item>
+    </style>
+
+    <style name="CornerCut" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
 </resources>
