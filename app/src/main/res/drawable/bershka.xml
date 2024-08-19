@@ -14,6 +14,5 @@
     <path
         android:pathData="M24,4L24,4A20,20 0,0 1,44 24L44,24A20,20 0,0 1,24 44L24,44A20,20 0,0 1,4 24L4,24A20,20 0,0 1,24 4z"
         android:fillColor="#ffffff"/>
-
   </group>
 </vector>

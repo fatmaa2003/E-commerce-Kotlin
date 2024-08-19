@@ -8,4 +8,6 @@
     <color name="grey">#309898A0</color>
     <color name="lightgray">#808080</color>
 
+    <color name="description_color">#575758</color>
+
 </resources>

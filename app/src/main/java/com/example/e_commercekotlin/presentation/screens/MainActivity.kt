@@ -20,19 +20,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.root)
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.Feed -> replaceFragment(FeedFragment())
+                R.id.Feed -> replaceFragment(ProductDetails())
                 R.id.Market -> replaceFragment(MarketFragment())
                 R.id.Profile -> replaceFragment(ProfileFragment())
             }
             true
         }
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, LoginFragment())
-//                .commit()
-//        }
     }
+
+
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
