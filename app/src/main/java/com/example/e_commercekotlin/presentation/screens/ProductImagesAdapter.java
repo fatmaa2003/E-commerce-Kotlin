@@ -1,6 +1,5 @@
 package com.example.e_commercekotlin.presentation.screens;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercekotlin.R;
-import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ComponentViewHolder> {
+public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdapter.ComponentViewHolder> {
 
     private List<ProductImage> productImages = new ArrayList<>();
 //    private FragmentProductDetailsBinding binding;

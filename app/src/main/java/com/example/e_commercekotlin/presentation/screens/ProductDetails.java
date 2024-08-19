@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ProductDetails extends Fragment {
     private FragmentProductDetailsBinding binding;
-    private Adapter adapter;
+    private ProductImagesAdapter productImagesAdapter;
     private List<ProductImage> productImages = new ArrayList<>();
     private boolean tagsVisible1 = false;
     private boolean tagsVisible2 = false;
@@ -83,18 +83,18 @@ public class ProductDetails extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize Adapter and RecyclerView
-        adapter = new Adapter();
-        adapter.setProductImages(productImages);
+        productImagesAdapter = new ProductImagesAdapter();
+        productImagesAdapter.setProductImages(productImages);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.clothes.setLayoutManager(layoutManager);
-        binding.clothes.setAdapter(adapter);
+        binding.clothes.setAdapter(productImagesAdapter);
 
         // Adding items to the list
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
-        adapter.setProductImages(productImages);
+        productImagesAdapter.setProductImages(productImages);
     }
 
     @Override

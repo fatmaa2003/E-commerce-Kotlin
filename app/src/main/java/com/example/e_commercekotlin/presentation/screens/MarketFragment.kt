@@ -20,7 +20,6 @@ class MarketFragment : Fragment() {
         binding = FragmentMarketBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         binding.tabFeatured.setOnClickListener { switchTab(binding.tabFeatured, binding.tabFeatured) }
         binding.tabCollection.setOnClickListener { switchTab(binding.tabCollection, binding.tabCollection) }
         binding.tabStores.setOnClickListener { switchTab(binding.tabStores, binding.tabStores) }

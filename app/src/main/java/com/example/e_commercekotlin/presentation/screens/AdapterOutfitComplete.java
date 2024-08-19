@@ -5,15 +5,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AdapterOutfitComplete extends RecyclerView.Adapter<Adapter.ComponentViewHolder>{
+public class AdapterOutfitComplete extends RecyclerView.Adapter<ProductImagesAdapter.ComponentViewHolder>{
     @NonNull
     @Override
-    public Adapter.ComponentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductImagesAdapter.ComponentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ComponentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductImagesAdapter.ComponentViewHolder holder, int position) {
 
     }
 
