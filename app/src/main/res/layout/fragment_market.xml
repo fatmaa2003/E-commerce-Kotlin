@@ -4,6 +4,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.screens.FeedFragment"
-    android:background="@color/material_dynamic_neutral20">
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tabFeatured"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Featured"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tabCollection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Collection"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tabStores"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Stores"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tabTags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tags"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+
+
+
+
 
 </FrameLayout>
