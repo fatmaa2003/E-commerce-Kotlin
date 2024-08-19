@@ -1,0 +1,291 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="1dp"
+        android:layoutDirection="ltr">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/clothes"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/shop_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bershka Mom Jeans"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/shop_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bershka"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$34"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="14dp"
+
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="14dp"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="6dp"
+                android:orientation="horizontal"
+                android:background="@drawable/text"
+                android:paddingVertical="12dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/color_image"
+                    android:layout_width="20dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/blue_image" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Blue"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/semibold"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/text"
+                android:text="Size"
+                android:layout_marginHorizontal="6dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/semibold"
+                android:paddingVertical="12dp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EDE4E4"
+            android:layout_marginTop="22dp"/>
+
+        <TextView
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:textSize="16sp"
+            android:fontFamily="@font/regular"
+            android:layout_marginTop="22dp"/>
+
+        <TextView
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_marginTop="14dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/semibold"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="These are the Mom Jeans you've been looking for. Let loose with this modern interpretation of a classic '90s style, featuring a flattering high rise and stacked, tapered leg."
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/description_color" />
+
+        <TextView
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How it fits"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/semibold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-Loose through your hip and thigh -super high rise"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/regular"
+            android:layout_marginHorizontal="14dp"
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/tv_tags_header1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+                android:text="Tags"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_tags_content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vintage"
+                    android:background="@drawable/ic_launcher_background"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_tags_header2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+                android:text="Composition and care"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_tags_content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Composition Details"
+                    android:background="@drawable/ic_launcher_background"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_tags_header3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+                android:text="Shipping and return policies"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_tags_content3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipping Details"
+                    android:background="@drawable/ic_launcher_background"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complete your outfit"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginHorizontal="14dp"
+            android:id="@+id/clothes1"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal" />
+    </LinearLayout>
+</ScrollView>
