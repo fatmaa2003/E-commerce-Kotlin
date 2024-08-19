@@ -1,8 +1,4 @@
 <resources>
     <!-- Define your custom shape appearance for rounded corners -->
-    <style name="CornerCut" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">28dp</item> <!-- Adjust this value -->
-    </style>
 
 </resources>

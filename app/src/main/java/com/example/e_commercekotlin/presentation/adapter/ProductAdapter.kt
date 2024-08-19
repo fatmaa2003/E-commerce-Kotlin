@@ -10,7 +10,6 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Product
 import com.squareup.picasso.Picasso
 
-
 class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     private var productList : List<Product> = listOf()
@@ -28,6 +27,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
         Picasso.get().load(currentItem.images.firstOrNull()).into(holder.productImage)
+
         holder.productName.text = currentItem.title
         holder.productPrice.text = currentItem.price.toString()
     }
