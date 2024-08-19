@@ -6,6 +6,7 @@
     <color name="transparent">#00F9F8FD</color>
     <color name="dark_surface">#272728</color>
     <color name="grey">#309898A0</color>
+    <color name="lightgray">#808080</color>
 
     <color name="description_color">#575758</color>
 
