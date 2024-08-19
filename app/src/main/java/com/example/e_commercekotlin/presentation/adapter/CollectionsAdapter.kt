@@ -20,6 +20,8 @@ class CollectionsAdapter(private val items: List<Featured>) : RecyclerView.Adapt
         holder.binding.secondText.text = item.description
     }
 
+
+
     override fun getItemCount() = items.size
 
     class ThirdViewHolder(val binding: FeaturedCollectionsBinding) : RecyclerView.ViewHolder(binding.root)

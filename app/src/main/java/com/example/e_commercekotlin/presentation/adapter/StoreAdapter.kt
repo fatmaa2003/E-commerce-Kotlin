@@ -20,6 +20,8 @@ class StoreAdapter(private val items: List<Featured>) : RecyclerView.Adapter<Sto
         holder.binding.secondText.text = item.description
     }
 
+
+
     override fun getItemCount() = items.size
 
     class FirstViewHolder(val binding: FeaturedStoreBinding) : RecyclerView.ViewHolder(binding.root)
