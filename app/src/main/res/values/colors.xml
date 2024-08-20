@@ -7,7 +7,8 @@
     <color name="dark_surface">#272728</color>
     <color name="grey">#309898A0</color>
     <color name="lightgray">#808080</color>
-
+    <color name="neutral_grey">#F3F3F3</color>
     <color name="description_color">#575758</color>
+    <color name="inactive_text">#868687</color>
 
 </resources>
