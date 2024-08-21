@@ -11,6 +11,7 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
 import com.example.e_commercekotlin.presentation.adapter.CollectionsAdapter
+import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductsAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreAdapter
 import com.example.e_commercekotlin.presentation.adapter.TagsAdapter
@@ -33,7 +34,7 @@ class FeaturedFragment : Fragment() {
         setupRecyclerView(binding.rvproductsonsale, getSliderItems2(), ProductAdapter())
         setupRecyclerView(binding.rvcollections, getSliderItems3(), CollectionsAdapter(getSliderItems3()))
         setupRecyclerView(binding.rvtags, getSliderItems4(), TagsAdapter(getSliderItems4()))
-        setupRecyclerView(binding.rvproduct, getSliderItems5(), ProductsAdapter(getSliderItems5()))
+        setupRecyclerView(binding.rvproduct, getSliderItems5(), ProductAdapter())
 
         return view
     }
@@ -85,11 +86,13 @@ class FeaturedFragment : Fragment() {
         )
     }
 
-    private fun getSliderItems5(): List<Featured> {
+    private fun getSliderItems5(): List<Product> {
         return listOf(
-            Featured(R.drawable.img, "Title 10", "Description 10", "10$"),
-            Featured(R.drawable.img, "Title 11", "Description 11", "120$"),
-            Featured(R.drawable.img, "Title 12", "Description 12", "132$")
+            Product( title = "Title 4", price = 100, images = listOf("https://i.imgur.com/MxJyADq.jpeg")),
+            Product( title = "Title 5", price = 200, images = listOf("https://i.imgur.com/MxJyADq.jpeg")),
+            Product( title = "Title 6", price = 300, images = listOf("https://i.imgur.com/MxJyADq.jpeg")),
+            Product( title = "Title 7", price = 100, images = listOf("https://i.imgur.com/MxJyADq.jpeg")),
+            Product( title = "Title 8", price = 100, images = listOf("https://i.imgur.com/MxJyADq.jpeg"))
         )
     }
 
