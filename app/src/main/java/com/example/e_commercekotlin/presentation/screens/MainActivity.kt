@@ -21,17 +21,12 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(FeedFragment())
-                R.id.Market -> replaceFragment(MarketFragment())
+                R.id.Market -> replaceFragment(CollectionFragment())
                 R.id.Profile -> replaceFragment(ProductDetails())
             }
             true
         }
-
-
-
     }
-
-
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager

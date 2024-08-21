@@ -1,6 +1,8 @@
 package com.example.e_commercekotlin.data
 
 import com.example.e_commercekotlin.data.model.Category
+import com.example.e_commercekotlin.data.model.Collection
+import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.Product
@@ -22,4 +24,10 @@ interface ApiService {
 
     @GET("products")
     suspend fun getItems(): List<Product>
+
+    @GET("cats?limit=8")
+    suspend fun getCollections(): List<Collection>
+
+    @GET("products")
+    suspend fun getFreqVisitedItems(): List<FrequentlyVisitedItems>
 }
