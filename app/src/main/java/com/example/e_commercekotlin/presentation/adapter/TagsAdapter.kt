@@ -6,19 +6,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.databinding.FeaturedTagsBinding
 import com.example.e_commercekotlin.presentation.model.Featured
 
-class TagsAdapter(private val items: List<Featured>) : RecyclerView.Adapter<TagsAdapter.FourthViewHolder>() {
+class TagsAdapter(private val items: List<Featured>) : RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FourthViewHolder {
-        val binding = FeaturedTagsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FourthViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = FeaturedTagsBinding.inflate(inflater, parent, false)
+        return TagViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FourthViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.imageView.setImageResource(item.imageResId)
+        holder.binding.tagIcon.setImageResource(item.imageResId)
+        holder.binding.tagTitle.text = item.title
     }
+
 
     override fun getItemCount() = items.size
 
-    class FourthViewHolder(val binding: FeaturedTagsBinding) : RecyclerView.ViewHolder(binding.root)
+    class TagViewHolder(val binding: FeaturedTagsBinding) : RecyclerView.ViewHolder(binding.root)
 }
+

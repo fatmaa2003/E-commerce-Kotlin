@@ -20,23 +20,25 @@ class MarketFragment : Fragment() {
         binding = FragmentMarketBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.tabFeatured.setOnClickListener { switchTab(binding.tabFeatured, binding.tabFeatured) }
-        binding.tabCollection.setOnClickListener { switchTab(binding.tabCollection, binding.tabCollection) }
-        binding.tabStores.setOnClickListener { switchTab(binding.tabStores, binding.tabStores) }
+
+        showFragment(FeaturedFragment())
+
+
+        binding.tabFeatured.setOnClickListener { switchTab(FeaturedFragment(), binding.tabFeatured) }
+
 
         return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
+    private fun showFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 
-    private fun switchTab(contentToShow: View, tabToHighlight: View) {
-//
-//        listOf(binding.tabFeatured, binding.tabCollection, binding.tabStores, binding.tabTags).forEach { contentView ->
-//            contentView.visibility = if (contentView == contentToShow) View.VISIBLE else View.GONE
-//        }
+    private fun switchTab(fragment: Fragment, tabToHighlight: View) {
+
+        showFragment(fragment)
 
 
         listOf(binding.tabFeatured, binding.tabCollection, binding.tabStores, binding.tabTags).forEach { tabView ->

@@ -7,6 +7,8 @@
     <color name="dark_surface">#272728</color>
     <color name="grey">#309898A0</color>
     <color name="lightgray">#808080</color>
+    <color name="lightpurple">#D3CEF6</color>
+    <color name="lightgray2">#EFEDFC</color>
 
     <color name="description_color">#575758</color>
 
