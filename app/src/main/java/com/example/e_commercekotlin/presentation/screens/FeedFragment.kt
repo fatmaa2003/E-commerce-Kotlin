@@ -63,7 +63,7 @@ class FeedFragment : Fragment() {
                 itemAdapter.setProductList(items)
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
             }
         }
     }

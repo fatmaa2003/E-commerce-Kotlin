@@ -19,7 +19,7 @@
         android:id="@+id/product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingVertical="4dp"
         android:ellipsize="end"
         />

@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdapter.ComponentViewHolder> {
 
     private List<ProductImage> productImages = new ArrayList<>();
-//    private FragmentProductDetailsBinding binding;
+
 
 public void setProductImages(List<ProductImage> productImages) {
     this.productImages = productImages;
@@ -48,7 +48,6 @@ public void setProductImages(List<ProductImage> productImages) {
         public ComponentViewHolder(@NonNull View itemView) {
             super(itemView);
                imageView = itemView.findViewById(R.id.image_view);
-//           .image_view.setImageResource(R.drawable.baseline_profile_24);
 
         }
     }
