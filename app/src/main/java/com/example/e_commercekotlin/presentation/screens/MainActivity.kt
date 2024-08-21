@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(FeedFragment())
-                R.id.Market -> replaceFragment(CollectionFragment())
-                R.id.Profile -> replaceFragment(ProductDetails())
+                R.id.Market -> replaceFragment(MarketFragment())
+                R.id.Profile -> replaceFragment(ProductDetailsFragment())
             }
             true
         }
