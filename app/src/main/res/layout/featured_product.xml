@@ -3,32 +3,42 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="4dp">
 
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/treka" />
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:src="@drawable/treka"
+        android:background="@drawable/rectangleshape"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/firstText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
-        android:textStyle="bold" />
+        android:fontFamily="@font/regular"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/secondText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description" />
+        android:text="Description"
+        android:fontFamily="@font/regular"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/priceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$Price" />
+        android:text="$Price"
+        android:fontFamily="@font/regular"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"/>
 
 </LinearLayout>

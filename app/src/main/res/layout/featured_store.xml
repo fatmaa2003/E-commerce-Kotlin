@@ -3,25 +3,32 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="3dp">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/treka" />
+        android:layout_width="220dp"
+        android:layout_height="130dp"
+        android:src="@drawable/treka"
+        android:background="@drawable/rectangleshape"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/firstText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
-        android:textStyle="bold" />
+        android:fontFamily="@font/regular"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"/>
 
     <TextView
         android:id="@+id/secondText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description" />
+        android:text="Description"
+        android:textSize="14sp"
+        android:fontFamily="@font/regular"
+        android:layout_marginTop="5dp"/>
 
 </LinearLayout>
