@@ -1,5 +1,7 @@
 package com.example.e_commercekotlin.presentation.screens;
 
+import static com.google.android.gms.common.util.CollectionUtils.listOf;
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,15 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.e_commercekotlin.R;
+import com.example.e_commercekotlin.data.model.Product;
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding;
+import com.example.e_commercekotlin.presentation.adapter.ProductAdapter;
+import com.example.e_commercekotlin.presentation.model.Featured;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDetails extends Fragment {
+public class ProductDetailsFragment extends Fragment {
     private FragmentProductDetailsBinding binding;
     private ProductImagesAdapter productImagesAdapter;
     private List<ProductImage> productImages = new ArrayList<>();
+    private List<Product>product=new ArrayList<>();
+    private ProductAdapter productAdapter;
+    private List<Featured>features=new ArrayList<>();
     private boolean tagsVisible1 = false;
     private boolean tagsVisible2 = false;
     private boolean tagsVisible3 = false;
@@ -85,16 +93,27 @@ public class ProductDetails extends Fragment {
         // Initialize Adapter and RecyclerView
         productImagesAdapter = new ProductImagesAdapter();
         productImagesAdapter.setProductImages(productImages);
+        productAdapter=new ProductAdapter();
+        productAdapter.setProductList(product);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.clothes.setLayoutManager(layoutManager);
         binding.clothes.setAdapter(productImagesAdapter);
+        binding.completeOutfit.setLayoutManager(layoutManager1);
+        binding.completeOutfit.setAdapter(productAdapter);
+
 
         // Adding items to the list
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
         productImages.add(new ProductImage(R.drawable.baseline_profile_24));
         productImagesAdapter.setProductImages(productImages);
+        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
+        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
+        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
+        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
+
     }
 
     @Override
