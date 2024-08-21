@@ -5,8 +5,6 @@
     android:orientation="horizontal"
     android:background="@drawable/main_button_background"
     android:gravity="center"
-    android:paddingVertical="16dp"
-
     >
 
     <ImageView
@@ -21,10 +19,13 @@
 
     <TextView
         android:id="@+id/button_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textColor="@color/white"
         android:layout_marginHorizontal="4dp"
+        android:text="Follow"
+        android:gravity="center"
+        android:textAlignment="center"
         android:textSize="18sp"/>
 
 
