@@ -17,7 +17,6 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.ApiService
 import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
-import com.example.e_commercekotlin.data.model.GridSpacingItemDecoration
 import com.example.e_commercekotlin.presentation.adapter.CollectionPageAdapter
 import com.example.e_commercekotlin.presentation.adapter.FrequentlyVisitedAdapter
 import kotlinx.coroutines.launch
