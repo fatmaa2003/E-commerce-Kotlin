@@ -1,6 +1,5 @@
 package com.example.e_commercekotlin.presentation.screens
 
-import CollectionDetails
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -21,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.root)
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.Feed -> replaceFragment(CollectionDetails())
-                R.id.Market -> replaceFragment(CollectionFragment())
-                R.id.Profile -> replaceFragment(BrandFragment())
+                R.id.Feed -> replaceFragment(FeedFragment())
+                R.id.Market -> replaceFragment(MarketFragment())
+                R.id.Profile -> replaceFragment(ScrollSheetFragment())
             }
             true
         }

@@ -15,7 +15,7 @@ class CollectionsAdapter(private val items: List<Featured>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ThirdViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.imageView.setImageResource(item.imageResId)
+        holder.binding.ivcollection.setImageResource(item.imageResId)
         holder.binding.firstText.text = item.title
         holder.binding.secondText.text = item.description
     }

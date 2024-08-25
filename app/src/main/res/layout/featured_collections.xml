@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="4dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/img"
-        android:background="@drawable/rectangleshape"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="160dp"
+        android:id="@+id/ivcollection"
+        android:layout_height="170dp"
+        app:shapeAppearanceOverlay="@style/CornerCut"
+        android:background="@drawable/treka"
         android:scaleType="fitXY"/>
 
     <TextView
