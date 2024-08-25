@@ -36,11 +36,7 @@
             android:id="@+id/rvstores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:clipToPadding="false"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:layoutDirection="rtl"
+            android:scrollbars="none"
             android:layout_marginBottom="16dp" />
 
         <!-- Products on Sale -->
@@ -69,10 +65,7 @@
             android:id="@+id/rvproductsonsale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:clipToPadding="false"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:scrollbars="none"
             android:layout_marginBottom="16dp" />
 
         <!-- Collections Section -->
@@ -101,10 +94,7 @@
             android:id="@+id/rvcollections"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:clipToPadding="false"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:scrollbars="none"
             android:layout_marginBottom="16dp" />
 
         <!-- Discover Tags Section -->
@@ -133,10 +123,7 @@
             android:id="@+id/rvtags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:clipToPadding="false"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:scrollbars="none"
             android:layout_marginBottom="16dp" />
 
         <!-- Lacoste Section -->
@@ -183,10 +170,7 @@
             android:id="@+id/rvproduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:clipToPadding="false"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp" />
+            android:scrollbars="none" />
 
     </LinearLayout>
 

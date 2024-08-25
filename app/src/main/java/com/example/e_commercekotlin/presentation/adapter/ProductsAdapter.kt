@@ -15,7 +15,7 @@ class ProductsAdapter(private val items: List<Featured>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: SecondViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.imageView.setImageResource(item.imageResId)
+        holder.binding.ivproduct.setImageResource(item.imageResId)
         holder.binding.firstText.text = item.title
         holder.binding.secondText.text = item.description
         holder.binding.priceText.text = item.price
