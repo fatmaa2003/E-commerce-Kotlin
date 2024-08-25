@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    android:gravity="center"
+    android:layout_marginHorizontal="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        >
+        <include
+            android:id="@+id/brand_image"
+            layout="@layout/circular_image"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textSize="22sp"
+        android:text="Bershka"
+        />
+
+    <TextView
+        android:id="@+id/discount_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/discount_red_clolor"
+        android:background="@drawable/red_bckground"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="12dp"
+        android:layout_marginVertical="10dp"
+        android:text="12% OFF"
+        />
+
+
+</LinearLayout>
+
+
+
+

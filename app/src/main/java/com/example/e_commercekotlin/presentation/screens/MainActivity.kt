@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(CollectionDetails())
                 R.id.Market -> replaceFragment(CollectionFragment())
-                R.id.Profile -> replaceFragment(FeaturedFragment())
+                R.id.Profile -> replaceFragment(BrandFragment())
             }
             true
         }
