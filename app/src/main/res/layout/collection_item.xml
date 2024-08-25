@@ -10,7 +10,6 @@
     android:layout_marginVertical="5dp"
     android:paddingBottom="15dp"
     android:paddingStart="18dp"
-    android:text="Clothing"
     android:textSize="18sp"
     android:background="@drawable/neutral_grey_rounded_background"
     />
