@@ -5,8 +5,7 @@
     android:background="@drawable/search_bar_background"
     android:paddingHorizontal="16dp"
     android:paddingVertical="13dp"
-   >
-
+    >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +13,4 @@
         android:drawableEnd="@drawable/search_icon"
         android:background="@color/transparent"
         />
-
-
 </LinearLayout>

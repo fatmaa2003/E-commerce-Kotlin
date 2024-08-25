@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/collection_name"
+        android:layout_width="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="8dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_surface"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:background="@drawable/purple_background" />
+    </RelativeLayout>
