@@ -38,9 +38,7 @@ class MarketFragment : Fragment() {
             }
         }
 
-        // Ensure to set listeners for other tabs if needed
-        // binding.tabStores.setOnClickListener { ... }
-        // binding.tabTags.setOnClickListener { ... }
+
 
         return view
     }

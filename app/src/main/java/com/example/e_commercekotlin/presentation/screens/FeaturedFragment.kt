@@ -12,7 +12,6 @@ import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
 import com.example.e_commercekotlin.presentation.adapter.CollectionsAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import com.example.e_commercekotlin.presentation.adapter.ProductsAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreAdapter
 import com.example.e_commercekotlin.presentation.adapter.TagsAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
