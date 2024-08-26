@@ -37,4 +37,4 @@ class CategoryAdapter(
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryName: TextView = itemView.findViewById(R.id.category_name)
     }
-}
+ }
