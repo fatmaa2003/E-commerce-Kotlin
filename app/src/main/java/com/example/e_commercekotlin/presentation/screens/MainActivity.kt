@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         replaceFragment(FeedFragment())
         setSupportActionBar(binding.toolbar.root)
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
@@ -27,8 +26,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
     }
 
     private fun replaceFragment(fragment: Fragment) {

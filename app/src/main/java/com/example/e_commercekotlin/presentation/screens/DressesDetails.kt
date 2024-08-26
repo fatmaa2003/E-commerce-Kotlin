@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.FragmentCollectionDetailsBinding
+import com.example.e_commercekotlin.databinding.FragmentDressesDetailsBinding
 
 class DressesDetails : Fragment() {
 
-    private var _binding: FragmentCollectionDetailsBinding? = null
+    private var _binding: FragmentDressesDetailsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCollectionDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentDressesDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
