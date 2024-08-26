@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="40dp"
+        >
+
+        <!-- Store Header -->
+        <include
+            android:id="@+id/store_image_id"
+            layout="@layout/circular_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bershka"
+            android:layout_marginTop="8dp"
+            android:textSize="32sp"
+            android:fontFamily="@font/extrabold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="verified official store"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/lightgray"/>
+
+        <!-- Follow Button and Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="90dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+            <include
+                layout="@layout/main_button"
+                android:id="@+id/follow_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="6dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/store_details_icon" />
+        </LinearLayout>
+
+        <!-- Tabs (Overview, Collection, Blog) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="70dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tabOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:gravity="center"
+                    android:text="Overview"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/dotOverview"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/dot_background"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tabCollection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:gravity="center"
+                    android:text="Collection"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/dotCollection"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/dot_background"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tabBlog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:gravity="start"
+                    android:text="Blog"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/dotBlog"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/dot_background"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Fragment Container for Tab Content -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <!-- ViewPager2 for Images -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"/>
+
+
+        <!-- Section Header for Products on Sale -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Peak of our new collection"
+                android:textSize="18sp"
+                android:fontFamily="@font/semibold"
+                android:layout_marginTop="50dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow"
+                android:layout_marginTop="50dp"/>
+        </LinearLayout>
+
+        <!-- Products on Sale RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvproductsonsale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp"
+            android:layout_margin="8dp"/>
+
+        <!-- Section Header for Summer Spring Collection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Summer spring 2021"
+                android:textSize="18sp"
+                android:fontFamily="@font/semibold"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+        <!-- Summer Spring RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvsummerspring"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            />
+    </LinearLayout>
+</ScrollView>

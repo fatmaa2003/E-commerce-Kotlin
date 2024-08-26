@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.ActivityMainBinding
+import com.example.e_commercekotlin.presentation.ui.StoreDetailsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(FeedFragment())
                 R.id.Market -> replaceFragment(MarketFragment())
-                R.id.Profile -> replaceFragment(ScrollSheetFragment())
+                R.id.Profile -> replaceFragment(StoreDetailsFragment())
             }
             true
         }
