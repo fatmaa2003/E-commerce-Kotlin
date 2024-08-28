@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".presentation.screens.PaymentFragment">
 
@@ -11,11 +12,54 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="103dp"
+            android:layout_height="103dp"
+            android:src="@drawable/cat1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/CircularImageView" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ava Johnson"
+            android:textColor="@color/dark_surface"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/extrabold"
+            android:textSize="32sp"
+            />
+        <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="avajohnson"
+            android:textSize="14dp"
+            android:textColor="@color/grey60"
+            android:layout_marginTop="7dp"
+
+            />
+        <include
+            android:id="@+id/profile_following_button"
+            layout="@layout/following_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="23dp"
+             />
+
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
+            android:layout_marginTop="35dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
