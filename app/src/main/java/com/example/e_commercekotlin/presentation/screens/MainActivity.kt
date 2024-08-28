@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
+import CartFragment
 import DressesDetails
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(DressesDetails())
                 R.id.Market -> replaceFragment(MarketFragment())
-                R.id.Profile -> replaceFragment(AddCard())
+                R.id.Profile -> replaceFragment(CartFragment())
             }
             true
         }
