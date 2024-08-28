@@ -8,6 +8,7 @@
     <color name="grey">#309898A0</color>
     <color name="lightgray">#808080</color>
     <color name="lightpurple">#D3CEF6</color>
+    // fatma eli msmya el color dh ya gd3an
     <color name="lightgray2">#EFEDFC</color>
     <color name="neutral_grey">#F3F3F3</color>
     <color name="darkpurple">#614FE0</color>
@@ -19,6 +20,7 @@
     <color name="red_background">#FEEFEF</color>
     <color name="discount_red_clolor">#B22424</color>
     <color name="purple_background">#EFEDFC</color>
+    <color name="master_card_card_view_bg">#FFF1DC</color>
 
 
 </resources>
