@@ -5,6 +5,7 @@
     <string name="search">Search</string>
     <string name="show_more">Show more</string>
     <string name="frequently_visited">Frequently visited</string>
+    <string name="feed_tool_bar_title">Feed</string>
 
 
 </resources>

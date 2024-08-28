@@ -1,8 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="Theme.EcommerceKotlin" parent="Base.Theme.EcommerceKotlin" />
-
     <style name="Base.Theme.EcommerceKotlin" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/dark_surface</item>

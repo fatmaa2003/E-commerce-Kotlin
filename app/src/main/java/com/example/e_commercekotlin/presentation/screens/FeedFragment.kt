@@ -16,6 +16,7 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.ApiService
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import kotlinx.coroutines.launch
@@ -26,17 +27,23 @@ class FeedFragment : Fragment() {
 
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
+    private var _binding: FragmentFeedBinding? = null
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+        _binding = FragmentFeedBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        handleToolBarStatus()
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -66,6 +73,11 @@ class FeedFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun handleToolBarStatus() {
+        binding.feedFragmentToolBar.toolbarTitle.text = getString(R.string.feed_tool_bar_title)
+//        binding.feedFragmentToolBar.placeHolderIcon.setImageResource()
     }
 
     private suspend fun getCategoriesFromApi(): List<Category> {

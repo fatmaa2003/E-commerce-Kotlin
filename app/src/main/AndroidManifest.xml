@@ -20,6 +20,7 @@
 
         <activity
             android:name=".presentation.screens.MainActivity"
+            android:theme="@style/Base.Theme.EcommerceKotlin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
