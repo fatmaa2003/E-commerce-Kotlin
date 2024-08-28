@@ -19,6 +19,8 @@
     <color name="red_background">#FEEFEF</color>
     <color name="discount_red_clolor">#B22424</color>
     <color name="purple_background">#EFEDFC</color>
+    <color name="grey_bg_cart">#E7E7E8</color>
+
 
 
 </resources>
