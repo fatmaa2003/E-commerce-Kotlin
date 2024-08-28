@@ -1,4 +1,8 @@
 <resources>
     <!-- Define your custom shape appearance for rounded corners -->
+    <style name="CircularImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>
