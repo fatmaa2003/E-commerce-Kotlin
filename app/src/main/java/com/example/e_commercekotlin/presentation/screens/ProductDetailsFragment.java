@@ -39,7 +39,6 @@ public class ProductDetailsFragment extends Fragment {
     private TextView tvTagsHeader2;
     private LinearLayout llTagsContent3;
     private TextView tvTagsHeader3;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -85,6 +84,7 @@ public class ProductDetailsFragment extends Fragment {
             tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_expand_less_24, 0);
         }
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

@@ -77,7 +77,9 @@ class FeedFragment : Fragment() {
 
     private fun handleToolBarStatus() {
         binding.feedFragmentToolBar.toolbarTitle.text = getString(R.string.feed_tool_bar_title)
-//        binding.feedFragmentToolBar.placeHolderIcon.setImageResource()
+        binding.feedFragmentToolBar.placeHolderIcon.setImageResource(R.drawable.search_icon)
+        binding.feedFragmentToolBar.leftIcon.setImageResource(R.drawable.disk)
+
     }
 
     private suspend fun getCategoriesFromApi(): List<Category> {
