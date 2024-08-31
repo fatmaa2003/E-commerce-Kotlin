@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.data.ApiService
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Product
@@ -43,7 +44,12 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        handleToolBarStatus()
+        binding.feedFragmentToolBar.handleToolBarState(
+            toolBarTitle = "Feed",
+            leftIconImage = R.drawable.disk
+        )
+
+
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -75,12 +81,12 @@ class FeedFragment : Fragment() {
         }
     }
 
-    private fun handleToolBarStatus() {
-        binding.feedFragmentToolBar.toolbarTitle.text = getString(R.string.feed_tool_bar_title)
-        binding.feedFragmentToolBar.placeHolderIcon.setImageResource(R.drawable.search_icon)
-        binding.feedFragmentToolBar.leftIcon.setImageResource(R.drawable.disk)
-
-    }
+//    private fun handleToolBarStatus() {
+//        binding.feedFragmentToolBar.toolbarTitle.text = getString(R.string.feed_tool_bar_title)
+//        binding.feedFragmentToolBar.placeHolderIcon.setImageResource(R.drawable.search_icon)
+//        binding.feedFragmentToolBar.leftIcon.setImageResource(R.drawable.disk)
+//
+//    }
 
     private suspend fun getCategoriesFromApi(): List<Category> {
         val retrofit = Retrofit.Builder()

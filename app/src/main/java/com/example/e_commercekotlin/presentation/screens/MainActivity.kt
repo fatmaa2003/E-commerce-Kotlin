@@ -1,6 +1,5 @@
 package com.example.e_commercekotlin.presentation.screens
 
-import DressesDetails
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,7 +7,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.ActivityMainBinding
-import com.example.e_commercekotlin.presentation.ui.StoreDetailsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,8 +18,8 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(FeedFragment())
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.Feed -> replaceFragment(FeedFragment())
-                R.id.Market -> replaceFragment(MarketFragment())
+                R.id.Feed -> replaceFragment(StoreDetailsFragment())
+                R.id.Market -> replaceFragment(ProductDetailsFragment())
                 R.id.Profile -> replaceFragment(PaymentFragment())
             }
             true

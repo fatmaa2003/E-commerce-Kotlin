@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.databinding.FragmentMarketBinding
 
 class MarketFragment : Fragment() {
@@ -21,7 +22,10 @@ class MarketFragment : Fragment() {
     ): View? {
         binding = FragmentMarketBinding.inflate(inflater, container, false)
         val view = binding.root
-
+        binding.fragmentMarketToolbar.handleToolBarState(
+            leftIconImage = R.drawable.disk,
+            searchVisibility = false
+        )
         if (savedInstanceState == null) {
             switchTab(FeaturedFragment(), binding.tabFeatured)
         }
