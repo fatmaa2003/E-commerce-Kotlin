@@ -1,16 +1,15 @@
 package com.example.e_commercekotlin.domain
 
-import com.example.e_commercekotlin.data.model.LoginRequest
-import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance
+import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SignupRequest
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.LoginRequest
+import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
-
 
 class Repository {
 
@@ -20,12 +19,14 @@ class Repository {
         return try {
             val response = apiService.login(LoginRequest(username, password))
             if (response.isSuccessful) {
-                Resource.Success(response.body()!!)
+                response.body()?.let {
+                    Resource.Success(it, "Login successful")
+                } ?: Resource.Error("Login failed: Empty response body")
             } else {
-                Resource.Error("Login failed")
+                Resource.Error("Login failed: ${response.message()}")
             }
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "An error occurred")
+            Resource.Error(e.message ?: "An error occurred during login")
         }
     }
 
@@ -33,28 +34,30 @@ class Repository {
         return try {
             val response = apiService.signup(signupRequest)
             if (response.isSuccessful) {
-                Resource.Success(response.body()!!)
+                response.body()?.let {
+                    Resource.Success(it, "Signup successful")
+                } ?: Resource.Error("Signup failed: Empty response body")
             } else {
-                Resource.Error("Signup failed")
+                Resource.Error("Signup failed: ${response.message()}")
             }
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "An error occurred")
+            Resource.Error(e.message ?: "An error occurred during signup")
         }
     }
 
-//    suspend fun getItems(): Resource<List<Product>> {
-//        return withContext(Dispatchers.IO) {
-//            try {
-//                val response = apiService.getItems()
-//                if (response.isSuccessful) { // Corrected spelling here
-//                    Resource.Success(response.body()!!)
-//                } else {
-//                    Resource.Error("Error: ${response.code()} ${response.message()}")
-//                }
-//            } catch (e: Exception) {
-//                Resource.Error("An error occurred: ${e.message}", null)
-//            }
-//        }
-//    }
-
+    suspend fun getData(): Resource<List<User>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getData()
+                if (response.isSuccessful) {
+                    // 2ool le class eli b3di en dh success
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}", null)
+            }
+        }
+    }
 }

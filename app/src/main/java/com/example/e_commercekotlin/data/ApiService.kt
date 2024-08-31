@@ -14,8 +14,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
-    @POST("login")
+    @POST("signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+    suspend fun getData(): Response<List<User>>
 
     @POST("signup")
     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
