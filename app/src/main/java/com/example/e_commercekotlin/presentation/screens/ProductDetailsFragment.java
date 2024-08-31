@@ -44,7 +44,7 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Inflate the layout
+        // Inflatee the layout
         binding = FragmentProductDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         CustomToolbarBinding toolbarBinding = binding.productDetailsFragmentToolbar;
