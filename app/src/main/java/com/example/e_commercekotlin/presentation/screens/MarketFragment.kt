@@ -42,6 +42,12 @@ class MarketFragment : Fragment() {
             }
         }
 
+        binding.tabStores.setOnClickListener {
+            if (currentFragment !is StoresFragment) {
+                switchTab(StoresFragment(), binding.tabStores)
+            }
+        }
+
 
 
         return view
@@ -61,7 +67,7 @@ class MarketFragment : Fragment() {
 
     private fun highlightTab(selectedTab: View) {
         val tabViews = listOf(binding.tabFeatured, binding.tabCollection, binding.tabStores, binding.tabTags)
-        val dotViews = listOf(binding.dotFeatured, binding.dotCollection)
+        val dotViews = listOf(binding.dotFeatured, binding.dotCollection,binding.dotStores)
 
         tabViews.forEachIndexed { index, tabView ->
             val textView = tabView as? TextView

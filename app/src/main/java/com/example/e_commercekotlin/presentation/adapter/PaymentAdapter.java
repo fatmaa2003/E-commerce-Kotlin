@@ -41,15 +41,18 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
     private static void handleCardType(@NonNull ViewHolder holder, CardModel card) {
         switch (card.getType()){
             case MASTER_CARD: {
+                    holder.binding.getRoot().setCardBackgroundColor(holder.binding.getRoot().getContext().getColor(R.color.master_card_card_view_bg));
                     holder.binding.cardTypeText.setText("Mastercard");
-                    holder.binding.cardImage.setImageResource(R.drawable.orangedot);
+                    holder.binding.cardImage.setImageResource(R.drawable.mastercardfinal);
 
                 break;
 
             }
             case VISA: {
+                // fatma eli msmya el color dh ya gd3an
+                holder.binding.getRoot().setCardBackgroundColor(holder.binding.getRoot().getContext().getColor(R.color.lightgray2));
                 holder.binding.cardTypeText.setText("Visa");
-                holder.binding.cardImage.setImageResource(R.drawable.arrow);
+                holder.binding.cardImage.setImageResource(R.drawable.visa_svgrepo_com);
                 break;
             }
         }

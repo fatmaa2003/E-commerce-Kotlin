@@ -46,7 +46,8 @@ public class PaymentFragment extends Fragment {
         binding.cardRecyclerView.setAdapter(paymentAdapter);
         cardModels.add(new CardModel(CardModel.CardType.MASTER_CARD, "123988"));
         cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
-        cardModels.add(new CardModel(CardModel.CardType.VISA, "12398"));
+        cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
+
         paymentAdapter.setCardModels(cardModels);
         binding.profileFollowingButton.followingButtonTv.setPadding(UtilJava.dpToPx(20), UtilJava.dpToPx(10),UtilJava.dpToPx(20), UtilJava.dpToPx(10));
         binding.profileFollowingButton.getRoot().setOnClickListener(v -> showBottomSheet());
