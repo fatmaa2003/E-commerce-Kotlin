@@ -12,21 +12,18 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
-    @POST("login")
+    @POST("auth/signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+    suspend fun getData(): Response<List<User>>
 
     @POST("signup")
     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
 
-    @GET("categories")
-    suspend fun getCategories(): List<Category>
-
     @GET("products")
     suspend fun getItems(): List<Product>
-//    @GET("products")
-//    suspend fun getItems(): Response<List<Product>>
 
     @GET("cats?limit=8")
     suspend fun getCollections(): List<Collection>
@@ -36,4 +33,7 @@ interface ApiService {
 
     @GET("products")
     suspend fun getStoreImages(): List<StoreImages>
+
+    @GET("categories")
+    suspend fun getCategories(): Response<Category>
 }

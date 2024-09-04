@@ -12,12 +12,13 @@ import kotlinx.coroutines.launch
 
 class SignupViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _signupState = MutableLiveData<Resource<SignupResponse>>(Resource.Loading)
+    private val _signupState = MutableLiveData<Resource<SignupResponse>>(Resource.Loading())
     val signupState: LiveData<Resource<SignupResponse>> get() = _signupState
 
-    fun signup(signupRequest: SignupRequest) {
+    fun signup(signupRequest:  SignupRequest)
+    {
         viewModelScope.launch {
-            _signupState.postValue(Resource.Loading)
+            _signupState.postValue(Resource.Loading())
             val result = repository.signup(signupRequest = signupRequest)
             _signupState.postValue(result)
         }

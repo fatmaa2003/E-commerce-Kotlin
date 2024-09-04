@@ -22,11 +22,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loginViewModel = LoginViewModel(Repository())
 
         loginObserver()
-
 
         view.findViewById<Button>(R.id.loginButton).setOnClickListener {
             val username = view.findViewById<EditText>(R.id.usernameEditText).text.toString()
@@ -49,7 +47,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 is Resource.Success -> {
                     navToLogin()
                     val data = resource.data
-                    val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data.role, ignoreCase = true) }
+                    val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data?.userDetails?.role, ignoreCase = true) }
                     navigateToHome(userRole ?: UserRole.USER)
                 }
                 is Resource.Error -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
@@ -59,7 +57,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
     private fun navigateToHome(userRole: UserRole) {
-        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
+        val intent = Intent(activity, MainActivity::class.java).apply {
             putExtra("USER_ROLE", userRole.name)
         }
         startActivity(intent)
