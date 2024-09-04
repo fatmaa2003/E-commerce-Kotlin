@@ -3,35 +3,32 @@ package com.example.e_commercekotlin.presentation.screens
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
-import com.example.e_commercekotlin.data.ApiService
-import com.example.e_commercekotlin.data.model.Category
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
+import androidx.fragment.app.viewModels
 
 class FeedFragment : Fragment() {
-
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
     private var _binding: FragmentFeedBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
+    //private lateinit var categoryId: String
+    private val viewModel: CategoryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,12 +41,11 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeData()
         binding.feedFragmentToolBar.handleToolBarState(
             toolBarTitle = "Feed",
             leftIconImage = R.drawable.disk
         )
-
-
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -59,26 +55,29 @@ class FeedFragment : Fragment() {
 
 
         itemAdapter = ProductAdapter()
-        categoryAdapter = CategoryAdapter(ArrayList()) { category ->
-
-        }
+        categoryAdapter = CategoryAdapter()
 
         itemRecyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
 
 
-        lifecycleScope.launch {
-            try {
-                val categories = getCategoriesFromApi()
-                categoryAdapter.updateCategories(categories)
+    }
 
-                val items = getItemsFromApi()
-                itemAdapter.setProductList(items)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
+    private fun observeData() {
+        viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    Log.d("FeedFragment", "Loading: $resource")
+                }
+                is Resource.Success -> {
+                    Log.d("FeedFragment", "Success: $resource")
+                    resource.data?.let { categoryAdapter.updateCategories(it) }
+                }
+                is Resource.Error -> {
+                    Log.d("FeedFragment", "Error: ${resource.message}")
+                }
             }
-        }
+        })
     }
 
 //    private fun handleToolBarStatus() {
@@ -88,22 +87,5 @@ class FeedFragment : Fragment() {
 //
 //    }
 
-    private suspend fun getCategoriesFromApi(): List<Category> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getCategories()
-    }
 
-
-    private suspend fun getItemsFromApi(): List<Product> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getItems()
-    }
 }

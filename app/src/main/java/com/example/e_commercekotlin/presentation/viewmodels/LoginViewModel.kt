@@ -14,12 +14,12 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _loginState = MutableLiveData<Resource<LoginResponse>>(Resource.Loading)
+    private val _loginState = MutableLiveData<Resource<LoginResponse>>(Resource.Loading())
     val loginState: LiveData<Resource<LoginResponse>> get() = _loginState
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
-            _loginState.postValue(Resource.Loading)
+            _loginState.postValue(Resource.Loading())
             val result = repository.login(username,password)
             _loginState.postValue(result)
 

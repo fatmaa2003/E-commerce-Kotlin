@@ -12,6 +12,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("login")
@@ -20,8 +21,7 @@ interface ApiService {
     @POST("signup")
     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
 
-    @GET("categories")
-    suspend fun getCategories(): List<Category>
+
 
     @GET("products")
     suspend fun getItems(): List<Product>
@@ -36,4 +36,7 @@ interface ApiService {
 
     @GET("products")
     suspend fun getStoreImages(): List<StoreImages>
+
+    @GET("categories")
+    suspend fun getCategories(): Response<Category>
 }
