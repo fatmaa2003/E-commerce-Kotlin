@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/sign_in">
+
+    <fragment
+        android:id="@+id/sign_in"
+        android:name="com.example.e_commercekotlin.presentation.screens.LoginFragment"
+        android:label="Login Fragment"
+        tools:layout="@layout/fragment_login"
+        >
+        <action
+            android:id="@+id/action_sign_in_to_sign_up"
+            app:destination="@id/sign_up" />
+        <action
+            android:id="@+id/action_sign_in_to_Feed_fragment"
+            app:destination="@id/Feed_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sign_up"
+        android:name="com.example.e_commercekotlin.presentation.screens.SignupFragment"
+        android:label="sign_up Fragment"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_sign_up_to_Feed_fragment"
+            app:destination="@id/Feed_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Feed_fragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.FeedFragment"
+        android:label="Feed Fragment"
+        tools:layout="@layout/fragment_feed">
+        <action
+            android:id="@+id/action_Feed_fragment_to_custom_dialog"
+            app:destination="@id/custom_dialog" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/product_details"
+        android:name="com.example.e_commercekotlin.presentation.screens.ProductDetailsFragment"
+        android:label="product details"
+        tools:layout="@layout/fragment_product_details"
+        />
+    <fragment
+        android:id="@+id/stores"
+        android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
+        tools:layout="@layout/fragment_brand"/>
+
+    <fragment
+        android:id="@+id/feature_fragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.FeaturedFragment"
+        tools:layout= "@layout/fragment_featured" >
+        <action
+            android:id="@+id/action_feature_fragment_to_collection"
+            app:destination="@id/collection" />
+        <action
+            android:id="@+id/action_feature_fragment_to_follow"
+            app:destination="@id/follow" />
+        <action
+            android:id="@+id/action_feature_fragment_to_stores"
+            app:destination="@id/stores" />
+    </fragment>
+    <fragment
+        android:id="@+id/collection"
+        android:name="com.example.e_commercekotlin.presentation.screens.CollectionFragment"
+        tools:layout="@layout/fragment_collection">
+        <action
+            android:id="@+id/action_collection_to_store"
+            app:destination="@id/store" />
+        <action
+            android:id="@+id/action_collection_to_collection_details"
+            app:destination="@id/collection_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/store"
+        android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
+        tools:layout="@layout/fragment_stores"/>
+    <fragment
+        android:id="@+id/collection_details"
+        android:name="DressesDetails"
+        tools:layout="@layout/fragment_dresses_details"/>
+    <fragment
+        android:id="@+id/follow"
+        android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
+        tools:layout="@layout/fragment_follow"/>
+
+    <fragment
+        android:id="@+id/cart"
+        android:name="CartFragment"
+        tools:layout="@layout/fragment_cart"/>
+    <fragment
+        android:id="@+id/add_to_cart"
+        android:name="com.example.e_commercekotlin.presentation.screens.AddCard"
+        tools:layout="@layout/fragment_add_to_cart">
+        <action
+            android:id="@+id/action_add_to_cart_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
+</navigation>

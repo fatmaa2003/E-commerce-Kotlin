@@ -28,7 +28,6 @@ class FeaturedFragment : Fragment() {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         setupRecyclerView(binding.rvstores, getSliderItems1(), StoreAdapter(getSliderItems1()))
         setupRecyclerView(binding.rvproductsonsale, getSliderItems2(), ProductAdapter())
         setupRecyclerView(binding.rvcollections, getSliderItems3(), CollectionsAdapter(getSliderItems3()))

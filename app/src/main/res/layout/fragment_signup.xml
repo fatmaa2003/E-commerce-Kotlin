@@ -27,6 +27,7 @@
             android:hint="First Name"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
         <EditText
             android:id="@+id/lastNameEditText"
@@ -35,6 +36,7 @@
             android:hint="Last Name"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
         <EditText
             android:id="@+id/emailEditText"
@@ -43,6 +45,7 @@
             android:hint="Email"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
         <EditText
             android:id="@+id/usernameEditText"
@@ -51,6 +54,7 @@
             android:hint="Username"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
         <EditText
             android:id="@+id/passwordEditText"
@@ -60,6 +64,7 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
         <EditText
             android:id="@+id/confirmPasswordEditText"
@@ -69,7 +74,9 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext" />
+
 
         <Button
             android:id="@+id/signupButton"

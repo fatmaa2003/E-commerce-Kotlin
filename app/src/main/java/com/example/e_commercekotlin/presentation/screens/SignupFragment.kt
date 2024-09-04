@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.SignupRequest
@@ -40,13 +41,20 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
         }
 
         signUpObserver()
-    }
 
+    }
+    fun navToFeed(){
+        val btn = view?.findViewById<Button>(R.id.signupButton)
+        btn!!.setOnClickListener{
+            findNavController().navigate(R.id.action_sign_up_to_Feed_fragment)
+        }
+    }
     private fun signUpObserver() {
         lifecycleScope.launch {
             signupViewModel.signupState.observe(viewLifecycleOwner) { resource ->
                 when (resource) {
                     is Resource.Success -> {
+                        navToFeed()
                         Toast.makeText(requireContext(), "Sign up successful", Toast.LENGTH_SHORT)
                             .show()
                     }
