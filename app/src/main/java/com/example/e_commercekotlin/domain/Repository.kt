@@ -50,7 +50,6 @@ class Repository {
             try {
                 val response = api.getData()
                 if (response.isSuccessful) {
-                    // 2ool le class eli b3di en dh success
                     Resource.Success(response.body()!!)
                 } else {
                     Resource.Error("Error: ${response.code()} ${response.message()}")

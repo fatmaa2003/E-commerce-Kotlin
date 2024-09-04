@@ -41,7 +41,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             when (resource) {
                 is Resource.Success -> {
                     val data = resource.data
-                    val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data.role, ignoreCase = true) }
+                    val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data?.role, ignoreCase = true) }
                     navigateToHome(userRole ?: UserRole.USER)
                 }
                 is Resource.Error -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
