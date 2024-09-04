@@ -20,17 +20,6 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
             _loginState.postValue(Resource.Loading())
             val result = repository.login(username,password)
             _loginState.postValue(result)
-
-//            when (val result = repository.login(username, password)) {
-//                is Resource.Success -> {
-//                    result.
-//                    val userRole = if (result.data.role == "ADMIN") UserRole.ADMIN else UserRole.USER
-//                    _loginState.value = Resource.Success(userRole)
-//                    //check eza kan admin wla user
-//                }
-//                is Resource.Error -> _loginState.value = Resource.Error(result.message)
-//                else -> _loginState.value = Resource.Error("Unknown error")
-//            }
         }
     }
 }

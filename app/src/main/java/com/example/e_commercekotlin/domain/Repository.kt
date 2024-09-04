@@ -1,16 +1,12 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
-import com.example.e_commercekotlin.data.model.LoginRequest
-import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
-import com.example.e_commercekotlin.data.model.Category
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.SignupResponse

@@ -51,7 +51,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun navigateToHome(userRole: UserRole) {
-        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
+        val intent = Intent(activity, MainActivity::class.java).apply {
             putExtra("USER_ROLE", userRole.name)
         }
         startActivity(intent)
