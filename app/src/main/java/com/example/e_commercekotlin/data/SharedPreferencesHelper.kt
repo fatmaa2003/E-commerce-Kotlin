@@ -13,11 +13,11 @@ object SharedPreferencesHelper {
         sharedPreferences = context.getSharedPreferences(MY_TOKEN, Context.MODE_PRIVATE)
     }
 
-    fun saveUserName(userName: String) {
-        sharedPreferences.edit().putString(MY_TOKEN, userName).apply()
+    fun saveToken(token: String) {
+        sharedPreferences.edit().putString(MY_TOKEN, token).apply()
     }
 
-    fun getUserName(): String? {
+    fun getToken(): String? {
         return sharedPreferences.getString(MY_TOKEN, null)
     }
 
@@ -26,7 +26,7 @@ object SharedPreferencesHelper {
         sharedPreferences.edit().clear().apply()
     }
 
-    fun removeUserName() {
+    fun removeToken() {
         sharedPreferences.edit().remove(MY_TOKEN).apply()
     }
 }

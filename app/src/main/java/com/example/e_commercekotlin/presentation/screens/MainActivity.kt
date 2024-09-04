@@ -22,14 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Set initial fragment
-        replaceFragment(FeedFragment())
-
-        // Observe data from ViewModel
-        observeData()
-
-        // Setup bottom navigation
+        replaceFragment(LoginFragment())
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Feed -> replaceFragment(FeedFragment())
@@ -38,27 +31,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-    }
-
-    private fun observeData() {
-        viewModel.data.observe(this, Observer { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    // Handle loading state if needed
-                }
-                is Resource.Success -> {
-                    // Handle success state if needed
-                }
-                is Resource.Error -> {
-                    val errorMessage = resource.message ?: "An unexpected error occurred"
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                }
-
-                is Resource.Error -> TODO()
-                is Resource.Loading -> TODO()
-                is Resource.Success -> TODO()
-            }
-        })
     }
 
     private fun replaceFragment(fragment: Fragment) {

@@ -33,7 +33,7 @@ object RetrofitInstance {
     }
 
     val api: ApiService by lazy {
-        createRetrofit("eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiQjZBUkJ4UnlOS2RCalpCNW1YMDJ5Zz09IiwidXNlcm5hbWUiOiJoYW5hbiIsInN1YiI6IjUxIiwiaWF0IjoxNzI1NDQ0NTc0LCJleHAiOjE3MjU0ODA1NzR9.ToBKt5SPTyVw18CGfpmF1_iiQw3vz8k7jVR6m2BGKpcCgP2lPJzknviU4zWFj475ciHm3E4Ujd9FhburARx8mg").create(ApiService::class.java)
+        createRetrofit(SharedPreferencesHelper.getToken()!!).create(ApiService::class.java)
     }
 }
 

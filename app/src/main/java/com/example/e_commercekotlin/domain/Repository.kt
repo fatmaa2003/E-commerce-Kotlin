@@ -1,12 +1,12 @@
 package com.example.e_commercekotlin.domain
 
+import android.util.Log
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.RetrofitInstance.api
+import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
-import com.example.e_commercekotlin.data.model.Category
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
@@ -15,20 +15,21 @@ import kotlinx.coroutines.withContext
 
 class Repository {
 
-    private val apiService = RetrofitInstance.api
+    private val apiService = api
 
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
             val response = apiService.login(LoginRequest(username, password))
             if (response.isSuccessful) {
-                response.body()?.let {
-                    Resource.Success(it)
-                } ?: Resource.Error("Login failed: Empty response body")
+                Log.d("token", response.body()?.userDetails?.token!!)
+                SharedPreferencesHelper.saveToken(response.body()?.userDetails?.token!!)
+                Resource.Success(response.body()!!)
             } else {
                 Resource.Error("Login failed: ${response.message()}")
             }
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "An error occurred during login")
+            Log.e("repo_error", e.message.toString())
+            Resource.Error(e.message.toString())
         }
     }
 
