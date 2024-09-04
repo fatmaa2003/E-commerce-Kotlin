@@ -17,14 +17,14 @@ import kotlinx.coroutines.withContext
 
 class Repository {
 
-    private val apiService = RetrofitInstance.api
+    private val apiService = api
 
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
             val response = apiService.login(LoginRequest(username, password))
             if (response.isSuccessful) {
-                Log.d("login token", response.body()?.token!!)
-                SharedPreferencesHelper.saveToken(response.body()?.token!!)
+                Log.d("token", response.body()?.userDetails?.token!!)
+                SharedPreferencesHelper.saveToken(response.body()?.userDetails?.token!!)
                 Resource.Success(response.body()!!)
             } else {
                 Resource.Error("Login failed")

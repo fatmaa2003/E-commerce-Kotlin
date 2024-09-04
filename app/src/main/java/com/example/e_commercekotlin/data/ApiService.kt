@@ -23,8 +23,6 @@ interface ApiService {
 
     @GET("products")
     suspend fun getItems(): List<Product>
-//    @GET("products")
-//    suspend fun getItems(): Response<List<Product>>
 
     @GET("cats?limit=8")
     suspend fun getCollections(): List<Collection>
