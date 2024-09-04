@@ -12,7 +12,7 @@ object RetrofitInstance {
     private class AuthInterceptor(private val token: String) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer $token")
+//                .addHeader("Authorization", "Bearer $token")
                 .build()
             return chain.proceed(request)
         }
@@ -33,7 +33,7 @@ object RetrofitInstance {
     }
 
     val api: ApiService by lazy {
-        createRetrofit("eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiQjZBUkJ4UnlOS2RCalpCNW1YMDJ5Zz09IiwidXNlcm5hbWUiOiJoYW5hbiIsInN1YiI6IjUxIiwiaWF0IjoxNzI1NDQ0NTc0LCJleHAiOjE3MjU0ODA1NzR9.ToBKt5SPTyVw18CGfpmF1_iiQw3vz8k7jVR6m2BGKpcCgP2lPJzknviU4zWFj475ciHm3E4Ujd9FhburARx8mg").create(ApiService::class.java)
+        createRetrofit("eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiQjZBUkJ4UnlOS2RCalpCNW1YMDJ5Zz09IiwidXNlcm5hbWUiOiJoYW5hbjAzIiwic3ViIjoiNTUiLCJpYXQiOjE3MjU0NTIxMzYsImV4cCI6MTcyNTQ4ODEzNn0.C5zhzT96qCpUWjUDtczIJYAS1uVpZQq3NQ_MWlW44XzVVTvdQ-MlY0B2d1bxRtaJQzIfPeMaTmT0JdVlerxjQg").create(ApiService::class.java)
     }
 }
 

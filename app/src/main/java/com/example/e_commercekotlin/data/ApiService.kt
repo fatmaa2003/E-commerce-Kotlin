@@ -15,13 +15,11 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
-    @POST("login")
+    @POST("auth/signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("signup")
     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
-
-
 
     @GET("products")
     suspend fun getItems(): List<Product>
