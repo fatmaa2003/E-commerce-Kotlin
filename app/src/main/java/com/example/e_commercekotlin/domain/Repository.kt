@@ -22,7 +22,7 @@ class Repository {
             val response = apiService.login(LoginRequest(username, password))
             if (response.isSuccessful) {
                 response.body()?.let {
-                    Resource.Success(it, "Login successful")
+                    Resource.Success(it)
                 } ?: Resource.Error("Login failed: Empty response body")
             } else {
                 Resource.Error("Login failed: ${response.message()}")
@@ -37,7 +37,7 @@ class Repository {
             val response = apiService.signup(signupRequest)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    Resource.Success(it, "Signup successful")
+                    Resource.Success(it, )
                 } ?: Resource.Error("Signup failed: Empty response body")
             } else {
                 Resource.Error("Signup failed: ${response.message()}")
