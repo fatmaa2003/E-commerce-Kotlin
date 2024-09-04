@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.UserRole
@@ -40,13 +41,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel.loginState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Success -> {
+                    findNavController().navigate(R.id.action_sign_in_to_Feed_fragment)
                     val data = resource.data
                     val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data.role, ignoreCase = true) }
                     navigateToHome(userRole ?: UserRole.USER)
                 }
                 is Resource.Error -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 is Resource.Loading -> {
-                    //
                 }
             }
         }
