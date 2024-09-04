@@ -8,8 +8,6 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.domain.Repository
 import com.example.e_commercekotlin.data.model.UserRole
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {

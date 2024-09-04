@@ -10,7 +10,7 @@ import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
 
 class ProductViewModel: ViewModel() {
-//    private val repository = Repository()
+//    private val repository = com.example.e_commercekotlin.domain.Repository()
 //
 //    private val _data = MutableLiveData<Resource<List<Product>>>()
 //    val data: LiveData<Resource<List<Product>>> get() = _data
