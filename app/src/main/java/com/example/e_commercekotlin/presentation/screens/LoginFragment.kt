@@ -36,12 +36,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
     }
+    fun navToLogin(){
+        val btn = view?.findViewById<Button>(R.id.loginButton)
+        btn!!.setOnClickListener{
+            findNavController().navigate(R.id.action_sign_in_to_Feed_fragment)
+        }
+    }
 
     private fun loginObserver() {
         loginViewModel.loginState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Success -> {
-                    findNavController().navigate(R.id.action_sign_in_to_Feed_fragment)
+                    navToLogin()
                     val data = resource.data
                     val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data.role, ignoreCase = true) }
                     navigateToHome(userRole ?: UserRole.USER)
@@ -52,7 +58,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
     }
-
     private fun navigateToHome(userRole: UserRole) {
         val intent = Intent(requireContext(), HomeActivity::class.java).apply {
             putExtra("USER_ROLE", userRole.name)

@@ -26,7 +26,6 @@
             android:id="@+id/action_sign_up_to_Feed_fragment"
             app:destination="@id/Feed_fragment" />
     </fragment>
-
     <fragment
         android:id="@+id/Feed_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeedFragment"
@@ -39,27 +38,31 @@
             android:id="@+id/action_Feed_fragment_to_product_details"
             app:destination="@id/product_details" />
     </fragment>
-
-
     <fragment
         android:id="@+id/product_details"
         android:name="com.example.e_commercekotlin.presentation.screens.ProductDetailsFragment"
         android:label="product details"
         tools:layout="@layout/fragment_product_details"
         />
+    <fragment
+        android:id="@+id/stores"
+        android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
+        tools:layout="@layout/fragment_brand"/>
 
     <fragment
         android:id="@+id/feature_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeaturedFragment"
-        tools:layout="@layout/fragment_featured" >
+        tools:layout= "@layout/fragment_featured" >
         <action
             android:id="@+id/action_feature_fragment_to_collection"
             app:destination="@id/collection" />
         <action
             android:id="@+id/action_feature_fragment_to_follow"
             app:destination="@id/follow" />
+        <action
+            android:id="@+id/action_feature_fragment_to_stores"
+            app:destination="@id/stores" />
     </fragment>
-
     <fragment
         android:id="@+id/collection"
         android:name="com.example.e_commercekotlin.presentation.screens.CollectionFragment"
