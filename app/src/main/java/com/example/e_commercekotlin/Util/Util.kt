@@ -52,8 +52,3 @@ fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(requireContext(), message, duration).show()
 }
 
-fun navToLogin(fragment: Fragment) {
-    val navController: NavController = NavHostFragment.findNavController(fragment)
-    navController.navigate(R.id.action_sign_in_to_Feed_fragment)
-}
-

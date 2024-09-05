@@ -5,15 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
-import com.example.e_commercekotlin.Util.navToLogin
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.showToast
@@ -56,7 +51,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
             when (resource) {
                 is Resource.Success -> {
                     binding.progressBar.progressBar.hide()
-                    navToLogin(this)
+                    navigateToFeedFragment()
                 }
 
                 is Resource.Error -> {
@@ -84,5 +79,10 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
                 loginViewModel.login(username, password)
             }
         }
+    }
+
+    private fun navigateToFeedFragment() {
+        val navController = NavHostFragment.findNavController(this)
+        navController.navigate(R.id.action_sign_in_to_Feed_fragment)
     }
 }

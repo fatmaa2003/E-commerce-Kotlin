@@ -3,8 +3,10 @@ package com.example.e_commercekotlin.data
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 object RetrofitInstance {
     private const val BASE_URL = "https://e-commerce-production-e59d.up.railway.app/api/"
@@ -19,12 +21,17 @@ object RetrofitInstance {
     }
 
     private fun createOkHttpClient(token: String): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         return OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor(token))
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 
-    fun createRetrofit(token: String): Retrofit {
+    private fun createRetrofit(token: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(createOkHttpClient(token))
@@ -36,5 +43,7 @@ object RetrofitInstance {
         createRetrofit(SharedPreferencesHelper.getToken()!!).create(ApiService::class.java)
     }
 }
+
+
 
 
