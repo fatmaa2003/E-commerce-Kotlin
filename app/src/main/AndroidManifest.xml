@@ -20,7 +20,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".presentation.screens.MainActivity"
+            android:name=".presentation.screens.mainActivity.MainActivity"
             android:theme="@style/Base.Theme.EcommerceKotlin"
             android:exported="true">
             <intent-filter>

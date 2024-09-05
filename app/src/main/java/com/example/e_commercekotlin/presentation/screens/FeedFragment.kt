@@ -21,6 +21,8 @@ import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 
 class FeedFragment : Fragment() {
     private lateinit var itemAdapter: ProductAdapter
@@ -46,6 +48,7 @@ class FeedFragment : Fragment() {
             toolBarTitle = "Feed",
             leftIconImage = R.drawable.disk
         )
+        activity?.setBottomNavVisibility(visible = false)
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -59,8 +62,6 @@ class FeedFragment : Fragment() {
 
         itemRecyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
-
-
     }
 
     private fun observeData() {
@@ -80,12 +81,7 @@ class FeedFragment : Fragment() {
         })
     }
 
-//    private fun handleToolBarStatus() {
-//        binding.feedFragmentToolBar.toolbarTitle.text = getString(R.string.feed_tool_bar_title)
-//        binding.feedFragmentToolBar.placeHolderIcon.setImageResource(R.drawable.search_icon)
-//        binding.feedFragmentToolBar.leftIcon.setImageResource(R.drawable.disk)
-//
-//    }
+
 
 
 }
