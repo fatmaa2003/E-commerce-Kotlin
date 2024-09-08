@@ -1,7 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +19,6 @@ class FeaturedFragment : Fragment() {
 
     private var _binding: FragmentFeaturedBinding? = null
     private val binding get() = _binding!!
-    private lateinit var categoryId:String
-    private val viewModel: ProductViewModel by viewModels()
-    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

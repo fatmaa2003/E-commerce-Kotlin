@@ -1,62 +1,88 @@
 package com.example.e_commercekotlin.presentation.screens
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View.OnClickListener
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
+import androidx.navigation.fragment.NavHostFragment
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
+import com.example.e_commercekotlin.Util.show
+import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.UserRole
+import com.example.e_commercekotlin.databinding.FragmentLoginBinding
 import com.example.e_commercekotlin.domain.Repository
 import com.example.e_commercekotlin.presentation.viewmodels.LoginViewModel
-import com.example.e_commercekotlin.presentation.screens.HomeActivity // Assuming HomeActivity is in the same package
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private lateinit var  loginViewModel: LoginViewModel
+class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
+
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var loginViewModel: LoginViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        loginViewModel = LoginViewModel(Repository())
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        loginViewModel = LoginViewModel(Repository())
-
+        activity?.setBottomNavVisibility(visible = false)
+        handleUIClicks()
         loginObserver()
+    }
 
-
-        view.findViewById<Button>(R.id.loginButton).setOnClickListener {
-            val username = view.findViewById<EditText>(R.id.usernameEditText).text.toString()
-            val password = view.findViewById<EditText>(R.id.passwordEditText).text.toString()
-            loginViewModel.login(username, password)
-        }
-
-
+    private fun handleUIClicks() {
+        binding.loginButton.setOnClickListener(this)
     }
 
     private fun loginObserver() {
         loginViewModel.loginState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Success -> {
-                    val data = resource.data
-                    val userRole = UserRole.entries.find { UserRole -> UserRole.role.equals(other = data.role, ignoreCase = true) }
-                    navigateToHome(userRole ?: UserRole.USER)
+                    binding.progressBar.progressBar.hide()
+                    navigateToFeedFragment()
                 }
-                is Resource.Error -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+
+                is Resource.Error -> {
+                    binding.progressBar.progressBar.hide()
+                    showToast(message = resource.message.orEmpty())
+                }
+
                 is Resource.Loading -> {
-                    //
+                    binding.progressBar.progressBar.show()
                 }
             }
         }
     }
 
-    private fun navigateToHome(userRole: UserRole) {
-        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
-            putExtra("USER_ROLE", userRole.name)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onClick(view: View?) {
+        when(view){
+            binding.loginButton -> {
+                val username = binding.usernameEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+                loginViewModel.login(username, password)
+            }
         }
-        startActivity(intent)
-        requireActivity().finish()
+    }
+
+    private fun navigateToFeedFragment() {
+        val navController = NavHostFragment.findNavController(this)
+        navController.navigate(R.id.action_sign_in_to_Feed_fragment)
     }
 }

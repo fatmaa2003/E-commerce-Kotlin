@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@color/grey"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/custom_dialog">
 
     <TextView
         android:id="@+id/itemBrandAndTitle"

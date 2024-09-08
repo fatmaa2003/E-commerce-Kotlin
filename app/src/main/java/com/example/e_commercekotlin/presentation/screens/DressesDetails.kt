@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.databinding.FragmentCollectionDetailsBinding
 import com.example.e_commercekotlin.databinding.FragmentDressesDetailsBinding
 
@@ -24,6 +25,7 @@ class DressesDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentDressDetailsToolbar.handleToolBarState(leftIconImage = R.drawable.back)
         val horizontalData = listOf("All", "T-shirts","Jackets","Sweater","Sweater","Sweater","Sweater")
         val verticalData = listOf(
             DressesAdapter.Item(R.drawable.cat1, "Prouduct 1", "$22.22"),

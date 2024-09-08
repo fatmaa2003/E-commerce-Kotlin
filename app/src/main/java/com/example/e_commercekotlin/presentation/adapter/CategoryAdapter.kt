@@ -9,9 +9,10 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Category
 
 class CategoryAdapter(
-    private val categories: MutableList<Category>,
-    private val onCategoryClick: (Category) -> Unit
+//    private val onCategoryClick: (Category.CategoryItem) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+    var categories = Category()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.category_item_layout, parent, false)
@@ -21,16 +22,15 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         holder.categoryName.text = category.name
-        holder.itemView.setOnClickListener { onCategoryClick(category) }
+//        holder.itemView.setOnClickListener { onCategoryClick(category) }
     }
 
     override fun getItemCount(): Int {
         return categories.size
     }
 
-    fun updateCategories(newCategories: List<Category>) {
-        categories.clear()
-        categories.addAll(newCategories)
+    fun updateCategories(categories: Category) {
+        this.categories = categories
         notifyDataSetChanged()
     }
 

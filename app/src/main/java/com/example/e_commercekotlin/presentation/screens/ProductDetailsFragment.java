@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens;
 
+import static com.example.e_commercekotlin.Util.UtilKt.handleToolBarState;
 import static com.google.android.gms.common.util.CollectionUtils.listOf;
 
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.e_commercekotlin.R;
 import com.example.e_commercekotlin.data.model.Product;
+import com.example.e_commercekotlin.databinding.CustomToolbarBinding;
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding;
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter;
 import com.example.e_commercekotlin.presentation.model.Featured;
@@ -39,13 +41,15 @@ public class ProductDetailsFragment extends Fragment {
     private TextView tvTagsHeader2;
     private LinearLayout llTagsContent3;
     private TextView tvTagsHeader3;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Inflate the layout
+        // Inflatee the layout
         binding = FragmentProductDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        CustomToolbarBinding toolbarBinding = binding.productDetailsFragmentToolbar;
+        handleToolBarState(toolbarBinding,"",false,true,true,R.drawable.bookmark,R.drawable.down_arrow
+        );
 
         // Find Views
         llTagsContent1 = view.findViewById(R.id.ll_tags_content1);
@@ -85,6 +89,7 @@ public class ProductDetailsFragment extends Fragment {
             tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_expand_less_24, 0);
         }
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

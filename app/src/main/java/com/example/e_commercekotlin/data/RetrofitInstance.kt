@@ -1,19 +1,49 @@
 package com.example.e_commercekotlin.data
 
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 object RetrofitInstance {
     private const val BASE_URL = "https://e-commerce-production-e59d.up.railway.app/api/"
 
-    val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
+    private class AuthInterceptor(private val token: String) : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request().newBuilder()
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+            return chain.proceed(request)
+        }
+    }
+
+    private fun createOkHttpClient(token: String): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(token))
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    private fun createRetrofit(token: String): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(createOkHttpClient(token))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     val api: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
+        createRetrofit(SharedPreferencesHelper.getToken()!!).create(ApiService::class.java)
     }
 }
+
+
+
+
