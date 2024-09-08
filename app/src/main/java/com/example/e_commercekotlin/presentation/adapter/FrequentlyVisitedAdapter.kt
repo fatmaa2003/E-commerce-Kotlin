@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
-import com.squareup.picasso.Picasso
+
 
 class FrequentlyVisitedAdapter() : RecyclerView.Adapter<FrequentlyVisitedAdapter.MyViewHolder>() {
 
@@ -26,7 +26,6 @@ class FrequentlyVisitedAdapter() : RecyclerView.Adapter<FrequentlyVisitedAdapter
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = freqVisitedList[position]
-        Picasso.get().load(currentItem.images.firstOrNull()).into(holder.freqVisitedItemImage)
 
         holder.freqVisitedItemType.text = currentItem.title
         holder.freqVisitedItemCategory.text = currentItem.price.toString()
