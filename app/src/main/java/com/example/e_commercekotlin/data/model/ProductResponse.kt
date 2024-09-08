@@ -1,9 +1,12 @@
 package com.example.e_commercekotlin.data.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 class ProductResponse : ArrayList<ProductResponse.ProductResponseItem>(){
+    @Entity
     data class ProductResponseItem(
         @SerializedName("description")
         val description: String?,
@@ -14,9 +17,10 @@ class ProductResponse : ArrayList<ProductResponse.ProductResponseItem>(){
         @SerializedName("price")
         val price: Double?,
         @SerializedName("productId")
+        @PrimaryKey
         val productId: Int?,
-        @SerializedName("productImages")
-        val productImages: List<ProductImage?>?,
+//        @SerializedName("productImages")
+//        val productImages: List<ProductImage?>?,
         @SerializedName("productName")
         val productName: String?,
         @SerializedName("stockQuantity")
@@ -28,7 +32,7 @@ class ProductResponse : ArrayList<ProductResponse.ProductResponseItem>(){
             @SerializedName("imageId")
             val imageId: Int?,
             @SerializedName("imageUrl")
-            val imageUrl: Any?
+            val imageUrl: String?
         )
     }
 }

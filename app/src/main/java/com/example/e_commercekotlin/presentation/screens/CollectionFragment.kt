@@ -1,11 +1,9 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,9 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.ApiService
+import com.example.e_commercekotlin.data.remote.ApiService
 import com.example.e_commercekotlin.data.model.Collection
-import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
 import com.example.e_commercekotlin.presentation.adapter.CollectionPageAdapter
 import com.example.e_commercekotlin.presentation.adapter.FrequentlyVisitedAdapter
 import kotlinx.coroutines.launch

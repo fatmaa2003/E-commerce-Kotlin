@@ -1,5 +1,7 @@
-package com.example.e_commercekotlin.data
+package com.example.e_commercekotlin.data.remote
 
+import com.example.e_commercekotlin.data.SignupRequest
+import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.LoginRequest
@@ -10,6 +12,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("auth/signin")
