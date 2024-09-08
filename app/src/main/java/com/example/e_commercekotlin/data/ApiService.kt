@@ -30,6 +30,6 @@ interface ApiService {
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<List<Product>>
 
     @GET("products")
-    suspend fun getStoreImages(): List<StoreImages>
+    suspend fun getStoreImages(): List<Product>
 
 }
