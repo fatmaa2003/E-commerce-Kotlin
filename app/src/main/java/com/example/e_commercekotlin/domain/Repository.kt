@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.domain
 
+import android.util.Log
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.SignupRequest
@@ -44,6 +45,7 @@ class Repository {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getProductsByCategoryId(categoryId = categoryId)
+                Log.d("in repo"," the response in repo $response")
                 if (response.isSuccessful) {
                     Resource.Success(response.body() ?: emptyList())
                 } else {

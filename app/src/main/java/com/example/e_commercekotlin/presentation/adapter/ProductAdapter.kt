@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Product
 import java.text.NumberFormat
@@ -29,11 +28,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
-        Glide.with(holder.itemView.context)
-            .load(currentItem.mainImageUrl)
-            .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher)
-            .into(holder.productImage)
+//        Glide.with(holder.itemView.context)
+//            .load(currentItem.mainImageUrl)
+//            .placeholder(R.mipmap.ic_launcher)
+//            .error(R.mipmap.ic_launcher)
+//            .into(holder.productImage)
 
         holder.productImage.setImageResource(R.mipmap.ic_launcher)
 

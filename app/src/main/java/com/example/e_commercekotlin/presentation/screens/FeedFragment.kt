@@ -49,6 +49,8 @@ class FeedFragment : Fragment() {
         binding.recyclerView.adapter = itemAdapter
         binding.categoriesRecyclerView.adapter = categoryAdapter
 
+        viewModel.fetchProduct("1")
+
         viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
@@ -67,6 +69,6 @@ class FeedFragment : Fragment() {
             }
         })
 
-        viewModel.fetchProduct(categoryId)
+
     }
 }

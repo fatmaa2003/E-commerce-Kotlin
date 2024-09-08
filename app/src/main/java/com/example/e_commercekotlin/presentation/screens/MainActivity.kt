@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.root)
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.Feed -> replaceFragment(DressesDetails())
+                R.id.Feed -> replaceFragment(FeedFragment())
                 R.id.Market -> replaceFragment(MarketFragment())
                 R.id.Profile -> replaceFragment(CartFragment())
             }
