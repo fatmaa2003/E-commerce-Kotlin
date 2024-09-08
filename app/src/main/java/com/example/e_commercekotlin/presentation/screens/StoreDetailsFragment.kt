@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.ViewPagerAdapter
 import com.example.e_commercekotlin.databinding.FragmentStoreDetailsBinding
@@ -44,17 +43,6 @@ class StoreDetailsFragment : Fragment() {
         binding.rvsummerspring.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
-        val imageList = listOf(
-            "https://i.imgur.com/MxJyADq.jpeg",
-            "https://i.imgur.com/MxJyADq.jpeg",
-            "https://i.imgur.com/MxJyADq.jpeg"
-        )
-
-        viewPagerAdapter = ViewPagerAdapter(imageList)
-        binding.viewPager2.adapter = viewPagerAdapter
-        binding.viewPager2.setPageTransformer { page, position ->
-            page.alpha = 1 - Math.abs(position)
-        }
 
         binding.tabOverview.setOnClickListener { highlightTab(binding.tabOverview) }
         binding.tabCollection.setOnClickListener { highlightTab(binding.tabCollection) }
@@ -69,26 +57,9 @@ class StoreDetailsFragment : Fragment() {
         }
 
 
-
-        loadProducts()
     }
 
-    private fun loadProducts() {
-        val productsOnSale = listOf(
-            Product("Product 1", 20, listOf("https://i.imgur.com/MxJyADq.jpeg")),
-            Product("Product 2", 30, listOf("https://i.imgur.com/MxJyADq.jpeg")),
-            Product("Product 3", 25, listOf("https://i.imgur.com/MxJyADq.jpeg"))
-        )
 
-        val summerSpringProducts = listOf(
-            Product("Summer Product 1", 40, listOf("https://i.imgur.com/MxJyADq.jpeg")),
-            Product("Summer Product 2", 50, listOf("https://i.imgur.com/MxJyADq.jpeg")),
-            Product("Summer Product 3", 45, listOf("https://i.imgur.com/MxJyADq.jpeg"))
-        )
-
-        productsOnSaleAdapter.setProductList(productsOnSale)
-        summerSpringAdapter.setProductList(summerSpringProducts)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

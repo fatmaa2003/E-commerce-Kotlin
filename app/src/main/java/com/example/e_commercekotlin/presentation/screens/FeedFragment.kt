@@ -1,29 +1,27 @@
 package com.example.e_commercekotlin.presentation.screens
 
-
-
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.ApiService
-import com.example.e_commercekotlin.data.model.Category
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
+import com.example.e_commercekotlin.data.Resource
 
 class FeedFragment : Fragment() {
 
+    private val viewModel: ProductViewModel by viewModels()
+    private lateinit var binding: FragmentFeedBinding
+    private lateinit var categoryId: String
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
 
@@ -31,59 +29,44 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+        binding = FragmentFeedBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
-
-        itemRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
+        binding.recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.categoriesRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         itemAdapter = ProductAdapter()
         categoryAdapter = CategoryAdapter(ArrayList()) { category ->
 
         }
 
-        itemRecyclerView.adapter = itemAdapter
-        categoryRecyclerView.adapter = categoryAdapter
+        binding.recyclerView.adapter = itemAdapter
+        binding.categoriesRecyclerView.adapter = categoryAdapter
 
+        viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    Log.d("in observer data success", "$resource")
+                    binding.progressBar.visibility = View.GONE
+                    itemAdapter.setProductList(resource.data)
+                }
+                is Resource.Error -> {
+                    Log.d("in observer data error", "$resource")
+                    binding.progressBar.visibility = View.GONE
 
-        lifecycleScope.launch {
-            try {
-                val categories = getCategoriesFromApi()
-                categoryAdapter.updateCategories(categories)
-
-                val items = getItemsFromApi()
-                itemAdapter.setProductList(items)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
-    }
+        })
 
-    private suspend fun getCategoriesFromApi(): List<Category> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getCategories()
-    }
-
-
-    private suspend fun getItemsFromApi(): List<Product> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getItems()
+        viewModel.fetchProduct(categoryId)
     }
 }

@@ -94,7 +94,7 @@ public class ProductDetailsFragment extends Fragment {
         productImagesAdapter = new ProductImagesAdapter();
         productImagesAdapter.setProductImages(productImages);
         productAdapter=new ProductAdapter();
-        productAdapter.setProductList(product);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -103,16 +103,6 @@ public class ProductDetailsFragment extends Fragment {
         binding.completeOutfit.setLayoutManager(layoutManager1);
         binding.completeOutfit.setAdapter(productAdapter);
 
-
-        // Adding items to the list
-        productImages.add(new ProductImage(R.drawable.baseline_profile_24));
-        productImages.add(new ProductImage(R.drawable.baseline_profile_24));
-        productImages.add(new ProductImage(R.drawable.baseline_profile_24));
-        productImagesAdapter.setProductImages(productImages);
-        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
-        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
-        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
-        product.add(new Product("T-shirt",200,listOf("https://i.imgur.com/Qphac99.jpeg")));
 
     }
 

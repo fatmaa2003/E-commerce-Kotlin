@@ -52,36 +52,11 @@ class StoresFragment : Fragment() {
         storeImagesRecyclerView.adapter = storeImagesAdapter
 
 
-        lifecycleScope.launch {
-            try {
-                val storeImages = getStoreImagesFromApi()
-                storeImagesAdapter.setStoreImagesList(storeImages)
-
-                val items = getItemsFromApi()
-                itemAdapter.setProductList(items)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private suspend fun getStoreImagesFromApi(): List<StoreImages> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getStoreImages()
+        
     }
 
 
-    private suspend fun getItemsFromApi(): List<Product> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getItems()
-    }
+
+
+
 }
