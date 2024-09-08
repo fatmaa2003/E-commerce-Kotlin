@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
-import com.example.e_commercekotlin.databinding.FragmentCollectionDetailsBinding
 import com.example.e_commercekotlin.databinding.FragmentDressesDetailsBinding
 
 class DressesDetails : Fragment() {

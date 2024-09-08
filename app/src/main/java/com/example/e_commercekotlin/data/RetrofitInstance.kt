@@ -40,7 +40,8 @@ object RetrofitInstance {
     }
 
     val api: ApiService by lazy {
-        createRetrofit(SharedPreferencesHelper.getToken()!!).create(ApiService::class.java)
+        createRetrofit(SharedPreferencesHelper.getToken()?: "").create(ApiService::class.java)
+
     }
 }
 
