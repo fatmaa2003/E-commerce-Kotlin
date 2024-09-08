@@ -22,7 +22,7 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         holder.categoryName.text = category.name
-//        holder.itemView.setOnClickListener { onCategoryClick(category) }
+        holder.itemView.setOnClickListener { onCategoryClick?.onCategoryClick(category) }
     }
 
     override fun getItemCount(): Int {
@@ -37,4 +37,10 @@ class CategoryAdapter(
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryName: TextView = itemView.findViewById(R.id.category_name)
     }
+
+    interface ClickListener{
+        fun onCategoryClick(category: Category.CategoryItem)
+    }
+
+    var onCategoryClick : ClickListener?=null
  }

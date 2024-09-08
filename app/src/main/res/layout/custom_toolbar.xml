@@ -28,7 +28,6 @@
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:paddingHorizontal="105dp"
-            android:text="feed"
             android:textStyle="bold"
             android:fontFamily="@font/semibold"/>
 

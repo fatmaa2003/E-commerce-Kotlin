@@ -8,21 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import com.example.e_commercekotlin.Util.setBottomNavVisibility
 
 class FeedFragment : Fragment() {
     private lateinit var itemAdapter: ProductAdapter
@@ -48,7 +47,7 @@ class FeedFragment : Fragment() {
             toolBarTitle = "Feed",
             leftIconImage = R.drawable.disk
         )
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -62,6 +61,8 @@ class FeedFragment : Fragment() {
 
         itemRecyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
+
+        onCategoryClick()
     }
 
     private fun observeData() {
@@ -82,6 +83,15 @@ class FeedFragment : Fragment() {
     }
 
 
+
+    private fun onCategoryClick(){
+        categoryAdapter.onCategoryClick = object : CategoryAdapter.ClickListener {
+            override fun onCategoryClick(category: Category.CategoryItem) {
+                Log.d("in category click in feed fragment"," adsdasdasdas ")
+            }
+
+        }
+    }
 
 
 }
