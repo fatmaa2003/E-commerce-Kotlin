@@ -43,4 +43,6 @@ class CategoryAdapter(
     }
 
     var onCategoryClick : ClickListener?=null
+
+
  }

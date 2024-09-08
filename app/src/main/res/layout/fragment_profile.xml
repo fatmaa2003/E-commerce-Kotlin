@@ -3,16 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screens.FeedFragment"
-    android:background="@color/design_default_color_primary_variant">
+    tools:context=".presentation.screens.FeedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="50sp"
-        android:layout_gravity="center"
-        android:textColor="@color/white"/>
+        android:orientation="vertical">
+        <include
+            layout="@layout/logout_button"/>
+    </LinearLayout>
 
 </FrameLayout>

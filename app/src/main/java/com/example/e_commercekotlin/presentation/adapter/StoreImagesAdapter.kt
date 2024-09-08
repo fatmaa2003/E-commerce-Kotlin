@@ -10,7 +10,7 @@ import com.example.e_commercekotlin.data.model.StoreImages
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.squareup.picasso.Picasso
+
 
 class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
 
@@ -28,11 +28,6 @@ class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = storeImagesList[position]
-
-        Picasso.get()
-            .load(currentItem.images.firstOrNull())
-            .error(R.drawable.ic_launcher_background)
-            .into(holder.storeImage)
 
         handleRoundedImageRadius(position, holder)
     }

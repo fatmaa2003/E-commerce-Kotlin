@@ -62,16 +62,7 @@ class CollectionFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            try {
-                val freqVisited = getFreqVisitedItemsFromApi()
-                Log.d("CollectionFragment", "Frequent visited items: $freqVisited")
-                frequentlyVisitedAdapter.setFrequentlyVisitedItemsList(freqVisited)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
-            }
-        }
+
 
         // Toggle text view logic
         toggleTextView.setOnClickListener {
@@ -99,12 +90,5 @@ class CollectionFragment : Fragment() {
         return api.getCollections()
     }
 
-    private suspend fun getFreqVisitedItemsFromApi(): List<FrequentlyVisitedItems> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getFreqVisitedItems()
-    }
+
 }

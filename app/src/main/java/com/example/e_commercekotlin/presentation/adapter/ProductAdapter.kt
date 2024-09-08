@@ -7,16 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.model.Product
-import com.squareup.picasso.Picasso
+import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
 
-class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
+class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
-    private var productList : List<Product> = listOf()
+    private var productList: List<ProductResponse.ProductResponseItem> = listOf()
 
-    fun setProductList(productList : List<Product>){
+    fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
         notifyDataSetChanged()
     }
@@ -29,15 +28,11 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
-        Picasso.get()
-            .load(currentItem.images.firstOrNull())
-            .error(R.mipmap.ic_launcher)
-            .into(holder.productImage)
+        holder.productImage.setImageResource(R.mipmap.ic_launcher)
 
-        holder.productName.text = currentItem.title
+        holder.productName.text = currentItem.productName
 
-        // Locale-specific currency formatting
-        val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US) // Change Locale.US as needed
+        val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
         val formattedPrice = currencyFormat.format(currentItem.price)
         holder.productPrice.text = formattedPrice
     }
