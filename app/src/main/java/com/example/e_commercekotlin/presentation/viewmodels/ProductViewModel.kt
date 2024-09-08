@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
 

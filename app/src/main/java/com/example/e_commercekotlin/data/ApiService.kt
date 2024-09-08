@@ -5,7 +5,7 @@ import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.StoreImages
 import retrofit2.Response
@@ -23,7 +23,7 @@ interface ApiService {
     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
 
     @GET("products")
-    suspend fun getItems(): List<Product>
+    suspend fun getItems(): List<ProductDetailsDto>
 
     @GET("cats?limit=8")
     suspend fun getCollections(): List<Collection>

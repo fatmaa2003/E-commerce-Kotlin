@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.ApiService
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.StoreImages
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
@@ -51,18 +51,18 @@ class StoresFragment : Fragment() {
         storeImagesRecyclerView.adapter = storeImagesAdapter
 
 
-        lifecycleScope.launch {
-            try {
-                val storeImages = getStoreImagesFromApi()
-                storeImagesAdapter.setStoreImagesList(storeImages)
-
-                val items = getItemsFromApi()
-                itemAdapter.setProductList(items)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        lifecycleScope.launch {
+//            try {
+//                val storeImages = getStoreImagesFromApi()
+//                storeImagesAdapter.setStoreImagesList(storeImages)
+//
+//                val items = getItemsFromApi()
+//                itemAdapter.setProductList(items)
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                Toast.makeText(requireActivity(), "Failed to load data", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     private suspend fun getStoreImagesFromApi(): List<StoreImages> {
@@ -75,12 +75,12 @@ class StoresFragment : Fragment() {
     }
 
 
-    private suspend fun getItemsFromApi(): List<Product> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.escuelajs.co/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val api = retrofit.create(ApiService::class.java)
-        return api.getItems()
-    }
+//    private suspend fun getItemsFromApi(): List<ProductDetailsDto.Product> {
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl("https://api.escuelajs.co/api/v1/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//        val api = retrofit.create(ApiService::class.java)
+//        return api.getItems()
+//    }
 }
