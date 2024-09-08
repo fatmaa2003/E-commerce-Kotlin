@@ -5,13 +5,11 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
-import com.example.e_commercekotlin.data.model.LoginRequest
-import com.example.e_commercekotlin.data.model.LoginResponse
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
+import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -72,6 +70,22 @@ class Repository {
             try {
                 Resource.Loading(null)
                 val response = api.getCategories()
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun getProductsByCategoryId(categoryId : String): Resource<ProductResponse> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = api.getProductsByCategoryId(categoryId = categoryId)
                 if (response.isSuccessful) {
                     Resource.Success(response.body()!!)
                 } else {

@@ -7,15 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.model.Product
+import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
-    private var productList: List<Product> = listOf()
+    private var productList: List<ProductResponse.ProductResponseItem> = listOf()
 
-    fun setProductList(productList: List<Product>) {
+    fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
         notifyDataSetChanged()
     }
@@ -28,15 +28,9 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
-//        Glide.with(holder.itemView.context)
-//            .load(currentItem.mainImageUrl)
-//            .placeholder(R.mipmap.ic_launcher)
-//            .error(R.mipmap.ic_launcher)
-//            .into(holder.productImage)
-
         holder.productImage.setImageResource(R.mipmap.ic_launcher)
 
-        holder.productName.text = currentItem.name
+        holder.productName.text = currentItem.productName
 
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
         val formattedPrice = currencyFormat.format(currentItem.price)

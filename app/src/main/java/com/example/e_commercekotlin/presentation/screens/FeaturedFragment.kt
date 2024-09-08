@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +11,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
 
 class FeaturedFragment : Fragment() {
 
     private var _binding: FragmentFeaturedBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: ProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +51,13 @@ class FeaturedFragment : Fragment() {
         })
 
 
-        viewModel.fetchProduct(categoryId)
+        viewModel.fetchProduct("1")
 
         return view
     }
 
     private fun setupProductRecyclerView() {
-        productAdapter = ProductAdapter()
+        val productAdapter = ProductAdapter()
         binding.rvproduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvproduct.adapter = productAdapter
     }

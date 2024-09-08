@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.e_commercekotlin.R;
-import com.example.e_commercekotlin.data.model.Product;
+import com.example.e_commercekotlin.data.model.ProductResponse;
 import com.example.e_commercekotlin.databinding.CustomToolbarBinding;
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding;
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter;
@@ -29,7 +29,7 @@ public class ProductDetailsFragment extends Fragment {
     private FragmentProductDetailsBinding binding;
     private ProductImagesAdapter productImagesAdapter;
     private List<ProductImage> productImages = new ArrayList<>();
-    private List<Product>product=new ArrayList<>();
+    private List<ProductResponse.ProductResponseItem>product=new ArrayList<>();
     private ProductAdapter productAdapter;
     private List<Featured>features=new ArrayList<>();
     private boolean tagsVisible1 = false;
