@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
+import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
@@ -50,7 +54,7 @@ class FeedFragment : Fragment() {
             toolBarTitle = "Feed",
             leftIconImage = R.drawable.disk
         )
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
 
         val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
@@ -64,6 +68,9 @@ class FeedFragment : Fragment() {
 
         itemRecyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
+
+        onCategoryClick()
+    }
 
 
         lifecycleScope.launch {
@@ -90,6 +97,15 @@ class FeedFragment : Fragment() {
         })
 
 
+    }
+
+    private fun onCategoryClick(){
+        categoryAdapter.onCategoryClick = object : CategoryAdapter.ClickListener {
+            override fun onCategoryClick(category: Category.CategoryItem) {
+                Log.d("in category click in feed fragment"," adsdasdasdas ")
+            }
+
+        }
     }
 
 

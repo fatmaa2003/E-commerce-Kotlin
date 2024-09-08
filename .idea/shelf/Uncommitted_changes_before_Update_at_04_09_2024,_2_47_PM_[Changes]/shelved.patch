@@ -1,0 +1,59 @@
+Index: app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.data\n\nimport com.example.e_commercekotlin.data.model.Category\nimport com.example.e_commercekotlin.data.model.Collection\nimport com.example.e_commercekotlin.data.model.FrequentlyVisitedItems\nimport com.example.e_commercekotlin.data.model.LoginRequest\nimport com.example.e_commercekotlin.data.model.LoginResponse\nimport com.example.e_commercekotlin.data.model.Product\nimport com.example.e_commercekotlin.data.model.SignupResponse\nimport com.example.e_commercekotlin.data.model.StoreImages\nimport retrofit2.Response\nimport retrofit2.http.Body\nimport retrofit2.http.GET\nimport retrofit2.http.POST\nimport retrofit2.http.Path\n\ninterface ApiService {\n    @POST(\"login\")\n    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>\n\n    @POST(\"signup\")\n    suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>\n\n\n\n    @GET(\"products\")\n    suspend fun getItems(): List<Product>\n//    @GET(\"products\")\n//    suspend fun getItems(): Response<List<Product>>\n\n    @GET(\"cats?limit=8\")\n    suspend fun getCollections(): List<Collection>\n\n    @GET(\"products\")\n    suspend fun getFreqVisitedItems(): List<FrequentlyVisitedItems>\n\n    @GET(\"products\")\n    suspend fun getStoreImages(): List<StoreImages>\n\n    @GET(\"categories\")\n    suspend fun getCategories(): Response<Category>\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt b/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt	(revision 6dbf06e1344f910ca97558f07467b05cf5afe80e)
++++ b/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt	(date 1725450393138)
+@@ -21,8 +21,6 @@
+     @POST("signup")
+     suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>
+ 
+-
+-
+     @GET("products")
+     suspend fun getItems(): List<Product>
+ //    @GET("products")
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 6dbf06e1344f910ca97558f07467b05cf5afe80e)
++++ b/.idea/misc.xml	(date 1725185231546)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"deploymentTargetSelector\">\n    <selectionStates>\n      <SelectionState runConfigName=\"app\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n    </selectionStates>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision 6dbf06e1344f910ca97558f07467b05cf5afe80e)
++++ b/.idea/deploymentTargetSelector.xml	(date 1725185231609)
+@@ -4,6 +4,14 @@
+     <selectionStates>
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
++        <DropdownSelection timestamp="2024-08-20T18:56:10.353885Z">
++          <Target type="DEFAULT_BOOT">
++            <handle>
++              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/hanansoliman/.android/avd/Pixel_3a_XL_API_35.avd" />
++            </handle>
++          </Target>
++        </DropdownSelection>
++        <DialogSelection />
+       </SelectionState>
+     </selectionStates>
+   </component>
