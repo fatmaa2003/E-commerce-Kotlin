@@ -1,0 +1,124 @@
+Index: app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.data\n\nimport com.example.e_commercekotlin.data.model.Category\nimport com.example.e_commercekotlin.data.model.Collection\nimport com.example.e_commercekotlin.data.model.FrequentlyVisitedItems\nimport com.example.e_commercekotlin.data.model.LoginRequest\nimport com.example.e_commercekotlin.data.model.LoginResponse\nimport com.example.e_commercekotlin.data.model.Product\nimport com.example.e_commercekotlin.data.model.SignupResponse\nimport com.example.e_commercekotlin.data.model.StoreImages\nimport retrofit2.Response\nimport retrofit2.http.Body\nimport retrofit2.http.GET\nimport retrofit2.http.POST\n\ninterface ApiService {\n    @POST(\"login\")\n    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>\n\n    @POST(\"signup\")\n    suspend fun signup(@Body signupRequest: SignupRequest): Response<SignupResponse>\n\n    @GET(\"categories\")\n    suspend fun getCategories(): List<Category>\n\n    @GET(\"products\")\n    suspend fun getItems(): List<Product>\n//    @GET(\"products\")\n//    suspend fun getItems(): Response<List<Product>>\n\n    @GET(\"cats?limit=8\")\n    suspend fun getCollections(): List<Collection>\n\n    @GET(\"products\")\n    suspend fun getFreqVisitedItems(): List<FrequentlyVisitedItems>\n\n    @GET(\"products\")\n    suspend fun getStoreImages(): List<StoreImages>\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt b/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/app/src/main/java/com/example/e_commercekotlin/data/ApiService.kt	(date 1725185229532)
+@@ -1,6 +1,5 @@
+ package com.example.e_commercekotlin.data
+ 
+-import com.example.e_commercekotlin.data.model.Category
+ import com.example.e_commercekotlin.data.model.Collection
+ import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
+ import com.example.e_commercekotlin.data.model.LoginRequest
+Index: app/src/main/java/com/example/e_commercekotlin/data/model/Category.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/data/model/Category.kt b/app/src/main/java/com/example/e_commercekotlin/data/model/Category.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/e_commercekotlin/data/model/Category.kt	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ /dev/null	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
+@@ -1,6 +0,0 @@
+-package com.example.e_commercekotlin.data.model
+-
+-data class Category(
+-    val id: Int,
+-    val name: String
+-)
+Index: app/src/main/java/com/example/e_commercekotlin/presentation/screens/StoresFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.presentation.screens\n\nimport android.os.Bundle\nimport androidx.fragment.app.Fragment\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.Toast\nimport androidx.lifecycle.lifecycleScope\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport androidx.recyclerview.widget.StaggeredGridLayoutManager\nimport com.example.e_commercekotlin.R\nimport com.example.e_commercekotlin.data.ApiService\nimport com.example.e_commercekotlin.data.model.Category\nimport com.example.e_commercekotlin.data.model.Product\nimport com.example.e_commercekotlin.data.model.StoreImages\nimport com.example.e_commercekotlin.presentation.adapter.CategoryAdapter\nimport com.example.e_commercekotlin.presentation.adapter.ProductAdapter\nimport com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter\nimport kotlinx.coroutines.launch\nimport retrofit2.Retrofit\nimport retrofit2.converter.gson.GsonConverterFactory\n\nclass StoresFragment : Fragment() {\n\n    private lateinit var itemAdapter: ProductAdapter\n    private lateinit var storeImagesAdapter: StoreImagesAdapter\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View? {\n        return inflater.inflate(R.layout.fragment_stores, container, false)\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n\n\n        val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)\n        val storeImagesRecyclerView: RecyclerView = view.findViewById(R.id.storeImagesRv)\n\n        itemRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)\n        storeImagesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\n\n\n        itemAdapter = ProductAdapter()\n        storeImagesAdapter = StoreImagesAdapter()\n\n        itemRecyclerView.adapter = itemAdapter\n        storeImagesRecyclerView.adapter = storeImagesAdapter\n\n\n        lifecycleScope.launch {\n            try {\n                val storeImages = getStoreImagesFromApi()\n                storeImagesAdapter.setStoreImagesList(storeImages)\n\n                val items = getItemsFromApi()\n                itemAdapter.setProductList(items)\n            } catch (e: Exception) {\n                e.printStackTrace()\n                Toast.makeText(requireActivity(), \"Failed to load data\", Toast.LENGTH_SHORT).show()\n            }\n        }\n    }\n\n    private suspend fun getStoreImagesFromApi(): List<StoreImages> {\n        val retrofit = Retrofit.Builder()\n            .baseUrl(\"https://api.escuelajs.co/api/v1/\")\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        val api = retrofit.create(ApiService::class.java)\n        return api.getStoreImages()\n    }\n\n\n    private suspend fun getItemsFromApi(): List<Product> {\n        val retrofit = Retrofit.Builder()\n            .baseUrl(\"https://api.escuelajs.co/api/v1/\")\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        val api = retrofit.create(ApiService::class.java)\n        return api.getItems()\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/presentation/screens/StoresFragment.kt b/app/src/main/java/com/example/e_commercekotlin/presentation/screens/StoresFragment.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/presentation/screens/StoresFragment.kt	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/app/src/main/java/com/example/e_commercekotlin/presentation/screens/StoresFragment.kt	(date 1725185229547)
+@@ -12,7 +12,6 @@
+ import androidx.recyclerview.widget.StaggeredGridLayoutManager
+ import com.example.e_commercekotlin.R
+ import com.example.e_commercekotlin.data.ApiService
+-import com.example.e_commercekotlin.data.model.Category
+ import com.example.e_commercekotlin.data.model.Product
+ import com.example.e_commercekotlin.data.model.StoreImages
+ import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/.idea/misc.xml	(date 1724841152175)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+Index: app/src/main/java/com/example/e_commercekotlin/presentation/screens/FeedFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.presentation.screens\n\n\n\nimport android.os.Bundle\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.Toast\nimport androidx.fragment.app.Fragment\nimport androidx.lifecycle.lifecycleScope\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport androidx.recyclerview.widget.StaggeredGridLayoutManager\nimport com.example.e_commercekotlin.R\nimport com.example.e_commercekotlin.data.ApiService\nimport com.example.e_commercekotlin.data.model.Category\nimport com.example.e_commercekotlin.data.model.Product\nimport com.example.e_commercekotlin.presentation.adapter.CategoryAdapter\nimport com.example.e_commercekotlin.presentation.adapter.ProductAdapter\nimport kotlinx.coroutines.launch\nimport retrofit2.Retrofit\nimport retrofit2.converter.gson.GsonConverterFactory\n\nclass FeedFragment : Fragment() {\n\n    private lateinit var itemAdapter: ProductAdapter\n    private lateinit var categoryAdapter: CategoryAdapter\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View? {\n        return inflater.inflate(R.layout.fragment_feed, container, false)\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n\n\n        val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)\n        val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)\n\n        itemRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)\n        categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\n\n\n        itemAdapter = ProductAdapter()\n        categoryAdapter = CategoryAdapter(ArrayList()) { category ->\n\n        }\n\n        itemRecyclerView.adapter = itemAdapter\n        categoryRecyclerView.adapter = categoryAdapter\n\n\n        lifecycleScope.launch {\n            try {\n                val categories = getCategoriesFromApi()\n                categoryAdapter.updateCategories(categories)\n\n                val items = getItemsFromApi()\n                itemAdapter.setProductList(items)\n            } catch (e: Exception) {\n                e.printStackTrace()\n                Toast.makeText(requireActivity(), \"Failed to load data\", Toast.LENGTH_SHORT).show()\n            }\n        }\n    }\n\n    private suspend fun getCategoriesFromApi(): List<Category> {\n        val retrofit = Retrofit.Builder()\n            .baseUrl(\"https://api.escuelajs.co/api/v1/\")\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        val api = retrofit.create(ApiService::class.java)\n        return api.getCategories()\n    }\n\n\n    private suspend fun getItemsFromApi(): List<Product> {\n        val retrofit = Retrofit.Builder()\n            .baseUrl(\"https://api.escuelajs.co/api/v1/\")\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        val api = retrofit.create(ApiService::class.java)\n        return api.getItems()\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/presentation/screens/FeedFragment.kt b/app/src/main/java/com/example/e_commercekotlin/presentation/screens/FeedFragment.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/presentation/screens/FeedFragment.kt	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/app/src/main/java/com/example/e_commercekotlin/presentation/screens/FeedFragment.kt	(date 1725185229509)
+@@ -14,7 +14,6 @@
+ import androidx.recyclerview.widget.StaggeredGridLayoutManager
+ import com.example.e_commercekotlin.R
+ import com.example.e_commercekotlin.data.ApiService
+-import com.example.e_commercekotlin.data.model.Category
+ import com.example.e_commercekotlin.data.model.Product
+ import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
+ import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
+Index: app/src/main/java/com/example/e_commercekotlin/presentation/adapter/CategoryAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commercekotlin.presentation.adapter\n\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.TextView\nimport androidx.recyclerview.widget.RecyclerView\nimport com.example.e_commercekotlin.R\nimport com.example.e_commercekotlin.data.model.Category\n\nclass CategoryAdapter(\n    private val categories: MutableList<Category>,\n    private val onCategoryClick: (Category) -> Unit\n) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {\n\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {\n        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.category_item_layout, parent, false)\n        return CategoryViewHolder(itemView)\n    }\n\n    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {\n        val category = categories[position]\n        holder.categoryName.text = category.name\n        holder.itemView.setOnClickListener { onCategoryClick(category) }\n    }\n\n    override fun getItemCount(): Int {\n        return categories.size\n    }\n\n    fun updateCategories(newCategories: List<Category>) {\n        categories.clear()\n        categories.addAll(newCategories)\n        notifyDataSetChanged()\n    }\n\n    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {\n        val categoryName: TextView = itemView.findViewById(R.id.category_name)\n    }\n }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commercekotlin/presentation/adapter/CategoryAdapter.kt b/app/src/main/java/com/example/e_commercekotlin/presentation/adapter/CategoryAdapter.kt
+--- a/app/src/main/java/com/example/e_commercekotlin/presentation/adapter/CategoryAdapter.kt	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/app/src/main/java/com/example/e_commercekotlin/presentation/adapter/CategoryAdapter.kt	(date 1725185229522)
+@@ -6,7 +6,6 @@
+ import android.widget.TextView
+ import androidx.recyclerview.widget.RecyclerView
+ import com.example.e_commercekotlin.R
+-import com.example.e_commercekotlin.data.model.Category
+ 
+ class CategoryAdapter(
+     private val categories: MutableList<Category>,
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"deploymentTargetSelector\">\n    <selectionStates>\n      <SelectionState runConfigName=\"app\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n    </selectionStates>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision 385fb2d2ccc578ce994c29d34589180a78d628ec)
++++ b/.idea/deploymentTargetSelector.xml	(date 1724600007602)
+@@ -4,6 +4,14 @@
+     <selectionStates>
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
++        <DropdownSelection timestamp="2024-08-20T18:56:10.353885Z">
++          <Target type="DEFAULT_BOOT">
++            <handle>
++              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/hanansoliman/.android/avd/Pixel_3a_XL_API_35.avd" />
++            </handle>
++          </Target>
++        </DropdownSelection>
++        <DialogSelection />
+       </SelectionState>
+     </selectionStates>
+   </component>

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.ViewpagerItemBinding
-import com.squareup.picasso.Picasso
+
 
 class ViewPagerAdapter(private val imageList: List<String>) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
@@ -22,9 +22,7 @@ class ViewPagerAdapter(private val imageList: List<String>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
-        Picasso.get()
-            .load(imageList[position])
-            .into(holder.imageView)
+
     }
 
     override fun getItemCount(): Int {

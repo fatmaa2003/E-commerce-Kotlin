@@ -5,26 +5,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
 
-class ProductViewModel: ViewModel() {
-//    private val repository = com.example.e_commercekotlin.domain.Repository()
-//
-//    private val _data = MutableLiveData<Resource<List<Product>>>()
-//    val data: LiveData<Resource<List<Product>>> get() = _data
-//
-//    init {
-//        fetchData()
-//    }
+class ProductViewModel : ViewModel() {
 
-//    private fun fetchData() {
-//        viewModelScope.launch {
-//            //n 2ool lel class eli b3dk en di el state
-//            _data.postValue(Resource.Loading())
-//            val response = repository.getItems()
-//            _data.postValue(response)
-//        }
-//    }
+    private val repository = Repository()
+
+    private val _product = MutableLiveData<Resource<ProductResponse>>()
+    val data: LiveData<Resource<ProductResponse>> get() = _product
+
+    fun fetchProduct(categoryId:String) {
+        viewModelScope.launch {
+            _product.postValue(Resource.Loading(null))
+            try {
+                val response = repository.getProductsByCategoryId(categoryId=categoryId)
+                _product.postValue(response)
+            } catch (e: Exception) {
+                _product.postValue(Resource.Error("An error occurred: ${e.message}"))
+            }
+        }
+    }
 }
-
