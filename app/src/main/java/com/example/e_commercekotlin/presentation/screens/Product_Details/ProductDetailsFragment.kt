@@ -60,9 +60,9 @@ class ProductDetailsFragment : Fragment() {
             productImagesAdapter = ProductImagesAdapter().apply {
                 setProductImages(productImages)
             }
-            productAdapter = ProductAdapter().apply {
-                setProductList(product)
-            }
+//            productAdapter = ProductAdapter().apply {
+//                setProductList(product)
+//            }
 
             clothes.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             clothes.adapter = productImagesAdapter
@@ -96,7 +96,7 @@ class ProductDetailsFragment : Fragment() {
                 is Resource.Success -> {
                     Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
-                    binding.shopName.text = resource.data[0].products?.get(0)?.name
+//                    binding.shopName.text = resource.data[0].products?.get(0)?.name
                 }
                 is Resource.Error -> {
                     Log.d("in observer data error", "$resource")

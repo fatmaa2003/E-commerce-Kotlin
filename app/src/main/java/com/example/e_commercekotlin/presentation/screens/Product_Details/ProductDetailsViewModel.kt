@@ -17,9 +17,9 @@ class ProductDetailsViewModel : ViewModel() {
 
     fun fetchData(productId : String) {
         viewModelScope.launch {
-            _data.postValue(Resource.Loading)
-            val response = repository.getProductDetailsDto(productId = productId)
-            _data.postValue(response)
+            _data.postValue(Resource.Loading(null))
+//            val response = repository.getProductDetailsDto(productId = productId)
+//            _data.postValue(response)
         }
     }
 }
