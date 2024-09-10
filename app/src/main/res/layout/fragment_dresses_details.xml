@@ -13,19 +13,23 @@
         android:layout_marginEnd="15dp"/>
 
     <TextView
+        android:id="@+id/titleCategoryDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Dresses"
         android:gravity="center"
         android:textSize="35sp"
         android:fontFamily="@font/extrabold" />
+
     <TextView
+        android:id="@+id/productCountText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:gravity="center"
+        android:gravity="center"
         android:text="250 products"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/regular" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,13 +49,22 @@
             android:src="@drawable/filter"
             android:layout_marginStart="16dp" />
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontal_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
 </LinearLayout>

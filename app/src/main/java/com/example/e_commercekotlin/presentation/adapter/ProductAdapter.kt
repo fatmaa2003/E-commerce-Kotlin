@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
@@ -19,6 +20,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         this.productList = productList
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)

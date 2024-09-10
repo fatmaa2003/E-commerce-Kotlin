@@ -1,11 +1,13 @@
 package com.example.e_commercekotlin.data
 
 import com.example.e_commercekotlin.data.model.Category
+import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
+import com.example.e_commercekotlin.data.model.Stores
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -28,8 +30,11 @@ interface ApiService {
 
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
-//
-//    @GET("products")
-//    suspend fun getStoreImages(): List<Product>
+
+    @GET("categories/{categoryid}")
+    suspend fun getCategoryById(@Path("categoryid") categoryid:String) : Response<CategoryDetails>
+
+    @GET("categories/stores")
+    suspend fun getStores():Response<Stores>
 
 }

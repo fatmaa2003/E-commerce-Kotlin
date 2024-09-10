@@ -7,10 +7,12 @@ import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.Category
+import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
+import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -96,5 +98,54 @@ class Repository {
             }
         }
     }
+
+    suspend fun getCategoryById(categoryid: String) :Resource<CategoryDetails>{
+
+        return withContext(Dispatchers.IO){
+            try {
+                Resource.Loading(null)
+                val response= api.getCategoryById(categoryid = categoryid)
+                if (response.isSuccessful){
+                    Resource.Success(response.body()!!)
+                }
+
+                else{
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            }
+
+            catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+
+
+        }
+
+
+    }
+
+
+    suspend fun getStores(): Resource<Stores> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response= api.getStores()
+                if (response.isSuccessful){
+                    Resource.Success(response.body()!!)
+                }
+
+                else{
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+
+            }
+
+            catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+
+        }
+    }
+
 
 }

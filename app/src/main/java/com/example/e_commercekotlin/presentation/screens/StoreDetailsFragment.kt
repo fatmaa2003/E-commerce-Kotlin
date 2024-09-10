@@ -100,6 +100,7 @@ class StoreDetailsFragment : Fragment() {
         }
     }
 
+
     private fun updateButtonState() {
         val buttonText = binding.followButton.buttonTv
         buttonText?.text = if (isFollowing) "Following" else "Follow"
