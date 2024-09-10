@@ -8,13 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
+import com.example.e_commercekotlin.data.model.ProductResponse
 
 
 class FrequentlyVisitedAdapter() : RecyclerView.Adapter<FrequentlyVisitedAdapter.MyViewHolder>() {
 
-    private var freqVisitedList : List<FrequentlyVisitedItems> = listOf()
+    private var freqVisitedList : ProductResponse = ProductResponse()
 
-    fun setFrequentlyVisitedItemsList(freqVisitedList : List<FrequentlyVisitedItems>){
+    fun setFrequentlyVisitedItemsList(freqVisitedList: ProductResponse){
         this.freqVisitedList = freqVisitedList
         notifyDataSetChanged()
     }
@@ -27,7 +28,7 @@ class FrequentlyVisitedAdapter() : RecyclerView.Adapter<FrequentlyVisitedAdapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = freqVisitedList[position]
 
-        holder.freqVisitedItemType.text = currentItem.title
+        holder.freqVisitedItemType.text = currentItem.productName
         holder.freqVisitedItemCategory.text = currentItem.price.toString()
     }
 

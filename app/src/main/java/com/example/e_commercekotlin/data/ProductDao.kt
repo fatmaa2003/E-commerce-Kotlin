@@ -7,9 +7,8 @@ import com.example.e_commercekotlin.data.model.ProductResponse
 
 @Dao
 interface ProductDao {
-    @Query("SELECT * FROM ProductResponseItem")
+    @Query("SELECT * FROM products_table")
     suspend fun getAllProducts(): List<ProductResponse.ProductResponseItem>
     @Insert
     suspend fun insertAll(product: List<ProductResponse.ProductResponseItem>)
-
 }

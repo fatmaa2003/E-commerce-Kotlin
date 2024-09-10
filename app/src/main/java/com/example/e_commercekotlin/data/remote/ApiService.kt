@@ -25,13 +25,7 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<Category>
 
-    @GET("cats?limit=8")
-    suspend fun getCollections(): List<Collection>
 
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
-//
-//    @GET("products")
-//    suspend fun getStoreImages(): List<Product>
-
 }

@@ -59,7 +59,6 @@ class FeedFragment : Fragment() {
         categoryRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-
         itemAdapter = ProductAdapter()
         categoryAdapter = CategoryAdapter()
 
@@ -67,9 +66,7 @@ class FeedFragment : Fragment() {
         categoryRecyclerView.adapter = categoryAdapter
 
         onCategoryClick()
-
     }
-
     private fun observeProducts() {
         productsViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
@@ -77,10 +74,20 @@ class FeedFragment : Fragment() {
                     binding.progressBar.visibility= View.VISIBLE
                 }
                 is Resource.Success -> {
+                    //caching in room
+                    resource.data?.let { productsViewModel.cacheProducts(it) }
+
                     Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
+
+                    //list from api
                     resource.data?.let { itemAdapter.setProductList(it) }
 
+                    //get list from room
+                    productsViewModel.getProducts()
+                    productsViewModel.productData.observe(viewLifecycleOwner,{
+
+                    })
                 }
                 is Resource.Error -> {
                     Log.d("in observer data error", "$resource")
@@ -99,6 +106,7 @@ class FeedFragment : Fragment() {
                     }
 
                     is Resource.Success -> {
+                        resource.data?.let { categoryViewModel.cacheCategory(it) }
                         Log.d("in observer data success", "$resource")
                         binding.progressBar.visibility = View.GONE
                         resource.data?.let { categoryAdapter.updateCategories(it) }
@@ -107,22 +115,17 @@ class FeedFragment : Fragment() {
                     is Resource.Error -> {
                         Log.d("in observer data error", "$resource")
                         binding.progressBar.visibility = View.GONE
-
                     }
                 }
             })
         }
     }
-
     private fun onCategoryClick() {
         categoryAdapter.onCategoryClick = object : CategoryAdapter.ClickListener {
             override fun onCategoryClick(category: Category.CategoryItem) {
                 productsViewModel.fetchProduct(categoryId = category.categoryId.toString())
                 Log.d("in category click in feed fragment", " ${category.categoryId}")
             }
-
         }
     }
-
-
 }

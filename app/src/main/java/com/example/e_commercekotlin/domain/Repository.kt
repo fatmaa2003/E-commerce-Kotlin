@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
+import com.example.e_commercekotlin.DatabaseHelper
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
@@ -17,10 +18,12 @@ import kotlinx.coroutines.withContext
 class Repository {
 
     private val apiService = api
+     lateinit var databaseHelper: DatabaseHelper
 
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
             val response = apiService.login(LoginRequest(username, password))
+            Log.d("in login in repo ","${response}")
             if (response.isSuccessful) {
                 Log.d("token", response.body()?.userDetails?.token!!)
                 SharedPreferencesHelper.saveToken(response.body()?.userDetails?.token!!)
@@ -95,6 +98,20 @@ class Repository {
                 Resource.Error("An error occurred: ${e.message}")
             }
         }
+    }
+
+
+    suspend fun insertAllProducts(list : List<ProductResponse.ProductResponseItem>) {
+        databaseHelper.insertProducts(list)
+    }
+    suspend fun getProducts() : List<ProductResponse.ProductResponseItem>
+    {
+      return  databaseHelper.getProducts()
+
+    }
+
+    suspend fun insertAllCategories(list : Category) {
+        databaseHelper.insertCategory(list)
     }
 
 }
