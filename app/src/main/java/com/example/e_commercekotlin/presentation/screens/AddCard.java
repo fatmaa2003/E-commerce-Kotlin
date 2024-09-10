@@ -43,7 +43,6 @@ public class AddCard extends Fragment {
         cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
         cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
         paymentAdapter.setCardModels(cardModels);
-
     }
 
     @Override

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    id ("androidx.navigation.safeargs.kotlin")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -82,8 +85,16 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.9.1")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10")
+    //picasso implementation
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.caverock:androidsvg:1.4")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
 
+    //nav args
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.0")   // Use the latest version
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

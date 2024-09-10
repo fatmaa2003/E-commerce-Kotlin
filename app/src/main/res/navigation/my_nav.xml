@@ -32,18 +32,20 @@
         android:label="Feed Fragment"
         tools:layout="@layout/fragment_feed">
         <action
-            android:id="@+id/action_Feed_fragment_to_custom_dialog"
-            app:destination="@id/custom_dialog" />
-        <action
             android:id="@+id/action_Feed_fragment_to_product_details"
             app:destination="@id/product_details" />
     </fragment>
+
     <fragment
         android:id="@+id/product_details"
-        android:name="com.example.e_commercekotlin.presentation.screens.ProductDetailsFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsFragment"
         android:label="product details"
-        tools:layout="@layout/fragment_product_details"
-        />
+        tools:layout="@layout/fragment_product_details">
+    <argument
+        android:name="productId"
+        app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/stores"
         android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
@@ -82,7 +84,11 @@
     <fragment
         android:id="@+id/collection_details"
         android:name="DressesDetails"
-        tools:layout="@layout/fragment_dresses_details"/>
+        tools:layout="@layout/fragment_dresses_details">
+        <action
+            android:id="@+id/action_collection_details_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
     <fragment
         android:id="@+id/follow"
         android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"

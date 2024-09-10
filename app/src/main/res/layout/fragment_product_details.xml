@@ -44,17 +44,19 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <ImageView
+            <include
                 android:id="@+id/shop_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/bershka"
-                android:layout_marginStart="4dp" />
+                layout="@layout/circular_image"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                />
+
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/price"
             android:text="$34"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -136,10 +138,10 @@
             android:textColor="@android:color/black" />
 
         <TextView
+            android:id="@+id/descriptiontext"
             android:layout_marginHorizontal="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="These are the Mom Jeans you've been looking for. Let loose with this modern interpretation of a classic '90s style, featuring a flattering high rise and stacked, tapered leg."
             android:layout_marginTop="4dp"
             android:textSize="16sp"
             android:lineSpacingExtra="2dp"
@@ -155,6 +157,7 @@
             android:fontFamily="@font/semibold" />
 
         <TextView
+            android:id="@+id/fit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-Loose through your hip and thigh -super high rise"
@@ -545,5 +548,14 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            />
+
     </LinearLayout>
 </ScrollView>
