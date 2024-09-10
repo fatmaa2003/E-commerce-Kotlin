@@ -1,11 +1,15 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
+import com.example.e_commercekotlin.data.AppDatabase
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.AddToCartResponse
+import com.example.e_commercekotlin.data.model.Cart
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
@@ -17,7 +21,7 @@ import kotlinx.coroutines.withContext
 class Repository {
 
     private val apiService = api
-
+    lateinit var database : AppDatabase
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
             val response = apiService.login(LoginRequest(username, password))
@@ -95,6 +99,48 @@ class Repository {
                 Resource.Error("An error occurred: ${e.message}")
             }
         }
+    }
+
+    suspend fun addToCart(addToCartRequest: AddToCartRequest): Resource<AddToCartResponse> {
+        return try {
+            val response = apiService.addToCart(addToCartRequest)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    Resource.Success(it, )
+                } ?: Resource.Error("Add to cart failed: Empty response body")
+            } else {
+                Resource.Error("Add to cart failed: ${response.message()}")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "An error occurred during add to cart")
+        }
+    }
+
+    suspend fun getCart(): Resource<Cart> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = api.getCart()
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+        }
+    }
+
+
+
+
+    suspend fun getAllCart() : List<Cart>{
+        return database.cartDao().getAllCart()
+    }
+
+    suspend fun insertCart(cart: Cart) {
+        return database.cartDao().insertCart(cart)
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,12 @@ import com.example.e_commercekotlin.databinding.CustomToolbarBinding;
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding;
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter;
 import com.example.e_commercekotlin.presentation.model.Featured;
+import com.example.e_commercekotlin.presentation.viewmodels.AddToCartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDetailsFragment extends Fragment {
+public class ProductDetailsFragment extends Fragment implements View.OnClickListener {
     private FragmentProductDetailsBinding binding;
     private ProductImagesAdapter productImagesAdapter;
     private List<ProductImage> productImages = new ArrayList<>();
@@ -41,6 +43,9 @@ public class ProductDetailsFragment extends Fragment {
     private TextView tvTagsHeader2;
     private LinearLayout llTagsContent3;
     private TextView tvTagsHeader3;
+    private TextView addToCartButton;
+    private AddToCartViewModel addToCartViewModel;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -58,11 +63,14 @@ public class ProductDetailsFragment extends Fragment {
         tvTagsHeader2 = view.findViewById(R.id.tv_tags_header2);
         llTagsContent3 = view.findViewById(R.id.ll_tags_content3);
         tvTagsHeader3 = view.findViewById(R.id.tv_tags_header3);
+        addToCartButton= view.findViewById(R.id.button_tv);
 
         // Set OnClickListener for the Headers
         tvTagsHeader1.setOnClickListener(v -> toggleTagsVisibility(llTagsContent1, tvTagsHeader1, 1));
         tvTagsHeader2.setOnClickListener(v -> toggleTagsVisibility(llTagsContent2, tvTagsHeader2, 2));
         tvTagsHeader3.setOnClickListener(v -> toggleTagsVisibility(llTagsContent3, tvTagsHeader3, 3));
+
+        binding.mainButtonId.buttonTv.setOnClickListener(this);
 
         return view;
     }
@@ -115,5 +123,10 @@ public class ProductDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.d("TAG","in click in add cart button");
     }
 }

@@ -1,5 +1,9 @@
 package com.example.e_commercekotlin.data
 
+import androidx.room.Query
+import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.AddToCartResponse
+import com.example.e_commercekotlin.data.model.Cart
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.LoginRequest
@@ -31,5 +35,9 @@ interface ApiService {
 //
 //    @GET("products")
 //    suspend fun getStoreImages(): List<Product>
+    @POST("cart/add")
+    suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<AddToCartResponse>
 
+    @GET("cart/view")
+    suspend fun getCart(): Response<Cart>
 }
