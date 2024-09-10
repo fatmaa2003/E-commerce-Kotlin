@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
+import android.app.Notification.Action
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -20,11 +23,13 @@ import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
+import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsFragment
+import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import kotlinx.coroutines.launch
 
-class FeedFragment : Fragment() {
+class FeedFragment : Fragment(), ProductAdapter.ClickListener{
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
     private var _binding: FragmentFeedBinding? = null
@@ -33,6 +38,7 @@ class FeedFragment : Fragment() {
     //private lateinit var categoryId: String
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val productsViewModel: ProductViewModel by viewModels()
+    private val productDetailsViewModel : ProductDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -62,12 +68,12 @@ class FeedFragment : Fragment() {
 
         itemAdapter = ProductAdapter()
         categoryAdapter = CategoryAdapter()
+        itemAdapter.setListener(this)
 
         itemRecyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
 
         onCategoryClick()
-
     }
 
     private fun observeProducts() {
@@ -122,6 +128,14 @@ class FeedFragment : Fragment() {
             }
 
         }
+    }
+
+
+    override fun onProductClick(productId: Long) {
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+        }
+        findNavController().navigate(R.id.action_Feed_fragment_to_product_details, bundle)
     }
 
 

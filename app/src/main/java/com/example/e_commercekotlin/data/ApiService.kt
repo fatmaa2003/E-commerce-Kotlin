@@ -30,7 +30,8 @@ interface ApiService {
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
 //
-//    @GET("products")
-//    suspend fun getStoreImages(): List<Product>
-
+      @GET("products/{productId}")
+      suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>
+    // @GET("")
+    //suspend fun
 }

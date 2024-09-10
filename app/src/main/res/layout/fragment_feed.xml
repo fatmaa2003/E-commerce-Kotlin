@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/Feed_fragment">
+    android:id="@+id/Feed_fragment"
+   >
 
     <include
         android:id="@+id/feed_fragment_tool_bar"

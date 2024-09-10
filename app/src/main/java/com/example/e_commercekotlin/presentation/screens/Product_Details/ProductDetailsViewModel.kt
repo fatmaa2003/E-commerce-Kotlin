@@ -12,14 +12,13 @@ import kotlinx.coroutines.launch
 class ProductDetailsViewModel : ViewModel() {
     private val repository = Repository()
 
-    private val _data = MutableLiveData<Resource<List<ProductDetailsDto>>>()
-    val data: LiveData<Resource<List<ProductDetailsDto>>> get() = _data
+    private val _data = MutableLiveData<Resource<ProductDetailsDto>>()
+    val data: LiveData<Resource<ProductDetailsDto>> get() = _data
 
-    fun fetchData(productId : String) {
+     fun fetchProductDetails(productId:Long) {
         viewModelScope.launch {
-            _data.postValue(Resource.Loading(null))
-//            val response = repository.getProductDetailsDto(productId = productId)
-//            _data.postValue(response)
+            val response = repository.getProductDetailsById(productId = productId)
+            _data.postValue(response)
         }
     }
 }
