@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    id ("androidx.navigation.safeargs.kotlin")
+    id("org.jetbrains.kotlin.kapt")
     id("kotlin-kapt")
 }
 
@@ -88,8 +91,16 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
 
 
+    //picasso implementation
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.caverock:androidsvg:1.4")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
 
+    //nav args
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.0")   // Use the latest version
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

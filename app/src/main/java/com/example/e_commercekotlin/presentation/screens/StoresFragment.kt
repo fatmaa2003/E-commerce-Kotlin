@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.data.ApiService
+import com.example.e_commercekotlin.data.model.ProductDetailsDto
+import com.example.e_commercekotlin.data.model.StoreImages
+import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter
 
@@ -42,11 +46,6 @@ class StoresFragment : Fragment() {
         storeImagesRecyclerView.adapter = storeImagesAdapter
 
 
-        
+
     }
-
-
-
-
-
 }
