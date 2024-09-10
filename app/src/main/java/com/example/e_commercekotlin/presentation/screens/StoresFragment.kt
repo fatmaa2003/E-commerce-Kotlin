@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
+import com.example.e_commercekotlin.data.ApiService
+import com.example.e_commercekotlin.data.model.ProductDetailsDto
+import com.example.e_commercekotlin.data.model.StoreImages
+import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
@@ -51,7 +55,7 @@ class StoresFragment : Fragment() {
 
         itemRecyclerView.adapter = itemAdapter
         storeImagesRecyclerView.adapter = storeImagesAdapter
-        
+
     }
 
     private fun observeStores() {
@@ -73,15 +77,5 @@ class StoresFragment : Fragment() {
                 }
             }
         })
-
-
-
-
     }
-
-
-
-
-
-
 }
