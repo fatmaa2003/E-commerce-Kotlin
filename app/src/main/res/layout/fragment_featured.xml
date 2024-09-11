@@ -151,13 +151,7 @@
                     android:fontFamily="@font/semibold"
                     android:layout_marginBottom="8dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="testttt"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/regular"
-                    android:id="@+id/tvoflastproduct" />
+
             </LinearLayout>
 
             <ImageView

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.StoreImages
+import com.example.e_commercekotlin.data.model.Stores
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -14,9 +15,9 @@ import com.google.android.material.shape.ShapeAppearanceModel
 
 class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
 
-    private var storeImagesList : List<StoreImages> = listOf()
+    private lateinit var storeImagesList : Stores
 
-    fun setStoreImagesList(storeImagesList : List<StoreImages>){
+    fun setStoreImagesList(storeImagesList : Stores){
         this.storeImagesList = storeImagesList
         notifyDataSetChanged()
     }

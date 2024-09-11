@@ -21,7 +21,6 @@ import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.screens.ProductImage
 import com.example.e_commercekotlin.presentation.screens.ProductImagesAdapter
-import com.squareup.picasso.Picasso
 
 class ProductDetailsFragment : Fragment() {
 
@@ -36,7 +35,7 @@ class ProductDetailsFragment : Fragment() {
     private var tagsVisible1 = false
     private var tagsVisible2 = false
     private var tagsVisible3 = false
-    private lateinit var productId : String
+    private lateinit var productId: String
     private val viewModel: ProductDetailsViewModel by viewModels()
 
     override fun onCreateView(
@@ -50,12 +49,8 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        productId =
-
-        //viewModel.fetchData(productId)
-
-
-        val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId
+        val args = ProductDetailsFragmentArgs.fromBundle(requireArguments())
+        productId = args.productId.toString()
 
         viewModel.fetchProductDetails(productId.toLong())
         observeData()
@@ -101,11 +96,11 @@ class ProductDetailsFragment : Fragment() {
                     Log.d("in observer data success", "$resource")
                     val productDetails = resource.data?.products?.first()
                     binding.progressBar.visibility = View.GONE
-                    val image=productDetails?.mainImageUrl.orEmpty()
+                    val image = productDetails?.mainImageUrl.orEmpty()
                     val shopName = productDetails?.name.orEmpty()
                     val description = productDetails?.description.orEmpty()
                     val price = productDetails?.price?.toString().orEmpty()
-                    handleUiSuccessState(shopName, description, price,image)
+                    handleUiSuccessState(shopName, description, price, image)
                 }
                 is Resource.Error -> {
                     Log.d("in observer data error", "$resource")
@@ -115,19 +110,12 @@ class ProductDetailsFragment : Fragment() {
         })
     }
 
-
-    private fun handleUiSuccessState(shopName : String ,description:String, price:String, image:String) {
+    private fun handleUiSuccessState(shopName: String, description: String, price: String, image: String) {
         binding.shopName.text = shopName
-        binding.descriptiontext.text= description
+        binding.descriptiontext.text = description
         binding.price.text = "$$price"
 
-
-        // with -> context
-        // load -> image url
-        // into -> actual image view
         Glide.with(this).load(image).into(binding.shopImage.image)
-
-
     }
 
     override fun onDestroyView() {
