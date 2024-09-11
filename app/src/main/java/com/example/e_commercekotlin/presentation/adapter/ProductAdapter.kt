@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
@@ -54,11 +53,8 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
         Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
 
-
         holder.productLayout.setOnClickListener {
-        currentItem.productId?.let { onProductClick?.onProductClick(it.toLong())
-
-            }
+        currentItem.productId?.let { onProductClick?.onProductClick(it.toLong())}
         }
     }
 

@@ -20,35 +20,35 @@ class ProductViewModel : ViewModel() {
     private val _product = MutableLiveData<Resource<ProductResponse>>()
     val data: LiveData<Resource<ProductResponse>> get() = _product
 
-    private val productlistData = MutableLiveData<List<ProductResponse.ProductResponseItem>>()
-    val productData: LiveData<List<ProductResponse.ProductResponseItem>>get() = productlistData
+//    private val productlistData = MutableLiveData<List<ProductResponse.ProductResponseItem>>()
+//    val productData: LiveData<List<ProductResponse.ProductResponseItem>>get() = productlistData
 
     fun fetchProduct(categoryId: String) {
         viewModelScope.launch {
             _product.postValue(Resource.Loading(null))
             try {
                 val response = repository.getProductsByCategoryId(categoryId = categoryId)
+                _product.postValue(response)
                 response.data?.let { database.insertProducts(it) }
                 Log.d(
                     "in view model in product view model",
                     "${response.data?.let { database.insertProducts(it) }}"
                 )
-                _product.postValue(response)
             } catch (e: Exception) {
                 _product.postValue(Resource.Error("An error occurred: ${e.message}"))
             }
         }
     }
 
-     fun cacheProducts(list: ProductResponse) {
-         viewModelScope.launch{
-             repository.insertAllProducts(list)
-         }
-    }
-
-     fun getProducts() {
-        viewModelScope.launch {
-        productlistData.postValue( repository.getProducts())
-        }
-    }
+//     fun cacheProducts(list: ProductResponse) {
+//         viewModelScope.launch{
+//             repository.insertAllProducts(list)
+//         }
+//    }
+//
+//     fun getProducts() {
+//        viewModelScope.launch {
+//        productlistData.postValue( repository.getProducts())
+//        }
+//    }
 }

@@ -1,10 +1,12 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.databinding.ItemCartBinding
-import com.example.e_commercekotlin.data.model.CartItem
+import com.example.e_commercekotlin.data.model.ProductItem
+import com.squareup.picasso.Picasso
 
-class CartAdapter(private val cartItems: List<CartItem>) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(private var productItems: List<ProductItem>) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(val binding: ItemCartBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -14,14 +16,20 @@ class CartAdapter(private val cartItems: List<CartItem>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val cartItem = cartItems[position]
+        val productItem = productItems[position]
         holder.binding.apply {
-            productImage.setImageResource(cartItem.imageResId)
-            productName.text = cartItem.productName
-            productDetails.text = cartItem.details
-            productPrice.text = cartItem.price
+            Glide.with(productName.context).load(productItem.productMainImage).into(productImage)
+
+            productName.text = productItem.productName
+            productDetails.text = "Quantity: ${productItem.quantity}"
+            productPrice.text = "$${productItem.productPrice}"
         }
     }
 
-    override fun getItemCount(): Int = cartItems.size
+    override fun getItemCount(): Int = productItems.size
+
+    fun setProductItems(productItems: List<ProductItem>) {
+        this.productItems = productItems
+        notifyDataSetChanged()
+    }
 }

@@ -100,10 +100,10 @@ class CollectionFragment : Fragment() {
 
     private fun updateToggleTextView() {
         if (collectionPageAdapter.isShowingAllItems()) {
-            toggleTextView.text = "Show Less"
+            toggleTextView.text = "ShowLess"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showless, 0, 0, 0)
         } else {
-            toggleTextView.text = "Show More"
+            toggleTextView.text = "ShowMore"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showmore, 0, 0, 0)
         }
     }

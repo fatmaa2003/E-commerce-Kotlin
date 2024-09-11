@@ -29,11 +29,11 @@ class CategoryViewModel : ViewModel() {
         }
     }
 
-
-    fun cacheCategory(list: Category) {
-        viewModelScope.launch {
-            repository.insertAllCategories(list)
-        }
-    }
+//
+//    fun cacheCategory(list: Category) {
+//        viewModelScope.launch {
+//            repository.insertAllCategories(list)
+//        }
+//    }
 
 }

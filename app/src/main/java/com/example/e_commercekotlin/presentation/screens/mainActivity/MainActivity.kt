@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         val navGraph = navInflater.inflate(R.navigation.my_nav)
 
         val isLoggedIn = checkIfUserIsLoggedIn()
-
-        if (isLoggedIn) navGraph.setStartDestination(R.id.Feed_fragment)
+        if (isLoggedIn) navGraph.setStartDestination(R.id.cart)
         else navGraph.setStartDestination(R.id.sign_in)
 
         // Set the graph on the NavController after modifying it

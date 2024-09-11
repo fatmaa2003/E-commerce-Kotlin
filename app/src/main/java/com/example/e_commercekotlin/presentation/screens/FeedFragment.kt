@@ -38,29 +38,29 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener{
     //private lateinit var categoryId: String
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val productsViewModel: ProductViewModel by viewModels()
-    private val productDetailsViewModel : ProductDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         val view = binding.root
+        observeProducts()
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        observeProducts()
         binding.feedFragmentToolBar.handleToolBarState(
             toolBarTitle = "Feed", leftIconImage = R.drawable.disk
         )
         activity?.setBottomNavVisibility(visible = true)
 
-        val itemRecyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+
         val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
 
-        itemRecyclerView.layoutManager =
+        binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         categoryRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -69,7 +69,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener{
         categoryAdapter = CategoryAdapter()
         itemAdapter.setListener(this)
 
-        itemRecyclerView.adapter = itemAdapter
+        binding.recyclerView.adapter = itemAdapter
         categoryRecyclerView.adapter = categoryAdapter
 
         onCategoryClick()
@@ -82,7 +82,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener{
                 }
                 is Resource.Success -> {
                     //caching in room
-                    resource.data?.let { productsViewModel.cacheProducts(it) }
+//                    resource.data?.let { productsViewModel.cacheProducts(it) }
 
                     Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
@@ -91,10 +91,10 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener{
                     resource.data?.let { itemAdapter.setProductList(it) }
 
                     //get list from room
-                    productsViewModel.getProducts()
-                    productsViewModel.productData.observe(viewLifecycleOwner,{
-
-                    })
+//                    productsViewModel.getProducts()
+//                    productsViewModel.productData.observe(viewLifecycleOwner) {
+//
+//                    }
                 }
                 is Resource.Error -> {
                     Log.d("in observer data error", "$resource")
@@ -113,7 +113,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener{
                     }
 
                     is Resource.Success -> {
-                        resource.data?.let { categoryViewModel.cacheCategory(it) }
+//                        resource.data?.let { categoryViewModel.cacheCategory(it) }
                         Log.d("in observer data success", "$resource")
                         binding.progressBar.visibility = View.GONE
                         resource.data?.let { categoryAdapter.updateCategories(it) }

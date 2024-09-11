@@ -1,13 +1,13 @@
 package com.example.e_commercekotlin.presentation.screens.Product_Details
 
 import android.os.Bundle
-import android.text.SpannedString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,13 +21,11 @@ import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.screens.ProductImage
 import com.example.e_commercekotlin.presentation.screens.ProductImagesAdapter
-import com.squareup.picasso.Picasso
 
 class ProductDetailsFragment : Fragment() {
 
     private var _binding: FragmentProductDetailsBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var productImagesAdapter: ProductImagesAdapter
     private val productImages = mutableListOf<ProductImage>()
     private lateinit var productAdapter: ProductAdapter
@@ -38,6 +36,7 @@ class ProductDetailsFragment : Fragment() {
     private var tagsVisible3 = false
     private lateinit var productId : String
     private val viewModel: ProductDetailsViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +53,16 @@ class ProductDetailsFragment : Fragment() {
 
         //viewModel.fetchData(productId)
 
+
+
+        binding.addToCartButton.root.setOnClickListener {
+            val quantity = 1
+            val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId.toLong()
+            viewModel.addToCart(productId, quantity)
+        }
+
+        observeData()
+        observeAddToCartStatus()
 
         val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId
 
@@ -78,6 +87,24 @@ class ProductDetailsFragment : Fragment() {
         }
     }
 
+    private fun observeAddToCartStatus() {
+        viewModel.addToCartStatus.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, "Error adding item to cart", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
     private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
         val isVisible = when (section) {
             1 -> tagsVisible1.also { tagsVisible1 = !it }
@@ -90,6 +117,7 @@ class ProductDetailsFragment : Fragment() {
         val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
         tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
+
 
     private fun observeData() {
         viewModel.data.observe(viewLifecycleOwner, Observer { resource ->

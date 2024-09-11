@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        app:startDestination="@id/collection">
+    app:startDestination="@id/cart">
 
     <fragment
         android:id="@+id/sign_in"
@@ -17,6 +17,7 @@
             android:id="@+id/action_sign_in_to_Feed_fragment"
             app:destination="@id/Feed_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/sign_up"
         android:name="com.example.e_commercekotlin.presentation.screens.SignupFragment"
@@ -44,7 +45,32 @@
     <argument
         android:name="productId"
         app:argType="integer" />
+        <action
+            android:id="@+id/action_product_details_to_cart"
+            app:destination="@id/cart" />
     </fragment>
+
+    <fragment
+        android:id="@+id/market_fragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.MarketFragment"
+        android:label="Market Fragment"
+        tools:layout="@layout/fragment_market" >
+        <action
+            android:id="@+id/action_market_fragment_to_feature_fragment"
+            app:destination="@id/feature_fragment" />
+        <action
+            android:id="@+id/action_market_fragment_to_collection"
+            app:destination="@id/collection" />
+        <action
+            android:id="@+id/action_market_fragment_to_store"
+            app:destination="@id/store" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.ProfileFragment"
+        android:label="Profile Fragment"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/stores"

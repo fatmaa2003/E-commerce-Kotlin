@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.model.FrequentlyVisitedItems
 import com.example.e_commercekotlin.data.model.ProductResponse
 
 
@@ -30,6 +30,7 @@ class FrequentlyVisitedAdapter() : RecyclerView.Adapter<FrequentlyVisitedAdapter
 
         holder.freqVisitedItemType.text = currentItem.productName
         holder.freqVisitedItemCategory.text = currentItem.price.toString()
+        Glide.with(holder.freqVisitedItemImage.context).load(currentItem.imageUrl).into(holder.freqVisitedItemImage)
     }
 
     override fun getItemCount(): Int {
