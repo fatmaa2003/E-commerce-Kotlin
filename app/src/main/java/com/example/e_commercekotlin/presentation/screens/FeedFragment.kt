@@ -51,19 +51,18 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         )
         activity?.setBottomNavVisibility(visible = true)
 
-        val categoryRecyclerView: RecyclerView = view.findViewById(R.id.categories_recycler_view)
 
-        binding.productRecyclerView.layoutManager =
+        binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        categoryRecyclerView.layoutManager =
+        binding.categoriesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         itemAdapter = ProductAdapter()
         categoryAdapter = CategoryAdapter()
         itemAdapter.setListener(this)
 
-        binding.productRecyclerView.adapter = itemAdapter
-        categoryRecyclerView.adapter = categoryAdapter
+        binding.recyclerView.adapter = itemAdapter
+        binding.categoriesRecyclerView.adapter = categoryAdapter
 
         onCategoryClick()
     }

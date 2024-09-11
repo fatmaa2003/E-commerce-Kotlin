@@ -65,8 +65,6 @@ class ProductDetailsFragment : Fragment() {
         observeAddToCartStatus()
 
         val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId
-        val args = ProductDetailsFragmentArgs.fromBundle(requireArguments())
-        productId = args.productId.toString()
 
         viewModel.fetchProductDetails(productId.toLong())
         observeData()
