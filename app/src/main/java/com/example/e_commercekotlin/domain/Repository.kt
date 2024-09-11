@@ -6,6 +6,7 @@ import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
@@ -90,6 +91,22 @@ class Repository {
             try {
                 Resource.Loading(null)
                 val response = api.getProductsByCategoryId(categoryId = categoryId)
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun getProducts(): Resource<AllProductModel> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = api.getAllProducts()
                 if (response.isSuccessful) {
                     Resource.Success(response.body()!!)
                 } else {

@@ -3,22 +3,19 @@ package com.example.e_commercekotlin.presentation.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.e_commercekotlin.R;
-import com.example.e_commercekotlin.data.model.Brand;
+import com.example.e_commercekotlin.data.model.Stores;
 import com.example.e_commercekotlin.databinding.BranddesignBinding;
 
 import java.util.List;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewHolder> {
-    private List<Brand> brandList;
+    private Stores brandList;
 
-    public void setBrandList(List<Brand> brandList) {
+    public void setBrandList(Stores brandList) {
         this.brandList = brandList;
         notifyDataSetChanged();
     }
@@ -43,19 +40,19 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Brand brand = brandList.get(position);
+        Stores.StoresItem brand = brandList.get(position);
         handleViewBiding(holder, brand);
     }
 
-    private static void handleViewBiding(@NonNull ProductViewHolder holder, Brand brand) {
-//        holder.binding.brandImage.image.setImageResource(brand.getImageBrand());
+    private static void handleViewBiding(@NonNull ProductViewHolder holder, Stores.StoresItem brand) {
+        holder.binding.brandImage.image.setImageResource(brand.getImageurl());
         holder.binding.brandName.setText(brand.getName());
-        if (brand.getOffer().isEmpty()){
-            holder.binding.discountPercentage.setVisibility(View.INVISIBLE);
-        } else {
-            holder.binding.discountPercentage.setVisibility(View.VISIBLE);
-        }
-        holder.binding.discountPercentage.setText(brand.getOffer());
+//        if (brand.getOffer().isEmpty()){
+//            holder.binding.discountPercentage.setVisibility(View.INVISIBLE);
+//        } else {
+//            holder.binding.discountPercentage.setVisibility(View.VISIBLE);
+//        }
+//        holder.binding.discountPercentage.setText(brand.getOffer());
     }
 
     @Override

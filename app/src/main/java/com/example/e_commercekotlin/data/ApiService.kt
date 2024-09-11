@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.data
 
+import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.Collection
@@ -31,11 +32,13 @@ interface ApiService {
 
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
-//
+
+    @GET("products")
+    suspend fun getAllProducts () : Response<AllProductModel>
+
       @GET("products/{productId}")
       suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>
-    // @GET("")
-    //suspend fun
+
 
     @GET("categories/{categoryid}")
     suspend fun getCategoryById(@Path("categoryid") categoryid:String) : Response<CategoryDetails>

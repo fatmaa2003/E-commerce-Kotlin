@@ -6,20 +6,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
-import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.databinding.FragmentCollectionDetailsBinding
 import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentDressesDetailsBinding
-import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.CategoryDetailsViewModel
@@ -49,7 +43,6 @@ class DressesDetails : Fragment() , ProductAdapter.ClickListener{
 
     private fun setupUI() {
         binding.fragmentDressDetailsToolbar.handleToolBarState(leftIconImage = R.drawable.back)
-
 
         observeProducts()
 
@@ -126,7 +119,7 @@ class DressesDetails : Fragment() , ProductAdapter.ClickListener{
         _binding = null
     }
 
-    override fun onProductClick(productId: Long) {
+    override fun onProductClick(productId: Long, productName : String, productImage : String) {
         val bundle = Bundle().apply {
             putInt("productId", productId.toInt())
         }

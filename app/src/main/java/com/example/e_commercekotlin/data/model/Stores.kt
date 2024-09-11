@@ -6,11 +6,9 @@ class Stores : ArrayList<Stores.StoresItem>() {
 
     data class StoresItem(
         @SerializedName("imageurl")
-        val imageurl: Any?,
+        val imageurl: Int?,
         @SerializedName("name")
         val name: String?
-    ) {
+    )
 
-
-    }
 }
