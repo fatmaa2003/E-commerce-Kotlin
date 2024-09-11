@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val navGraph = navInflater.inflate(R.navigation.my_nav)
 
         val isLoggedIn = checkIfUserIsLoggedIn()
+        Log.d("TAG","$isLoggedIn")
         if (isLoggedIn) navGraph.setStartDestination(R.id.Feed_fragment)
         else navGraph.setStartDestination(R.id.sign_in)
 
