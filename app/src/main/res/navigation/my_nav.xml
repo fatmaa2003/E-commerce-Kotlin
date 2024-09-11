@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/Feed_fragment"
-        android:name="com.example.e_commercekotlin.presentation.screens.FeedFragment"
+        android:name="FeedFragment"
         android:label="Feed Fragment"
         tools:layout="@layout/fragment_feed">
         <action
