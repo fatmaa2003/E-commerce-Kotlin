@@ -17,7 +17,11 @@ class ProductViewModel : ViewModel() {
     private val _product = MutableLiveData<Resource<ProductResponse>>()
     val data: LiveData<Resource<ProductResponse>> get() = _product
 
-    fun fetchProduct(categoryId:String? = null) {
+    init {
+        fetchProduct()
+    }
+
+    fun fetchProduct(categoryId:String? = "16") {
         viewModelScope.launch {
             _product.postValue(Resource.Loading(null))
             try {
