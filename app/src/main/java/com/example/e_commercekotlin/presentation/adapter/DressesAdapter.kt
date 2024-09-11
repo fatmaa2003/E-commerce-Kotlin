@@ -1,10 +1,14 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.e_commercekotlin.data.model.CategoryDetails.CategoryDetailsItem
+import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.databinding.DressesHorizontalBinding
 import com.example.e_commercekotlin.databinding.DressesVerticalBinding
+import com.squareup.picasso.Picasso
 
 class DressesAdapter(private val dataList: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     companion object {
         private const val TYPE_HORIZONTAL = 1
@@ -14,7 +18,7 @@ class DressesAdapter(private val dataList: List<Any>) : RecyclerView.Adapter<Rec
     override fun getItemViewType(position: Int): Int {
         return when (dataList[position]) {
             is String -> TYPE_HORIZONTAL
-            is Item -> TYPE_VERTICAL
+            is CategoryDetailsItem -> TYPE_VERTICAL
             else -> throw IllegalArgumentException("Invalid data type")
         }
     }
@@ -32,10 +36,11 @@ class DressesAdapter(private val dataList: List<Any>) : RecyclerView.Adapter<Rec
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is HorizontalViewHolder -> holder.bind(dataList[position] as String)
-            is VerticalViewHolder -> holder.bind(dataList[position] as Item)
+            is VerticalViewHolder -> holder.bind(dataList[position] as CategoryDetailsItem)
         }
     }
 
@@ -48,12 +53,12 @@ class DressesAdapter(private val dataList: List<Any>) : RecyclerView.Adapter<Rec
     }
 
     inner class VerticalViewHolder(private val binding: DressesVerticalBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item) {
-            binding.imageview.setImageResource(item.imageResId)
-            binding.name.text = item.name
-            binding.price.text = item.price
+        fun bind(item: CategoryDetailsItem) {
+
+
+            }
+
+
         }
     }
 
-    data class Item(val imageResId: Int, val name: String, val price: String)
-}

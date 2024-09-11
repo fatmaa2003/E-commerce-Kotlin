@@ -23,7 +23,9 @@ class FeaturedFragment : Fragment() {
 
     private var _binding: FragmentFeaturedBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ProductViewModel by viewModels()
+    private val productsViewModel: ProductViewModel by viewModels()
+    private lateinit var itemAdapter: ProductAdapter
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +33,15 @@ class FeaturedFragment : Fragment() {
     ): View? {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
         val view = binding.root
-
-
+        productsViewModel.getAllProduct()
+        observeProducts()
         setupProductRecyclerView()
 
+        return view
+    }
 
-        viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+    private fun observeProducts() {
+        productsViewModel.allProduct.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility= View.VISIBLE
@@ -44,6 +49,8 @@ class FeaturedFragment : Fragment() {
                 is Resource.Success -> {
                     Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
+                    resource.data?.let { itemAdapter.setProductList(it.products.orEmpty()) }
+                    resource.data?.let { productAdapter.setProductList(it.products.orEmpty()) }
 
                 }
                 is Resource.Error -> {
@@ -52,17 +59,15 @@ class FeaturedFragment : Fragment() {
                 }
             }
         })
-
-
-        viewModel.fetchProduct("1")
-
-        return view
     }
 
     private fun setupProductRecyclerView() {
-        val productAdapter = ProductAdapter()
+        itemAdapter = ProductAdapter()
         binding.rvproduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvproduct.adapter = productAdapter
+        binding.rvproduct.adapter = itemAdapter
+        productAdapter = ProductAdapter()
+        binding.rvproductsonsale.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvproductsonsale.adapter = productAdapter
     }
 
     override fun onDestroyView() {

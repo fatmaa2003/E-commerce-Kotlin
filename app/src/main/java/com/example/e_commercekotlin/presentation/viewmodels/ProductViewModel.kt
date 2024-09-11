@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.DatabaseHelper
 import com.example.e_commercekotlin.data.DatabaseHelperImpl
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
@@ -20,14 +21,11 @@ class ProductViewModel : ViewModel() {
     private val _product = MutableLiveData<Resource<ProductResponse>>()
     val data: LiveData<Resource<ProductResponse>> get() = _product
 
-//    private val productlistData = MutableLiveData<List<ProductResponse.ProductResponseItem>>()
-//    val productData: LiveData<List<ProductResponse.ProductResponseItem>>get() = productlistData
-
-    fun fetchProduct(categoryId: String) {
+    fun fetchProduct(categoryId:String? = null) {
         viewModelScope.launch {
             _product.postValue(Resource.Loading(null))
             try {
-                val response = repository.getProductsByCategoryId(categoryId = categoryId)
+                val response = repository.getProductsByCategoryId(categoryId=categoryId.orEmpty())
                 _product.postValue(response)
                 response.data?.let { database.insertProducts(it) }
                 Log.d(
@@ -51,4 +49,19 @@ class ProductViewModel : ViewModel() {
 //        productlistData.postValue( repository.getProducts())
 //        }
 //    }
+
+    private val _allProduct = MutableLiveData<Resource<AllProductModel>>()
+    val allProduct: LiveData<Resource<AllProductModel>> get() = _allProduct
+
+    fun getAllProduct() {
+        viewModelScope.launch {
+            _allProduct.postValue(Resource.Loading(null))
+            try {
+                val response = repository.getProducts()
+                _allProduct.postValue(response)
+            } catch (e: Exception) {
+                _allProduct.postValue(Resource.Error("An error occurred: ${e.message}"))
+            }
+        }
+    }
 }

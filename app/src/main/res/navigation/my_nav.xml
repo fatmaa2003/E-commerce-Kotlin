@@ -38,9 +38,28 @@
     </fragment>
 
     <fragment
+        android:id="@+id/customDialogFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.CustomDialogFragment"
+        android:label="Custom Dialog Fragment"
+        tools:layout="@layout/custom_dialog_box">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <argument
+            android:name="productName"
+            app:argType="string" />
+        <argument
+            android:name="productImage"
+            app:argType="string" />
+        <action
+            android:id="@+id/actionCustomDialogFragmentToProductDetailsFragment"
+            app:destination="@id/product_details" />
+    </fragment>
+
+    <fragment
         android:id="@+id/product_details"
         android:name="com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsFragment"
-        android:label="product details"
+        android:label="Product Details"
         tools:layout="@layout/fragment_product_details">
     <argument
         android:name="productId"
