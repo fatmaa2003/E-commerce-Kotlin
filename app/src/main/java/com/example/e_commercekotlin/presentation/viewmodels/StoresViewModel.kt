@@ -22,7 +22,7 @@ class StoresViewModel : ViewModel() {
 
     fun fetchStores() {
         viewModelScope.launch {
-            _stores.postValue(Resource.Loading(null))
+            _stores.postValue(Resource.Loading())
             try {
                 val response = repository.getStores()
                 _stores.postValue(response)
