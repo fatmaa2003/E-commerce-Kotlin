@@ -31,12 +31,13 @@ class ProductViewModel : ViewModel() {
             try {
                 val response = repository.getProductsByCategoryId(categoryId=categoryId.orEmpty())
                 _product.postValue(response)
-                response.data?.let { database.insertProducts(it) }
-                Log.d(
-                    "in view model in product view model",
-                    "${response.data?.let { database.insertProducts(it) }}"
-                )
+//                response.data?.let { database.insertProducts(it) }
+//                Log.d(
+//                    "in view model in product view model",
+//                    "${response.data?.let { database.insertProducts(it) }}"
+//                )
             } catch (e: Exception) {
+                Log.e("TAG123", "fetchProduct: ", )
                 _product.postValue(Resource.Error("An error occurred: ${e.message}"))
             }
         }
