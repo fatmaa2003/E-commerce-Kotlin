@@ -205,7 +205,7 @@ class Repository {
 
     suspend fun addToCart(productId: Long, quantity: Int): Resource<Unit> {
         return try {
-            val response = apiService.addToCart(AddToCartRequest(productId, quantity))
+            val response = apiService.addToCart(AddToCartRequest(listOf(AddToCartRequest.Product(productId, quantity)) ))
             if (response.isSuccessful) {
                 Resource.Success(Unit)
             } else {
