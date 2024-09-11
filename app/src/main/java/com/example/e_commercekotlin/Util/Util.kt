@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.CustomToolbarBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,6 +47,6 @@ fun ProgressBar.hide() {
 }
 // Extension function to Show a toast
 fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(requireContext(), message, duration).show()
+    Toast.makeText(requireContext(), message, duration).show() 
 }
 

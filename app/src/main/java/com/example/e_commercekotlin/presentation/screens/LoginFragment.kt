@@ -71,7 +71,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
                 }
 
                 is Resource.Loading -> {
-                    binding.progressBar.progressBar.show()
+                 binding.progressBar.progressBar.show()
                 }
             }
         }

@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.Category
+import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
 
 class CategoryViewModel : ViewModel() {
-   private val repository= Repository()
+    private val repository = Repository()
 
     init {
         fetchCategories()
@@ -27,8 +28,11 @@ class CategoryViewModel : ViewModel() {
         }
     }
 
-
-
-
+//
+//    fun cacheCategory(list: Category) {
+//        viewModelScope.launch {
+//            repository.insertAllCategories(list)
+//        }
+//    }
 
 }

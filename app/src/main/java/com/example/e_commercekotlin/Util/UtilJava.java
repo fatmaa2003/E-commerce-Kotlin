@@ -1,7 +1,5 @@
 package com.example.e_commercekotlin.Util;
 
-import static android.provider.Settings.System.getString;
-
 import android.content.res.Resources;
 import android.view.View;
 

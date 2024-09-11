@@ -1,8 +1,15 @@
 package com.example.e_commercekotlin.data.model
 
 data class CartItem(
-    val imageResId: Int,
+    val products: List<ProductItem>,
+    val totalCartPrice: Double
+)
+
+data class ProductItem(
+    val productId: Int,
     val productName: String,
-    val details: String,
-    val price: String
+    val productMainImage: String,
+    val productPrice: Double,
+    val quantity: Int,
+    val itemTotalPrice: Double
 )

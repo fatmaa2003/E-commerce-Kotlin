@@ -7,15 +7,16 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Collection
 
 
 class CollectionPageAdapter : RecyclerView.Adapter<CollectionPageAdapter.MyViewHolder>() {
 
-    private var collectionList: List<Collection> = listOf()
+    private var collectionList: Category= Category()
     private var showAllItems: Boolean = false
 
-    fun setCollectionList(collectionList: List<Collection>) {
+    fun setCollectionList(collectionList: Category) {
         this.collectionList = collectionList
         notifyDataSetChanged()
     }

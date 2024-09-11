@@ -47,7 +47,7 @@
             android:fontFamily="@font/semibold"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Add card"
+            android:text="Purchase"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 

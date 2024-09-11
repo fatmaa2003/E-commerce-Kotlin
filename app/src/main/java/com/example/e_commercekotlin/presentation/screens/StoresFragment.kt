@@ -2,10 +2,10 @@ package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +14,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
-import com.example.e_commercekotlin.data.ApiService
-import com.example.e_commercekotlin.data.model.ProductDetailsDto
-import com.example.e_commercekotlin.data.model.StoreImages
-import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel

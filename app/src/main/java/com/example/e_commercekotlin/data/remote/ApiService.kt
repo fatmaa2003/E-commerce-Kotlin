@@ -1,6 +1,11 @@
-package com.example.e_commercekotlin.data
+package com.example.e_commercekotlin.data.remote
 
 import com.example.e_commercekotlin.data.model.AllProductModel
+import androidx.room.Query
+import com.example.e_commercekotlin.data.SignupRequest
+import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.Collection
@@ -27,11 +32,14 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<Category>
 
-    @GET("cats?limit=8")
-    suspend fun getCollections(): List<Collection>
 
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
+    @GET("cart/view")
+    suspend fun getCartItems():Response<CartItem>
+
+    @POST("cart/add")
+    suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<Unit>
 
     @GET("products")
     suspend fun getAllProducts () : Response<AllProductModel>
