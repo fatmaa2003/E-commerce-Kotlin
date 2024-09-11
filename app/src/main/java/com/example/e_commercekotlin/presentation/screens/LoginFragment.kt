@@ -12,6 +12,7 @@ import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.showToast
+import com.example.e_commercekotlin.data.ProfileUserDetails
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentLoginBinding
 import com.example.e_commercekotlin.domain.Repository
@@ -51,6 +52,16 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
             when (resource) {
                 is Resource.Success -> {
                     binding.progressBar.progressBar.hide()
+
+                    resource.data?.let { loginResponse ->
+                        val userDetails = loginResponse.userDetails
+                        userDetails?.let {
+                            ProfileUserDetails.firstName = it.firstName
+                            ProfileUserDetails.lastName = it.lastName
+                            ProfileUserDetails.username = it.username
+                        }
+                    }
+
                     navigateToFeedFragment()
                 }
 

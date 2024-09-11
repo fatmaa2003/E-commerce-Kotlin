@@ -132,4 +132,9 @@
             android:id="@+id/action_add_to_cart_to_cart"
             app:destination="@id/cart" />
     </fragment>
+    <fragment
+        android:id="@+id/paymentFragment2"
+        android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
 </navigation>
