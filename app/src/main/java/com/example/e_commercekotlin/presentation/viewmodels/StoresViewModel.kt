@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,15 +21,11 @@ class StoresViewModel : ViewModel() {
     private val _stores = MutableLiveData<Resource<Stores>>()
     val data: LiveData<Resource<Stores>> get() = _stores
 
-    fun fetchStores() {
+    private fun fetchStores() {
         viewModelScope.launch {
-            _stores.postValue(Resource.Loading())
-            try {
-                val response = repository.getStores()
-                _stores.postValue(response)
-            } catch (e: Exception) {
-                _stores.postValue(Resource.Error("An error occurred: ${e.message}"))
-            }
+            val response=repository.getStores()
+            Log.e("TAG123", "fetchStores: " + response)
+            _stores.postValue(response)
         }
     }
 }
