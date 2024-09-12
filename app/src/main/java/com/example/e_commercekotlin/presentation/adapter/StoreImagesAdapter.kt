@@ -13,14 +13,17 @@ import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
 
 
-class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
+class StoreImagesAdapter : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
 
-    private lateinit var storeImagesList : Stores
+    private var storeImagesList : Stores = Stores()
 
     fun setStoreImagesList(storeImagesList : Stores){
         this.storeImagesList = storeImagesList
         notifyDataSetChanged()
     }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.store_item_layout, parent, false)
@@ -29,6 +32,9 @@ class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = storeImagesList[position]
+
+//        val imageUrlList = storeImagesList.map { it-> "${it.imageurl}" }
+
 
         handleRoundedImageRadius(position, holder)
     }

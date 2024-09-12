@@ -1,7 +1,6 @@
 package com.example.e_commercekotlin.data.remote
 
 import com.example.e_commercekotlin.data.model.AllProductModel
-import androidx.room.Query
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AddToCartRequest

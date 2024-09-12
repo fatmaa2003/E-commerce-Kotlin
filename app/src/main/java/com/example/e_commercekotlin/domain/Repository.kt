@@ -155,16 +155,19 @@ class Repository {
                 Resource.Loading(null)
                 val response= api.getStores()
                 if (response.isSuccessful){
+                    Log.e("TAG123", "getStores: " )
                     Resource.Success(response.body()!!)
                 }
 
                 else{
+                    Log.e("TAG123", "getStores: " +response.message().toString())
                     Resource.Error("Error: ${response.code()} ${response.message()}")
                 }
 
             }
 
             catch (e: Exception) {
+                Log.e("TAG123", "getStores: " + e.message )
                 Resource.Error("An error occurred: ${e.message}")
             }
 
