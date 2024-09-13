@@ -37,6 +37,7 @@ interface ApiService {
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
     @GET("cart/view")
     suspend fun getCartItems():Response<CartItem>
+    suspend fun getCartSize():Response<CartItem>
 
     @POST("cart/add")
     suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<Unit>

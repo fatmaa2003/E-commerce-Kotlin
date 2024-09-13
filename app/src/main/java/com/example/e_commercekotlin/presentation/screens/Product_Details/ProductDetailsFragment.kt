@@ -1,10 +1,12 @@
 package com.example.e_commercekotlin.presentation.screens.Product_Details
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -22,7 +24,6 @@ import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.screens.ProductImage
 import com.example.e_commercekotlin.presentation.screens.ProductImagesAdapter
-
 class ProductDetailsFragment : Fragment() {
 
     private var _binding: FragmentProductDetailsBinding? = null
@@ -38,7 +39,6 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var productId: String
     private val viewModel: ProductDetailsViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,27 +50,18 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        productId =
-
-        //viewModel.fetchData(productId)
-
-//        binding.continueToPurchase.setOnClickListener {
-//            findNavController().navigate(R.id.action_product_details_to_cart)
-//        }
+        productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId.toString()
 
         binding.addToCartButton.root.setOnClickListener {
             val quantity = 1
-            val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId.toLong()
-            viewModel.addToCart(productId, quantity)
+            viewModel.addToCart(productId.toLong(), quantity)
         }
 
         observeData()
         observeAddToCartStatus()
 
-        val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId
-
         viewModel.fetchProductDetails(productId.toLong())
-        observeData()
+        viewModel.fetchCartSize()
 
         binding.apply {
             tvTagsHeader1.setOnClickListener { toggleTagsVisibility(llTagsContent1, tvTagsHeader1, 1) }
@@ -99,6 +90,7 @@ class ProductDetailsFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
+                    showCartDialog()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -107,20 +99,6 @@ class ProductDetailsFragment : Fragment() {
             }
         })
     }
-
-    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
-        val isVisible = when (section) {
-            1 -> tagsVisible1.also { tagsVisible1 = !it }
-            2 -> tagsVisible2.also { tagsVisible2 = !it }
-            3 -> tagsVisible3.also { tagsVisible3 = !it }
-            else -> false
-        }
-
-        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
-        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
-        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
-    }
-
 
     private fun observeData() {
         viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
@@ -152,6 +130,40 @@ class ProductDetailsFragment : Fragment() {
         binding.price.text = "$$price"
 
         Glide.with(this).load(image).into(binding.shopImage.image)
+    }
+
+    private fun showCartDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.cart_popup, null)
+        val cartSizeTextView = dialogView.findViewById<TextView>(R.id.cartSizeTextView)
+        val goToCartButton = dialogView.findViewById<Button>(R.id.goToCartButton)
+
+//        viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
+//            cartSizeTextView.text = "Cart Size: $cartSize"
+//        }
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        goToCartButton.setOnClickListener {
+            alertDialog.dismiss()
+            findNavController().navigate(R.id.action_product_details_to_cart)
+        }
+
+        alertDialog.show()
+    }
+
+    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
+        val isVisible = when (section) {
+            1 -> tagsVisible1.also { tagsVisible1 = !it }
+            2 -> tagsVisible2.also { tagsVisible2 = !it }
+            3 -> tagsVisible3.also { tagsVisible3 = !it }
+            else -> false
+        }
+
+        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
+        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
+        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
 
     override fun onDestroyView() {

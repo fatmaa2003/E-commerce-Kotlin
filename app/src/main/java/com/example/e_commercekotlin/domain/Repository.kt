@@ -26,7 +26,6 @@ import retrofit2.Response
 class Repository {
 
     private val apiService = api
-//     lateinit var databaseHelper: DatabaseHelper = DatabaseHelperImpl()
 
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
@@ -223,5 +222,17 @@ class Repository {
     suspend fun makePurchase(products: List<AddToCartRequest.Product>): Response<PurchaseResponse> {
         val purchaseRequest = AddToCartRequest(products)
         return apiService.makePurchase(purchaseRequest)
+    }
+    suspend fun getCartSize(): Resource<Int> {
+        return try {
+            val response = apiService.getCartSize()
+            if (response.isSuccessful) {
+                Resource.Success(response.body()?.cartSize ?: 0)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
     }
 }
