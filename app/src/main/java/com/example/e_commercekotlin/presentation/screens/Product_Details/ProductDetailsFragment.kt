@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
@@ -53,7 +54,9 @@ class ProductDetailsFragment : Fragment() {
 
         //viewModel.fetchData(productId)
 
-
+//        binding.continueToPurchase.setOnClickListener {
+//            findNavController().navigate(R.id.action_product_details_to_cart)
+//        }
 
         binding.addToCartButton.root.setOnClickListener {
             val quantity = 1
