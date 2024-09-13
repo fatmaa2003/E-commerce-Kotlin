@@ -1,21 +1,44 @@
 package com.example.e_commercekotlin.presentation.adapter;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.e_commercekotlin.R;
 import com.example.e_commercekotlin.data.model.Stores;
 import com.example.e_commercekotlin.databinding.BranddesignBinding;
-
 import java.util.List;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewHolder> {
-    private Stores brandList;
 
-    public void setBrandList(Stores brandList) {
+    private List<Stores.StoresItem> brandList;
+    private final int[] drawableResources = {
+            R.drawable.lacoste,
+            R.drawable.breshkaa,
+            R.drawable.adidas,
+            R.drawable.zara,
+            R.drawable.nike,
+            R.drawable.gucci,
+            R.drawable.prada,
+            R.drawable.boss,
+            R.drawable.leviss
+
+
+    };
+    private Context context;
+
+
+    public BrandAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setBrandList(List<Stores.StoresItem> brandList) {
+        if (brandList == null || brandList.isEmpty()) {
+            return;
+        }
         this.brandList = brandList;
         notifyDataSetChanged();
     }
@@ -41,22 +64,24 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Stores.StoresItem brand = brandList.get(position);
-        handleViewBiding(holder, brand);
+        handleViewBinding(holder, brand, position);
     }
 
-    private static void handleViewBiding(@NonNull ProductViewHolder holder, Stores.StoresItem brand) {
-        holder.binding.brandImage.image.setImageResource(brand.getImageurl());
+    private void handleViewBinding(@NonNull ProductViewHolder holder, Stores.StoresItem brand, int position) {
+
         holder.binding.brandName.setText(brand.getName());
-//        if (brand.getOffer().isEmpty()){
-//            holder.binding.discountPercentage.setVisibility(View.INVISIBLE);
-//        } else {
-//            holder.binding.discountPercentage.setVisibility(View.VISIBLE);
-//        }
-//        holder.binding.discountPercentage.setText(brand.getOffer());
+
+
+        Drawable drawable = getDrawableFromResources(position % drawableResources.length);
+        holder.binding.brandImage.image.setImageDrawable(drawable);
+    }
+
+    private Drawable getDrawableFromResources(int index) {
+        return ContextCompat.getDrawable(context, drawableResources[index]);
     }
 
     @Override
     public int getItemCount() {
-        return brandList.size();
+        return brandList == null ? 0 : brandList.size();
     }
 }
