@@ -8,8 +8,7 @@
         android:id="@+id/sign_in"
         android:name="com.example.e_commercekotlin.presentation.screens.LoginFragment"
         android:label="Login Fragment"
-        tools:layout="@layout/fragment_login"
-        >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_sign_in_to_sign_up"
             app:destination="@id/sign_up" />
@@ -22,11 +21,12 @@
         android:id="@+id/sign_up"
         android:name="com.example.e_commercekotlin.presentation.screens.SignupFragment"
         android:label="sign_up Fragment"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_sign_up_to_Feed_fragment"
             app:destination="@id/Feed_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/Feed_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeedFragment"
@@ -61,9 +61,9 @@
         android:name="com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsFragment"
         android:label="Product Details"
         tools:layout="@layout/fragment_product_details">
-    <argument
-        android:name="productId"
-        app:argType="integer" />
+        <argument
+            android:name="productId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_product_details_to_cart"
             app:destination="@id/cart" />
@@ -73,7 +73,7 @@
         android:id="@+id/market_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.MarketFragment"
         android:label="Market Fragment"
-        tools:layout="@layout/fragment_market" >
+        tools:layout="@layout/fragment_market">
         <action
             android:id="@+id/action_market_fragment_to_feature_fragment"
             app:destination="@id/feature_fragment" />
@@ -91,15 +91,35 @@
         android:label="Profile Fragment"
         tools:layout="@layout/fragment_profile" />
 
+
     <fragment
         android:id="@+id/stores"
-        android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
-        tools:layout="@layout/fragment_brand"/>
+        android:name="com.example.e_commercekotlin.presentation.screens.BrandFragment"
+        android:label="Brand Fragment"
+        tools:layout="@layout/fragment_brand">
+        <action
+            android:id="@+id/action_stores_to_storeDetailsFragment"
+            app:destination="@id/storeDetailsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/storeDetailsFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.StoreDetailsFragment"
+        android:label="Store Details Fragment"
+        tools:layout="@layout/fragment_store_details">
+        <argument
+            android:name="brandName"
+            app:argType="string" />
+        <argument
+            android:name="imageDrawable"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/feature_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeaturedFragment"
-        tools:layout= "@layout/fragment_featured" >
+        tools:layout="@layout/fragment_featured">
         <action
             android:id="@+id/action_feature_fragment_to_collection"
             app:destination="@id/collection" />
@@ -110,6 +130,7 @@
             android:id="@+id/action_feature_fragment_to_stores"
             app:destination="@id/stores" />
     </fragment>
+
     <fragment
         android:id="@+id/collection"
         android:name="com.example.e_commercekotlin.presentation.screens.CollectionFragment"
@@ -125,7 +146,8 @@
     <fragment
         android:id="@+id/store"
         android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
-        tools:layout="@layout/fragment_stores"/>
+        tools:layout="@layout/fragment_stores" />
+
     <fragment
         android:id="@+id/collection_details"
         android:name="DressesDetails"
@@ -134,15 +156,17 @@
             android:id="@+id/action_collection_details_to_product_details"
             app:destination="@id/product_details" />
     </fragment>
+
     <fragment
         android:id="@+id/follow"
         android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
-        tools:layout="@layout/fragment_follow"/>
+        tools:layout="@layout/fragment_follow" />
 
     <fragment
         android:id="@+id/cart"
         android:name="CartFragment"
-        tools:layout="@layout/fragment_cart"/>
+        tools:layout="@layout/fragment_cart" />
+
     <fragment
         android:id="@+id/add_to_cart"
         android:name="com.example.e_commercekotlin.presentation.screens.AddCard"
@@ -151,6 +175,7 @@
             android:id="@+id/action_add_to_cart_to_cart"
             app:destination="@id/cart" />
     </fragment>
+
     <fragment
         android:id="@+id/paymentFragment2"
         android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
