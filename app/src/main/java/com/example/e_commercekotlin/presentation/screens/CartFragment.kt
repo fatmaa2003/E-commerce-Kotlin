@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.e_commercekotlin.data.RetrofitInstance
+    import androidx.navigation.fragment.findNavController
+    import androidx.recyclerview.widget.LinearLayoutManager
+    import com.example.e_commercekotlin.R
+    import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import kotlinx.coroutines.launch
 
@@ -33,7 +35,12 @@ class CartFragment : Fragment() {
         binding.cartRecyclerView.adapter = cartAdapter
 
         fetchCartItems()
+
+        binding.continueToCheckout.setOnClickListener {
+            findNavController().navigate(R.id.action_cart_to_purchase)
+        }
     }
+
 
     private fun fetchCartItems() {
         lifecycleScope.launch {

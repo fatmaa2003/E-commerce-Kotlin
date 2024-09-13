@@ -16,6 +16,7 @@ import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
+import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
@@ -217,5 +218,10 @@ class Repository {
         } catch (e: Exception) {
             Resource.Error("Network error")
         }
+    }
+
+    suspend fun makePurchase(products: List<AddToCartRequest.Product>): Response<PurchaseResponse> {
+        val purchaseRequest = AddToCartRequest(products)
+        return apiService.makePurchase(purchaseRequest)
     }
 }

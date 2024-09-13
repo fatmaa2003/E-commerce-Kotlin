@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val isLoggedIn = checkIfUserIsLoggedIn()
         Log.d("TAG","$isLoggedIn")
-        if (isLoggedIn) navGraph.setStartDestination(R.id.Feed_fragment)
+        if (isLoggedIn) navGraph.setStartDestination(R.id.cart)
         else navGraph.setStartDestination(R.id.sign_in)
 
         // Set the graph on the NavController after modifying it
