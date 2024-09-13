@@ -24,7 +24,7 @@ class StoresFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var storeImagesAdapter: StoreImagesAdapter
-    private val storesViewModel: StoresViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +38,7 @@ class StoresFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeStores()
+//        observeStores()
 
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -52,25 +52,25 @@ class StoresFragment : Fragment() {
 
     }
 
-    private fun observeStores() {
-        storesViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is Resource.Success -> {
-                    Log.d("in observer data success", "$resource")
-                    binding.progressBar.visibility = View.GONE
-                    resource.data?.let { storesList ->
-                        Log.e("hanan&fatma", "observeStores: " + storesList )
-                        storeImagesAdapter.setStoreImagesList(storesList)
-                    }
-                }
-                is Resource.Error -> {
-                    Log.d("in observer data error", "$resource")
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        })
-    }
+//    private fun observeStores() {
+//        storesViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+//            when (resource) {
+//                is Resource.Loading -> {
+//                    binding.progressBar.visibility = View.VISIBLE
+//                }
+//                is Resource.Success -> {
+//                    Log.d("in observer data success", "$resource")
+//                    binding.progressBar.visibility = View.GONE
+//                    resource.data?.let { storesList ->
+//                        Log.e("hanan&fatma", "observeStores: " + storesList )
+//                        storeImagesAdapter.setStoreImagesList(storesList)
+//                    }
+//                }
+//                is Resource.Error -> {
+//                    Log.d("in observer data error", "$resource")
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//            }
+//        })
+//    }
 }

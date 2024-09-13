@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:gravity="center"
         >
+
         <include
             android:id="@+id/brand_image"
             layout="@layout/circular_image"

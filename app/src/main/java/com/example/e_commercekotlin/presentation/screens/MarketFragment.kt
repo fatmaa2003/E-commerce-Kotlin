@@ -43,8 +43,8 @@ class MarketFragment : Fragment() {
         }
 
         binding.tabStores.setOnClickListener {
-            if (currentFragment !is StoresFragment) {
-                switchTab(StoresFragment(), binding.tabStores)
+            if (currentFragment !is BrandFragment) {
+                switchTab(BrandFragment(), binding.tabStores)
             }
         }
 
