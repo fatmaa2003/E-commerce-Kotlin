@@ -23,6 +23,12 @@
             android:name=".presentation.screens.mainActivity.MainActivity"
             android:theme="@style/Base.Theme.EcommerceKotlin"
             android:exported="true">
+
+        </activity>
+
+        <activity android:name=".presentation.screens.SplashScreenActivity"
+            android:theme="@style/Base.Theme.EcommerceKotlin"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
