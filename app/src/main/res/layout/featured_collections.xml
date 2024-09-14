@@ -12,13 +12,16 @@
         android:layout_height="170dp"
         app:shapeAppearanceOverlay="@style/CornerCut"
         android:background="@drawable/treka"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/firstText"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
+        android:paddingHorizontal="2dp"
         android:layout_height="wrap_content"
         android:text="Title"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textStyle="bold" />
 
     <TextView

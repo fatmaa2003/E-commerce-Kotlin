@@ -158,7 +158,10 @@
 
         <action
             android:id="@+id/action_purchase_to_Feed_fragment"
-            app:destination="@id/Feed_fragment" />
+            app:destination="@id/Feed_fragment"
+            app:popUpTo="@id/Feed_fragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment2"
