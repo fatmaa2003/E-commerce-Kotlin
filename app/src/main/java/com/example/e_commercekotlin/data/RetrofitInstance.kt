@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://e-commerce-production-e59d.up.railway.app/api/"
+    private const val BASE_URL = "https://e-commerce-production-4712.up.railway.app/api/"
 
     private fun createOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {

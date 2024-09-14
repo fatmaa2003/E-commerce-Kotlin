@@ -10,12 +10,14 @@ import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
+import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +27,6 @@ import retrofit2.Response
 class Repository {
 
     private val apiService = api
-//     lateinit var databaseHelper: DatabaseHelper = DatabaseHelperImpl()
 
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
@@ -216,6 +217,48 @@ class Repository {
             }
         } catch (e: Exception) {
             Resource.Error("Network error")
+        }
+    }
+
+    suspend fun makePurchase(products: List<AddToCartRequest.Product>): Resource<PurchaseResponse> {
+        return try {
+            val purchaseRequest = AddToCartRequest(products)
+            Resource.Loading(null)
+            val response = apiService.makePurchase(purchaseRequest)
+            if (response.isSuccessful) {
+                Resource.Success(response.body()!!)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getCartSize(): Resource<Int> {
+        return try {
+            val response = apiService.getCartSize()
+            if (response.isSuccessful) {
+                Resource.Success(response.body()?.cartSize ?: 0)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getCartItems(): Resource<CartItem> {
+        return try {
+            Resource.Loading(null)
+            val response = apiService.getCartItems()
+            if (response.isSuccessful) {
+                Resource.Success(response.body()!!)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
         }
     }
 }

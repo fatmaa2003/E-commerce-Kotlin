@@ -24,7 +24,5 @@ class SplashScreenActivity : FragmentActivity() {
             finish()
 
         }
-
-
     }
 }

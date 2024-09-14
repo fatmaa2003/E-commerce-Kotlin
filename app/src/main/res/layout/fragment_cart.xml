@@ -5,11 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/grey_bg_cart">
-
-
-
     <TextView
-
         android:id="@+id/text_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +14,6 @@
         android:layout_gravity="center"
         android:fontFamily="@font/extrabold"
         android:textColor="@android:color/black"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
@@ -26,7 +21,6 @@
         android:layout_weight="1"
         android:layout_marginTop="18dp"
         android:paddingVertical="8dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,21 +37,14 @@
             android:fontFamily="@font/regular"
             android:textColor="@android:color/black"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$34"
-            android:textSize="16sp"
-            android:fontFamily="@font/semibold"
-            android:textColor="@android:color/black"
-            android:layout_gravity="end"/>
     </LinearLayout>
-<!--hnkhly esmo continue to checkout-->
-    <include
+    <Button
         layout="@layout/main_button"
         android:id="@+id/continue_to_checkout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
+        android:text="Continue to checkout"
+        android:textSize="20dp"
         android:layout_marginHorizontal="25dp"
         android:layout_marginBottom="16dp"/>
 </LinearLayout>

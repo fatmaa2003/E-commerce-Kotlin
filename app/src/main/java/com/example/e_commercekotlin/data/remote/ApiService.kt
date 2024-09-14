@@ -12,6 +12,7 @@ import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
+import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.Stores
 import retrofit2.Response
@@ -34,8 +35,11 @@ interface ApiService {
 
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
+
     @GET("cart/view")
     suspend fun getCartItems():Response<CartItem>
+
+    suspend fun getCartSize():Response<CartItem>
 
     @POST("cart/add")
     suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<Unit>
@@ -52,5 +56,9 @@ interface ApiService {
 
     @GET("categories/stores")
     suspend fun getStores():Response<Stores>
+
+    @POST("cart/purchase")
+    suspend fun makePurchase(@Body purchaseRequest:AddToCartRequest): Response<PurchaseResponse>
+
 
 }

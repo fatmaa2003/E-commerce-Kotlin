@@ -164,16 +164,27 @@
 
     <fragment
         android:id="@+id/cart"
-        android:name="CartFragment"
-        tools:layout="@layout/fragment_cart" />
-
-    <fragment
-        android:id="@+id/add_to_cart"
-        android:name="com.example.e_commercekotlin.presentation.screens.AddCard"
-        tools:layout="@layout/fragment_add_to_cart">
+        android:name="com.example.e_commercekotlin.presentation.screens.CartFragment"
+        tools:layout="@layout/fragment_cart">
         <action
-            android:id="@+id/action_add_to_cart_to_cart"
-            app:destination="@id/cart" />
+            android:id="@+id/action_cart_to_purchase"
+            app:destination="@id/purchase" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchase"
+        android:name="com.example.e_commercekotlin.presentation.screens.PurchaseFragment"
+        tools:layout="@layout/fragment_purchase">
+
+        <argument
+            android:name="cartData"
+            app:argType="com.example.e_commercekotlin.data.model.CartItem" />
+
+        <action
+            android:id="@+id/action_purchase_to_Feed_fragment"
+            app:destination="@id/Feed_fragment"
+            app:popUpTo="@id/Feed_fragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
     <fragment
