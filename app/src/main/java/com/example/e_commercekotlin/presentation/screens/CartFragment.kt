@@ -42,7 +42,7 @@ class CartFragment : Fragment() {
         fetchCartItems()
 
         binding.continueToCheckout.setOnClickListener {
-            val action = CartFragmentDirections.actionCartToPurchase(cartData)
+            val action = CartFragmentDirections.actionCartToShippingAddressFragment2(cartData)
             findNavController().navigate(action)
         }
     }
