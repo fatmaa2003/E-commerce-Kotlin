@@ -46,7 +46,6 @@ class CustomDialogFragment : DialogFragment() {
         val productName = arguments?.getString("product_name")
         val productImage = arguments?.getString("product_image")
 
-        binding.itemBrandAndTitle.text = "Product ID: $productId"
         binding.productName.text = productName
         Glide.with(this).load(productImage).into(binding.itemImage)
 

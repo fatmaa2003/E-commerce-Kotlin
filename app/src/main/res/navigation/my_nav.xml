@@ -141,7 +141,7 @@
 
     <fragment
         android:id="@+id/cart"
-        android:name="CartFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.CartFragment"
         tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cart_to_purchase"
@@ -149,8 +149,12 @@
     </fragment>
     <fragment
         android:id="@+id/purchase"
-android:name="com.example.e_commercekotlin.presentation.screens.PurchaseFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.PurchaseFragment"
         tools:layout="@layout/fragment_purchase">
+
+        <argument
+            android:name="cartData"
+            app:argType="com.example.e_commercekotlin.data.model.CartItem" />
 
         <action
             android:id="@+id/action_purchase_to_Feed_fragment"

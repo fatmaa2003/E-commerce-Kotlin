@@ -1,22 +1,27 @@
-    import android.os.Bundle
+package com.example.e_commercekotlin.presentation.screens
+
+import CartAdapter
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-    import androidx.navigation.fragment.findNavController
-    import androidx.recyclerview.widget.LinearLayoutManager
-    import com.example.e_commercekotlin.R
-    import com.example.e_commercekotlin.data.RetrofitInstance
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
-import kotlinx.coroutines.launch
+import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
     private lateinit var cartAdapter: CartAdapter
+    private val viewModel: PurchaseViewModel by viewModels()
+    private lateinit var cartData : CartItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,17 +42,22 @@ class CartFragment : Fragment() {
         fetchCartItems()
 
         binding.continueToCheckout.setOnClickListener {
-            findNavController().navigate(R.id.action_cart_to_purchase)
+            val action = CartFragmentDirections.actionCartToPurchase(cartData)
+            findNavController().navigate(action)
         }
     }
 
 
     private fun fetchCartItems() {
-        lifecycleScope.launch {
-            try {
-                val cartResponse = RetrofitInstance.api.getCartItems()
-                if (cartResponse.isSuccessful) {
-                    val cartItem = cartResponse.body()
+        viewModel.cartItems.observe(viewLifecycleOwner) { resources ->
+
+            when (resources) {
+                is Resource.Loading -> {
+                    // handle progress bar visibility
+                }
+                is Resource.Success -> {
+                    val cartItem = resources.data
+                    cartData = resources.data!!
                     if (cartItem != null && cartItem.products.isNotEmpty()) {
                         cartAdapter.setProductItems(cartItem.products)
 
@@ -56,12 +66,10 @@ class CartFragment : Fragment() {
                     } else {
                         Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
                     }
-                } else {
+                }
+                is Resource.Error -> {
                     Toast.makeText(requireContext(), "Failed to load cart items", Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
