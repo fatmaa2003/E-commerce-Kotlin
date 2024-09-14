@@ -53,7 +53,6 @@ class CartFragment : Fragment() {
 
             when (resources) {
                 is Resource.Loading -> {
-                    // handle progress bar visibility
                 }
                 is Resource.Success -> {
                     val cartItem = resources.data

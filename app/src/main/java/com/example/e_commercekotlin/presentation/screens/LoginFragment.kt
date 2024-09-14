@@ -7,6 +7,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
@@ -41,12 +42,15 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
         activity?.setBottomNavVisibility(visible = false)
         handleUIClicks()
         loginObserver()
+        binding.goToSignupTextView.setOnClickListener {
+            val action = LoginFragmentDirections.actionSignInToSignUp()
+            findNavController().navigate(action)
+        }
     }
 
     private fun handleUIClicks() {
         binding.loginButton.setOnClickListener(this)
     }
-
     private fun loginObserver() {
         loginViewModel.loginState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
@@ -96,4 +100,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
         val navController = NavHostFragment.findNavController(this)
         navController.navigate(R.id.action_sign_in_to_Feed_fragment)
     }
+
+
 }

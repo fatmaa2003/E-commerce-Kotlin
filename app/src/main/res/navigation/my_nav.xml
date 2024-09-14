@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_sign_up_to_Feed_fragment"
             app:destination="@id/Feed_fragment" />
+        <action
+            android:id="@+id/action_sign_up_to_sign_in"
+            app:destination="@id/sign_in" />
     </fragment>
     <fragment
         android:id="@+id/Feed_fragment"
