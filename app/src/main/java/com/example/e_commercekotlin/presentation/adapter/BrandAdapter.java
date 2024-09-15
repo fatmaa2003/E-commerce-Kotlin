@@ -11,17 +11,21 @@ import com.bumptech.glide.Glide;
 import com.example.e_commercekotlin.R;
 import com.example.e_commercekotlin.data.model.Stores;
 import com.example.e_commercekotlin.databinding.BranddesignBinding;
+import com.example.e_commercekotlin.presentation.listener.StoreClickListener;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewHolder> {
 
     private List<Stores.StoresItem> brandList;
-    private Context context;
 
-    public BrandAdapter(Context context) {
-        this.context = context;
+    private StoreClickListener storeClickListener;
+
+    void setStoreClickListener(StoreClickListener storeClickListener){
+        this.storeClickListener = storeClickListener;
     }
+
 
     public void setBrandList(List<Stores.StoresItem> brandList) {
         if (brandList == null || brandList.isEmpty()) {
@@ -58,31 +62,24 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
 
         holder.binding.brandName.setText(brand.getName());
 
-
-        if (brand.getDiscount() != null) {
-            Log.d("BrandAdapter", "Discount: " + brand.getDiscount());
-        } else {
-            Log.d("BrandAdapter", "Discount is null");
-        }
-
-
         if (brand.getDiscount() != null && brand.getDiscount() > 0) {
             String discountText = String.format("%.0f%% OFF", brand.getDiscount());
             holder.binding.discountPercentage.setText(discountText);
             holder.binding.discountPercentage.setVisibility(View.VISIBLE);
         } else {
-            holder.binding.discountPercentage.setVisibility(View.GONE);
+            holder.binding.discountPercentage.setVisibility(View.INVISIBLE);
         }
 
-
         if (brand.getImageurl() != null && !brand.getImageurl().isEmpty()) {
-            Glide.with(context)
+            Glide.with(holder.binding.brandImage.image.getContext())
                     .load(brand.getImageurl())
                     .placeholder(R.drawable.img)
                     .into(holder.binding.brandImage.image);
         } else {
             holder.binding.brandImage.image.setImageResource(R.drawable.img);
         }
+
+        holder.binding.getRoot().setOnClickListener(v -> storeClickListener.onStoreClicked(Objects.requireNonNull(brand.getStoreId()).toString()));
     }
 
 

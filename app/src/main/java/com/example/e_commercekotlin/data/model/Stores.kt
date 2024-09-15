@@ -11,12 +11,11 @@ class Stores : ArrayList<Stores.StoresItem>() {
         val discount: Double?,
         @SerializedName("imageurl")
         val imageurl: String?,
-        @SerializedName("marketImage")
-        val marketImage: Any?,
+        @SerializedName("market_image")
+        val marketImage: String?,
         @SerializedName("name")
         val name: String?,
-        @SerializedName("storeId")
+        @SerializedName("store_id")
         val storeId: Int?
     )
-
 }
