@@ -84,6 +84,30 @@
             android:id="@+id/action_market_fragment_to_store"
             app:destination="@id/store" />
     </fragment>
+    <fragment
+        android:id="@+id/tagsFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.TagsFragment"
+        android:label="Tags Fragment"
+        tools:layout="@layout/fragment_tags">
+        <action
+            android:id="@+id/actionTagsFragmentToFollowFragment"
+            app:destination="@id/followFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/followFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
+        android:label="Follow Fragment"
+        tools:layout="@layout/fragment_follow">
+        <argument
+            android:name="imageResId"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/profile_fragment"
@@ -128,7 +152,7 @@
             app:destination="@id/collection" />
         <action
             android:id="@+id/action_feature_fragment_to_follow"
-            app:destination="@id/follow" />
+            app:destination="@id/followFragment" />
         <action
             android:id="@+id/action_feature_fragment_to_stores"
             app:destination="@id/stores" />
@@ -166,11 +190,6 @@
             android:id="@+id/action_collection_details_to_product_details"
             app:destination="@id/product_details" />
     </fragment>
-
-    <fragment
-        android:id="@+id/follow"
-        android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
-        tools:layout="@layout/fragment_follow" />
 
     <fragment
         android:id="@+id/cart"

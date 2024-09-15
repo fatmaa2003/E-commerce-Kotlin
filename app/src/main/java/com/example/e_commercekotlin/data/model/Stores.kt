@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 class Stores : ArrayList<Stores.StoresItem>() {
 
     data class StoresItem(
-
         @SerializedName("description")
         val description: String?,
         @SerializedName("discount")
@@ -13,7 +12,7 @@ class Stores : ArrayList<Stores.StoresItem>() {
         @SerializedName("imageurl")
         val imageurl: String?,
         @SerializedName("market_image")
-        val marketImage: Any?,
+        val marketImage: String?,
         @SerializedName("name")
         val name: String?,
         @SerializedName("store_id")
