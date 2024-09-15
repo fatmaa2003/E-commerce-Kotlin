@@ -10,6 +10,7 @@ import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
@@ -107,7 +108,7 @@ class Repository {
         }
     }
 
-    suspend fun getProducts(): Resource<AllProductModel> {
+    suspend fun getProducts(): Resource<AllProdcutsDto> {
         return withContext(Dispatchers.IO) {
             try {
                 Resource.Loading(null)

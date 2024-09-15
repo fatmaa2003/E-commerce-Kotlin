@@ -24,10 +24,10 @@ class FollowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageResId = args.imageResId
-        val title = args.title
+        val imageResId = arguments?.getInt("imageResId")
+        val title = arguments?.getString("title")
 
-        binding.followImage.setImageResource(imageResId)
+        binding.followImage.setImageResource(imageResId ?: 0)
         binding.followTitle.text = title
     }
 }

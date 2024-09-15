@@ -37,12 +37,15 @@ class FeaturedFragment : Fragment() {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
         val view = binding.root
         productsViewModel.getAllProduct()
-        observeProducts()
-        observeStores()
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupProductRecyclerView()
         setupTagsRecyclerView()
-
-        return view
+        observeProducts()
+        observeStores()
     }
 
     private fun observeProducts() {
@@ -52,13 +55,11 @@ class FeaturedFragment : Fragment() {
                     binding.progressBar.visibility= View.VISIBLE
                 }
                 is Resource.Success -> {
-                    Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
-                    resource.data?.let { itemAdapter.setProductList(it.products.orEmpty()) }
-                    resource.data?.let { productAdapter.setProductList(it.products.orEmpty()) }
+                    resource.data?.let { itemAdapter.setProductList(it) }
+                    resource.data?.let { productAdapter.setProductList(it) }
                 }
                 is Resource.Error -> {
-                    Log.d("in observer data error", "$resource")
                     binding.progressBar.visibility = View.GONE
                 }
             }

@@ -36,8 +36,9 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val currentItem = productList[position]
 
         holder.productName.text = currentItem.productName
+        val priceAsDouble = currentItem.price?.toDouble() ?: 0.0 // Default to 0.0 if conversion fails
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
-        val formattedPrice = currencyFormat.format(currentItem.price)
+        val formattedPrice = currencyFormat.format(priceAsDouble)
         holder.productPrice.text = formattedPrice
 
         Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
@@ -68,5 +69,4 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     }
 
     var onProductClick: ClickListener? = null
-
 }

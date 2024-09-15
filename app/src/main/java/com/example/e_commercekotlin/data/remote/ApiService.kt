@@ -4,6 +4,7 @@ import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
@@ -41,7 +42,7 @@ interface ApiService {
     suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<Unit>
 
     @GET("products")
-    suspend fun getAllProducts () : Response<AllProductModel>
+    suspend fun getAllProducts () : Response<AllProdcutsDto>
 
       @GET("products/{productId}")
       suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>

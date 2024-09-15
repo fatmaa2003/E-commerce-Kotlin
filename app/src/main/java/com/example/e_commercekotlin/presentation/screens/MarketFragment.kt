@@ -51,11 +51,9 @@ class MarketFragment : Fragment() {
 
         binding.tabTags.setOnClickListener {
             if (currentFragment !is FollowFragment) {
-                switchTab(FollowFragment(), binding.tabTags)
+                switchTab(TagsFragment(), binding.tabTags)
             }
         }
-
-
 
         return view
     }

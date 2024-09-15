@@ -75,6 +75,9 @@
         android:label="Market Fragment"
         tools:layout="@layout/fragment_market">
         <action
+            android:id="@+id/actionTagsFragmentToFollowFragment"
+            app:destination="@id/followFragment" />
+        <action
             android:id="@+id/action_market_fragment_to_feature_fragment"
             app:destination="@id/feature_fragment" />
         <action
@@ -89,9 +92,6 @@
         android:name="com.example.e_commercekotlin.presentation.screens.TagsFragment"
         android:label="Tags Fragment"
         tools:layout="@layout/fragment_tags">
-        <action
-            android:id="@+id/actionTagsFragmentToFollowFragment"
-            app:destination="@id/followFragment" />
     </fragment>
 
 

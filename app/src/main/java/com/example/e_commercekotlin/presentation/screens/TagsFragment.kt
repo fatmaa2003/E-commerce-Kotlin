@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.databinding.FragmentTagsBinding
 import com.example.e_commercekotlin.presentation.model.Featured
 
@@ -31,6 +32,8 @@ class TagsFragment : Fragment() {
     ): View? {
         _binding = FragmentTagsBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        activity?.setBottomNavVisibility(visible = false)
 
         // Setting up RecyclerView
         val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
