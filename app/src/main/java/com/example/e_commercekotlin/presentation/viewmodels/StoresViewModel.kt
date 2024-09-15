@@ -15,7 +15,7 @@ class StoresViewModel : ViewModel() {
     private val repository = Repository()
 
     private val _stores = MutableLiveData<Resource<Stores>>()
-    val data: LiveData<Resource<Stores>> get() = _stores
+    val stores: LiveData<Resource<Stores>> get() = _stores
 
     init {
         fetchStores()
@@ -25,11 +25,16 @@ class StoresViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = repository.getStores()
+
+                if (response is Resource.Success) {
+                    Log.d("StoresViewModel", "API Response Data: ${response.data}")
+                } else {
+                    Log.d("StoresViewModel", "API Response: $response")
+                }
                 _stores.postValue(response)
-                Log.e("TAG123", "fetchStores: $response")
             } catch (e: Exception) {
                 _stores.postValue(Resource.Error("Failed to load stores"))
-                Log.e("TAG123", "Error fetching stores: ${e.message}")
+                Log.e("StoresViewModel", "Error fetching stores: ${e.message}")
             }
         }
     }

@@ -5,20 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".presentation.screens.MarketFragment">
+
+    <TextView
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Market"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/bold"/>
+
     <include
         android:id="@+id/fragment_market_toolbar"
         layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginEnd="15dp"
+        android:background="@color/lightgray"
+    />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <include
-            layout="@layout/logout_button"/>
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,6 +128,14 @@
                 android:text="Tags"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
+
+            <View
+                android:id="@+id/dotTags"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="@drawable/dot_background"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 

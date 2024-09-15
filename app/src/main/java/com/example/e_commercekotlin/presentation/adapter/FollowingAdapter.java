@@ -18,6 +18,7 @@ import java.util.List;
 public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.ComponentViewHolder> {
 
     private List<Featured> features = new ArrayList<>();
+
     public void setFeatures(List<Featured> features) {
         this.features = features;
         notifyDataSetChanged();
@@ -33,13 +34,12 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.Comp
 
     @Override
     public void onBindViewHolder(@NonNull ComponentViewHolder holder, int position) {
-        // Get the Featured object at the given position
         Featured featured = features.get(position);
 
-        // Directly access the properties of the Featured data class
+        // Set image, title, and price
         holder.imageView.setImageResource(featured.getImageResId());
         holder.textView1.setText(featured.getTitle());
-        holder.textView3.setText(featured.getPrice());
+        holder.textView3.setText(String.valueOf(featured.getPrice())); // Ensure price is a String
     }
 
     @Override

@@ -6,23 +6,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.databinding.FeaturedTagsBinding
 import com.example.e_commercekotlin.presentation.model.Featured
 
-class TagsAdapter(private val items: List<Featured>) : RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
+class TagsAdapter(private val items: List<Featured>) : RecyclerView.Adapter<TagsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = FeaturedTagsBinding.inflate(inflater, parent, false)
-        return TagViewHolder(binding)
+    private var onItemClickListener: ((Featured) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Featured) -> Unit) {
+        onItemClickListener = listener
     }
 
-    override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        val item = items[position]
-        holder.binding.tagIcon.setImageResource(item.imageResId)
-        holder.binding.tagTitle.text = item.title
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = FeaturedTagsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val featuredItem = items[position]
+        holder.bind(featuredItem)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.invoke(featuredItem)
+        }
+    }
 
     override fun getItemCount() = items.size
 
-    class TagViewHolder(val binding: FeaturedTagsBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(private val binding: FeaturedTagsBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Featured) {
+            binding.tagIcon.setImageResource(item.imageResId)
+            binding.tagTitle.text = item.title
+        }
+    }
 }
-
