@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_stores_to_storeDetailsFragment"
             app:destination="@id/storeDetailsFragment" />
+        <action
+            android:id="@+id/action_stores_to_store"
+            app:destination="@id/store" />
     </fragment>
 
 
@@ -142,11 +145,14 @@
             android:id="@+id/action_collection_to_collection_details"
             app:destination="@id/collection_details" />
     </fragment>
-
     <fragment
         android:id="@+id/store"
         android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
-        tools:layout="@layout/fragment_stores" />
+        tools:layout="@layout/fragment_stores" >
+        <action
+            android:id="@+id/action_store_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/collection_details"

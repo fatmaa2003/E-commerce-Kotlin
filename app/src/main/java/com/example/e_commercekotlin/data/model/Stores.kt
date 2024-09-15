@@ -6,9 +6,17 @@ class Stores : ArrayList<Stores.StoresItem>() {
 
     data class StoresItem(
 
-        val imageurl: String,
+        @SerializedName("description")
+        val description: String?,
+        @SerializedName("discount")
+        val discount: Double?,
+        @SerializedName("imageurl")
+        val imageurl: String?,
+        @SerializedName("market_image")
+        val marketImage: Any?,
         @SerializedName("name")
-        val name: String?
-
+        val name: String?,
+        @SerializedName("store_id")
+        val storeId: Int?
     )
 }

@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ class CustomDialogFragment : DialogFragment() {
         val productId = arguments?.getInt("productId")
         val productName = arguments?.getString("product_name")
         val productImage = arguments?.getString("product_image")
+        val sourceFragment = arguments?.getString("source_fragment")
 
         binding.itemBrandAndTitle.text = "Product ID: $productId"
         binding.productName.text = productName
@@ -52,8 +54,19 @@ class CustomDialogFragment : DialogFragment() {
 
         binding.bottomLinearLayout.setOnClickListener {
             dialog?.hide()
-            val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId ?: 0)
-            findNavController().navigate(action)
+            when (sourceFragment) {
+                "FeedFragment" -> {
+                    val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId ?: 0)
+                    findNavController().navigate(action)
+                }
+                "StoresFragment" -> {
+                    val action = StoresFragmentDirections.actionStoreToProductDetails(productId ?: 0)
+                    findNavController().navigate(action)
+                }
+                else -> {
+                    Log.e("CustomDialogFragment", "Unknown source fragment: $sourceFragment")
+                }
+            }
         }
 
     }
