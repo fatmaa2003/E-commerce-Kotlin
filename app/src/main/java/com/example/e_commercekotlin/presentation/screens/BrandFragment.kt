@@ -32,11 +32,16 @@ class BrandFragment : Fragment(), StoreClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        storeViewModel.fetchStores()
         observeStores()
-
         brandAdapter = BrandAdapter()
+        setListener()
         binding.brandRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.brandRecyclerView.adapter = brandAdapter
+    }
+
+    private fun setListener() {
+        brandAdapter.setStoreClickListener(this)
     }
 
     private fun observeStores() {
@@ -64,7 +69,7 @@ class BrandFragment : Fragment(), StoreClickListener {
     }
 
     override fun onStoreClicked(storeId: String) {
-        val action = BrandFragmentDirections.actionStoresToStoreFragment(storeId)
+        val action = MarketFragmentDirections.actionMarketFragmentToStore(storeId)
         findNavController().navigate(action)
     }
 }

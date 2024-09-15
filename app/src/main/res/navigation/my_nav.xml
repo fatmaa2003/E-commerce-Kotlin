@@ -121,9 +121,7 @@
         android:name="com.example.e_commercekotlin.presentation.screens.BrandFragment"
         android:label="Brand Fragment"
         tools:layout="@layout/fragment_brand">
-        <action
-            android:id="@+id/action_stores_to_storeDetailsFragment"
-            app:destination="@id/storeDetailsFragment" />
+
         <action
             android:id="@+id/action_stores_to_store"
             app:destination="@id/store" />

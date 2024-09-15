@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.webkit.internal.ApiFeature
+import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
@@ -43,9 +44,9 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
         val storeId = arguments?.getString("storeId")
         storeViewModel.fetchCategoryDetails(storeId.orEmpty())
         observeCategoryDetails()
+        initAdapter()
         handleLayoutManager()
         setRecyclerViewAdapter()
-        initAdapter()
         setListener()
     }
 
@@ -75,11 +76,14 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
-                    val productList = resources.data?.first()?.products
+                    val productList = resources.data?.category?.products
                     binding.progressBar.visibility = View.GONE
                     itemAdapter.setProductList(productList.orEmpty())
                     val productImageList =  productList?.mapNotNull { it.imageUrl }
                     productImageList?.let { storeImagesAdapter.setStoreImagesList(it) }
+                    binding.storeName.text = resources.data?.category?.name
+                    binding.storeDescription.text = resources.data?.category?.description
+                    Glide.with(binding.storeImage.image.context).load(resources.data?.category?.image_url).into(binding.storeImage.image)
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE

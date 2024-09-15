@@ -32,12 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         val isLoggedIn = checkIfUserIsLoggedIn()
         Log.d("TAG","$isLoggedIn")
-        if (isLoggedIn) navGraph.setStartDestination(R.id.store)
+        if (isLoggedIn) navGraph.setStartDestination(R.id.Feed_fragment)
         else navGraph.setStartDestination(R.id.sign_in)
 
         // Set the graph on the NavController after modifying it
         navController.graph = navGraph
-
 
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         NavigationUI.setupWithNavController(bottomNavView, navController)

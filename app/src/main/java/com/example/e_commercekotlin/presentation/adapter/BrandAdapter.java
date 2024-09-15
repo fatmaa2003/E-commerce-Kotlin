@@ -22,7 +22,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
 
     private StoreClickListener storeClickListener;
 
-    void setStoreClickListener(StoreClickListener storeClickListener){
+    public void setStoreClickListener(StoreClickListener storeClickListener){
         this.storeClickListener = storeClickListener;
     }
 

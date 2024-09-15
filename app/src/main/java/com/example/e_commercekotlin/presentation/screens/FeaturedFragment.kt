@@ -37,6 +37,7 @@ class FeaturedFragment : Fragment() {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
         val view = binding.root
         productsViewModel.getAllProduct()
+        storesViewModel.fetchStores()
         observeProducts()
         observeStores()
         setupProductRecyclerView()
