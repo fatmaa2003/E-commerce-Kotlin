@@ -152,6 +152,10 @@
         <action
             android:id="@+id/action_store_to_product_details"
             app:destination="@id/product_details" />
+        <argument
+            android:name="storeId"
+            app:argType="string"
+        />
     </fragment>
 
     <fragment

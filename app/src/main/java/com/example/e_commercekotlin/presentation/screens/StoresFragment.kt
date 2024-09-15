@@ -68,7 +68,6 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
         binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
-
     private fun observeCategoryDetails() {
         storeViewModel.data.observe(viewLifecycleOwner) { resources->
             when (resources) {
