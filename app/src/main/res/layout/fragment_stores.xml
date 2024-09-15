@@ -26,7 +26,6 @@
             android:id="@+id/store_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lacoste x Polaroid"
             android:fontFamily="@font/semibold"
             android:textSize="20sp"
             />
@@ -36,8 +35,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"
             android:textSize="16sp"
-            android:textColor="@color/description_color"
-            android:text="With its retro-modern vibes, the Lacoste x Polaroid collection brings together vibrant colors and the inclusive spirit" />
+            android:textColor="@color/description_color"/>
 
         <include
             layout="@layout/products_sort_and_filter" />

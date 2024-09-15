@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.webkit.internal.ApiFeature
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
@@ -27,52 +28,67 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
     private val binding get() = _binding!!
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var storeImagesAdapter: StoreImagesAdapter
-    private val productsViewModel: ProductViewModel by viewModels()
     private val storeViewModel: StoresViewModel by viewModels()
-//    private val categoryDetailsViewModel: CategoryDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStoresBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeProducts()
-//        observeCategoryDetails()
+        val storeId = arguments?.getString("storeId")
+        storeViewModel.fetchCategoryDetails(storeId.orEmpty())
+        observeCategoryDetails()
+        handleLayoutManager()
+        setRecyclerViewAdapter()
+        initAdapter()
+        setListener()
+    }
 
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    private fun setListener() {
+        itemAdapter.setListener(this)
+    }
 
-
+    private fun initAdapter() {
         itemAdapter = ProductAdapter()
         storeImagesAdapter = StoreImagesAdapter()
+    }
 
-        itemAdapter.setListener(this)
-
+    private fun setRecyclerViewAdapter() {
         binding.recyclerView.adapter = itemAdapter
         binding.storeImagesRv.adapter = storeImagesAdapter
     }
 
-    private fun observeProducts() {
-        productsViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
-            when (resource) {
+    private fun handleLayoutManager() {
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    }
+
+
+    private fun observeCategoryDetails() {
+        storeViewModel.data.observe(viewLifecycleOwner) { resources->
+            when (resources) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
+                    val productList = resources.data?.first()?.products
                     binding.progressBar.visibility = View.GONE
-                    resource.data?.let { itemAdapter.setProductList(it) }
+                    itemAdapter.setProductList(productList.orEmpty())
+                    val productImageList =  productList?.mapNotNull { it.imageUrl }
+                    productImageList?.let { storeImagesAdapter.setStoreImagesList(it) }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
+
     override fun onProductClick(productId: Long, productName: String, productImage: String) {
         val dialogFragment = CustomDialogFragment()
         val bundle = Bundle().apply {
