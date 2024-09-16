@@ -1,8 +1,5 @@
 package com.example.e_commercekotlin.presentation.adapter
 
-import android.graphics.drawable.PictureDrawable
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.e_commercekotlin.R
-import com.example.e_commercekotlin.data.model.Category
-import com.example.e_commercekotlin.data.model.ProductDetailsDto
-import com.squareup.picasso.Picasso
 import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
@@ -46,14 +39,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val formattedPrice = currencyFormat.format(currentItem.price)
         holder.productPrice.text = formattedPrice
 
-//       Glide.with(holder.productName.context).load(currentItem.imageUrl).into(holder.productImage)
-//        Glide.with(holder.productName.context)
-//            .`as`(PictureDrawable::class.java)
-//            .load(currentItem.imageUrl)
-//            .into(holder.productImage)
-
         Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
-
 
         holder.productLayout.setOnClickListener {
         currentItem.productId?.let { onProductClick?.onProductClick(it.toLong())

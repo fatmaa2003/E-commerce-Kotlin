@@ -92,6 +92,8 @@ dependencies {
     implementation("com.caverock:androidsvg:1.4")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
+
+
     //nav args
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.0")   // Use the latest version
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.0")

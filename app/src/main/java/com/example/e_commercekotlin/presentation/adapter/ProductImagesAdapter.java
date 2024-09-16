@@ -1,4 +1,5 @@
-package com.example.e_commercekotlin.presentation.screens;
+package com.example.e_commercekotlin.presentation.adapter;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,21 +9,23 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.e_commercekotlin.R;
+import com.example.e_commercekotlin.data.model.ProductResponse;
+import com.example.e_commercekotlin.data.model.ProductResponse.ProductResponseItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdapter.ComponentViewHolder> {
 
-    private List<ProductImage> productImages = new ArrayList<>();
+    private List<String> productImages = new ArrayList<>();
 
 
-public void setProductImages(List<ProductImage> productImages) {
-    this.productImages = productImages;
-    notifyDataSetChanged();
-}
-
+    public void setProductImages(List<String> productImages) {
+        this.productImages = productImages;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -33,8 +36,8 @@ public void setProductImages(List<ProductImage> productImages) {
 
     @Override
     public void onBindViewHolder(@NonNull ComponentViewHolder holder, int position) {
-        ProductImage productImage = productImages.get(position);
-        holder.imageView.setImageResource(productImage.getImage());
+        String productImage = productImages.get(position);
+        Glide.with(holder.imageView.getContext()).load(productImage).into(holder.imageView);
     }
 
     @Override
@@ -47,7 +50,7 @@ public void setProductImages(List<ProductImage> productImages) {
 
         public ComponentViewHolder(@NonNull View itemView) {
             super(itemView);
-               imageView = itemView.findViewById(R.id.image_view);
+            imageView = itemView.findViewById(R.id.image_view);
 
         }
     }
