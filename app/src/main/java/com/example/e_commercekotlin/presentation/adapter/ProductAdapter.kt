@@ -15,10 +15,14 @@ import java.util.Locale
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     private var productList: List<ProductResponse.ProductResponseItem> = listOf()
+    private var filteredProductList: List<ProductResponse.ProductResponseItem> = productList
+
+    var onProductClick: ClickListener? = null
 
 
     fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
+        filteredProductList = productList
         notifyDataSetChanged()
     }
 
@@ -36,7 +40,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     // Bind data to the views in the ViewHolder
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = productList[position]
+        val currentItem = filteredProductList[position]
 
         // Set product name and formatted price
         holder.productName.text = currentItem.productName
@@ -64,7 +68,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     // Return the total number of products in the list
     override fun getItemCount(): Int {
-        return productList.size
+        return filteredProductList.size
     }
 
     // ViewHolder class to hold references to the views for each item
@@ -75,11 +79,28 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val productLayout: LinearLayout = itemView.findViewById(R.id.product_layout)
     }
 
-    // Interface to handle product click events
+    // Filter function to filter the product list based on search query
+    fun filter(query: String) {
+        val lowerCaseQuery = query.lowercase()
+
+        filteredProductList = if (query.isEmpty()) {
+            productList // If the query is empty, show the full product list
+        } else {
+            productList.filter { product ->
+                product.productName?.lowercase()?.contains(lowerCaseQuery) == true
+            }
+        }
+        // Notify the adapter of the changes
+        notifyDataSetChanged()
+    }
+
+
+    // this is the interface of the api integration
     interface ClickListener {
         fun onProductClick(productId: Long, productName: String, productImage: String)
     }
 
-    // Variable to store the click listener
-    private var onProductClick: ClickListener? = null
+
 }
+
+

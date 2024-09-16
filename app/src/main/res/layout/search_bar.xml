@@ -7,10 +7,13 @@
     android:paddingVertical="13dp"
     >
     <EditText
+        android:id="@+id/search_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/search"
         android:drawableEnd="@drawable/search_icon"
         android:background="@color/transparent"
+        android:singleLine="true"
+        android:maxLines="1"
         />
 </LinearLayout>

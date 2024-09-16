@@ -40,6 +40,12 @@
             android:id="@+id/action_Feed_fragment_to_product_details"
             app:destination="@id/product_details" />
         <action
+            android:id="@+id/action_Feed_fragment_to_searchFragmente"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
             android:id="@+id/action_Feed_fragment_to_sign_in"
             app:destination="@id/sign_in"
             app:popUpToInclusive="true"
@@ -236,4 +242,16 @@
             android:id="@+id/action_shippingAddressFragment2_to_purchase"
             app:destination="@id/purchase" />
     </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.searchFragment"
+        android:label="fragment_search_fragmente"
+        tools:layout="@layout/fragment_search_fragmente" >
+        <action
+            android:id="@+id/action_searchFragment_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
+
+
 </navigation>

@@ -35,3 +35,25 @@ class ProductResponse : ArrayList<ProductResponse.ProductResponseItem>() {
         )
     }
 }
+
+data class Product(
+    val productId: Int,
+    val productName: String,
+    val productMainImage: String,
+    val productPrice: Double,
+    val quantity: Int,
+    val itemTotalPrice: Double,
+    val cartSize: Int
+)
+
+fun Product.toProductItem () : ProductResponse.ProductResponseItem  = ProductResponse.ProductResponseItem(
+     description= "" ,
+     imageUrl = productMainImage ,
+     manufacturer = "" ,
+     price = productPrice ,
+     productId = productId ,
+     productName = productName ,
+     stockQuantity =  quantity,
+     warrantyPeriod = -1 ,
+     categoryId = -1
+)
