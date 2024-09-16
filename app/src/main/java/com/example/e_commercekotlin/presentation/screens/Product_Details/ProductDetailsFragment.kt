@@ -137,10 +137,10 @@ class ProductDetailsFragment : Fragment() {
         val cartSizeTextView = dialogView.findViewById<TextView>(R.id.cartSizeTextView)
         val goToCartButton = dialogView.findViewById<Button>(R.id.goToCartButton)
 
-//        viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
-//            Log.d("CartSize", "Observed cart size: $cartSize")
-//            cartSizeTextView.text = "Cart Size: $cartSize"
-//        }
+        viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
+            Log.d("CartSize", "Observed cart size: ${cartSize.data}")
+            cartSizeTextView.text = " ${cartSize.data}"
+        }
 
 
         val alertDialog = AlertDialog.Builder(requireContext())
