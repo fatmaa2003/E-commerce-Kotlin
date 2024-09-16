@@ -11,10 +11,11 @@ class AddressAdapter(
     private var addressList: List<Address> = listOf()
 ) : RecyclerView.Adapter<AddressAdapter.MyViewHolder>() {
 
-    private var selectedPosition: Int = RecyclerView.NO_POSITION
+    private var selectedPosition: Int = if (addressList.isNotEmpty()) 0 else RecyclerView.NO_POSITION
 
     fun setAddressList(addressList: List<Address>) {
         this.addressList = addressList
+        selectedPosition = if (addressList.isNotEmpty()) 0 else RecyclerView.NO_POSITION
         notifyDataSetChanged()
     }
 
@@ -24,22 +25,35 @@ class AddressAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = addressList[position]
+        val currentItem = addressList[holder.adapterPosition]
+
         holder.addressName.text = currentItem.addressName
         holder.address.text = currentItem.address
         holder.arrivalEstimate.text = currentItem.arrivalEstimate
         holder.shippingCost.text = currentItem.shippingCost
 
-        holder.itemView.isSelected = (position == selectedPosition)
-        holder.addressRadioButton.isChecked = (position == selectedPosition)
+        holder.itemView.isSelected = (holder.adapterPosition == selectedPosition)
+        holder.addressRadioButton.isChecked = (holder.adapterPosition == selectedPosition)
 
         holder.itemView.setOnClickListener {
-            val previousSelectedPosition = selectedPosition
-            selectedPosition = if (position == selectedPosition) RecyclerView.NO_POSITION else position
-            notifyItemChanged(previousSelectedPosition)
-            notifyItemChanged(selectedPosition)
+            val currentPos = holder.adapterPosition
+            if (currentPos != RecyclerView.NO_POSITION && currentPos != selectedPosition) {  // Prevent deselection
+                val previousSelectedPosition = selectedPosition
+                selectedPosition = currentPos
+                notifyItemChanged(previousSelectedPosition)
+                notifyItemChanged(selectedPosition)
+            }
         }
 
+        holder.addressRadioButton.setOnClickListener {
+            val currentPos = holder.adapterPosition
+            if (currentPos != RecyclerView.NO_POSITION && currentPos != selectedPosition) {  // Prevent deselection
+                val previousSelectedPosition = selectedPosition
+                selectedPosition = currentPos
+                notifyItemChanged(previousSelectedPosition)
+                notifyItemChanged(selectedPosition)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
