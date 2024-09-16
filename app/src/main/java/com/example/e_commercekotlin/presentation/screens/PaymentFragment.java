@@ -6,11 +6,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.e_commercekotlin.R;
 import com.example.e_commercekotlin.Util.UtilJava;
+import com.example.e_commercekotlin.data.ProfileUserDetails;
 import com.example.e_commercekotlin.data.model.CardModel;
 import com.example.e_commercekotlin.data.model.Followings;
 import com.example.e_commercekotlin.databinding.FollowingButtonBinding;
@@ -52,6 +55,9 @@ public class PaymentFragment extends Fragment {
         binding.profileFollowingButton.followingButtonTv.setPadding(UtilJava.dpToPx(20), UtilJava.dpToPx(10),UtilJava.dpToPx(20), UtilJava.dpToPx(10));
         binding.profileFollowingButton.getRoot().setOnClickListener(v -> showBottomSheet());
 
+        binding.profileName.setText(ProfileUserDetails.INSTANCE.getFirstName()+ " " + ProfileUserDetails.INSTANCE.getLastName());
+//        Log.d("in payment fragment ",ProfileUserDetails.INSTANCE.getFirstName());
+        binding.profileUsername.setText(ProfileUserDetails.INSTANCE.getUsername());
 
     }
 

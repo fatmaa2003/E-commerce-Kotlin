@@ -7,19 +7,23 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.StoreImages
+import com.example.e_commercekotlin.data.model.Stores
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
 
 
-class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
+class StoreImagesAdapter : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
 
-    private var storeImagesList : List<StoreImages> = listOf()
+    private var storeImagesList : Stores = Stores()
 
-    fun setStoreImagesList(storeImagesList : List<StoreImages>){
+    fun setStoreImagesList(storeImagesList : Stores){
         this.storeImagesList = storeImagesList
         notifyDataSetChanged()
     }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.store_item_layout, parent, false)
@@ -28,6 +32,9 @@ class StoreImagesAdapter() : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = storeImagesList[position]
+
+//        val imageUrlList = storeImagesList.map { it-> "${it.imageurl}" }
+
 
         handleRoundedImageRadius(position, holder)
     }

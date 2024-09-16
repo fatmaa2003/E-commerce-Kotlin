@@ -1,17 +1,25 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
+import com.example.e_commercekotlin.DatabaseHelper
+import com.example.e_commercekotlin.data.DatabaseHelperImpl
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
+import com.example.e_commercekotlin.data.model.AllProductModel
+import com.example.e_commercekotlin.data.model.AddToCartRequest
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
+import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
+import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
+import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -23,6 +31,7 @@ class Repository {
     suspend fun login(username: String, password: String): Resource<LoginResponse> {
         return try {
             val response = apiService.login(LoginRequest(username, password))
+            Log.d("in login in repo ","${response}")
             if (response.isSuccessful) {
                 Log.d("token", response.body()?.userDetails?.token!!)
                 SharedPreferencesHelper.saveToken(response.body()?.userDetails?.token!!)
@@ -99,6 +108,88 @@ class Repository {
         }
     }
 
+    suspend fun getProducts(): Resource<AllProductModel> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = api.getAllProducts()
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun getCategoryById(categoryid: String) :Resource<CategoryDetails>{
+
+        return withContext(Dispatchers.IO){
+            try {
+                Resource.Loading(null)
+                val response= api.getCategoryById(categoryid = categoryid)
+                if (response.isSuccessful){
+                    Resource.Success(response.body()!!)
+                }
+
+                else{
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            }
+
+            catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+
+
+        }
+
+
+    }
+
+
+    suspend fun getStores(): Resource<Stores> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response= api.getStores()
+                if (response.isSuccessful){
+                    Log.e("TAG123", "getStores: " )
+                    Resource.Success(response.body()!!)
+                }
+
+                else{
+                    Log.e("TAG123", "getStores: " +response.message().toString())
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+
+            }
+
+            catch (e: Exception) {
+                Log.e("TAG123", "getStores: " + e.message )
+                Resource.Error("An error occurred: ${e.message}")
+            }
+
+        }
+    }
+
+
+
+//    suspend fun insertAllProducts(list : List<ProductResponse.ProductResponseItem>) {
+//        databaseHelper.insertProducts(list)
+//    }
+//    suspend fun getProducts() : List<ProductResponse.ProductResponseItem>
+//    {
+//      return  databaseHelper.getProducts()
+//
+//    }
+//
+//    suspend fun insertAllCategories(list : Category) {
+//        databaseHelper.insertCategory(list)
+//    }
+
     suspend fun getProductDetailsById(productId:Long) : Resource<ProductDetailsDto> {
         return withContext(Dispatchers.IO){
             try {
@@ -112,6 +203,75 @@ class Repository {
             } catch (e: Exception) {
                 Resource.Error("An error occurred: ${e.message}")
             }
+        }
+    }
+
+
+    suspend fun addToCart(productId: Long, quantity: Int): Resource<Unit> {
+        return try {
+            val response = apiService.addToCart(AddToCartRequest(listOf(AddToCartRequest.Product(productId, quantity)) ))
+            if (response.isSuccessful) {
+                Resource.Success(Unit)
+            } else {
+                Resource.Error("Error adding item to cart")
+            }
+        } catch (e: Exception) {
+            Resource.Error("Network error")
+        }
+    }
+
+    suspend fun makePurchase(products: List<AddToCartRequest.Product>): Resource<PurchaseResponse> {
+        return try {
+            val purchaseRequest = AddToCartRequest(products)
+            Resource.Loading(null)
+            val response = apiService.makePurchase(purchaseRequest)
+            if (response.isSuccessful) {
+                Resource.Success(response.body()!!)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getCartSize(): Resource<Int> {
+        return try {
+            val response = apiService.getCartSize()
+            if (response.isSuccessful) {
+                Resource.Success(response.body()?.cartSize ?: 0)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getCartItems(): Resource<CartItem> {
+        return try {
+            Resource.Loading(null)
+            val response = apiService.getCartItems()
+            if (response.isSuccessful) {
+                Resource.Success(response.body()!!)
+            } else {
+                Resource.Error("Error fetching cart size")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun deleteProductFromCart(productId: Long): Resource<Unit> {
+        return try {
+            val response = apiService.deleteProductFromCart(productId)
+            if (response.isSuccessful) {
+                Resource.Success(Unit)
+            } else {
+                Resource.Error("Failed to delete product")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "An error occurred")
         }
     }
 }

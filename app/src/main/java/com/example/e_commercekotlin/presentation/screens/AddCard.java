@@ -1,5 +1,4 @@
 package com.example.e_commercekotlin.presentation.screens;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,6 +47,6 @@ public class AddCard extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
-    }
+        binding=null;
+}
 }

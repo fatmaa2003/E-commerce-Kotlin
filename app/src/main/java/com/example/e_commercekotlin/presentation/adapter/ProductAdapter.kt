@@ -20,8 +20,9 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         this.productList = productList
         notifyDataSetChanged()
     }
+
     //set on click listner for the api integration
-    fun setListener(onProductClick : ClickListener){
+    fun setListener(onProductClick: ClickListener) {
         this.onProductClick = onProductClick
     }
 
@@ -42,9 +43,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
 
         holder.productLayout.setOnClickListener {
-        currentItem.productId?.let { onProductClick?.onProductClick(it.toLong())
-
-            }
+            currentItem.let { onProductClick?.onProductClick(
+                productId = it.productId?.toLong() ?: 0,
+                productImage = it.imageUrl.orEmpty(),
+                productName = it.productName.orEmpty()
+            ) }
         }
     }
 
@@ -56,13 +59,14 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
         val productName: TextView = itemView.findViewById(R.id.product_name)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
-        val productLayout : LinearLayout = itemView.findViewById(R.id.product_layout)
+        val productLayout: LinearLayout = itemView.findViewById(R.id.product_layout)
     }
-   // this is the interface of the api integration
-   interface ClickListener{
-       fun onProductClick(productId : Long)
-   }
 
-    var onProductClick : ClickListener?=null
+    // this is the interface of the api integration
+    interface ClickListener {
+        fun onProductClick(productId: Long, productName : String, productImage : String)
+    }
+
+    var onProductClick: ClickListener? = null
 
 }

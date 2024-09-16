@@ -6,6 +6,8 @@
     <color name="transparent">#00F9F8FD</color>
     <color name="dark_surface">#272728</color>
     <color name="grey">#309898A0</color>
+    <color name="bottom_nav_color">#868687</color>
+    <color name="transparent_grey">#109898A0</color>
     <color name="lightgray">#808080</color>
     <color name="lightpurple">#D3CEF6</color>
     // fatma eli msmya el color dh ya gd3an

@@ -7,11 +7,13 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.showToast
+import com.example.e_commercekotlin.data.ProfileUserDetails
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentLoginBinding
 import com.example.e_commercekotlin.domain.Repository
@@ -40,17 +42,30 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
         activity?.setBottomNavVisibility(visible = false)
         handleUIClicks()
         loginObserver()
+        binding.goToSignupTextView.setOnClickListener {
+            val action = LoginFragmentDirections.actionSignInToSignUp()
+            findNavController().navigate(action)
+        }
     }
 
     private fun handleUIClicks() {
         binding.loginButton.setOnClickListener(this)
     }
-
     private fun loginObserver() {
         loginViewModel.loginState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Success -> {
                     binding.progressBar.progressBar.hide()
+
+                    resource.data?.let { loginResponse ->
+                        val userDetails = loginResponse.userDetails
+                        userDetails?.let {
+                            ProfileUserDetails.firstName = it.firstName
+                            ProfileUserDetails.lastName = it.lastName
+                            ProfileUserDetails.username = it.username
+                        }
+                    }
+
                     navigateToFeedFragment()
                 }
 
@@ -60,7 +75,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
                 }
 
                 is Resource.Loading -> {
-                    binding.progressBar.progressBar.show()
+                 binding.progressBar.progressBar.show()
                 }
             }
         }
@@ -85,4 +100,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), OnClickListener {
         val navController = NavHostFragment.findNavController(this)
         navController.navigate(R.id.action_sign_in_to_Feed_fragment)
     }
+
+
 }

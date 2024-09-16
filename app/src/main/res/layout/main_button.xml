@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:textColor="@color/white"
         android:layout_marginHorizontal="4dp"
-        android:text="Follow"
+        android:text="Add to cart"
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="18sp"/>
