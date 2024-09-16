@@ -79,7 +79,7 @@ interface ApiService {
         @retrofit2.http.Query("quantity") quantity: Int
     ): Response<Unit>
 
-}
+
     @GET("products/fresh_collections")
     suspend fun getFreshCollections(): Response<FreshCollection>
 
