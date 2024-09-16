@@ -193,8 +193,8 @@
         android:name="com.example.e_commercekotlin.presentation.screens.CartFragment"
         tools:layout="@layout/fragment_cart">
         <action
-            android:id="@+id/action_cart_to_purchase"
-            app:destination="@id/purchase" />
+            android:id="@+id/action_cart_to_shippingAddressFragment2"
+            app:destination="@id/shippingAddressFragment2" />
     </fragment>
     <fragment
         android:id="@+id/purchase"
@@ -218,4 +218,15 @@
         android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/shippingAddressFragment2"
+        android:name="com.example.e_commercekotlin.presentation.screens.ShippingAddressFragment"
+        android:label="ShippingAddressFragment" >
+        <argument
+            android:name="cartData"
+            app:argType="com.example.e_commercekotlin.data.model.CartItem" />
+        <action
+            android:id="@+id/action_shippingAddressFragment2_to_purchase"
+            app:destination="@id/purchase" />
+    </fragment>
 </navigation>

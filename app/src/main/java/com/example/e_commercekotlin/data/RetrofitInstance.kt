@@ -27,7 +27,7 @@ object RetrofitInstance {
                 val request: Request = requestBuilder.build()
                 val response = chain.proceed(request)
                 response
-                })
+            })
             .addInterceptor(loggingInterceptor)
             .build()
     }
