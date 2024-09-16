@@ -43,6 +43,8 @@
                     android:drawableStart="@drawable/baseline_person_24"
                     android:drawablePadding="8dp"
                     android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:layout_marginTop="15dp" />
                 <EditText
                     android:id="@+id/passwordEditText"
@@ -54,6 +56,8 @@
                     android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:layout_marginTop="15dp"
                     android:inputType="textPassword" />
                 <Button

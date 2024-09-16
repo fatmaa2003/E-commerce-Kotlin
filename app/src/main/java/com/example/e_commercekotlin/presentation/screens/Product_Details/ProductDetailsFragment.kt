@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding
@@ -56,7 +57,7 @@ class ProductDetailsFragment : Fragment() {
             val quantity = 1
             viewModel.addToCart(productId.toLong(), quantity)
         }
-
+        binding.productDetailsFragmentToolbar.handleToolBarState(leftIconVisibility = false)
         observeData()
         observeAddToCartStatus()
 
