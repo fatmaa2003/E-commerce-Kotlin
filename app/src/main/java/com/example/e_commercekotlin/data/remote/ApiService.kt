@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.data.remote
 
+import androidx.room.Query
 import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
@@ -63,5 +64,18 @@ interface ApiService {
 
     @DELETE("cart/remove/{productId}")
     suspend fun deleteProductFromCart(@Path("productId") productId: Long): Response<Unit>
+
+
+    @POST("cart/increase")
+    suspend fun increaseCartQuantity(
+        @retrofit2.http.Query("productId") productId: Long,
+        @retrofit2.http.Query("quantity") quantity: Int
+    ): Response<Unit>
+
+    @POST("cart/decrease")
+    suspend fun decreaseCartQuantity(
+        @retrofit2.http.Query("productId") productId: Long,
+        @retrofit2.http.Query("quantity") quantity: Int
+    ): Response<Unit>
 
 }

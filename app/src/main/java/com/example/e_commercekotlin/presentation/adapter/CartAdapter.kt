@@ -7,7 +7,9 @@ import com.example.e_commercekotlin.data.model.ProductItem
 import com.squareup.picasso.Picasso
 class CartAdapter(
     private var productItems: List<ProductItem>,
-    private val onDeleteClick: (ProductItem) -> Unit
+    private val onDeleteClick: (ProductItem) -> Unit,
+    private val onIncreaseClick: (ProductItem, Int) -> Unit,
+    private val onDecreaseClick: (ProductItem, Int) -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(val binding: ItemCartBinding) : RecyclerView.ViewHolder(binding.root)
@@ -23,11 +25,23 @@ class CartAdapter(
             Glide.with(productName.context).load(productItem.productMainImage).into(productImage)
 
             productName.text = productItem.productName
-            productDetails.text = "Quantity: ${productItem.quantity}"
+            cartQuantity.text = "Quantity: ${productItem.quantity}"
             productPrice.text = "$${productItem.productPrice}"
 
             deleteButton.setOnClickListener {
                 onDeleteClick(productItem)
+            }
+
+            increasequatitybutton.setOnClickListener {
+                onIncreaseClick(productItem, position)
+
+            }
+
+            decreasequatitybutton.setOnClickListener {
+                if (productItem.quantity > 1) {
+                    onDecreaseClick(productItem, position)
+
+                }
             }
         }
     }

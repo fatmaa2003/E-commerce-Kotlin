@@ -29,7 +29,7 @@ class PurchaseViewModel : ViewModel() {
         fetchCartItems()
     }
 
-    private fun fetchCartItems() {
+     fun fetchCartItems() {
         viewModelScope.launch {
             _cartItems.postValue(Resource.Loading())
             viewModelScope.launch {
@@ -56,6 +56,28 @@ class PurchaseViewModel : ViewModel() {
         viewModelScope.launch {
             val response = repository.deleteProductFromCart(productId)
             _deleteProductStatus.postValue(response)
+        }
+    }
+
+    private val _increaseQuantityState = MutableLiveData<Resource<Unit>>()
+    val increaseQuantityState: LiveData<Resource<Unit>> get() = _increaseQuantityState
+
+    private val _decreaseQuantityState = MutableLiveData<Resource<Unit>>()
+    val decreaseQuantityState: LiveData<Resource<Unit>> get() = _decreaseQuantityState
+
+    fun increaseProductQuantity(productId: Long) {
+        viewModelScope.launch {
+            _increaseQuantityState.postValue(Resource.Loading())
+            val response = repository.increaseProductQuantity(productId, 1)
+            _increaseQuantityState.postValue(response)
+        }
+    }
+
+    fun decreaseProductQuantity(productId: Long) {
+        viewModelScope.launch {
+            _decreaseQuantityState.postValue(Resource.Loading())
+            val response = repository.decreaseProductQuantity(productId, 1)
+            _decreaseQuantityState.postValue(response)
         }
     }
 }

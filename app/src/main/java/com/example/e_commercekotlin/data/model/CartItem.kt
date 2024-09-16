@@ -16,6 +16,6 @@ data class ProductItem(
     val productName: String,
     val productMainImage: String,
     val productPrice: Double,
-    val quantity: Int,
+    var quantity: Int,
     val itemTotalPrice: Double
 ) : Parcelable

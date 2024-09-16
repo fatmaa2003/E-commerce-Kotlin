@@ -6,8 +6,8 @@
 
 <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/itemImage"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
     android:scaleType="centerCrop"
     app:shapeAppearanceOverlay="@style/CornerCut"/>
 </LinearLayout>

@@ -274,4 +274,29 @@ class Repository {
             Resource.Error(e.message ?: "An error occurred")
         }
     }
+    suspend fun increaseProductQuantity(productId: Long,quantity: Int): Resource<Unit> {
+        return try {
+            val response = apiService.increaseCartQuantity(productId, quantity = 1)
+            if (response.isSuccessful) {
+                Resource.Success(Unit)
+            } else {
+                Resource.Error(response.message())
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun decreaseProductQuantity(productId: Long,quantity: Int): Resource<Unit> {
+        return try {
+            val response = apiService.decreaseCartQuantity(productId, quantity = 1)
+            if (response.isSuccessful) {
+                Resource.Success(Unit)
+            } else {
+                Resource.Error(response.message())
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unknown error")
+        }
+    }
 }

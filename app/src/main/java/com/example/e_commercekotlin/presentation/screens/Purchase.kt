@@ -51,7 +51,7 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
 
         observePurchaseOrder()
 
-        binding.confirmandpay.setOnClickListener {
+        binding.continueToCheckout.setOnClickListener {
             val cartPurchaseData = cartItem.products.map {  AddToCartRequest.Product(productId = it.productId.toLong() , quantity = it.quantity )}
             if (cartPurchaseData.isNotEmpty()) {
                 purchaseViewModel.makePurchase(cartPurchaseData)

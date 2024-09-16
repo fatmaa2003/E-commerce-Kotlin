@@ -29,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Shipping : 5EGP"
+            android:text="Shipping : $5"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -40,18 +41,19 @@
             android:layout_marginStart="20dp"
             android:text="Total (VAT included)"
             android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/confirmandpay"
+            android:id="@+id/continue_to_checkout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
+            android:layout_height="70dp"
             android:text="Confirm and Pay"
-            android:textColor="@android:color/white"
-            android:background="@drawable/text" />
+            android:textSize="20sp"
+            android:layout_marginHorizontal="25dp"
+            android:backgroundTint="@color/purple"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"/>
     </LinearLayout>
 </ScrollView>

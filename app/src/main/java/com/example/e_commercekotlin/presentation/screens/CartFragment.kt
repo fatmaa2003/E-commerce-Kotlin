@@ -14,7 +14,6 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
-
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
@@ -22,6 +21,7 @@ class CartFragment : Fragment() {
     private lateinit var cartAdapter: CartAdapter
     private val viewModel: PurchaseViewModel by viewModels()
     private var cartData: CartItem? = null
+    private var adapterPosition = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +34,20 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cartAdapter = CartAdapter(emptyList()) { productItem ->
-            viewModel.deleteProduct(productItem.productId)
-        }
+        cartAdapter = CartAdapter(
+            emptyList(),
+            onDeleteClick = { productItem  ->
+                viewModel.deleteProduct(productItem.productId)
+            },
+            onIncreaseClick = { productItem , position ->
+                adapterPosition = position
+                viewModel.increaseProductQuantity(productItem.productId)
+            },
+            onDecreaseClick = { productItem , position ->
+                adapterPosition = position
+                viewModel.decreaseProductQuantity(productItem.productId)
+            }
+        )
 
         binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRecyclerView.adapter = cartAdapter
@@ -53,6 +64,8 @@ class CartFragment : Fragment() {
         }
 
         observeDeleteProductStatus()
+        observeOIncreaseQuantityStatus()
+        observeDecreaseQuantityStatus()
     }
 
     private fun fetchCartItems() {
@@ -64,7 +77,7 @@ class CartFragment : Fragment() {
                     val cartItem = resources.data
                     cartData = cartItem
 
-                    if (cartItem != null && cartItem.products.isNotEmpty()) {
+                    if (cartItem != null) {
                         cartAdapter.setProductItems(cartItem.products)
 
                         val totalCartPrice = cartItem.totalCartPrice
@@ -80,6 +93,44 @@ class CartFragment : Fragment() {
         }
     }
 
+    private fun observeOIncreaseQuantityStatus() {
+        viewModel.increaseQuantityState.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+                    cartData?.products?.get(adapterPosition)?.apply {
+                        quantity += 1
+                    }
+                    cartAdapter.notifyItemChanged(adapterPosition)
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun observeDecreaseQuantityStatus() {
+        viewModel.decreaseQuantityState.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+                    cartData?.products?.get(adapterPosition)?.apply {
+                        quantity -= 1
+                    }
+                    cartAdapter.notifyItemChanged(adapterPosition)
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     private fun observeDeleteProductStatus() {
         viewModel.deleteProductStatus.observe(viewLifecycleOwner) { resource ->
             when (resource) {
@@ -87,8 +138,7 @@ class CartFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "Product deleted", Toast.LENGTH_SHORT).show()
-                    fetchCartItems()
-                    // bye3ml refresh lel page
+                    viewModel.fetchCartItems()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
