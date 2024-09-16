@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivcollection"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="170dp"
         android:background="@drawable/error"
         android:scaleType="centerCrop"
@@ -22,11 +22,12 @@
 
     <TextView
         android:id="@+id/firstText"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:text="Title"
         android:textStyle="bold"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivcollection" />
@@ -34,8 +35,10 @@
 
     <TextView
         android:id="@+id/secondText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:padding="4dp"
         android:text="Description"
         app:layout_constraintStart_toStartOf="parent"

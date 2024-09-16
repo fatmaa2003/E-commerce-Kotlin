@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,9 @@ import kotlinx.coroutines.launch
 
 class CollectionViewModel : ViewModel() {
     private val repository = Repository()
-    val freshCollections = MutableLiveData<Resource<FreshCollection>>()
+
+    private val _freshCollections = MutableLiveData<Resource<FreshCollection>>()
+    val freshCollections : LiveData<Resource<FreshCollection>> get() = _freshCollections
 
     init {
         getFreshCollections()
@@ -19,12 +22,12 @@ class CollectionViewModel : ViewModel() {
 
     private fun getFreshCollections() {
         viewModelScope.launch(Dispatchers.IO) {
-            freshCollections.postValue(Resource.Loading())
+            _freshCollections.postValue(Resource.Loading())
             try {
                 val response = repository.getFreshCollection()
-                freshCollections.postValue(response)
+                _freshCollections.postValue(response)
             } catch (e: Exception) {
-                freshCollections.postValue(Resource.Error(e.message ?: "Unknown error"))
+                _freshCollections.postValue(Resource.Error(e.message ?: "Unknown error"))
             }
         }
     }

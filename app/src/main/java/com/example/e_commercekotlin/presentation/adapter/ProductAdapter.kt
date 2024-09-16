@@ -9,16 +9,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.dp
 import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
+
+
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     private var productList: List<ProductResponse.ProductResponseItem> = listOf()
     private var filteredProductList: List<ProductResponse.ProductResponseItem> = productList
 
     var onProductClick: ClickListener? = null
-
+    private var isFullWidth: Boolean = true // Default to match parent
 
     fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
@@ -26,11 +29,15 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         notifyDataSetChanged()
     }
 
-
     fun setListener(onProductClick: ClickListener) {
         this.onProductClick = onProductClick
     }
 
+    // Method to set the width dynamically
+    fun setFullWidth(fullWidth: Boolean) {
+        isFullWidth = fullWidth
+        notifyDataSetChanged() // Refresh the adapter to apply the width changes
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -54,7 +61,15 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
             .load(currentItem.imageUrl)
             .into(holder.productImage)
 
-        // Set click listener on the product layout
+        // Set the width of the root layout based on isFullWidth
+        val layoutParams = holder.itemView.layoutParams as ViewGroup.LayoutParams
+        layoutParams.width = if (isFullWidth) {
+            ViewGroup.LayoutParams.MATCH_PARENT
+        } else {
+            160.dp
+        }
+        holder.itemView.layoutParams = layoutParams
+
         holder.productLayout.setOnClickListener {
             currentItem.let {
                 onProductClick?.onProductClick(
@@ -66,12 +81,10 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         }
     }
 
-    // Return the total number of products in the list
     override fun getItemCount(): Int {
         return filteredProductList.size
     }
 
-    // ViewHolder class to hold references to the views for each item
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
         val productName: TextView = itemView.findViewById(R.id.product_name)
@@ -79,28 +92,23 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val productLayout: LinearLayout = itemView.findViewById(R.id.product_layout)
     }
 
-    // Filter function to filter the product list based on search query
     fun filter(query: String) {
         val lowerCaseQuery = query.lowercase()
 
         filteredProductList = if (query.isEmpty()) {
-            productList // If the query is empty, show the full product list
+            productList
         } else {
             productList.filter { product ->
                 product.productName?.lowercase()?.contains(lowerCaseQuery) == true
             }
         }
-        // Notify the adapter of the changes
         notifyDataSetChanged()
     }
 
-
-    // this is the interface of the api integration
     interface ClickListener {
         fun onProductClick(productId: Long, productName: String, productImage: String)
     }
-
-
 }
+
 
 

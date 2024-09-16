@@ -10,6 +10,7 @@ import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.StoreDetailsDto
 import com.example.e_commercekotlin.data.model.Stores
 import com.example.e_commercekotlin.domain.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class StoresViewModel : ViewModel() {
@@ -19,16 +20,11 @@ class StoresViewModel : ViewModel() {
     private val _stores = MutableLiveData<Resource<Stores>>()
     val stores: LiveData<Resource<Stores>> get() = _stores
 
-     fun fetchStores() {
-        viewModelScope.launch {
+
+    fun fetchStores() {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = repository.getStores()
-
-                if (response is Resource.Success) {
-                    Log.d("StoresViewModel", "API Response Data: ${response.data}")
-                } else {
-                    Log.d("StoresViewModel", "API Response: $response")
-                }
                 _stores.postValue(response)
             } catch (e: Exception) {
                 _stores.postValue(Resource.Error("Failed to load stores"))

@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.FeaturedStoreBinding
 import com.example.e_commercekotlin.data.model.Stores
+import com.google.android.material.imageview.ShapeableImageView
 
 class StoreAdapter(private val stores: Stores) : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
 
@@ -17,9 +18,11 @@ class StoreAdapter(private val stores: Stores) : RecyclerView.Adapter<StoreAdapt
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         val store = stores[position]
+        val storeImage: ShapeableImageView = holder.itemView.findViewById(R.id.imageView)
+
         Glide.with(holder.binding.imageView.context)
             .load(store.marketImage)
-            .into(holder.binding.imageView)
+            .into(storeImage)
         holder.binding.firstText.text = store.name ?: "Unknown"
        // holder.binding.secondText.text = store.description ?: "No description"
     }
