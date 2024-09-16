@@ -1,15 +1,14 @@
 package com.example.e_commercekotlin.data.remote
 
-import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
-import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.PurchaseResponse
@@ -46,7 +45,7 @@ interface ApiService {
     suspend fun addToCart(@Body addToCartRequest: AddToCartRequest): Response<Unit>
 
     @GET("products")
-    suspend fun getAllProducts () : Response<AllProductModel>
+    suspend fun getAllProducts () : Response<List<Product>>
 
       @GET("products/{productId}")
       suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>

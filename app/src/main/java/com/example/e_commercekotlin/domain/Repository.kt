@@ -1,20 +1,18 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
-import com.example.e_commercekotlin.DatabaseHelper
-import com.example.e_commercekotlin.data.DatabaseHelperImpl
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
-import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.PurchaseResponse
@@ -22,7 +20,6 @@ import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 
 class Repository {
 
@@ -108,7 +105,7 @@ class Repository {
         }
     }
 
-    suspend fun getProducts(): Resource<AllProductModel> {
+    suspend fun getProducts(): Resource<List<Product>> {
         return withContext(Dispatchers.IO) {
             try {
                 Resource.Loading(null)

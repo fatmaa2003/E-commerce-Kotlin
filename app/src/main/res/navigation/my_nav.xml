@@ -38,6 +38,12 @@
         <action
             android:id="@+id/action_Feed_fragment_to_product_details"
             app:destination="@id/product_details" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_searchFragmente"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -171,4 +177,16 @@
         android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.searchFragment"
+        android:label="fragment_search_fragmente"
+        tools:layout="@layout/fragment_search_fragmente" >
+        <action
+            android:id="@+id/action_searchFragment_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
+
+
 </navigation>

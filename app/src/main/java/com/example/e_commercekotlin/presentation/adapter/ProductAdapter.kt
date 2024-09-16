@@ -15,9 +15,13 @@ import java.util.Locale
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     private var productList: List<ProductResponse.ProductResponseItem> = listOf()
+    private var filteredProductList: List<ProductResponse.ProductResponseItem> = productList
+
+    var onProductClick: ClickListener? = null
 
     fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
+        filteredProductList = productList
         notifyDataSetChanged()
     }
 
@@ -33,11 +37,12 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = productList[position]
+        val currentItem = filteredProductList[position]
 
         holder.productName.text = currentItem.productName
+        val priceAsDouble = currentItem.price?.toDouble() ?: 0.0 // Default to 0.0 if conversion fails
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
-        val formattedPrice = currencyFormat.format(currentItem.price)
+        val formattedPrice = currencyFormat.format(priceAsDouble)
         holder.productPrice.text = formattedPrice
 
         Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
@@ -52,7 +57,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return filteredProductList.size
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -62,11 +67,28 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val productLayout: LinearLayout = itemView.findViewById(R.id.product_layout)
     }
 
+    // Filter function to filter the product list based on search query
+    fun filter(query: String) {
+        val lowerCaseQuery = query.lowercase()
+
+        filteredProductList = if (query.isEmpty()) {
+            productList // If the query is empty, show the full product list
+        } else {
+            productList.filter { product ->
+                product.productName?.lowercase()?.contains(lowerCaseQuery) == true
+            }
+        }
+        // Notify the adapter of the changes
+        notifyDataSetChanged()
+    }
+
+
     // this is the interface of the api integration
     interface ClickListener {
         fun onProductClick(productId: Long, productName : String, productImage : String)
     }
 
-    var onProductClick: ClickListener? = null
 
 }
+
+

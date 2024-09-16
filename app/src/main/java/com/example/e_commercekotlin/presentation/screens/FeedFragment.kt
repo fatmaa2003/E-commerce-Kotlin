@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.handleSearchItem
 import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
@@ -51,6 +53,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         )
         activity?.setBottomNavVisibility(visible = true)
 
+        handleSearchItem(binding = binding.feedFragmentToolBar, action = R.id.action_Feed_fragment_to_searchFragmente, fragment = this)
 
         binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -67,16 +70,19 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         onCategoryClick()
     }
 
+
     private fun observeProducts() {
         productsViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     resource.data?.let { itemAdapter.setProductList(it) }
                 }
+
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
@@ -91,10 +97,12 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
+
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         resource.data?.let { categoryAdapter.updateCategories(it) }
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                     }
@@ -111,19 +119,27 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
             }
         }
     }
-    override fun onProductClick(productId: Long, productName : String, productImage : String) {
 
-        val dialogFragment = CustomDialogFragment()
-
-
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        // Create a Bundle with the product details
         val bundle = Bundle().apply {
             putInt("productId", productId.toInt())
-            putString("product_name" , productName)
-            putString("product_image" , productImage)
+            putString("product_name", productName)
+            putString("product_image", productImage)
         }
 
+        // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
+        val dialogFragment = CustomDialogFragment.newInstance {
+            // Action to be executed when the user clicks in the dialog
+            val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId.toInt())
+            findNavController().navigate(action)
+        }
+
+        // Set the arguments (product details) for the dialog
         dialogFragment.arguments = bundle
 
+        // Show the dialog
         dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
     }
+
 }

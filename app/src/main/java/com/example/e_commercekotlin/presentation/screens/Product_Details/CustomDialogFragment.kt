@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.CustomDialogBoxBinding
 
-class CustomDialogFragment : DialogFragment() {
+class CustomDialogFragment(private val onActionClick: (() -> Unit)? = null) : DialogFragment() {
 
     private var _binding: CustomDialogBoxBinding? = null
     private val binding get() = _binding!!
@@ -51,8 +51,7 @@ class CustomDialogFragment : DialogFragment() {
 
         binding.bottomLinearLayout.setOnClickListener {
             dialog?.hide()
-            val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId ?: 0)
-            findNavController().navigate(action)
+            onActionClick?.invoke() // Execute the passed action
         }
 
     }
@@ -61,4 +60,11 @@ class CustomDialogFragment : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        fun newInstance(onActionClick: (() -> Unit)): CustomDialogFragment {
+            return CustomDialogFragment(onActionClick)
+        }
+    }
 }
+

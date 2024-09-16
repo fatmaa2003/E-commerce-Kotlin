@@ -17,6 +17,7 @@ import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
 
 class FeaturedFragment : Fragment() {
@@ -49,8 +50,8 @@ class FeaturedFragment : Fragment() {
                 is Resource.Success -> {
                     Log.d("in observer data success", "$resource")
                     binding.progressBar.visibility = View.GONE
-                    resource.data?.let { itemAdapter.setProductList(it.products.orEmpty()) }
-                    resource.data?.let { productAdapter.setProductList(it.products.orEmpty()) }
+                    resource.data?.let { itemAdapter.setProductList(it.map { it.toProductItem() }) }
+                    resource.data?.let { productAdapter.setProductList(it.map { it.toProductItem() }) }
 
                 }
                 is Resource.Error -> {

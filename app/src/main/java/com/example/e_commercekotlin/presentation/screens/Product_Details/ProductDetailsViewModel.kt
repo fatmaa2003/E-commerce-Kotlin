@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
+import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductDetailsViewModel : ViewModel() {
@@ -43,5 +46,19 @@ class ProductDetailsViewModel : ViewModel() {
             val response = repository.getCartSize()
             _cartSize.postValue(response)
         }
+    }
+
+    private val _allProducts = MutableLiveData<Resource<List<Product>>>()
+    val allProducts : LiveData<Resource<List<Product>>> get() = _allProducts
+
+    private fun getAllProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getProducts()
+            _allProducts.postValue(response)
+        }
+    }
+
+    init {
+        getAllProducts()
     }
 }

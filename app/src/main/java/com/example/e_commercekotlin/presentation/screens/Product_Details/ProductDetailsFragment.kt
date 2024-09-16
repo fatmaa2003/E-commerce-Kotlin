@@ -1,10 +1,13 @@
 package com.example.e_commercekotlin.presentation.screens.Product_Details
 
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,6 +19,7 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
+import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
@@ -35,6 +39,7 @@ class ProductDetailsFragment : Fragment() {
     private val viewModel: ProductDetailsViewModel by viewModels()
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -45,14 +50,21 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        productId =
-
-        //viewModel.fetchData(productId)
-
         val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).productId
 
         viewModel.fetchProductDetails(productId.toLong())
         observeData()
+        observeProducts()
+
+        val sizeTextView: TextView = view?.findViewById(R.id.size) ?: return
+        sizeTextView.setOnClickListener {
+            showSizeDialog()
+        }
+        val colorTextView: TextView = view?.findViewById(R.id.color) ?: return
+        colorTextView.setOnClickListener {
+            showColorDialog()
+        }
+
 
         binding.apply {
             tvTagsHeader1.setOnClickListener { toggleTagsVisibility(llTagsContent1, tvTagsHeader1, 1) }
@@ -61,6 +73,7 @@ class ProductDetailsFragment : Fragment() {
 
             productAdapter = ProductAdapter()
 
+            productImagesAdapter = ProductImagesAdapter()
             clothes.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             clothes.adapter = productImagesAdapter
 
@@ -68,6 +81,62 @@ class ProductDetailsFragment : Fragment() {
             completeOutfit.adapter = productAdapter
         }
     }
+
+    private fun observeProducts() {
+        viewModel.allProducts.observe(viewLifecycleOwner){ resources ->
+            when(resources){
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    Log.e("TAG123", "observeProducts: " + resources.data.orEmpty())
+                    resources.data?.map { it.toProductItem() }
+                        ?.let { productAdapter.setProductList(it) }
+                }
+                is Resource.Error -> {}
+            }
+
+        }
+    }
+
+    private fun showSizeDialog() {
+        val sizes = arrayOf("small", "medium", "large" , "x large")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select Size")
+        builder.setItems(sizes) { dialog, which ->
+            // Handle the size selection
+            val selectedSize = sizes[which]
+            val sizeTextView: TextView = view?.findViewById(R.id.size) ?: return@setItems
+            sizeTextView.text = selectedSize
+        }
+        builder.create().show()
+    }
+
+    private fun showColorDialog() {
+        val colors = arrayOf("Black", "Pink", "White", "Red", "Orange", "Green", "Yellow" , "Blue")
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select Color")
+
+        builder.setItems(colors) { dialog, which ->
+            val selectedColor = colors[which]
+            val colorImageView: ImageView = view?.findViewById(R.id.color_image) ?: return@setItems
+            when (selectedColor.lowercase()) {
+                "black" -> colorImageView.setColorFilter(Color.BLACK)
+                "pink" -> colorImageView.setColorFilter(Color.parseColor("#FFC0CB")) // Pink
+                "white" -> colorImageView.setColorFilter(Color.WHITE)
+                "red" -> colorImageView.setColorFilter(Color.RED)
+                "orange" -> colorImageView.setColorFilter(Color.parseColor("#FFA500")) // Orange
+                "green" -> colorImageView.setColorFilter(Color.GREEN)
+                "yellow" -> colorImageView.setColorFilter(Color.YELLOW)
+                 "blue"   -> colorImageView.setColorFilter(Color.BLUE)
+            }
+            val colorTextView: TextView = view?.findViewById(R.id.color) ?: return@setItems
+            colorTextView.text = selectedColor
+        }
+
+        builder.create().show()
+    }
+
+
 
     private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
         val isVisible = when (section) {
@@ -83,27 +152,29 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+        viewModel.data.observe(viewLifecycleOwner) { resource ->
             when (resource) {
+
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
                     val productDetails = resource.data?.products?.first()
                     binding.progressBar.visibility = View.GONE
-                    val image=productDetails?.mainImageUrl.orEmpty()
+                    val image = productDetails?.mainImageUrl.orEmpty()
                     val shopName = productDetails?.name.orEmpty()
                     val description = productDetails?.description.orEmpty()
                     val price = productDetails?.price?.toString().orEmpty()
                     val imageList = productDetails?.imageUrls
-                    handleUiSuccessState(shopName, description, price,image, imageList.orEmpty())
-//                    productAdapter.setProductList()
+                    handleUiSuccessState(shopName, description, price, image, imageList.orEmpty())
+                    productImagesAdapter.setProductImages(imageList)
                 }
+
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
 
