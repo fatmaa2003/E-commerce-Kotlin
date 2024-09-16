@@ -11,66 +11,97 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.webkit.internal.ApiFeature
+import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter
+import com.example.e_commercekotlin.presentation.viewmodels.CategoryDetailsViewModel
+import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
-class StoresFragment : Fragment() {
+class StoresFragment : Fragment(), ProductAdapter.ClickListener {
 
     private var _binding: FragmentStoresBinding? = null
     private val binding get() = _binding!!
     private lateinit var itemAdapter: ProductAdapter
     private lateinit var storeImagesAdapter: StoreImagesAdapter
-
+    private val storeViewModel: StoresViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStoresBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        observeStores()
-
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-
-        itemAdapter = ProductAdapter()
-        storeImagesAdapter = StoreImagesAdapter()
-
-        binding.recyclerView.adapter = itemAdapter
-        binding.storeImagesRv.adapter = storeImagesAdapter
-
+        val storeId = arguments?.getString("storeId")
+        storeViewModel.fetchCategoryDetails(storeId.orEmpty())
+        observeCategoryDetails()
+        initAdapter()
+        handleLayoutManager()
+        setRecyclerViewAdapter()
+        setListener()
     }
 
-//    private fun observeStores() {
-//        storesViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
-//            when (resource) {
-//                is Resource.Loading -> {
-//                    binding.progressBar.visibility = View.VISIBLE
-//                }
-//                is Resource.Success -> {
-//                    Log.d("in observer data success", "$resource")
-//                    binding.progressBar.visibility = View.GONE
-//                    resource.data?.let { storesList ->
-//                        Log.e("hanan&fatma", "observeStores: " + storesList )
-//                        storeImagesAdapter.setStoreImagesList(storesList)
-//                    }
-//                }
-//                is Resource.Error -> {
-//                    Log.d("in observer data error", "$resource")
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//        })
-//    }
+    private fun setListener() {
+        itemAdapter.setListener(this)
+    }
+
+    private fun initAdapter() {
+        itemAdapter = ProductAdapter()
+        storeImagesAdapter = StoreImagesAdapter()
+    }
+
+    private fun setRecyclerViewAdapter() {
+        binding.recyclerView.adapter = itemAdapter
+        binding.storeImagesRv.adapter = storeImagesAdapter
+    }
+
+    private fun handleLayoutManager() {
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun observeCategoryDetails() {
+        storeViewModel.data.observe(viewLifecycleOwner) { resources->
+            when (resources) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    val productList = resources.data?.category?.products
+                    binding.progressBar.visibility = View.GONE
+                    itemAdapter.setProductList(productList.orEmpty())
+                    val productImageList =  productList?.mapNotNull { it.imageUrl }
+                    productImageList?.let { storeImagesAdapter.setStoreImagesList(it) }
+                    binding.storeName.text = resources.data?.category?.name
+                    binding.storeDescription.text = resources.data?.category?.description
+                    Glide.with(binding.storeImage.image.context).load(resources.data?.category?.image_url).into(binding.storeImage.image)
+                }
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        val dialogFragment = CustomDialogFragment()
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+            putString("source_fragment", "StoresFragment")
+        }
+        dialogFragment.arguments = bundle
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
+    }
+
 }

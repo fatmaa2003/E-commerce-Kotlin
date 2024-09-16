@@ -21,6 +21,7 @@ import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
+import com.example.e_commercekotlin.data.model.StoreDetailsDto
 import com.example.e_commercekotlin.data.model.Stores
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -144,11 +145,28 @@ class Repository {
             catch (e: Exception) {
                 Resource.Error("An error occurred: ${e.message}")
             }
-
-
         }
+    }
 
+    suspend fun getStoreDetailsById(storeId: String) :Resource<StoreDetailsDto>{
 
+        return withContext(Dispatchers.IO){
+            try {
+                Resource.Loading(null)
+                val response= api.getStoresById(storeId = storeId)
+                if (response.isSuccessful){
+                    Resource.Success(response.body()!!)
+                }
+
+                else{
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            }
+
+            catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
+        }
     }
 
 

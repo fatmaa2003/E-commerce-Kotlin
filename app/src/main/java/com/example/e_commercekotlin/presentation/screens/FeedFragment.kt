@@ -30,7 +30,6 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
     private lateinit var categoryAdapter: CategoryAdapter
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
-
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val productsViewModel: ProductViewModel by viewModels()
     private val productDetailsViewModel: ProductDetailsViewModel by viewModels()
@@ -111,19 +110,17 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
             }
         }
     }
-    override fun onProductClick(productId: Long, productName : String, productImage : String) {
 
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
         val dialogFragment = CustomDialogFragment()
-
-
         val bundle = Bundle().apply {
             putInt("productId", productId.toInt())
-            putString("product_name" , productName)
-            putString("product_image" , productImage)
+            putString("product_name", productName)
+            putString("product_image", productImage)
+            putString("source_fragment", "FeedFragment")
         }
-
         dialogFragment.arguments = bundle
-
         dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
     }
+
 }

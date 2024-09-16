@@ -128,8 +128,9 @@
         android:name="com.example.e_commercekotlin.presentation.screens.BrandFragment"
         android:label="Brand Fragment"
         tools:layout="@layout/fragment_brand">
+
         <action
-            android:id="@+id/action_stores_to_storeFragment"
+            android:id="@+id/action_stores_to_store"
             app:destination="@id/store" />
     </fragment>
 
@@ -165,7 +166,6 @@
             android:id="@+id/action_collection_to_collection_details"
             app:destination="@id/collection_details" />
     </fragment>
-
     <fragment
         android:id="@+id/store"
         android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
@@ -176,8 +176,7 @@
         <argument
             android:name="storeId"
             app:argType="string"
-            />
-
+        />
     </fragment>
 
     <fragment

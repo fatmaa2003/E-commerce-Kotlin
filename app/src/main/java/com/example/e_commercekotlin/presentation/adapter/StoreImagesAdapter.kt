@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.StoreImages
 import com.example.e_commercekotlin.data.model.Stores
@@ -15,15 +16,12 @@ import com.google.android.material.shape.ShapeAppearanceModel
 
 class StoreImagesAdapter : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>() {
 
-    private var storeImagesList : Stores = Stores()
+    private var storeImagesList : List<String> = listOf()
 
-    fun setStoreImagesList(storeImagesList : Stores){
+    fun setStoreImagesList(storeImagesList : List<String>){
         this.storeImagesList = storeImagesList
         notifyDataSetChanged()
     }
-
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.store_item_layout, parent, false)
@@ -32,11 +30,9 @@ class StoreImagesAdapter : RecyclerView.Adapter<StoreImagesAdapter.MyViewHolder>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = storeImagesList[position]
-
-//        val imageUrlList = storeImagesList.map { it-> "${it.imageurl}" }
-
-
         handleRoundedImageRadius(position, holder)
+
+        Glide.with(holder.storeImage.context).load(currentItem).into(holder.storeImage)
     }
 
     private fun handleRoundedImageRadius(

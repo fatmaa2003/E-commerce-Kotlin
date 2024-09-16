@@ -17,6 +17,7 @@ import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.PurchaseResponse
 import com.example.e_commercekotlin.data.model.SignupResponse
+import com.example.e_commercekotlin.data.model.StoreDetailsDto
 import com.example.e_commercekotlin.data.model.Stores
 import retrofit2.Response
 import retrofit2.http.Body
@@ -56,6 +57,9 @@ interface ApiService {
 
     @GET("categories/{categoryid}")
     suspend fun getCategoryById(@Path("categoryid") categoryid:String) : Response<CategoryDetails>
+
+    @GET("categories/{categoryid}")
+    suspend fun getStoresById(@Path("categoryid") storeId:String) : Response<StoreDetailsDto>
 
     @GET("categories/stores")
     suspend fun getStores():Response<Stores>
