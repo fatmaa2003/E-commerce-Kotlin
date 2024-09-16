@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/grey_bg_cart">
+    android:background="@color/grey_bg_cart"
+    android:id="@+id/f_cart">
     <TextView
         android:id="@+id/text_item"
         android:layout_width="wrap_content"

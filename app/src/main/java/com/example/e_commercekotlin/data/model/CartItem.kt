@@ -12,7 +12,7 @@ data class CartItem(
 
 @Parcelize
 data class ProductItem(
-    val productId: Int,
+    val productId: Long,
     val productName: String,
     val productMainImage: String,
     val productPrice: Double,

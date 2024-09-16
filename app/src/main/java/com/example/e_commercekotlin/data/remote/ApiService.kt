@@ -17,6 +17,7 @@ import com.example.e_commercekotlin.data.model.SignupResponse
 import com.example.e_commercekotlin.data.model.Stores
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -38,7 +39,7 @@ interface ApiService {
 
     @GET("cart/view")
     suspend fun getCartItems():Response<CartItem>
-
+    @GET("cart/view")
     suspend fun getCartSize():Response<CartItem>
 
     @POST("cart/add")
@@ -60,5 +61,7 @@ interface ApiService {
     @POST("cart/purchase")
     suspend fun makePurchase(@Body purchaseRequest:AddToCartRequest): Response<PurchaseResponse>
 
+    @DELETE("cart/remove/{productId}")
+    suspend fun deleteProductFromCart(@Path("productId") productId: Long): Response<Unit>
 
 }

@@ -5,8 +5,10 @@ import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.databinding.ItemCartBinding
 import com.example.e_commercekotlin.data.model.ProductItem
 import com.squareup.picasso.Picasso
-
-class CartAdapter(private var productItems: List<ProductItem>) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(
+    private var productItems: List<ProductItem>,
+    private val onDeleteClick: (ProductItem) -> Unit
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(val binding: ItemCartBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,6 +25,10 @@ class CartAdapter(private var productItems: List<ProductItem>) : RecyclerView.Ad
             productName.text = productItem.productName
             productDetails.text = "Quantity: ${productItem.quantity}"
             productPrice.text = "$${productItem.productPrice}"
+
+            deleteButton.setOnClickListener {
+                onDeleteClick(productItem)
+            }
         }
     }
 

@@ -138,8 +138,10 @@ class ProductDetailsFragment : Fragment() {
         val goToCartButton = dialogView.findViewById<Button>(R.id.goToCartButton)
 
 //        viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
+//            Log.d("CartSize", "Observed cart size: $cartSize")
 //            cartSizeTextView.text = "Cart Size: $cartSize"
 //        }
+
 
         val alertDialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)

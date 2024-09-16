@@ -261,4 +261,17 @@ class Repository {
             Resource.Error(e.message ?: "Unknown error")
         }
     }
+
+    suspend fun deleteProductFromCart(productId: Long): Resource<Unit> {
+        return try {
+            val response = apiService.deleteProductFromCart(productId)
+            if (response.isSuccessful) {
+                Resource.Success(Unit)
+            } else {
+                Resource.Error("Failed to delete product")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "An error occurred")
+        }
+    }
 }

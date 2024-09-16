@@ -111,7 +111,6 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
             }
         }
     }
-
     override fun onProductClick(productId: Long, productName : String, productImage : String) {
 
         val dialogFragment = CustomDialogFragment()

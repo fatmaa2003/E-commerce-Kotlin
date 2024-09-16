@@ -48,4 +48,14 @@ class PurchaseViewModel : ViewModel() {
             }
         }
     }
+
+    private val _deleteProductStatus = MutableLiveData<Resource<Unit>>()
+    val deleteProductStatus: LiveData<Resource<Unit>> get() = _deleteProductStatus
+
+    fun deleteProduct(productId: Long) {
+        viewModelScope.launch {
+            val response = repository.deleteProductFromCart(productId)
+            _deleteProductStatus.postValue(response)
+        }
+    }
 }

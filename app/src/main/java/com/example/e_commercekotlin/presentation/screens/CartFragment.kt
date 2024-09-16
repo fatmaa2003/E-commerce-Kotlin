@@ -21,7 +21,7 @@ class CartFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var cartAdapter: CartAdapter
     private val viewModel: PurchaseViewModel by viewModels()
-    private lateinit var cartData : CartItem
+    private var cartData: CartItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,9 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cartAdapter = CartAdapter(emptyList())
+        cartAdapter = CartAdapter(emptyList()) { productItem ->
+            viewModel.deleteProduct(productItem.productId)
+        }
 
         binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRecyclerView.adapter = cartAdapter
@@ -42,21 +44,26 @@ class CartFragment : Fragment() {
         fetchCartItems()
 
         binding.continueToCheckout.setOnClickListener {
-            val action = CartFragmentDirections.actionCartToPurchase(cartData)
-            findNavController().navigate(action)
+            cartData?.let {
+                val action = CartFragmentDirections.actionCartToPurchase(it)
+                findNavController().navigate(action)
+            } ?: run {
+                Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
 
+        observeDeleteProductStatus()
+    }
 
     private fun fetchCartItems() {
         viewModel.cartItems.observe(viewLifecycleOwner) { resources ->
-
             when (resources) {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
                     val cartItem = resources.data
-                    cartData = resources.data!!
+                    cartData = cartItem
+
                     if (cartItem != null && cartItem.products.isNotEmpty()) {
                         cartAdapter.setProductItems(cartItem.products)
 
@@ -72,6 +79,24 @@ class CartFragment : Fragment() {
             }
         }
     }
+
+    private fun observeDeleteProductStatus() {
+        viewModel.deleteProductStatus.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), "Product deleted", Toast.LENGTH_SHORT).show()
+                    fetchCartItems()
+                    // bye3ml refresh lel page
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
