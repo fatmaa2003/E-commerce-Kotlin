@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -16,6 +17,7 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
@@ -46,9 +48,16 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         observeData()
         observeProducts()
         binding.feedFragmentToolBar.handleToolBarState(
-            toolBarTitle = "Feed", leftIconImage = R.drawable.disk
+            toolBarTitle = "Feed", leftIconImage = R.drawable.disk, rightIconImage = R.drawable.logout_icon,
+            rightIconVisibility = true
         )
         activity?.setBottomNavVisibility(visible = true)
+
+       binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener{
+           SharedPreferencesHelper.removeToken()
+           findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
+
+       }
 
 
         binding.recyclerView.layoutManager =
