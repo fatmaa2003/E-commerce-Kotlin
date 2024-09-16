@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.DatabaseHelper
-import com.example.e_commercekotlin.data.DatabaseHelperImpl
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.AllProductModel
+import com.example.e_commercekotlin.data.model.AllProdcutsDto
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class ProductViewModel : ViewModel() {
         fetchProduct()
     }
 
-    fun fetchProduct(categoryId:String? = "16") {
+    fun fetchProduct(categoryId:String? = "19") {
         viewModelScope.launch {
             _product.postValue(Resource.Loading(null))
             try {
@@ -55,8 +55,8 @@ class ProductViewModel : ViewModel() {
 //        }
 //    }
 
-    private val _allProduct = MutableLiveData<Resource<AllProductModel>>()
-    val allProduct: LiveData<Resource<AllProductModel>> get() = _allProduct
+    private val _allProduct = MutableLiveData<Resource<List<Product>>>()
+    val allProduct: LiveData<Resource<List<Product>>> get() = _allProduct
 
     fun getAllProduct() {
         viewModelScope.launch {

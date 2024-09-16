@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="13dp"
+        android:orientation="vertical"
+        tools:context=".presentation.screens.PurchaseFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/add_to_cart_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:background="#E0E0E0" />
+
+        <TextView
+            android:id="@+id/shippingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Shipping : $5"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Total (VAT included)"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/continue_to_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Confirm and Pay"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="25dp"
+            android:backgroundTint="@color/purple"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"/>
+    </LinearLayout>
+</ScrollView>

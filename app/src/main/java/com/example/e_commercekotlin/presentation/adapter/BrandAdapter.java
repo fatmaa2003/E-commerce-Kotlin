@@ -1,39 +1,31 @@
 package com.example.e_commercekotlin.presentation.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.example.e_commercekotlin.R;
 import com.example.e_commercekotlin.data.model.Stores;
 import com.example.e_commercekotlin.databinding.BranddesignBinding;
+import com.example.e_commercekotlin.presentation.listener.StoreClickListener;
+
 import java.util.List;
+import java.util.Objects;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewHolder> {
 
     private List<Stores.StoresItem> brandList;
-    private final int[] drawableResources = {
-            R.drawable.lacoste,
-            R.drawable.breshkaa,
-            R.drawable.adidas,
-            R.drawable.zara,
-            R.drawable.nike,
-            R.drawable.gucci,
-            R.drawable.prada,
-            R.drawable.boss,
-            R.drawable.leviss
 
+    private StoreClickListener storeClickListener;
 
-    };
-    private Context context;
-
-
-    public BrandAdapter(Context context) {
-        this.context = context;
+    public void setStoreClickListener(StoreClickListener storeClickListener){
+        this.storeClickListener = storeClickListener;
     }
+
 
     public void setBrandList(List<Stores.StoresItem> brandList) {
         if (brandList == null || brandList.isEmpty()) {
@@ -44,7 +36,6 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
-
         private final BranddesignBinding binding;
 
         public ProductViewHolder(BranddesignBinding binding) {
@@ -64,21 +55,33 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Stores.StoresItem brand = brandList.get(position);
-        handleViewBinding(holder, brand, position);
+        handleViewBinding(holder, brand);
     }
 
-    private void handleViewBinding(@NonNull ProductViewHolder holder, Stores.StoresItem brand, int position) {
+    private void handleViewBinding(@NonNull ProductViewHolder holder, Stores.StoresItem brand) {
 
         holder.binding.brandName.setText(brand.getName());
 
+        if (brand.getDiscount() != null && brand.getDiscount() > 0) {
+            String discountText = String.format("%.0f%% OFF", brand.getDiscount());
+            holder.binding.discountPercentage.setText(discountText);
+            holder.binding.discountPercentage.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.discountPercentage.setVisibility(View.INVISIBLE);
+        }
 
-        Drawable drawable = getDrawableFromResources(position % drawableResources.length);
-        holder.binding.brandImage.image.setImageDrawable(drawable);
+        if (brand.getImageurl() != null && !brand.getImageurl().isEmpty()) {
+            Glide.with(holder.binding.brandImage.image.getContext())
+                    .load(brand.getImageurl())
+                    .placeholder(R.drawable.img)
+                    .into(holder.binding.brandImage.image);
+        } else {
+            holder.binding.brandImage.image.setImageResource(R.drawable.img);
+        }
+
+        holder.binding.getRoot().setOnClickListener(v -> storeClickListener.onStoreClicked(Objects.requireNonNull(brand.getStoreId()).toString()));
     }
 
-    private Drawable getDrawableFromResources(int index) {
-        return ContextCompat.getDrawable(context, drawableResources[index]);
-    }
 
     @Override
     public int getItemCount() {

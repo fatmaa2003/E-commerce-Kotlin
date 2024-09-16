@@ -20,7 +20,7 @@ data class ProductDetailsDto(
         @SerializedName("id")
         val id: Int?,
         @SerializedName("imageUrls")
-        val imageUrls: List<String?>?,
+        val imageUrls: List<String>?,
         @SerializedName("mainImageUrl")
         val mainImageUrl: String?,
         @SerializedName("name")

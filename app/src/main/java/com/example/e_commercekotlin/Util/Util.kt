@@ -6,14 +6,15 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.CustomToolbarBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 val Int.dp: Int get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
- fun CustomToolbarBinding.handleToolBarState(
-    toolBarTitle : String = "",
+fun CustomToolbarBinding.handleToolBarState(
+    toolBarTitle: String = "",
     searchVisibility: Boolean = true,
     rightIconVisibility: Boolean = false,
     leftIconVisibility: Boolean = true,
@@ -45,8 +46,15 @@ fun ProgressBar.show() {
 fun ProgressBar.hide() {
     this.visibility = View.GONE
 }
+
 // Extension function to Show a toast
 fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(requireContext(), message, duration).show() 
+    Toast.makeText(requireContext(), message, duration).show()
+}
+
+fun handleSearchItem(binding: CustomToolbarBinding, action: Int, fragment : Fragment) {
+    binding.searchIcon.setOnClickListener {
+        fragment.findNavController().navigate(action)
+    }
 }
 

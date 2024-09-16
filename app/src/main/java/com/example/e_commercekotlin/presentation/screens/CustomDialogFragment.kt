@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.databinding.CustomDialogBoxBinding
 
-class CustomDialogFragment : DialogFragment() {
+class CustomDialogFragment(private val onActionClick: (() -> Unit)? = null) : DialogFragment() {
 
     private var _binding: CustomDialogBoxBinding? = null
     private val binding get() = _binding!!
@@ -45,15 +46,14 @@ class CustomDialogFragment : DialogFragment() {
         val productId = arguments?.getInt("productId")
         val productName = arguments?.getString("product_name")
         val productImage = arguments?.getString("product_image")
+        val sourceFragment = arguments?.getString("source_fragment")
 
-        binding.itemBrandAndTitle.text = "Product ID: $productId"
         binding.productName.text = productName
         Glide.with(this).load(productImage).into(binding.itemImage)
 
         binding.bottomLinearLayout.setOnClickListener {
             dialog?.hide()
-            val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId ?: 0)
-            findNavController().navigate(action)
+            onActionClick?.invoke() // Execute the passed action
         }
 
     }
@@ -62,4 +62,11 @@ class CustomDialogFragment : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        fun newInstance(onActionClick: (() -> Unit)): CustomDialogFragment {
+            return CustomDialogFragment(onActionClick)
+        }
+    }
 }
+

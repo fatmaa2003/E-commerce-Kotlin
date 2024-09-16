@@ -21,7 +21,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@android:color/transparent"
         app:menu="@menu/buttom_navmenu"
-         />
+        app:itemIconTint="@drawable/bottom_nav_bar_selector"
+        app:itemTextColor="@drawable/bottom_nav_bar_selector"
+        app:itemActiveIndicatorStyle="@color/white"
+        app:itemRippleColor="@color/transparent"
+        />
 
 </LinearLayout>

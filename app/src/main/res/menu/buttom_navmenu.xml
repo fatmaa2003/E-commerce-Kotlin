@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/Feed_fragment"
-        android:icon="@drawable/baseline_feed_24"
+        android:icon="@drawable/feed_icon"
         android:title="Feed"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/market_fragment"
-        android:icon="@drawable/baseline_store_24"
+        android:icon="@drawable/market_icon"
         android:title="Market"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/profile_fragment"
-        android:icon="@drawable/baseline_profile_24"
+        android:id="@+id/paymentFragment2"
+        android:icon="@drawable/profile_icon"
         android:title="Profile"
         app:showAsAction="ifRoom" />
 </menu>

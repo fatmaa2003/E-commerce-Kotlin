@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +49,11 @@ class MarketFragment : Fragment() {
             }
         }
 
-
+        binding.tabTags.setOnClickListener {
+            if (currentFragment !is FollowFragment) {
+                switchTab(TagsFragment(), binding.tabTags)
+            }
+        }
 
         return view
     }
@@ -67,7 +72,7 @@ class MarketFragment : Fragment() {
 
     private fun highlightTab(selectedTab: View) {
         val tabViews = listOf(binding.tabFeatured, binding.tabCollection, binding.tabStores, binding.tabTags)
-        val dotViews = listOf(binding.dotFeatured, binding.dotCollection,binding.dotStores)
+        val dotViews = listOf(binding.dotFeatured, binding.dotCollection,binding.dotStores,binding.dotTags)
 
         tabViews.forEachIndexed { index, tabView ->
             val textView = tabView as? TextView

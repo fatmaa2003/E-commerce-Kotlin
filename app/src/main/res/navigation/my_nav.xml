@@ -14,7 +14,8 @@
             app:destination="@id/sign_up" />
         <action
             android:id="@+id/action_sign_in_to_Feed_fragment"
-            app:destination="@id/Feed_fragment" />
+            app:destination="@id/Feed_fragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -25,6 +26,9 @@
         <action
             android:id="@+id/action_sign_up_to_Feed_fragment"
             app:destination="@id/Feed_fragment" />
+        <action
+            android:id="@+id/action_sign_up_to_sign_in"
+            app:destination="@id/sign_in" />
     </fragment>
 
     <fragment
@@ -35,6 +39,18 @@
         <action
             android:id="@+id/action_Feed_fragment_to_product_details"
             app:destination="@id/product_details" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_searchFragmente"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_Feed_fragment_to_sign_in"
+            app:destination="@id/sign_in"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/sign_in"
+            />
     </fragment>
 
     <fragment
@@ -75,6 +91,13 @@
         android:label="Market Fragment"
         tools:layout="@layout/fragment_market">
         <action
+            android:id="@+id/action_feature_fragment_to_follow"
+            app:destination="@id/followFragment">
+        </action>
+        <action
+            android:id="@+id/actionTagsFragmentToFollowFragment"
+            app:destination="@id/followFragment" />
+        <action
             android:id="@+id/action_market_fragment_to_feature_fragment"
             app:destination="@id/feature_fragment" />
         <action
@@ -83,13 +106,30 @@
         <action
             android:id="@+id/action_market_fragment_to_store"
             app:destination="@id/store" />
+        <action
+            android:id="@+id/action_market_fragment_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagsFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.TagsFragment"
+        android:label="Tags Fragment"
+        tools:layout="@layout/fragment_tags">
     </fragment>
 
+
     <fragment
-        android:id="@+id/profile_fragment"
-        android:name="com.example.e_commercekotlin.presentation.screens.ProfileFragment"
-        android:label="Profile Fragment"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/followFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
+        android:label="Follow Fragment"
+        tools:layout="@layout/fragment_follow">
+        <argument
+            android:name="imageResId"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 
 
     <fragment
@@ -97,9 +137,10 @@
         android:name="com.example.e_commercekotlin.presentation.screens.BrandFragment"
         android:label="Brand Fragment"
         tools:layout="@layout/fragment_brand">
+
         <action
-            android:id="@+id/action_stores_to_storeDetailsFragment"
-            app:destination="@id/storeDetailsFragment" />
+            android:id="@+id/action_stores_to_store"
+            app:destination="@id/store" />
     </fragment>
 
 
@@ -120,15 +161,7 @@
         android:id="@+id/feature_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeaturedFragment"
         tools:layout="@layout/fragment_featured">
-        <action
-            android:id="@+id/action_feature_fragment_to_collection"
-            app:destination="@id/collection" />
-        <action
-            android:id="@+id/action_feature_fragment_to_follow"
-            app:destination="@id/follow" />
-        <action
-            android:id="@+id/action_feature_fragment_to_stores"
-            app:destination="@id/stores" />
+
     </fragment>
 
     <fragment
@@ -142,11 +175,18 @@
             android:id="@+id/action_collection_to_collection_details"
             app:destination="@id/collection_details" />
     </fragment>
-
     <fragment
         android:id="@+id/store"
         android:name="com.example.e_commercekotlin.presentation.screens.StoresFragment"
-        tools:layout="@layout/fragment_stores" />
+        tools:layout="@layout/fragment_stores" >
+        <action
+            android:id="@+id/action_store_to_product_details"
+            app:destination="@id/product_details" />
+        <argument
+            android:name="storeId"
+            app:argType="string"
+        />
+    </fragment>
 
     <fragment
         android:id="@+id/collection_details"
@@ -158,22 +198,28 @@
     </fragment>
 
     <fragment
-        android:id="@+id/follow"
-        android:name="com.example.e_commercekotlin.presentation.screens.FollowFragment"
-        tools:layout="@layout/fragment_follow" />
-
-    <fragment
         android:id="@+id/cart"
-        android:name="CartFragment"
-        tools:layout="@layout/fragment_cart" />
-
-    <fragment
-        android:id="@+id/add_to_cart"
-        android:name="com.example.e_commercekotlin.presentation.screens.AddCard"
-        tools:layout="@layout/fragment_add_to_cart">
+        android:name="com.example.e_commercekotlin.presentation.screens.CartFragment"
+        tools:layout="@layout/fragment_cart">
         <action
-            android:id="@+id/action_add_to_cart_to_cart"
-            app:destination="@id/cart" />
+            android:id="@+id/action_cart_to_shippingAddressFragment2"
+            app:destination="@id/shippingAddressFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchase"
+        android:name="com.example.e_commercekotlin.presentation.screens.PurchaseFragment"
+        tools:layout="@layout/fragment_purchase">
+
+        <argument
+            android:name="cartData"
+            app:argType="com.example.e_commercekotlin.data.model.CartItem" />
+
+        <action
+            android:id="@+id/action_purchase_to_Feed_fragment"
+            app:destination="@id/Feed_fragment"
+            app:popUpTo="@id/Feed_fragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
     <fragment
@@ -181,4 +227,27 @@
         android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/shippingAddressFragment2"
+        android:name="com.example.e_commercekotlin.presentation.screens.ShippingAddressFragment"
+        android:label="ShippingAddressFragment" >
+        <argument
+            android:name="cartData"
+            app:argType="com.example.e_commercekotlin.data.model.CartItem" />
+        <action
+            android:id="@+id/action_shippingAddressFragment2_to_purchase"
+            app:destination="@id/purchase" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.e_commercekotlin.presentation.screens.searchFragment"
+        android:label="fragment_search_fragmente"
+        tools:layout="@layout/fragment_search_fragmente" >
+        <action
+            android:id="@+id/action_searchFragment_to_product_details"
+            app:destination="@id/product_details" />
+    </fragment>
+
+
 </navigation>

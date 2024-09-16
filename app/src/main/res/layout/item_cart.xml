@@ -59,11 +59,11 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/productDetails"
+                android:id="@+id/cart_quantity"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="S - 26 | Blue | x1"
+                android:text=""
                 android:textSize="18sp"
                 android:textColor="@color/description_color"/>
 
@@ -86,24 +86,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete"
+                android:text="-"
+                android:id="@+id/decreasequatitybutton"
                 android:background="@drawable/text"
                 android:padding="15dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/text_on_label"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Confirm"
+                android:text="+"
+                android:id="@+id/increasequatitybutton"
                 android:background="@drawable/text"
                 android:padding="15dp"
                 android:textColor="@color/text_on_label"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:layout_marginEnd="7dp"
                 android:gravity="center"/>
         </LinearLayout>

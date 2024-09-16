@@ -8,8 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercekotlin.R;
+import com.example.e_commercekotlin.data.model.AddToCartRequest;
 import com.example.e_commercekotlin.data.model.CardModel;
 import com.example.e_commercekotlin.databinding.PaymentCardItemBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,11 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
     @Override
     public int getItemCount() {
         return cardModels.size();
+    }
+
+    @NotNull
+    public List<AddToCartRequest.Product> getProductItems() {
+        return null;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

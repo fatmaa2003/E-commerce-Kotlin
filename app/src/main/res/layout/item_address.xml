@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selected_address_background"
+    android:orientation="vertical"
+    android:paddingVertical="10dp"
+    android:id="@+id/entire_address_item"
+    android:padding="15dp">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/left_of_address">
+    <TextView
+        android:id="@+id/address_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ava Johnson Home"
+        android:textSize="20sp"
+        android:fontFamily="@font/semibold"
+        android:textColor="@color/dark_surface"
+        />
+
+    <TextView
+        android:id="@+id/item_address_text"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="60003 Karl Radial, Carrollchester, UT 47800-8751"
+        android:textSize="16sp"
+        android:textColor="@color/description_color"
+        android:layout_marginTop="8dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/arrival_estimate_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrival est: Apr 15"
+            android:textColor="@color/purple"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/shipping_cost_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$5 shipping"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/dark_surface"
+            android:layout_toEndOf="@id/arrival_estimate_tv"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true">
+        <RadioButton
+            android:id="@+id/address_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+

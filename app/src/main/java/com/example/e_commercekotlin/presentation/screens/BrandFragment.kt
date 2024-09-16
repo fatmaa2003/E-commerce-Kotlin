@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentBrandBinding
 import com.example.e_commercekotlin.presentation.adapter.BrandAdapter
+import com.example.e_commercekotlin.presentation.listener.StoreClickListener
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
-class BrandFragment : Fragment() {
+class BrandFragment : Fragment(), StoreClickListener {
     private lateinit var brandAdapter: BrandAdapter
     private val storeViewModel: StoresViewModel by viewModels()
     private var _binding: FragmentBrandBinding? = null
@@ -32,32 +33,42 @@ class BrandFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeStores()
+        brandAdapter = BrandAdapter()
+        setListener()
+        binding.brandRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.brandRecyclerView.adapter = brandAdapter
+    }
 
-
-        brandAdapter = BrandAdapter(requireContext())
-        binding.brand.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.brand.adapter = brandAdapter
+    private fun setListener() {
+        brandAdapter.setStoreClickListener(this)
     }
 
     private fun observeStores() {
-        storeViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
+        storeViewModel.stores.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     resource.data?.let { brandAdapter.setBrandList(it) }
                 }
+
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onStoreClicked(storeId: String) {
+        val action = MarketFragmentDirections.actionMarketFragmentToStore(storeId)
+        findNavController().navigate(action)
     }
 }
