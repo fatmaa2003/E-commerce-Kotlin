@@ -102,6 +102,7 @@ class CartFragment : Fragment() {
                     Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity += 1
+                        productPrice=itemTotalPrice*quantity
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
                 }
@@ -121,6 +122,7 @@ class CartFragment : Fragment() {
                     Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity -= 1
+                        productPrice=itemTotalPrice*quantity
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
                 }
