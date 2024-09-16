@@ -56,7 +56,7 @@ class CartFragment : Fragment() {
 
         binding.continueToCheckout.setOnClickListener {
             cartData?.let {
-                val action = CartFragmentDirections.actionCartToPurchase(it)
+                val action = CartFragmentDirections.actionCartToShippingAddressFragment2(it)
                 findNavController().navigate(action)
             } ?: run {
                 Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -55,8 +56,8 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
 
        binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener{
            SharedPreferencesHelper.removeToken()
-           findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
 
+           findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
        }
 
 
