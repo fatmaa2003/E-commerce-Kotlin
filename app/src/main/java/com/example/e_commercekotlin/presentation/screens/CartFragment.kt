@@ -55,13 +55,14 @@ class CartFragment : Fragment() {
         fetchCartItems()
 
         binding.continueToCheckout.setOnClickListener {
-            cartData?.let {
-                val action = CartFragmentDirections.actionCartToShippingAddressFragment2(it)
+            if (cartData != null && cartData!!.cartSize > 0) { // Ensure cartData is not null and not empty
+                val action = CartFragmentDirections.actionCartToShippingAddressFragment2(cartData!!)
                 findNavController().navigate(action)
-            } ?: run {
+            } else {
                 Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         observeDeleteProductStatus()
         observeOIncreaseQuantityStatus()
@@ -99,7 +100,7 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity += 1
                         productPrice=itemTotalPrice*quantity
@@ -119,7 +120,7 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity -= 1
                         productPrice=itemTotalPrice*quantity
@@ -139,7 +140,7 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Product deleted", Toast.LENGTH_SHORT).show()
+
                     viewModel.fetchCartItems()
                 }
                 is Resource.Error -> {

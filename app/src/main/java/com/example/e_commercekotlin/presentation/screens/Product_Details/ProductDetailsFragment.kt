@@ -103,7 +103,9 @@ class ProductDetailsFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
-                    showCartDialog()
+                    binding.popup.root.visibility = View.VISIBLE
+                    binding.addToCartButton.root.visibility=View.GONE
+                    navigateToCart()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -206,28 +208,23 @@ class ProductDetailsFragment : Fragment() {
 
     }
 
-    private fun showCartDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.cart_popup, null)
-        val cartSizeTextView = dialogView.findViewById<TextView>(R.id.cartSizeTextView)
-        val goToCartButton = dialogView.findViewById<Button>(R.id.goToCartButton)
+    private fun navigateToCart() {
+        val cartSizeTextView: TextView = view?.findViewById(R.id.cartSizeTextView) ?: return
+        val goToCartButton: ImageView = view?.findViewById(R.id.goToCartButton) ?: return
 
+        // Observe cart size and update cartSizeTextView
         viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
-            Log.d("CartSize", "Observed cart size: ${cartSize.data}")
             cartSizeTextView.text = " ${cartSize.data}"
         }
 
-
-        val alertDialog = AlertDialog.Builder(requireContext())
-            .setView(dialogView)
-            .create()
-
+        // Set click listener for goToCartButton to navigate to cart
         goToCartButton.setOnClickListener {
-            alertDialog.dismiss()
             findNavController().navigate(R.id.action_product_details_to_cart)
         }
-
-        alertDialog.show()
     }
+
+
+
 
     private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
         val isVisible = when (section) {
@@ -241,20 +238,6 @@ class ProductDetailsFragment : Fragment() {
         val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
         tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
-
-//    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
-//        val isVisible = when (section) {
-//            1 -> tagsVisible1.also { tagsVisible1 = !it }
-//            2 -> tagsVisible2.also { tagsVisible2 = !it }
-//            3 -> tagsVisible3.also { tagsVisible3 = !it }
-//            else -> false
-//        }
-//
-//        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
-//        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
-//        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
-//    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
