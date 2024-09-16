@@ -13,6 +13,7 @@ import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
+import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
@@ -176,7 +177,6 @@ class Repository {
     }
 
 
-
 //    suspend fun insertAllProducts(list : List<ProductResponse.ProductResponseItem>) {
 //        databaseHelper.insertProducts(list)
 //    }
@@ -217,6 +217,22 @@ class Repository {
             }
         } catch (e: Exception) {
             Resource.Error("Network error")
+        }
+    }
+
+    suspend fun getFreshCollection(): Resource<FreshCollection> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = apiService.getFreshCollections()
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
         }
     }
 }

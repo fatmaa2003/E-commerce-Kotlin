@@ -35,7 +35,7 @@ class TagsFragment : Fragment() {
 
         activity?.setBottomNavVisibility(visible = false)
 
-        // Setting up RecyclerView
+
         val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.featured_tags, parent, false)

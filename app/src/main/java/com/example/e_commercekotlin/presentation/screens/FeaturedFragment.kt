@@ -9,13 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.Stores
 import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
+import com.example.e_commercekotlin.presentation.adapter.CollectionsAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreAdapter
 import com.example.e_commercekotlin.presentation.adapter.TagsAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
+import com.example.e_commercekotlin.presentation.viewmodels.CollectionViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
@@ -25,84 +29,112 @@ class FeaturedFragment : Fragment() {
     private val binding get() = _binding!!
     private val productsViewModel: ProductViewModel by viewModels()
     private val storesViewModel: StoresViewModel by viewModels()
-    private lateinit var itemAdapter: ProductAdapter
+    private val collectionViewModel: CollectionViewModel by viewModels()
     private lateinit var productAdapter: ProductAdapter
-    private lateinit var tagsAdapter: TagsAdapter
     private lateinit var storeAdapter: StoreAdapter
+    private lateinit var tagsAdapter: TagsAdapter
+    private lateinit var collectionsAdapter: CollectionsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
-        val view = binding.root
         productsViewModel.getAllProduct()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupProductRecyclerView()
-        setupTagsRecyclerView()
+        setupRecyclerViews()
         observeProducts()
         observeStores()
+        observeFreshCollections()
     }
 
     private fun observeProducts() {
         productsViewModel.allProduct.observe(viewLifecycleOwner, Observer { resource ->
+            handleLoadingState(resource is Resource.Loading)
             when (resource) {
-                is Resource.Loading -> {
-                    binding.progressBar.visibility= View.VISIBLE
-                }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    resource.data?.let { itemAdapter.setProductList(it) }
-                    resource.data?.let { productAdapter.setProductList(it) }
+                    resource.data?.let { productList ->
+                        productAdapter.setProductList(productList)
+                    }
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    Log.e("FeaturedFragment", "Product Error: ${resource.message}")
                 }
+                else -> {}
+            }
+        })
+    }
+
+    private fun observeFreshCollections() {
+        collectionViewModel.freshCollections.observe(viewLifecycleOwner, Observer { resource ->
+            handleLoadingState(resource is Resource.Loading)
+            when (resource) {
+                is Resource.Success -> {
+                    resource.data?.let { freshCollectionList ->
+                        Log.e("FeaturedFragmentt", "Fresh Collection : ${resource.message}")
+                        collectionsAdapter.setItems(freshCollectionList)
+                    }
+                }
+                is Resource.Error -> {
+                    Log.e("FeaturedFragment", "Fresh Collection Error: ${resource.message}")
+                }
+                else -> {}
             }
         })
     }
 
     private fun observeStores() {
         storesViewModel.stores.observe(viewLifecycleOwner, Observer { resource ->
+            handleLoadingState(resource is Resource.Loading)
             when (resource) {
-                is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
                 is Resource.Success -> {
-                    Log.d("FeaturedFragment", "Stores Data: ${resource.data}")
-                    binding.progressBar.visibility = View.GONE
-                    resource.data?.let {
-                        storeAdapter = StoreAdapter(it)
-                        binding.rvstores.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    resource.data?.let { storesList ->
+                        storeAdapter = StoreAdapter(storesList)
                         binding.rvstores.adapter = storeAdapter
                     }
                 }
                 is Resource.Error -> {
-                    Log.d("FeaturedFragment", "Error: ${resource.message}")
-                    binding.progressBar.visibility = View.GONE
+                    Log.e("FeaturedFragment", "Store Error: ${resource.message}")
                 }
+                else -> {}
             }
         })
     }
 
-    private fun setupProductRecyclerView() {
-        itemAdapter = ProductAdapter()
-        binding.rvproduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvproduct.adapter = itemAdapter
+    private fun setupRecyclerViews() {
+
         productAdapter = ProductAdapter()
-        binding.rvproductsonsale.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvproductsonsale.adapter = productAdapter
+        setupRecyclerView(binding.rvproduct, productAdapter)
+
+
+        setupRecyclerView(binding.rvproductsonsale, productAdapter)
+
+
+        val tagsList = getDummyTags()
+        tagsAdapter = TagsAdapter(this, tagsList)
+        setupRecyclerView(binding.rvtags, tagsAdapter)
+
+
+        storeAdapter = StoreAdapter(Stores())
+        setupRecyclerView(binding.rvstores, storeAdapter)
+
+        collectionsAdapter = CollectionsAdapter()
+        binding.rvcollections.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        binding.rvcollections.adapter = collectionsAdapter
+
+
+
     }
 
-    private fun setupTagsRecyclerView() {
-        val tagsList = getDummyTags()
-        tagsAdapter = TagsAdapter(tagsList)
-        binding.rvtags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvtags.adapter = tagsAdapter
+    private fun setupRecyclerView(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = adapter
     }
 
     private fun getDummyTags(): List<Featured> {
@@ -111,6 +143,10 @@ class FeaturedFragment : Fragment() {
             Featured(R.drawable.tag2, "Luxury"),
             Featured(R.drawable.tag1, "Glam")
         )
+    }
+
+    private fun handleLoadingState(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

@@ -9,6 +9,7 @@ import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.Collection
+import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
@@ -22,6 +23,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
+
     @POST("auth/signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
     suspend fun getData(): Response<List<User>>
@@ -32,9 +34,9 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<Category>
 
-
     @GET("products/by_category/{categoryId}")
     suspend fun getProductsByCategoryId(@Path("categoryId") categoryId: String) : Response<ProductResponse>
+
     @GET("cart/view")
     suspend fun getCartItems():Response<CartItem>
 
@@ -44,14 +46,16 @@ interface ApiService {
     @GET("products")
     suspend fun getAllProducts () : Response<AllProdcutsDto>
 
-      @GET("products/{productId}")
-      suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>
-
+    @GET("products/{productId}")
+    suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>
 
     @GET("categories/{categoryid}")
     suspend fun getCategoryById(@Path("categoryid") categoryid:String) : Response<CategoryDetails>
 
     @GET("categories/stores")
     suspend fun getStores():Response<Stores>
+
+    @GET("products/fresh_collections")
+    suspend fun getFreshCollections(): Response<FreshCollection>
 
 }

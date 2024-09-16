@@ -75,6 +75,10 @@
         android:label="Market Fragment"
         tools:layout="@layout/fragment_market">
         <action
+            android:id="@+id/action_feature_fragment_to_follow"
+            app:destination="@id/followFragment">
+        </action>
+        <action
             android:id="@+id/actionTagsFragmentToFollowFragment"
             app:destination="@id/followFragment" />
         <action
@@ -144,15 +148,7 @@
         android:id="@+id/feature_fragment"
         android:name="com.example.e_commercekotlin.presentation.screens.FeaturedFragment"
         tools:layout="@layout/fragment_featured">
-        <action
-            android:id="@+id/action_feature_fragment_to_collection"
-            app:destination="@id/collection" />
-        <action
-            android:id="@+id/action_feature_fragment_to_follow"
-            app:destination="@id/followFragment" />
-        <action
-            android:id="@+id/action_feature_fragment_to_stores"
-            app:destination="@id/stores" />
+
     </fragment>
 
     <fragment
