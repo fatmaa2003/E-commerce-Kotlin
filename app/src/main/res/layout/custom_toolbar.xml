@@ -39,16 +39,6 @@
             >
 
             <ImageView
-                android:id="@+id/place_holder_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/baseline_search_24"
-                android:background="@color/white"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                />
-            <ImageView
                 android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,6 +47,16 @@
                 android:background="@color/white"
                 android:layout_marginEnd="20dp"
 
+                />
+
+
+            <ImageView
+                android:id="@+id/place_holder_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/baseline_search_24"
+                android:background="@color/white"
                 />
 
         </LinearLayout>
