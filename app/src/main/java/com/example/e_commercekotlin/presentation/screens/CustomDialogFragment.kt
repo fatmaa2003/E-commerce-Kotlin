@@ -53,19 +53,6 @@ class CustomDialogFragment(private val onActionClick: (() -> Unit)? = null) : Di
 
         binding.bottomLinearLayout.setOnClickListener {
             dialog?.hide()
-            when (sourceFragment) {
-                "FeedFragment" -> {
-                    val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId ?: 0)
-                    findNavController().navigate(action)
-                }
-                "StoresFragment" -> {
-                    val action = StoresFragmentDirections.actionStoreToProductDetails(productId ?: 0)
-                    findNavController().navigate(action)
-                }
-                else -> {
-                    Log.e("CustomDialogFragment", "Unknown source fragment: $sourceFragment")
-                }
-            }
             onActionClick?.invoke() // Execute the passed action
         }
 

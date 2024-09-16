@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
@@ -91,6 +94,25 @@ class ProductDetailsFragment : Fragment() {
         }
     }
 
+    private fun observeAddToCartStatus() {
+        viewModel.addToCartStatus.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
+                    showCartDialog()
+                }
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, "Error adding item to cart", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
     private fun observeProducts() {
         viewModel.allProducts.observe(viewLifecycleOwner){ resources ->
             when(resources){
@@ -143,21 +165,6 @@ class ProductDetailsFragment : Fragment() {
         }
 
         builder.create().show()
-    }
-
-
-
-    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
-        val isVisible = when (section) {
-            1 -> tagsVisible1.also { tagsVisible1 = !it }
-            2 -> tagsVisible2.also { tagsVisible2 = !it }
-            3 -> tagsVisible3.also { tagsVisible3 = !it }
-            else -> false
-        }
-
-        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
-        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
-        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
 
     private fun observeData() {
@@ -234,6 +241,19 @@ class ProductDetailsFragment : Fragment() {
         val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
         tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
+
+//    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
+//        val isVisible = when (section) {
+//            1 -> tagsVisible1.also { tagsVisible1 = !it }
+//            2 -> tagsVisible2.also { tagsVisible2 = !it }
+//            3 -> tagsVisible3.also { tagsVisible3 = !it }
+//            else -> false
+//        }
+//
+//        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
+//        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
+//        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

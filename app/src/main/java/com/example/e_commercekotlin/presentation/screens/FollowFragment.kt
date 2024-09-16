@@ -14,6 +14,7 @@ import com.example.e_commercekotlin.databinding.FragmentFollowBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
+import com.example.e_commercekotlin.data.model.toProductItem
 
 class FollowFragment : Fragment() {
 
@@ -70,7 +71,7 @@ class FollowFragment : Fragment() {
                 is Resource.Success -> {
 
                     resource.data?.let { productList ->
-                        productAdapter.setProductList(productList)
+                        productAdapter.setProductList(productList.map { it.toProductItem()})
                     }
                 }
                 is Resource.Error -> {

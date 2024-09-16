@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.DatabaseHelper
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
-import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository

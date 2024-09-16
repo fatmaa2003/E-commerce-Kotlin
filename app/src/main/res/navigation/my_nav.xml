@@ -106,6 +106,9 @@
         <action
             android:id="@+id/action_market_fragment_to_store"
             app:destination="@id/store" />
+        <action
+            android:id="@+id/action_market_fragment_to_product_details"
+            app:destination="@id/product_details" />
     </fragment>
     <fragment
         android:id="@+id/tagsFragment"
@@ -127,13 +130,6 @@
             android:name="title"
             app:argType="string" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/profile_fragment"
-        android:name="com.example.e_commercekotlin.presentation.screens.ProfileFragment"
-        android:label="Profile Fragment"
-        tools:layout="@layout/fragment_profile" />
 
 
     <fragment

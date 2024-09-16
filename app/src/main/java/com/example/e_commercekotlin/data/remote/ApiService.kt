@@ -1,15 +1,11 @@
 package com.example.e_commercekotlin.data.remote
 
-import androidx.room.Query
-import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.SignupRequest
 import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AddToCartRequest
-import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
-import com.example.e_commercekotlin.data.model.Collection
 import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
