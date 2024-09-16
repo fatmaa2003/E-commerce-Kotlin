@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="4dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="160dp"
         android:id="@+id/ivcollection"
+        android:layout_width="160dp"
         android:layout_height="170dp"
-        app:shapeAppearanceOverlay="@style/CornerCut"
-        android:background="@drawable/treka"
-        android:scaleType="centerCrop"/>
+        android:background="@drawable/error"
+        android:scaleType="centerCrop"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:shapeAppearanceOverlay="@style/CornerCut" />
+
 
     <TextView
         android:id="@+id/firstText"
         android:layout_width="160dp"
-        android:paddingHorizontal="2dp"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:text="Title"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivcollection" />
+
 
     <TextView
         android:id="@+id/secondText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description" />
-
-</LinearLayout>
+        android:padding="4dp"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

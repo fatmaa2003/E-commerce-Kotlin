@@ -12,6 +12,7 @@
         >
 
         <ImageView
+            android:id="@+id/follow_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/baseline_profile_24"
@@ -20,12 +21,15 @@
             />
 
         <TextView
+            android:id="@+id/follow_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sustainable"
             android:textSize="24sp"
             android:fontFamily="@font/extrabold"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,5 +79,13 @@
         android:layout_gravity="center"
         android:layoutDirection="ltr"
 
+        />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
         />
 </LinearLayout>

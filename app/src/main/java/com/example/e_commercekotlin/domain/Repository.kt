@@ -11,8 +11,10 @@ import com.example.e_commercekotlin.data.User
 import com.example.e_commercekotlin.data.model.AllProductModel
 import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.CartItem
+import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
+import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
@@ -108,7 +110,7 @@ class Repository {
         }
     }
 
-    suspend fun getProducts(): Resource<AllProductModel> {
+    suspend fun getProducts(): Resource<AllProdcutsDto> {
         return withContext(Dispatchers.IO) {
             try {
                 Resource.Loading(null)
@@ -174,7 +176,6 @@ class Repository {
 
         }
     }
-
 
 
 //    suspend fun insertAllProducts(list : List<ProductResponse.ProductResponseItem>) {
@@ -297,6 +298,22 @@ class Repository {
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getFreshCollection(): Resource<FreshCollection> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Resource.Loading(null)
+                val response = apiService.getFreshCollections()
+                if (response.isSuccessful) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Resource.Error("An error occurred: ${e.message}")
+            }
         }
     }
 }

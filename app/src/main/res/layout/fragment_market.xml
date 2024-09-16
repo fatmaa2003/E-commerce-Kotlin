@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".presentation.screens.MarketFragment">
+
     <include
         android:id="@+id/fragment_market_toolbar"
         layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginEnd="15dp"
+        android:background="@color/lightgray" />
+
+    <TextView
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Market"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <include
-            layout="@layout/logout_button"/>
+        android:orientation="horizontal"
+        android:layout_margin="25dp"
+        android:padding="10dp"
+        android:background="@drawable/search_shape"
+        android:gravity="center_vertical">
+
+
+
+        <TextView
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search on Tassel"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="10dp"
+            android:textSize="18sp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_icon"
+            android:paddingEnd="8dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -26,14 +58,12 @@
         android:layout_marginBottom="4dp"
         android:orientation="horizontal">
 
-
-
+        <!-- Featured Tab -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tabFeatured"
                 android:layout_width="match_parent"
@@ -44,7 +74,6 @@
                 android:text="Featured"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
             <View
                 android:id="@+id/dotFeatured"
                 android:layout_width="4dp"
@@ -54,12 +83,12 @@
                 android:visibility="gone" />
         </LinearLayout>
 
+        <!-- Collection Tab -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tabCollection"
                 android:layout_width="match_parent"
@@ -70,7 +99,6 @@
                 android:text="Collection"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
             <View
                 android:id="@+id/dotCollection"
                 android:layout_width="4dp"
@@ -80,12 +108,12 @@
                 android:visibility="gone" />
         </LinearLayout>
 
+        <!-- Stores Tab -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tabStores"
                 android:layout_width="match_parent"
@@ -96,7 +124,6 @@
                 android:text="Stores"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
             <View
                 android:id="@+id/dotStores"
                 android:layout_width="4dp"
@@ -106,12 +133,12 @@
                 android:visibility="gone" />
         </LinearLayout>
 
+        <!-- Tags Tab -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tabTags"
                 android:layout_width="match_parent"
@@ -122,6 +149,13 @@
                 android:text="Tags"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
+            <View
+                android:id="@+id/dotTags"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="@drawable/dot_background"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 
@@ -131,4 +165,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
 </LinearLayout>

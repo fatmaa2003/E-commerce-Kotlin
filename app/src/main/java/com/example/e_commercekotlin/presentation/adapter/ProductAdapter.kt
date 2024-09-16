@@ -16,45 +16,58 @@ import java.util.Locale
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     private var productList: List<ProductResponse.ProductResponseItem> = listOf()
 
+
     fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
         notifyDataSetChanged()
     }
 
-    //set on click listner for the api integration
+
     fun setListener(onProductClick: ClickListener) {
         this.onProductClick = onProductClick
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_layout, parent, false)
         return MyViewHolder(itemView)
     }
 
+    // Bind data to the views in the ViewHolder
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
+        // Set product name and formatted price
         holder.productName.text = currentItem.productName
+        val priceAsDouble = currentItem.price?.toDouble() ?: 0.0 // Default to 0.0 if conversion fails
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
-        val formattedPrice = currencyFormat.format(currentItem.price)
+        val formattedPrice = currencyFormat.format(priceAsDouble)
         holder.productPrice.text = formattedPrice
 
-        Glide.with(holder.productImage.context).load(currentItem.imageUrl).into(holder.productImage)
+        // Use Glide to load the product image
+        Glide.with(holder.productImage.context)
+            .load(currentItem.imageUrl)
+            .into(holder.productImage)
 
+        // Set click listener on the product layout
         holder.productLayout.setOnClickListener {
-            currentItem.let { onProductClick?.onProductClick(
-                productId = it.productId?.toLong() ?: 0,
-                productImage = it.imageUrl.orEmpty(),
-                productName = it.productName.orEmpty()
-            ) }
+            currentItem.let {
+                onProductClick?.onProductClick(
+                    productId = it.productId?.toLong() ?: 0,
+                    productImage = it.imageUrl.orEmpty(),
+                    productName = it.productName.orEmpty()
+                )
+            }
         }
     }
 
+    // Return the total number of products in the list
     override fun getItemCount(): Int {
         return productList.size
     }
 
+    // ViewHolder class to hold references to the views for each item
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
         val productName: TextView = itemView.findViewById(R.id.product_name)
@@ -62,11 +75,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         val productLayout: LinearLayout = itemView.findViewById(R.id.product_layout)
     }
 
-    // this is the interface of the api integration
+    // Interface to handle product click events
     interface ClickListener {
-        fun onProductClick(productId: Long, productName : String, productImage : String)
+        fun onProductClick(productId: Long, productName: String, productImage: String)
     }
 
-    var onProductClick: ClickListener? = null
-
+    // Variable to store the click listener
+    private var onProductClick: ClickListener? = null
 }
