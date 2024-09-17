@@ -9,6 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
+import com.example.e_commercekotlin.Util.showToast
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentBrandBinding
 import com.example.e_commercekotlin.presentation.adapter.BrandAdapter
@@ -27,6 +33,7 @@ class BrandFragment : Fragment(), StoreClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrandBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
         return binding.root
     }
 
@@ -47,16 +54,16 @@ class BrandFragment : Fragment(), StoreClickListener {
         storeViewModel.stores.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
 
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     resource.data?.let { brandAdapter.setBrandList(it) }
                 }
 
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                 }
             }
         }

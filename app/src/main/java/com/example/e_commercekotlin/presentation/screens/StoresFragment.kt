@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.webkit.internal.ApiFeature
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
@@ -74,12 +76,12 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
         storeViewModel.data.observe(viewLifecycleOwner) { resources ->
             when (resources) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
 
                 is Resource.Success -> {
                     val productList = resources.data?.category?.products
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     itemAdapter.setProductList(productList.orEmpty())
                     val productImageList = productList?.mapNotNull { it.imageUrl }
                     productImageList?.let { storeImagesAdapter.setStoreImagesList(it) }
@@ -90,7 +92,7 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
                 }
 
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                 }
             }
         }

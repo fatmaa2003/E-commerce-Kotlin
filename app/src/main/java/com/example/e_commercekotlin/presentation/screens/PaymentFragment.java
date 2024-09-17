@@ -36,7 +36,9 @@ public class PaymentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPaymentBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
+
     }
 
     @Override
@@ -77,13 +79,6 @@ public class PaymentFragment extends Fragment {
         recyclerView.setAdapter(profileBottomSheetAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        followings.add(new Followings(R.drawable.ic_launcher_background, "John Doe", "adidas"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "Jane Doe", "bershka"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "John Doe", "adidas"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "Jane Doe", "H&M"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "John Doe", "adidas"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "Jane Doe", "Defacto"));
-        followings.add(new Followings(R.drawable.ic_launcher_background, "John Doe", "adidas"));
         profileBottomSheetAdapter.setFollowingList(followings);
 
         dialog.show();

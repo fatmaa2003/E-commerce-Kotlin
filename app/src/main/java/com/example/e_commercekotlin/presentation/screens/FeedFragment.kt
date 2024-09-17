@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleSearchItem
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.model.Category
@@ -104,16 +106,16 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
             categoryViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
                 when (resource) {
                     is Resource.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.show()
                     }
 
                     is Resource.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                         resource.data?.let { categoryAdapter.updateCategories(it) }
                     }
 
                     is Resource.Error -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                     }
                 }
             })
@@ -140,7 +142,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         }
 
         // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
             val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId.toInt())
             findNavController().navigate(action)

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
@@ -28,8 +31,10 @@ import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.adapter.ProductImagesAdapter
+import com.example.e_commercekotlin.presentation.screens.CustomDialogFragment
+import com.example.e_commercekotlin.presentation.screens.searchFragmentDirections
 
-class ProductDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
     private var _binding: FragmentProductDetailsBinding? = null
     private val binding get() = _binding!!
@@ -75,6 +80,7 @@ class ProductDetailsFragment : Fragment() {
         val colorTextView: TextView = view?.findViewById(R.id.color) ?: return
         colorTextView.setOnClickListener {
             showColorDialog()
+
         }
 
 
@@ -92,21 +98,23 @@ class ProductDetailsFragment : Fragment() {
             completeOutfit.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             completeOutfit.adapter = productAdapter
         }
+        productAdapter.setListener(this)
     }
+
 
     private fun observeAddToCartStatus() {
         viewModel.addToCartStatus.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.progressBar.show()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
                     showCartDialog()
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Error adding item to cart", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -116,13 +124,17 @@ class ProductDetailsFragment : Fragment() {
     private fun observeProducts() {
         viewModel.allProducts.observe(viewLifecycleOwner){ resources ->
             when(resources){
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    binding.progressBar.progressBar.show()
+                }
                 is Resource.Success -> {
-                    Log.e("TAG123", "observeProducts: " + resources.data.orEmpty())
+                    binding.progressBar.progressBar.hide()
                     resources.data?.map { it.toProductItem() }
                         ?.let { productAdapter.setProductList(it) }
                 }
-                is Resource.Error -> {}
+                is Resource.Error -> {
+                    binding.progressBar.progressBar.hide()
+                }
             }
 
         }
@@ -172,11 +184,11 @@ class ProductDetailsFragment : Fragment() {
             when (resource) {
 
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.progressBar.show()
                 }
                 is Resource.Success -> {
                     val productDetails = resource.data?.products?.first()
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     val image = productDetails?.mainImageUrl.orEmpty()
                     val shopName = productDetails?.name.orEmpty()
                     val description = productDetails?.description.orEmpty()
@@ -187,7 +199,7 @@ class ProductDetailsFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                 }
             }
         }
@@ -203,7 +215,6 @@ class ProductDetailsFragment : Fragment() {
         // into -> actual image view
         Glide.with(this).load(image).into(binding.shopImage.image)
         productImagesAdapter.setProductImages(imageRecycler)
-
     }
 
     private fun showCartDialog() {
@@ -259,4 +270,25 @@ class ProductDetailsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        // Create a Bundle with the product details
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+        }
+
+        viewModel.fetchProductDetails(productId)
+
+        val dialogFragment = CustomDialogFragment {
+            // Action to be executed when the user clicks in the dialog
+        }
+
+        // Set the arguments (product details) for the dialog
+        dialogFragment.arguments = bundle
+
+        // Show the dialog
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
+    }
+
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
@@ -36,6 +37,7 @@ class CollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_collection, container, false)
+        activity?.setBottomNavVisibility(visible = false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +96,7 @@ class CollectionFragment : Fragment() {
     private fun fetchProducts(categoryId: String) {
         lifecycleScope.launch {
             try {
-                // Assuming getProductsByCategoryId is a suspend function
+
                 val productsResponse = RetrofitInstance.api.getProductsByCategoryId(categoryId)
                 if (productsResponse.isSuccessful) {
                     val products = productsResponse.body()

@@ -52,10 +52,14 @@ class CustomDialogFragment(private val onActionClick: (() -> Unit)? = null) : Di
         Glide.with(this).load(productImage).into(binding.itemImage)
 
         binding.bottomLinearLayout.setOnClickListener {
-            dialog?.hide()
             onActionClick?.invoke() // Execute the passed action
+            dismiss()
         }
 
+    }
+
+    private fun closeDialog (){
+        dialog?.hide()
     }
 
     override fun onDestroyView() {
@@ -63,10 +67,6 @@ class CustomDialogFragment(private val onActionClick: (() -> Unit)? = null) : Di
         _binding = null
     }
 
-    companion object {
-        fun newInstance(onActionClick: (() -> Unit)): CustomDialogFragment {
-            return CustomDialogFragment(onActionClick)
-        }
-    }
+
 }
 

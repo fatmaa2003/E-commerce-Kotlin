@@ -19,6 +19,9 @@ class StoresViewModel : ViewModel() {
     private val _stores = MutableLiveData<Resource<Stores>>()
     val stores: LiveData<Resource<Stores>> get() = _stores
 
+    init {
+        fetchStores()
+    }
 
     init {
         fetchStores()

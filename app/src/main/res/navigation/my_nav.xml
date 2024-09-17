@@ -185,7 +185,7 @@
         <argument
             android:name="storeId"
             app:argType="string"
-        />
+            />
     </fragment>
 
     <fragment

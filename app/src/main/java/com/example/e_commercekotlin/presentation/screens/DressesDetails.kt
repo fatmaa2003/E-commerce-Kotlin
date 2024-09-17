@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.showToast
 import com.example.e_commercekotlin.data.Resource
