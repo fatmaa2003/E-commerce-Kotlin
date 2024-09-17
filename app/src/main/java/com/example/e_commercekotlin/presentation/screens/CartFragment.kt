@@ -106,6 +106,7 @@ class CartFragment : Fragment() {
                         productPrice=itemTotalPrice*quantity
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
@@ -123,9 +124,10 @@ class CartFragment : Fragment() {
 
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity -= 1
-                        productPrice=itemTotalPrice*quantity
+                        productPrice=itemTotalPrice/quantity
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
@@ -142,12 +144,20 @@ class CartFragment : Fragment() {
                 is Resource.Success -> {
 
                     viewModel.fetchCartItems()
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+    private fun updateTotalCartPrice() {
+        var totalCartPrice = 0.0
+        cartData?.products?.forEach {
+            totalCartPrice+=it.productPrice
+        }
+        binding.totalPriceTextView.text = "Total: $$totalCartPrice"
     }
 
     override fun onDestroyView() {

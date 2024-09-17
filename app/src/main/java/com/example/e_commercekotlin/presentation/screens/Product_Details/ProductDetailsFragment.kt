@@ -238,6 +238,12 @@ class ProductDetailsFragment : Fragment() {
         val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
         tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.popup.root.visibility = View.GONE
+        binding.addToCartButton.root.visibility=View.VISIBLE
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

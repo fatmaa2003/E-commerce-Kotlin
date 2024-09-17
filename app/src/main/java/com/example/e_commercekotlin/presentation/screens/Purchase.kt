@@ -46,12 +46,12 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
         val subtotal = cartItem.totalCartPrice
         val shipping = 5.0
         val total = subtotal + shipping
-
-        binding.totalPrice.text = "Subtotal: $${String.format("%.2f", subtotal)}\nTotal: $${String.format("%.2f", total)}"
+        binding.subtotalTv.text = String.format("%.2f", subtotal)
+        binding.totalPrice.text = String.format("%.2f", total)
+        binding.continueToCheckout.buttonTv.text = "Confirm and pay"
 
         observePurchaseOrder()
-
-        binding.continueToCheckout.setOnClickListener {
+        binding.continueToCheckout.root.setOnClickListener {
             val cartPurchaseData = cartItem.products.map {  AddToCartRequest.Product(productId = it.productId.toLong() , quantity = it.quantity )}
             if (cartPurchaseData.isNotEmpty()) {
                 purchaseViewModel.makePurchase(cartPurchaseData)

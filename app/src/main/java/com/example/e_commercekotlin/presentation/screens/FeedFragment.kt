@@ -51,7 +51,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         observeData()
         observeProducts()
         binding.feedFragmentToolBar.handleToolBarState(
-            toolBarTitle = "Feed", leftIconImage = R.drawable.disk, rightIconImage = R.drawable.logout_icon,
+            toolBarTitle = "Feed", leftIconImage = R.drawable.cartt, rightIconImage = R.drawable.logout_icon,
             rightIconVisibility = true
         )
         activity?.setBottomNavVisibility(visible = true)
@@ -62,6 +62,9 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
 
            findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
        }
+        binding.feedFragmentToolBar.leftIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_Feed_fragment_to_cart)
+        }
 
 
         binding.recyclerView.layoutManager =

@@ -51,6 +51,9 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/sign_in"
             />
+        <action
+            android:id="@+id/action_Feed_fragment_to_cart"
+            app:destination="@id/cart" />
     </fragment>
 
     <fragment
