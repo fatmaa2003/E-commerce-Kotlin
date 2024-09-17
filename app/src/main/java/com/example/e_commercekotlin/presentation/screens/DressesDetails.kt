@@ -81,6 +81,7 @@ class DressesDetails : Fragment(), ProductAdapter.ClickListener {
                     resource.data?.let {
                         val productList = it.category?.products
                         productAdapter.setProductList(productList.orEmpty())
+                        binding.productCountText.text = "${it.category?.products?.size} " + "products"
                     }
                 }
                 is Resource.Error -> {
@@ -110,7 +111,7 @@ class DressesDetails : Fragment(), ProductAdapter.ClickListener {
         }
 
         // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
             val action = DressesDetailsDirections.actionCollectionDetailsToProductDetails2(productId.toInt())
             findNavController().navigate(action)
