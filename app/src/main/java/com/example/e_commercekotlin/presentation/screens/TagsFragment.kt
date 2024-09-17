@@ -33,7 +33,6 @@ class TagsFragment : Fragment() {
 
         activity?.setBottomNavVisibility(visible = false)
 
-
         val adapter = TagsAdapter(this, items)
         binding.tagsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.tagsRecyclerView.adapter = adapter

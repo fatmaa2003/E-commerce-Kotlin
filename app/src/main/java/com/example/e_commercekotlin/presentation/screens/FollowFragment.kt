@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.Util.Constants
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
@@ -26,7 +27,6 @@ class FollowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        productsViewModel.getAllProduct()
         binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,10 +38,9 @@ class FollowFragment : Fragment() {
         val title = args.title
 
         productAdapter = ProductAdapter()
+        binding.followrecycle.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.followrecycle.adapter = productAdapter
-
         observeProducts()
-
 
         binding.followImage.setImageResource(imageResId)
         binding.followTitle.text = title
@@ -74,7 +73,6 @@ class FollowFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     handleLoadingState(false)
-                    Log.e("TAG12345", "observeProducts: "+ resource.data )
                     resource.data?.let {
                         productAdapter.setProductList(it.map { it.toProductItem() })}
                 }
