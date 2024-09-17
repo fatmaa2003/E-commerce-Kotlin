@@ -15,6 +15,8 @@ import androidx.webkit.internal.ApiFeature
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.showToast
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
@@ -73,7 +75,7 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
         storeViewModel.data.observe(viewLifecycleOwner) { resources->
             when (resources) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
                     val productList = resources.data?.category?.products
@@ -84,9 +86,17 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
                     binding.storeName.text = resources.data?.category?.name
                     binding.storeDescription.text = resources.data?.category?.description
                     Glide.with(binding.storeImage.image.context).load(resources.data?.category?.image_url).into(binding.storeImage.image)
+                    Log.d("in observer data success", "$resource")
+                    binding.progressBar.hide()
+                    resource.data?.let { storesList ->
+                        Log.e("hanan&fatma", "observeStores: " + storesList )
+                        storeImagesAdapter.setStoreImagesList(storesList)
+                    }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    Log.d("in observer data error", "$resource")
+                    binding.progressBar.hide()
                 }
             }
         }

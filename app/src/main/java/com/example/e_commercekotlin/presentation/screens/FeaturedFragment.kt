@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
+import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentFeaturedBinding
@@ -19,13 +23,18 @@ import com.example.e_commercekotlin.presentation.adapter.TagsAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.viewmodels.CollectionViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
+import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.toProductItem
+import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsViewModel
+import com.example.e_commercekotlin.presentation.viewmodels.CategoryViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
-class FeaturedFragment : Fragment() {
+class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
 
     private var _binding: FragmentFeaturedBinding? = null
     private val binding get() = _binding!!
     private val productsViewModel: ProductViewModel by viewModels()
+    private val productDetailsViewModel : ProductDetailsViewModel by viewModels()
     private val storesViewModel: StoresViewModel by viewModels()
     private val collectionViewModel: CollectionViewModel by viewModels()
     private lateinit var itemAdapter: ProductAdapter
@@ -48,6 +57,10 @@ class FeaturedFragment : Fragment() {
         setUpCollectionRecyclerView()
         setupTagsRecyclerView()
         observeProducts()
+        setupProductRecyclerView()
+        productAdapter.setListener(this)
+        itemAdapter.setListener(this)
+        return view
         observeStores()
         observeCollection()
     }
@@ -74,32 +87,45 @@ class FeaturedFragment : Fragment() {
     private fun observeProducts() {
         productsViewModel.allProduct.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Resource.Loading -> {
+                    binding.progressBar.show()
+                }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    Log.d("in observer data success", "$resource")
+                    binding.progressBar.hide()
                     resource.data?.let { itemAdapter.setProductList(it.map { it.toProductItem() }) }
                     resource.data?.let { productAdapter.setProductList(it.map { it.toProductItem() }.reversed()) }
+                }
+                is Resource.Error -> {
+                    Log.d("in observer data error", "$resource")
+                    binding.progressBar.hide()
                 }
                 is Resource.Error -> binding.progressBar.visibility = View.GONE
             }
         })
     }
 
-    private fun observeStores() {
-        storesViewModel.stores.observe(viewLifecycleOwner, Observer { resource ->
-            when (resource) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    resource.data?.let {
-                        storeAdapter = StoreAdapter(it)
-                        binding.rvstores.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                        binding.rvstores.adapter = storeAdapter
-                    }
-                }
-                is Resource.Error -> binding.progressBar.visibility = View.GONE
-            }
-        })
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        // Create a Bundle with the product details
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+        }
+
+        productDetailsViewModel.fetchProductDetails(productId)
+
+        val dialogFragment = CustomDialogFragment.newInstance {
+            // Action to be executed when the user clicks in the dialog
+            val action = MarketFragmentDirections.actionMarketFragmentToProductDetails(productId.toInt())
+            findNavController().navigate(action)
+        }
+
+        // Set the arguments (product details) for the dialog
+        dialogFragment.arguments = bundle
+
+        // Show the dialog
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
     }
 
     private fun setupProductRecyclerView() {
