@@ -554,6 +554,15 @@
                 android:layout_weight="1"
                 />
 
+            <include
+                layout="@layout/shopping_cart"
+                android:id="@+id/popup"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                />
+
             <include layout="@layout/main_button"
                 android:id="@+id/addToCartButton"
                 android:layout_height="50dp"
