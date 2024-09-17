@@ -23,6 +23,7 @@ import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
@@ -53,6 +54,8 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
+
         return binding.root
     }
 
@@ -65,7 +68,7 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
             val quantity = 1
             viewModel.addToCart(productId.toLong(), quantity)
         }
-        binding.productDetailsFragmentToolbar.handleToolBarState(leftIconVisibility = false)
+
         observeData()
         observeAddToCartStatus()
 

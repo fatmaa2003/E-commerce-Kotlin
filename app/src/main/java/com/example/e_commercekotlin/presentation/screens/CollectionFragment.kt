@@ -37,7 +37,8 @@ class CollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_collection, container, false)
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

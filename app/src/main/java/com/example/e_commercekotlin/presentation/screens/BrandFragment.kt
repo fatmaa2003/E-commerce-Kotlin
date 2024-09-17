@@ -33,7 +33,7 @@ class BrandFragment : Fragment(), StoreClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrandBinding.inflate(inflater, container, false)
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
         return binding.root
     }
 

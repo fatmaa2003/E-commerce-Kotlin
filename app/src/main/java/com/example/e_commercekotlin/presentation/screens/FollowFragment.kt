@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.Util.Constants
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentFollowBinding
@@ -28,6 +29,7 @@ class FollowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFollowBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
         return binding.root
     }
 

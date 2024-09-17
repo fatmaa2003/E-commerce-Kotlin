@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.databinding.FragmentMarketBinding
 
 class MarketFragment : Fragment() {
@@ -24,7 +25,8 @@ class MarketFragment : Fragment() {
         binding = FragmentMarketBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.fragmentMarketToolbar.handleToolBarState(
-            leftIconImage = R.drawable.disk,
+            toolBarTitle = "Market",
+            leftIconVisibility = false,
             searchVisibility = false
         )
         if (savedInstanceState == null) {

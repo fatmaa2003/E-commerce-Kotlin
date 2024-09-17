@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
@@ -45,6 +46,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener,CollectionsAda
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = true)
         return binding.root
     }
 

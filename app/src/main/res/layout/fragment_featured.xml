@@ -18,19 +18,14 @@
             android:layout_marginTop="10dp">
 
             <TextView
-
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="New stores"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/semibold"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="20dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -45,14 +40,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Products on sale"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/semibold"
                 android:layout_marginBottom="8dp" />
 
@@ -74,14 +70,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Fresh collections"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/semibold"
                 android:layout_marginBottom="8dp" />
 
@@ -104,14 +101,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Discover tags"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/semibold"
                 android:layout_marginBottom="8dp" />
 
@@ -133,7 +131,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -149,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lacoste"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/semibold"
                     android:layout_marginBottom="8dp" />
 
