@@ -13,7 +13,5 @@ data class StoreDetailsDto(
         val marketImage: String,
         val name: String,
         val products: List<ProductResponse.ProductResponseItem>
-    ) {
-
-    }
+    )
 }

@@ -25,7 +25,7 @@ class ProductViewModel : ViewModel() {
         fetchProduct()
     }
 
-    fun fetchProduct(categoryId:String? = "19") {
+    fun fetchProduct(categoryId:String? = "1") {
         viewModelScope.launch {
             _product.postValue(Resource.Loading(null))
             try {

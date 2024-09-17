@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -19,8 +20,6 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.adapter.StoreImagesAdapter
-import com.example.e_commercekotlin.presentation.viewmodels.CategoryDetailsViewModel
-import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
 class StoresFragment : Fragment(), ProductAdapter.ClickListener {
@@ -65,26 +64,31 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
     }
 
     private fun handleLayoutManager() {
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.storeImagesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.storeImagesRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun observeCategoryDetails() {
-        storeViewModel.data.observe(viewLifecycleOwner) { resources->
+        storeViewModel.data.observe(viewLifecycleOwner) { resources ->
             when (resources) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.Success -> {
                     val productList = resources.data?.category?.products
                     binding.progressBar.visibility = View.GONE
                     itemAdapter.setProductList(productList.orEmpty())
-                    val productImageList =  productList?.mapNotNull { it.imageUrl }
+                    val productImageList = productList?.mapNotNull { it.imageUrl }
                     productImageList?.let { storeImagesAdapter.setStoreImagesList(it) }
                     binding.storeName.text = resources.data?.category?.name
                     binding.storeDescription.text = resources.data?.category?.description
-                    Glide.with(binding.storeImage.image.context).load(resources.data?.category?.image_url).into(binding.storeImage.image)
+                    Glide.with(binding.storeImage.image.context)
+                        .load(resources.data?.category?.image_url).into(binding.storeImage.image)
                 }
+
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
@@ -93,15 +97,28 @@ class StoresFragment : Fragment(), ProductAdapter.ClickListener {
     }
 
     override fun onProductClick(productId: Long, productName: String, productImage: String) {
-        val dialogFragment = CustomDialogFragment()
+//         Create a Bundle with the product details
         val bundle = Bundle().apply {
             putInt("productId", productId.toInt())
             putString("product_name", productName)
             putString("product_image", productImage)
-            putString("source_fragment", "StoresFragment")
+            putString("source_fragment", "FeedFragment")
+
         }
+
+        // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
+        val dialogFragment = CustomDialogFragment.newInstance {
+            // Action to be executed when the user clicks in the dialog
+            val action = StoresFragmentDirections.actionStoreToProductDetails(productId.toInt())
+            findNavController().navigate(action)
+        }
+
+        // Set the arguments (product details) for the dialog
         dialogFragment.arguments = bundle
+
+        // Show the dialog
         dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
+
     }
 
 }
