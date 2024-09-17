@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,8 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
+import com.example.e_commercekotlin.presentation.viewmodels.SharedCartViewModel
+
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
@@ -22,6 +25,7 @@ class CartFragment : Fragment() {
     private val viewModel: PurchaseViewModel by viewModels()
     private var cartData: CartItem? = null
     private var adapterPosition = -1
+    private val sharedCartViewModel: SharedCartViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -155,9 +159,10 @@ class CartFragment : Fragment() {
     private fun updateTotalCartPrice() {
         var totalCartPrice = 0.0
         cartData?.products?.forEach {
-            totalCartPrice+=it.productPrice
+            totalCartPrice += it.productPrice
         }
         binding.totalPriceTextView.text = "Total: $$totalCartPrice"
+        sharedCartViewModel.updateSubtotal(totalCartPrice)
     }
 
     override fun onDestroyView() {
