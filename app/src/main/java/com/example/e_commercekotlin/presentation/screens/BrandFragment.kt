@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentBrandBinding
 import com.example.e_commercekotlin.presentation.adapter.BrandAdapter
@@ -27,6 +28,7 @@ class BrandFragment : Fragment(), StoreClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrandBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
         return binding.root
     }
 

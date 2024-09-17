@@ -10,11 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.e_commercekotlin.Util.Constants
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentFollowBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
-import com.example.e_commercekotlin.data.model.AllProdcutsDto
-import com.example.e_commercekotlin.data.model.toProductItem
 
 class FollowFragment : Fragment() {
 
@@ -27,11 +26,10 @@ class FollowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        productsViewModel.getAllProduct()
         binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,50 +37,53 @@ class FollowFragment : Fragment() {
         val imageResId = args.imageResId
         val title = args.title
 
-
-        binding.followImage.setImageResource(imageResId)
-        binding.followTitle.text = title
-        binding.followButton.buttonTv.text=Constants.FOLLOW
-        binding.followButton.buttonTv.setOnClickListener {
-            val currentText = binding.followButton.buttonTv.text.toString()
-            if (currentText == Constants.FOLLOW) {
-                binding.followButton.buttonTv.text = "Following"
-            } else {
-                binding.followButton.buttonTv.text = Constants.FOLLOW
-            }
-        }
-
-
-
         productAdapter = ProductAdapter()
         binding.followrecycle.adapter = productAdapter
 
         observeProducts()
 
-        productsViewModel.getAllProduct()
+
+        binding.followImage.setImageResource(imageResId)
+        binding.followTitle.text = title
+
+
+        binding.followButton.buttonTv.text = Constants.FOLLOW
+        binding.followButton.buttonTv.setOnClickListener {
+            toggleFollowState()
+        }
+//
+//        productAdapter.setListener(object : ProductAdapter.ClickListener {
+//            override fun onProductClick(productId: Long, productName: String, productImage: String) {
+//
+//            }
+//        })
+
+
     }
 
+    private fun toggleFollowState() {
+        val currentText = binding.followButton.buttonTv.text.toString()
+        binding.followButton.buttonTv.text = if (currentText == Constants.FOLLOW) "Following" else Constants.FOLLOW
+    }
 
     private fun observeProducts() {
         productsViewModel.allProduct.observe(viewLifecycleOwner) { resource ->
-
-            handleLoadingState(resource is Resource.Loading)
             when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility= View.VISIBLE
+                }
                 is Resource.Success -> {
-
-                    resource.data?.let { productList ->
-                        productAdapter.setProductList(productList.map { it.toProductItem()})
-                    }
+                    handleLoadingState(false)
+                    Log.e("TAG12345", "observeProducts: "+ resource.data )
+                    resource.data?.let {
+                        productAdapter.setProductList(it.map { it.toProductItem() })}
                 }
                 is Resource.Error -> {
-
-                    Log.e("FollowFragment", "Product Error: ${resource.message}")
+                    binding.progressBar.visibility = View.GONE
                 }
-                else -> {}
             }
         }
     }
-
 
     private fun handleLoadingState(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

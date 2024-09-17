@@ -1,7 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,11 +38,8 @@ class FeaturedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        storesViewModel.fetchStores()
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
-        val view = binding.root
-        productsViewModel.getAllProduct()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,16 +59,14 @@ class FeaturedFragment : Fragment() {
     }
 
     private fun observeCollection() {
-        collectionViewModel.freshCollections.observe(viewLifecycleOwner) { resources->
-            when(resources){
-                is Resource.Loading -> {
-                    binding.progressBar.visibility= View.VISIBLE
-                }
+        collectionViewModel.freshCollections.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    resources.data.let { collectionsAdapter.setItems(it) }
+                    resource.data?.let { collectionsAdapter.setItems(it) }
                 }
-                is Resource.Error -> {}
+                is Resource.Error -> binding.progressBar.visibility = View.GONE
             }
         }
     }
@@ -80,17 +74,13 @@ class FeaturedFragment : Fragment() {
     private fun observeProducts() {
         productsViewModel.allProduct.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> {
-                    binding.progressBar.visibility= View.VISIBLE
-                }
+                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     resource.data?.let { itemAdapter.setProductList(it.map { it.toProductItem() }) }
                     resource.data?.let { productAdapter.setProductList(it.map { it.toProductItem() }.reversed()) }
                 }
-                is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                }
+                is Resource.Error -> binding.progressBar.visibility = View.GONE
             }
         })
     }
@@ -98,9 +88,7 @@ class FeaturedFragment : Fragment() {
     private fun observeStores() {
         storesViewModel.stores.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
+                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     resource.data?.let {
@@ -109,21 +97,15 @@ class FeaturedFragment : Fragment() {
                         binding.rvstores.adapter = storeAdapter
                     }
                 }
-                is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                }
+                is Resource.Error -> binding.progressBar.visibility = View.GONE
             }
         })
     }
 
     private fun setupProductRecyclerView() {
         itemAdapter = ProductAdapter()
-        binding.rvproduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvproduct.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvproduct.adapter = itemAdapter
-        productAdapter = ProductAdapter()
-        binding.rvproductsonsale.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvproductsonsale.adapter = productAdapter
-        productAdapter.setFullWidth(false)
     }
 
     private fun setupTagsRecyclerView() {

@@ -3,35 +3,27 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:padding="8dp"
+    android:id="@+id/product_layout">
 
     <ImageView
-        android:id="@+id/ivproduct"
+        android:id="@+id/product_image"
         android:layout_width="160dp"
         android:layout_height="200dp"
         android:scaleType="fitXY"
         android:src="@drawable/treka" />
 
     <TextView
-        android:id="@+id/firstText"
+        android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Product Name"
         android:layout_marginTop="12dp"
         android:textSize="16sp"
         android:fontFamily="@font/regular" />
 
     <TextView
-        android:id="@+id/secondText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginTop="5dp"
-        android:textSize="14sp"
-        android:fontFamily="@font/regular" />
-
-    <TextView
-        android:id="@+id/priceText"
+        android:id="@+id/product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$Price"
