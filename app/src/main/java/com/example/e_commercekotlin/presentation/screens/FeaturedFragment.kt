@@ -39,7 +39,6 @@ class FeaturedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        storesViewModel.fetchStores()
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
         val view = binding.root
         productsViewModel.getAllProduct()

@@ -20,8 +20,11 @@ class StoresViewModel : ViewModel() {
     private val _stores = MutableLiveData<Resource<Stores>>()
     val stores: LiveData<Resource<Stores>> get() = _stores
 
+    init {
+        fetchStores()
+    }
 
-    fun fetchStores() {
+    private fun fetchStores() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = repository.getStores()

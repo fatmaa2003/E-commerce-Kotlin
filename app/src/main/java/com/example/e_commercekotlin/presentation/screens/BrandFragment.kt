@@ -32,11 +32,11 @@ class BrandFragment : Fragment(), StoreClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeStores()
         brandAdapter = BrandAdapter()
         setListener()
         binding.brandRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.brandRecyclerView.adapter = brandAdapter
+        observeStores()
     }
 
     private fun setListener() {
