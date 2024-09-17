@@ -97,7 +97,7 @@ class searchFragment : Fragment() , ProductAdapter.ClickListener {
         }
 
         // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
 
             val action = searchFragmentDirections.actionSearchFragmentToProductDetails(productId.toInt())

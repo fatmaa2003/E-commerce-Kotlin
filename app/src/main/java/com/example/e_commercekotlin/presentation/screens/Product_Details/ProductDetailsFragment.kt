@@ -280,7 +280,7 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
         viewModel.fetchProductDetails(productId)
 
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
         }
 

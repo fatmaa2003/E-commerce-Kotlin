@@ -26,7 +26,7 @@ import com.example.e_commercekotlin.presentation.viewmodels.CollectionViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.StoresViewModel
 
-class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
+class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener,CollectionsAdapter.ClickListener{
 
     private var _binding: FragmentFeaturedBinding? = null
     private val binding get() = _binding!!
@@ -56,6 +56,8 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
         setupProductRecyclerView()
         productAdapter.setListener(this)
         itemAdapter.setListener(this)
+        collectionsAdapter.setListener(this)
+
         observeStores()
         observeCollection()
         //return view
@@ -114,7 +116,8 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
             }
         })
     }
-    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+
+    override fun onCollectionClick(productId: Long, productName: String, productImage: String) {
         // Create a Bundle with the product details
         val bundle = Bundle().apply {
             putInt("productId", productId.toInt())
@@ -124,7 +127,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
 
         productDetailsViewModel.fetchProductDetails(productId)
 
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
             val action = MarketFragmentDirections.actionMarketFragmentToProductDetails(productId.toInt())
             findNavController().navigate(action)
@@ -155,6 +158,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
         binding.rvtags.adapter = tagsAdapter
     }
 
+
     private fun getDummyTags(): List<Featured> {
         return listOf(
             Featured(R.drawable.tag3, "Sustainable"),
@@ -167,4 +171,28 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener{
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+        }
+
+        productDetailsViewModel.fetchProductDetails(productId)
+
+        val dialogFragment = CustomDialogFragment {
+            val action = MarketFragmentDirections.actionMarketFragmentToProductDetails(productId.toInt())
+            findNavController().navigate(action)
+        }
+
+        // Set the arguments (product details) for the dialog
+        dialogFragment.arguments = bundle
+
+        // Show the dialog
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
+
+    }
+
+
 }
