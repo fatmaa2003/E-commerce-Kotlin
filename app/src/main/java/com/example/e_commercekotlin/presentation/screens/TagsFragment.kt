@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.databinding.FragmentTagsBinding
+import com.example.e_commercekotlin.presentation.adapter.FeaturedTagAdapter
 import com.example.e_commercekotlin.presentation.adapter.TagsAdapter
 import com.example.e_commercekotlin.presentation.model.Featured
 
@@ -33,7 +34,7 @@ class TagsFragment : Fragment() {
 
         activity?.setBottomNavVisibility(visible = false)
 
-        val adapter = TagsAdapter(this, items)
+        val adapter = FeaturedTagAdapter(this, items)
         binding.tagsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.tagsRecyclerView.adapter = adapter
 
