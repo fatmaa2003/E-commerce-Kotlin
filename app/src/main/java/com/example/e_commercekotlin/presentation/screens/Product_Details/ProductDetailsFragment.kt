@@ -3,14 +3,11 @@ package com.example.e_commercekotlin.presentation.screens.Product_Details
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,15 +21,12 @@ import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.handleToolBarState
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.ProductDetailsDto
-import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.adapter.ProductImagesAdapter
 import com.example.e_commercekotlin.presentation.screens.CustomDialogFragment
-import com.example.e_commercekotlin.presentation.screens.searchFragmentDirections
+import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 
 class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
@@ -46,6 +40,7 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
     private var tagsVisible3 = false
     private lateinit var productId : String
     private val viewModel: ProductDetailsViewModel by viewModels()
+    private val purchaseviewModel: PurchaseViewModel by viewModels()
 
     override fun onCreateView(
 
@@ -227,11 +222,12 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
         viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
             cartSizeTextView.text = " ${cartSize.data}"
         }
-
-        // Set click listener for goToCartButton to navigate to cart
-        goToCartButton.setOnClickListener {
+        binding.popup.root.setOnClickListener {
             findNavController().navigate(R.id.action_product_details_to_cart)
         }
+//        cartSizeTextView.setOnClickListener {
+//            findNavController().navigate(R.id.action_product_details_to_cart)
+//        }
     }
 
 
@@ -252,8 +248,15 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
     override fun onResume() {
         super.onResume()
-        binding.popup.root.visibility = View.GONE
-        binding.addToCartButton.root.visibility=View.VISIBLE
+        val isInCart =
+            purchaseviewModel.isProductInCart(productId)
+        if (isInCart) {
+            binding.popup.root.visibility = View.VISIBLE
+            binding.addToCartButton.root.visibility = View.GONE
+        } else {
+            binding.popup.root.visibility = View.GONE
+            binding.addToCartButton.root.visibility = View.VISIBLE
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

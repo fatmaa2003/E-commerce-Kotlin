@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 class CartFragment : Fragment() {
@@ -124,7 +127,7 @@ class CartFragment : Fragment() {
 
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity -= 1
-                        productPrice=itemTotalPrice/quantity
+                        productPrice=productPrice-itemTotalPrice
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
                     updateTotalCartPrice()
