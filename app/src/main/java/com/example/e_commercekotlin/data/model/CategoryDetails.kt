@@ -14,3 +14,4 @@ class CategoryDetails : ArrayList<CategoryDetails.CategoryDetailsItem>(){
         val products: List<ProductResponse.ProductResponseItem>?
     )
 }
+

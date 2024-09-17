@@ -11,6 +11,7 @@ import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
+import com.example.e_commercekotlin.data.model.DressDetailsDto
 import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
@@ -124,12 +125,13 @@ class Repository {
         }
     }
 
-    suspend fun getCategoryById(categoryid: String) :Resource<CategoryDetails>{
+    suspend fun getCategoryById(categoryId: String) :Resource<DressDetailsDto>{
 
         return withContext(Dispatchers.IO){
             try {
                 Resource.Loading(null)
-                val response= api.getCategoryById(categoryid = categoryid)
+                Log.d("categoryId",categoryId.toString())
+                val response= api.getCategoryById(categoryId = categoryId)
                 if (response.isSuccessful){
                     Resource.Success(response.body()!!)
                 }

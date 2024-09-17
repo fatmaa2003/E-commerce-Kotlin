@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_market_fragment_to_product_details"
             app:destination="@id/product_details" />
+        <action
+            android:id="@+id/action_market_fragment_to_collection_details"
+            app:destination="@id/collection_details" />
     </fragment>
     <fragment
         android:id="@+id/tagsFragment"
@@ -174,9 +177,6 @@
         <action
             android:id="@+id/action_collection_to_store"
             app:destination="@id/store" />
-        <action
-            android:id="@+id/action_collection_to_collection_details"
-            app:destination="@id/collection_details" />
     </fragment>
     <fragment
         android:id="@+id/store"
@@ -188,16 +188,23 @@
         <argument
             android:name="storeId"
             app:argType="string"
-        />
+            />
     </fragment>
 
     <fragment
         android:id="@+id/collection_details"
-        android:name="DressesDetails"
+        android:name="com.example.e_commercekotlin.presentation.screens.DressesDetails"
         tools:layout="@layout/fragment_dresses_details">
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
         <action
-            android:id="@+id/action_collection_details_to_product_details"
+            android:id="@+id/action_collection_details_to_product_details2"
             app:destination="@id/product_details" />
+
     </fragment>
 
     <fragment

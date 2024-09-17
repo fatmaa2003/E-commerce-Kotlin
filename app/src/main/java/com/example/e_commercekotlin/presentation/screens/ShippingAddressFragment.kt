@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentShippingAddressBinding
 
@@ -37,6 +38,7 @@ class ShippingAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentShippingAddressBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
         val view = binding.root
 
         val cartItem: CartItem? = args.cartData

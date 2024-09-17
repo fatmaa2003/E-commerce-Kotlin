@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.RetrofitInstance
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
@@ -35,6 +37,7 @@ class CollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_collection, container, false)
+        activity?.setBottomNavVisibility(visible = false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +62,18 @@ class CollectionFragment : Fragment() {
             collectionPageAdapter.toggleShowItems()
             updateToggleTextView()
         }
+
+        collectionPageAdapter.onCollectionClickListener = { categoryItem ->
+            // Handle the category click (e.g., fetch products or navigate to another fragment)
+            Log.d("Category Clicked", "Category ID: ${categoryItem.categoryId}, Name: ${categoryItem.name}")
+
+            val bundle = Bundle().apply {
+                putString("categoryId", categoryItem.categoryId.toString())
+                putString("categoryName", categoryItem.name.toString())
+            }
+            findNavController().navigate(R.id.action_market_fragment_to_collection_details, bundle)
+        }
+
     }
 
     private fun fetchCategories() {
@@ -81,7 +96,7 @@ class CollectionFragment : Fragment() {
     private fun fetchProducts(categoryId: String) {
         lifecycleScope.launch {
             try {
-                // Assuming getProductsByCategoryId is a suspend function
+
                 val productsResponse = RetrofitInstance.api.getProductsByCategoryId(categoryId)
                 if (productsResponse.isSuccessful) {
                     val products = productsResponse.body()
@@ -100,13 +115,14 @@ class CollectionFragment : Fragment() {
 
     private fun updateToggleTextView() {
         if (collectionPageAdapter.isShowingAllItems()) {
-            toggleTextView.text = "ShowLess"
+            toggleTextView.text = "Show Less"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showless, 0, 0, 0)
         } else {
-            toggleTextView.text = "ShowMore"
+            toggleTextView.text = "Show More"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showmore, 0, 0, 0)
         }
     }
+
 
     private fun onCategoryClick() {
         categoryAdapter.onCategoryClick = object : CategoryAdapter.ClickListener {

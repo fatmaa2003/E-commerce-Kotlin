@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.CategoryDetails
 import com.example.e_commercekotlin.data.model.StoreDetailsDto
 import com.example.e_commercekotlin.data.model.Stores
 import com.example.e_commercekotlin.domain.Repository
