@@ -90,6 +90,7 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
             tvTagsHeader3.setOnClickListener { toggleTagsVisibility(llTagsContent3, tvTagsHeader3, 3) }
 
             productAdapter = ProductAdapter()
+            productAdapter.setFullWidth(false)
 
             productImagesAdapter = ProductImagesAdapter()
             clothes.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

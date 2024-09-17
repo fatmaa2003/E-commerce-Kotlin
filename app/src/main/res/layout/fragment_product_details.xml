@@ -9,7 +9,6 @@
         >
         <LinearLayout
             android:id="@+id/content_layout"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -45,7 +44,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bershka Mom Jeans"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -140,8 +138,7 @@
                 android:text="Description"
                 android:layout_marginTop="14dp"
                 android:textSize="14sp"
-                android:fontFamily="@font/semibold"
-                android:textColor="@android:color/black" />
+                android:fontFamily="@font/semibold"/>
 
             <TextView
                 android:id="@+id/descriptiontext"
@@ -169,9 +166,9 @@
                 android:text="-Loose through your hip and thigh -super high rise"
                 android:layout_marginTop="4dp"
                 android:textSize="14sp"
+                android:textColor="@color/description_color"
                 android:fontFamily="@font/regular"
-                android:layout_marginHorizontal="14dp"
-                android:textColor="@android:color/black" />
+                android:layout_marginHorizontal="14dp" />
 
             <View
                 android:layout_width="match_parent"

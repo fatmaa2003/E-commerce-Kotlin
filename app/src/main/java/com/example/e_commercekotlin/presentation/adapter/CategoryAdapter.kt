@@ -29,7 +29,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         // Set dot visibility and text color based on the selected position
         if (position == selectedPosition) {
             holder.dotCollection.visibility = View.VISIBLE
-            holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+            holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.chips_color))
         } else {
             holder.dotCollection.visibility = View.GONE
             holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.lightgray))

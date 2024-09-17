@@ -53,7 +53,9 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         observeData()
         observeProducts()
         binding.feedFragmentToolBar.handleToolBarState(
-            toolBarTitle = "Feed", leftIconImage = R.drawable.cartt, rightIconImage = R.drawable.logout_icon,
+            toolBarTitle = "Feed",
+            leftIconImage = R.drawable.cart_icon,
+            rightIconImage = R.drawable.logout_icon,
             rightIconVisibility = true
         )
         activity?.setBottomNavVisibility(visible = true)

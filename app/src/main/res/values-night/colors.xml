@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
-    <color name="chips_color">#FF000000</color>
+    <color name="chips_color">#FFFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#614FE0</color>
     <color name="transparent">#00F9F8FD</color>
     <color name="dark_surface">#272728</color>
     <color name="grey">#309898A0</color>
     <color name="bottom_nav_color">#868687</color>
-    <color name="bottom_nav_color_selected">#614FE0</color>
+    <color name="bottom_nav_color_selected">#FFFFFFFF</color>
     <color name="transparent_grey">#109898A0</color>
     <color name="lightgray">#808080</color>
     <color name="lightpurple">#D3CEF6</color>
@@ -36,5 +37,4 @@
     <color name="search_opaque">#ffaa3f</color>
     <color name="selected_background">#ffaa3f</color>
     <color name="default_background">#3d3d3d</color>
-
 </resources>
