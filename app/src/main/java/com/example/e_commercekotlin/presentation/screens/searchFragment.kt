@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentSearchFragmenteBinding
@@ -42,6 +44,7 @@ class searchFragment : Fragment() , ProductAdapter.ClickListener {
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.searchRecyclerView.adapter = productAdapter
         observeProducts()
+        onResume()
 
         binding.searchBar.searchEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -59,20 +62,27 @@ class searchFragment : Fragment() , ProductAdapter.ClickListener {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.searchBar.searchEt.text.clear() // Clear the search text
+    }
 
     private fun observeProducts() {
         productViewModel.allProduct.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility= View.VISIBLE
+                    binding.progressBar.show()
+                    binding.contentLayout.visibility = View.GONE
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.contentLayout.visibility = View.VISIBLE
+                    binding.progressBar.hide()
                     resource.data?.map { it.toProductItem() }
                         ?.let { productAdapter.setProductList(it) }
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.contentLayout.visibility = View.GONE
+                    binding.progressBar.hide()
                 }
             }
         })
@@ -89,11 +99,6 @@ class searchFragment : Fragment() , ProductAdapter.ClickListener {
         // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
         val dialogFragment = CustomDialogFragment.newInstance {
             // Action to be executed when the user clicks in the dialog
-//
-//            val action = .actionFeedFragmentToProductDetails(productId.toInt())
-//            findNavController().navigate(action)
-
-//            val action = Directions.actionSearchFragmentToProductDetails(productId.toInt())
 
             val action = searchFragmentDirections.actionSearchFragmentToProductDetails(productId.toInt())
             findNavController().navigate(action)

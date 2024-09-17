@@ -3,567 +3,579 @@
     android:layout_height="match_parent"
     android:scrollbars="none">
 
-    <LinearLayout
-        android:background="@color/white"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="1dp"
-        android:layoutDirection="ltr">
-
-        <include
-            android:id="@+id/product_details_fragment_toolbar"
-            layout="@layout/custom_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/clothes"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-           />
-
+        >
         <LinearLayout
-            android:layout_marginHorizontal="14dp"
+            android:id="@+id/content_layout"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:id="@+id/shop_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Bershka Mom Jeans"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="1dp"
+            android:layoutDirection="ltr">
 
             <include
-                android:id="@+id/shop_image"
-                layout="@layout/circular_image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:id="@+id/product_details_fragment_toolbar"
+                layout="@layout/custom_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/clothes"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                />
+
+            <LinearLayout
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/shop_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bershka Mom Jeans"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <include
+                    android:id="@+id/shop_image"
+                    layout="@layout/circular_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                android:text="$34"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="14dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="6dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/text"
+                    android:paddingVertical="12dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/color_image"
+                        android:layout_width="20dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/blue_image"
+                        />
+
+                    <TextView
+                        android:id="@+id/color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Blue"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/semibold"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/size"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/text"
+                    android:text="Size"
+                    android:layout_marginHorizontal="6dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/semibold"
+                    android:paddingVertical="12dp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDE4E4"
+                android:layout_marginTop="22dp" />
+
+            <TextView
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textSize="16sp"
+                android:fontFamily="@font/regular"
+                android:layout_marginTop="22dp" />
+
+            <TextView
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_marginTop="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/semibold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/descriptiontext"
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
+                android:lineSpacingExtra="2dp"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/description_color" />
+
+            <TextView
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How it fits"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/semibold" />
+
+            <TextView
+                android:id="@+id/fit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-Loose through your hip and thigh -super high rise"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/regular"
+                android:layout_marginHorizontal="14dp"
+                android:textColor="@android:color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDE4E4"
+                android:layout_marginTop="22dp" />
+
+            <LinearLayout
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tv_tags_header1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/baseline_expand_more_24"
+                    android:text="Tags"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/regular"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tags_content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vintage"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="glam"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="durable"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDE4E4"
+                android:layout_marginTop="22dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/tv_tags_header2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/baseline_expand_more_24"
+                    android:text="Composition and care"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/regular"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tags_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDE4E4"
+                android:layout_marginTop="22dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/tv_tags_header3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/baseline_expand_more_24"
+                    android:text="Shipping and return policies"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/regular"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tags_content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:padding="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/tags"
+                        android:layout_margin="1dp"
+                        android:paddingLeft="2dp"
+                        android:padding="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circle"
+                            android:layout_marginTop="2dp"
+                            android:padding="1dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="jeans"
+                            android:textSize="17dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:fontFamily="@font/regular"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDE4E4"
+                android:layout_marginTop="22dp" />
+
+            <TextView
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complete your outfit"
+                android:fontFamily="@font/regular"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginHorizontal="14dp"
+                android:id="@+id/complete_outfit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <include layout="@layout/main_button"
+                android:id="@+id/addToCartButton"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
                 />
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/price"
-            android:text="$34"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="4dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="14dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="6dp"
-                android:orientation="horizontal"
-                android:background="@drawable/text"
-                android:paddingVertical="12dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/color_image"
-                    android:layout_width="20dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/blue_image"
-                    />
-
-                <TextView
-                    android:id="@+id/color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="Blue"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/semibold"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/size"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/text"
-                android:text="Size"
-                android:layout_marginHorizontal="6dp"
-                android:textSize="15sp"
-                android:fontFamily="@font/semibold"
-                android:paddingVertical="12dp"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
-
-        <TextView
-            android:layout_marginHorizontal="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Details"
-            android:textSize="16sp"
-            android:fontFamily="@font/regular"
-            android:layout_marginTop="22dp" />
-
-        <TextView
-            android:layout_marginHorizontal="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:layout_marginTop="14dp"
-            android:textSize="14sp"
-            android:fontFamily="@font/semibold"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:id="@+id/descriptiontext"
-            android:layout_marginHorizontal="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="16sp"
-            android:lineSpacingExtra="2dp"
-            android:fontFamily="@font/regular"
-            android:textColor="@color/description_color" />
-
-        <TextView
-            android:layout_marginHorizontal="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="How it fits"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/semibold" />
-
-        <TextView
-            android:id="@+id/fit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-Loose through your hip and thigh -super high rise"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp"
-            android:fontFamily="@font/regular"
-            android:layout_marginHorizontal="14dp"
-            android:textColor="@android:color/black" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
-
-        <LinearLayout
-            android:layout_marginHorizontal="14dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="2dp">
-
-            <TextView
-                android:id="@+id/tv_tags_header1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/baseline_expand_more_24"
-                android:text="Tags"
-                android:textSize="18dp"
-                android:fontFamily="@font/regular"
-                android:gravity="center_vertical"
-                android:padding="8dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_tags_content1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"
-                >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                  <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vintage"
-                      android:textSize="17dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:fontFamily="@font/regular"
-                     />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="glam"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="durable"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:id="@+id/tv_tags_header2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/baseline_expand_more_24"
-                android:text="Composition and care"
-                android:textSize="18dp"
-                android:fontFamily="@font/regular"
-                android:gravity="center_vertical"
-                android:padding="8dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_tags_content2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp">
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:id="@+id/tv_tags_header3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/baseline_expand_more_24"
-                android:text="Shipping and return policies"
-                android:textSize="18dp"
-                android:fontFamily="@font/regular"
-                android:gravity="center_vertical"
-                android:padding="8dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_tags_content3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:padding="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/tags"
-                    android:layout_margin="1dp"
-                    android:paddingLeft="2dp"
-                    android:padding="2dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/circle"
-                        android:layout_marginTop="2dp"
-                        android:padding="1dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="jeans"
-                        android:textSize="17dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:fontFamily="@font/regular"
-                        />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EDE4E4"
-            android:layout_marginTop="22dp" />
-
-        <TextView
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Complete your outfit"
-            android:fontFamily="@font/regular"
-            android:textSize="20sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="14dp"
-            android:id="@+id/complete_outfit"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-        <ProgressBar
+        <include
+            layout="@layout/progressbar"
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
+            android:layout_centerInParent="true"
             android:visibility="gone"
             />
-        <include layout="@layout/main_button"
-            android:id="@+id/addToCartButton"
-            android:layout_height="50dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
 
-    </LinearLayout>
+    </RelativeLayout>
+
 </ScrollView>

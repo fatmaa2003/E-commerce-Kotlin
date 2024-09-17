@@ -19,7 +19,7 @@ class SplashScreenActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
         lifecycleScope.launch {
-            delay(3000)
+            delay(2500)
             startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             finish()
 

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.databinding.FragmentStoresBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
@@ -56,11 +58,11 @@ class StoresFragment : Fragment() {
         storesViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
                     Log.d("in observer data success", "$resource")
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     resource.data?.let { storesList ->
                         Log.e("hanan&fatma", "observeStores: " + storesList )
                         storeImagesAdapter.setStoreImagesList(storesList)
@@ -68,7 +70,7 @@ class StoresFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     Log.d("in observer data error", "$resource")
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                 }
             }
         })
