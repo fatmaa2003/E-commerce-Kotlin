@@ -106,15 +106,15 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
         viewModel.addToCartStatus.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.progressBar.show()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
                     showCartDialog()
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Error adding item to cart", Toast.LENGTH_SHORT).show()
                 }
             }

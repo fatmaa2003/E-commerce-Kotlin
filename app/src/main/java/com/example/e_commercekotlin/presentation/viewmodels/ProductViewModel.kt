@@ -23,6 +23,7 @@ class ProductViewModel : ViewModel() {
 
     init {
         fetchProduct()
+        getAllProduct()
     }
 
     fun fetchProduct(categoryId:String? = "19") {
@@ -60,7 +61,6 @@ class ProductViewModel : ViewModel() {
 
     fun getAllProduct() {
         viewModelScope.launch {
-            _allProduct.postValue(Resource.Loading(null))
             try {
                 val response = repository.getProducts()
                 _allProduct.postValue(response)
