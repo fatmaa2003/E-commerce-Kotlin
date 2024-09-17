@@ -276,12 +276,10 @@
             android:layout_marginTop="35dp"
             />
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
-
             >
 
             <!-- Title -->
@@ -294,86 +292,16 @@
                 android:textColor="#000000"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Address Item 1 -->
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="24dp">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3910 Crim Lane"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Greendale County, Colorado."
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zip Code 410348"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ava Johnson - Home"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="21 Yellow Av"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Greendale County, Colorado."
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="4dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zip Code 410236"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ava Johnson - Work"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Adresse"
-            android:background="@drawable/text"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:padding="15dp"
-            android:layout_marginTop="16dp"/>
 
 
     </LinearLayout>

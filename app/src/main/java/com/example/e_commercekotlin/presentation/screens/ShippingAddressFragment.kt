@@ -1,7 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
 import Address
-import AddressAdapter
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -19,9 +18,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.ShippingAddress
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentShippingAddressBinding
+import com.example.e_commercekotlin.presentation.adapter.AddressAdapter
 
 
 class ShippingAddressFragment : Fragment() {
@@ -49,10 +50,7 @@ class ShippingAddressFragment : Fragment() {
 
         val subtotal = cartItem.totalCartPrice
 
-        addressList = mutableListOf(
-            Address("Home", "569 Bergstrom Estates, South Reinaldo, HI 42207-8015", "Arrival est: 2 days", "$5 Shipping"),
-            Address("Office", "Apt. 360 659 Margart Centers, Corkeryburgh, IA 17132-2663", "Arrival est: 3 days", "$7 Shipping"),
-        )
+        addressList = ShippingAddress.addresses
         adapter = AddressAdapter(addressList)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
@@ -103,8 +101,8 @@ class ShippingAddressFragment : Fragment() {
                         arrivalEstimate = "Arrival est: 2 days",
                         shippingCost = "$5 Shipping"
                     )
-                    addressList.add(newAddress)
-                    adapter.setAddressList(addressList)
+                    ShippingAddress.addresses.add(newAddress)
+                    adapter.setAddressList(ShippingAddress.addresses)
                     binding.recyclerView.scrollToPosition(addressList.size - 1)
                 }
             }
