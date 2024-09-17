@@ -70,6 +70,8 @@ class MarketFragment : Fragment() {
         highlightTab(tabToHighlight)
     }
 
+
+
     private fun highlightTab(selectedTab: View) {
         val tabViews = listOf(binding.tabFeatured, binding.tabCollection, binding.tabStores, binding.tabTags)
         val dotViews = listOf(binding.dotFeatured, binding.dotCollection,binding.dotStores,binding.dotTags)
@@ -81,7 +83,7 @@ class MarketFragment : Fragment() {
                 textView.setTextColor(
                     if (tabView == selectedTab) {
                         dotViews.getOrNull(index)?.visibility = View.VISIBLE
-                        ContextCompat.getColor(requireContext(), R.color.black)
+                        ContextCompat.getColor(requireContext(), R.color.chips_color)
                     } else {
                         dotViews.getOrNull(index)?.visibility = View.GONE
                         ContextCompat.getColor(requireContext(), R.color.lightgray)

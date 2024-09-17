@@ -17,6 +17,7 @@
     <color name="neutral_grey">#F3F3F3</color>
     <color name="darkpurple">#614FE0</color>
     <color name="description_color">#575758</color>
+    <color name="cart_quantity_color">#575758</color>
     <color name="inactive_text">#868687</color>
     <color name="text_on_label">#3E3E40</color>
     <color name="salered">#DF0707</color>

@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/grey_bg_cart">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -23,7 +22,6 @@
                 android:text="Shopping Cart"
                 android:textSize="32sp"
                 android:fontFamily="@font/extrabold"
-                android:textColor="@android:color/black"
                 android:layout_gravity="center" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cartRecyclerView"
@@ -39,7 +37,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -49,9 +46,9 @@
             android:layout_height="wrap_content"
             android:text="Subtotal (VAT included)"
             android:textSize="16sp"
-            android:fontFamily="@font/regular"
-            android:textColor="@android:color/black" />
-        <Button
+            android:fontFamily="@font/regular" />
+        <include
+            layout="@layout/main_button"
             android:id="@+id/continue_to_checkout"
             android:layout_width="match_parent"
             android:layout_height="70dp"

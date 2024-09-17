@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
@@ -34,6 +35,8 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.continueToCheckout.buttonTv.text = "Continue to checkout"
+        activity?.setBottomNavVisibility(false)
         cartAdapter = CartAdapter(
             emptyList(),
             onDeleteClick = { productItem  ->
@@ -54,7 +57,7 @@ class CartFragment : Fragment() {
 
         fetchCartItems()
 
-        binding.continueToCheckout.setOnClickListener {
+        binding.continueToCheckout.root.setOnClickListener {
             if (cartData != null && cartData!!.cartSize > 0) { // Ensure cartData is not null and not empty
                 val action = CartFragmentDirections.actionCartToShippingAddressFragment2(cartData!!)
                 findNavController().navigate(action)
