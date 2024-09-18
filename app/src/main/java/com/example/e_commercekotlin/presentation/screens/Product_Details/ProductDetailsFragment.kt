@@ -3,6 +3,7 @@ package com.example.e_commercekotlin.presentation.screens.Product_Details
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -225,9 +226,6 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
         binding.popup.root.setOnClickListener {
             findNavController().navigate(R.id.action_product_details_to_cart)
         }
-//        cartSizeTextView.setOnClickListener {
-//            findNavController().navigate(R.id.action_product_details_to_cart)
-//        }
     }
 
 
@@ -248,15 +246,8 @@ class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
     override fun onResume() {
         super.onResume()
-        val isInCart =
-            purchaseviewModel.isProductInCart(productId)
-        if (isInCart) {
-            binding.popup.root.visibility = View.VISIBLE
-            binding.addToCartButton.root.visibility = View.GONE
-        } else {
-            binding.popup.root.visibility = View.GONE
-            binding.addToCartButton.root.visibility = View.VISIBLE
-        }
+        binding.popup.root.visibility = View.GONE
+        binding.addToCartButton.root.visibility=View.VISIBLE
     }
     override fun onDestroyView() {
         super.onDestroyView()

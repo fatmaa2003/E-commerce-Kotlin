@@ -58,15 +58,6 @@ class PurchaseViewModel : ViewModel() {
     }
 
 
-    fun isProductInCart(productId: String): Boolean {
-        val cartResource = cartItems.value
-        if (cartResource is Resource.Success) {
-            val cartItemsList = cartResource.data?.products ?: emptyList()
-            val productIdInt = productId.toIntOrNull()
-            return productIdInt != null && cartItemsList.any { it.productId.toInt() == productIdInt }
-        }
-        return false
-    }
 
     private val _increaseQuantityState = MutableLiveData<Resource<Unit>>()
     val increaseQuantityState: LiveData<Resource<Unit>> get() = _increaseQuantityState
