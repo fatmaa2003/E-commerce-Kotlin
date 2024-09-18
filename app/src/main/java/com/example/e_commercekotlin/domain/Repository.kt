@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
@@ -245,19 +246,6 @@ class Repository {
             val response = apiService.makePurchase(purchaseRequest)
             if (response.isSuccessful) {
                 Resource.Success(response.body()!!)
-            } else {
-                Resource.Error("Error fetching cart size")
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun getCartSize(): Resource<Int> {
-        return try {
-            val response = apiService.getCartSize()
-            if (response.isSuccessful) {
-                Resource.Success(response.body()?.cartSize ?: 0)
             } else {
                 Resource.Error("Error fetching cart size")
             }
