@@ -73,7 +73,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ProductViewH
         if (brand.getImageurl() != null && !brand.getImageurl().isEmpty()) {
             Glide.with(holder.binding.brandImage.image.getContext())
                     .load(brand.getImageurl())
-                    .placeholder(R.drawable.img)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
                     .into(holder.binding.brandImage.image);
         } else {
             holder.binding.brandImage.image.setImageResource(R.drawable.img);

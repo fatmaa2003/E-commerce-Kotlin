@@ -16,12 +16,7 @@
             android:padding="1dp"
             android:layoutDirection="ltr">
 
-            <include
-                android:id="@+id/product_details_fragment_toolbar"
-                layout="@layout/custom_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginHorizontal="14dp"
@@ -552,6 +547,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                />
+
+            <include
+                layout="@layout/shopping_cart"
+                android:id="@+id/popup"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
                 />
 
             <include layout="@layout/main_button"

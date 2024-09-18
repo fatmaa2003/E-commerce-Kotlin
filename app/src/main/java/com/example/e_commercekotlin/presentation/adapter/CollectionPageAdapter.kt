@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.Collection
+import com.example.e_commercekotlin.presentation.listener.StoreClickListener
 
 
 class CollectionPageAdapter : RecyclerView.Adapter<CollectionPageAdapter.MyViewHolder>() {
 
-    private var collectionList: Category= Category()
+    private var collectionList: Category = Category()
     private var showAllItems: Boolean = false
+
+    // Click listener interface
+    var onCollectionClickListener: ((Category.CategoryItem) -> Unit)? = null
 
     fun setCollectionList(collectionList: Category) {
         this.collectionList = collectionList
@@ -44,9 +48,11 @@ class CollectionPageAdapter : RecyclerView.Adapter<CollectionPageAdapter.MyViewH
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            val currentItem = collectionList[position]
-            holder.collectionName.text = currentItem.name
-        when(position){
+        val currentItem = collectionList[position]
+        holder.collectionName.text = currentItem.name
+
+        // Customizing item based on position
+        when (position) {
             0 -> {
                 holder.collectionName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.salered))
                 holder.itemView.setBackgroundResource(R.drawable.red_bckground)
@@ -61,10 +67,13 @@ class CollectionPageAdapter : RecyclerView.Adapter<CollectionPageAdapter.MyViewH
             }
         }
 
+        // Set click listener for each item
+        holder.itemView.setOnClickListener {
+            onCollectionClickListener?.invoke(currentItem) // Trigger the click event
+        }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val collectionName: TextView = itemView.findViewById(R.id.collection_name)
     }
 }
-

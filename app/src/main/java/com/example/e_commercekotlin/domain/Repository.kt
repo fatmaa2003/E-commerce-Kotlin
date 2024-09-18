@@ -1,6 +1,7 @@
 package com.example.e_commercekotlin.domain
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.RetrofitInstance.api
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
@@ -11,6 +12,7 @@ import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
+import com.example.e_commercekotlin.data.model.DressDetailsDto
 import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
@@ -124,12 +126,13 @@ class Repository {
         }
     }
 
-    suspend fun getCategoryById(categoryid: String) :Resource<CategoryDetails>{
+    suspend fun getCategoryById(categoryId: String) :Resource<DressDetailsDto>{
 
         return withContext(Dispatchers.IO){
             try {
                 Resource.Loading(null)
-                val response= api.getCategoryById(categoryid = categoryid)
+                Log.d("categoryId",categoryId.toString())
+                val response= api.getCategoryById(categoryId = categoryId)
                 if (response.isSuccessful){
                     Resource.Success(response.body()!!)
                 }
@@ -243,19 +246,6 @@ class Repository {
             val response = apiService.makePurchase(purchaseRequest)
             if (response.isSuccessful) {
                 Resource.Success(response.body()!!)
-            } else {
-                Resource.Error("Error fetching cart size")
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun getCartSize(): Resource<Int> {
-        return try {
-            val response = apiService.getCartSize()
-            if (response.isSuccessful) {
-                Resource.Success(response.body()?.cartSize ?: 0)
             } else {
                 Resource.Error("Error fetching cart size")
             }

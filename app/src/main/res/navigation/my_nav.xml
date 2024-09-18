@@ -51,6 +51,9 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/sign_in"
             />
+        <action
+            android:id="@+id/action_Feed_fragment_to_cart"
+            app:destination="@id/cart" />
     </fragment>
 
     <fragment
@@ -112,6 +115,9 @@
         <action
             android:id="@+id/action_market_fragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_market_fragment_to_collection_details"
+            app:destination="@id/collection_details" />
     </fragment>
     <fragment
         android:id="@+id/tagsFragment"
@@ -132,6 +138,9 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <action
+            android:id="@+id/action_followFragment_to_product_details"
+            app:destination="@id/product_details" />
     </fragment>
 
 
@@ -175,8 +184,8 @@
             android:id="@+id/action_collection_to_store"
             app:destination="@id/store" />
         <action
-            android:id="@+id/action_collection_to_collection_details"
-            app:destination="@id/collection_details" />
+            android:id="@+id/action_collection_to_product_details"
+            app:destination="@id/product_details" />
     </fragment>
     <fragment
         android:id="@+id/store"
@@ -193,11 +202,18 @@
 
     <fragment
         android:id="@+id/collection_details"
-        android:name="DressesDetails"
+        android:name="com.example.e_commercekotlin.presentation.screens.DressesDetails"
         tools:layout="@layout/fragment_dresses_details">
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
         <action
-            android:id="@+id/action_collection_details_to_product_details"
+            android:id="@+id/action_collection_details_to_product_details2"
             app:destination="@id/product_details" />
+
     </fragment>
 
     <fragment
@@ -229,7 +245,11 @@
         android:id="@+id/paymentFragment2"
         android:name="com.example.e_commercekotlin.presentation.screens.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" />
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment2_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
     <fragment
         android:id="@+id/shippingAddressFragment2"
         android:name="com.example.e_commercekotlin.presentation.screens.ShippingAddressFragment"

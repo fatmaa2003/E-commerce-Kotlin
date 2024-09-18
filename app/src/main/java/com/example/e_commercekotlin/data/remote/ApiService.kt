@@ -6,6 +6,7 @@ import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.data.model.CategoryDetails
+import com.example.e_commercekotlin.data.model.DressDetailsDto
 import com.example.e_commercekotlin.data.model.FreshCollection
 import com.example.e_commercekotlin.data.model.LoginRequest
 import com.example.e_commercekotlin.data.model.LoginResponse
@@ -53,7 +54,7 @@ interface ApiService {
     suspend fun getProductDetailsById(@Path("productId") productId : Long) : Response<ProductDetailsDto>
 
     @GET("categories/{categoryid}")
-    suspend fun getCategoryById(@Path("categoryid") categoryid:String) : Response<CategoryDetails>
+    suspend fun getCategoryById(@Path("categoryid") categoryId:String) : Response<DressDetailsDto>
 
     @GET("categories/{categoryid}")
     suspend fun getStoresById(@Path("categoryid") storeId:String) : Response<StoreDetailsDto>

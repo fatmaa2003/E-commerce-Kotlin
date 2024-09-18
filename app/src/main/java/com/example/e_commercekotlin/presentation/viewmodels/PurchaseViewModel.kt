@@ -1,15 +1,13 @@
 package com.example.e_commercekotlin.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
+ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.AddToCartRequest
 import com.example.e_commercekotlin.data.model.CartItem
-import com.example.e_commercekotlin.data.model.ProductItem
 import com.example.e_commercekotlin.data.model.PurchaseResponse
-import com.example.e_commercekotlin.data.remote.ApiService
 import com.example.e_commercekotlin.domain.Repository
 import kotlinx.coroutines.launch
 
@@ -58,6 +56,8 @@ class PurchaseViewModel : ViewModel() {
             _deleteProductStatus.postValue(response)
         }
     }
+
+
 
     private val _increaseQuantityState = MutableLiveData<Resource<Unit>>()
     val increaseQuantityState: LiveData<Resource<Unit>> get() = _increaseQuantityState

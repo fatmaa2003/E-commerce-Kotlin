@@ -33,17 +33,17 @@ class BrandFragment : Fragment(), StoreClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrandBinding.inflate(inflater, container, false)
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeStores()
         brandAdapter = BrandAdapter()
         setListener()
         binding.brandRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.brandRecyclerView.adapter = brandAdapter
+        observeStores()
     }
 
     private fun setListener() {

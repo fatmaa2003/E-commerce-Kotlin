@@ -21,6 +21,7 @@ import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.databinding.FragmentMarketBinding
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
@@ -45,6 +46,11 @@ class MarketFragment : Fragment() ,ProductAdapter.ClickListener {
         binding = FragmentMarketBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        binding.fragmentMarketToolbar.handleToolBarState(
+            toolBarTitle = "Market",
+            leftIconVisibility = false,
+            searchVisibility = false
+        )
         if (savedInstanceState == null) {
             switchTab(FeaturedFragment(), binding.tabFeatured)
         }

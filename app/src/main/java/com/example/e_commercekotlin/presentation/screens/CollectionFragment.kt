@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,7 @@ import com.example.e_commercekotlin.presentation.adapter.FrequentlyVisitedAdapte
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
 import kotlinx.coroutines.launch
 
-class CollectionFragment : Fragment() {
+class CollectionFragment : Fragment() , FrequentlyVisitedAdapter.OnFrequentlyProductClick {
 
     private lateinit var collectionPageAdapter: CollectionPageAdapter
     private lateinit var frequentlyVisitedAdapter: FrequentlyVisitedAdapter
@@ -36,7 +37,8 @@ class CollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_collection, container, false)
-        activity?.setBottomNavVisibility(visible = false)
+        activity?.setBottomNavVisibility(visible = true)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +54,8 @@ class CollectionFragment : Fragment() {
         collectionPageAdapter = CollectionPageAdapter()
         frequentlyVisitedAdapter = FrequentlyVisitedAdapter()
 
+        frequentlyVisitedAdapter.setListener(this)
+
         collectionRecyclerView.adapter = collectionPageAdapter
         freqVisitedRecyclerView.adapter = frequentlyVisitedAdapter
         fetchCategories()
@@ -61,6 +65,18 @@ class CollectionFragment : Fragment() {
             collectionPageAdapter.toggleShowItems()
             updateToggleTextView()
         }
+
+        collectionPageAdapter.onCollectionClickListener = { categoryItem ->
+            // Handle the category click (e.g., fetch products or navigate to another fragment)
+            Log.d("Category Clicked", "Category ID: ${categoryItem.categoryId}, Name: ${categoryItem.name}")
+
+            val bundle = Bundle().apply {
+                putString("categoryId", categoryItem.categoryId.toString())
+                putString("categoryName", categoryItem.name.toString())
+            }
+            findNavController().navigate(R.id.action_market_fragment_to_collection_details, bundle)
+        }
+
     }
 
     private fun fetchCategories() {
@@ -102,13 +118,14 @@ class CollectionFragment : Fragment() {
 
     private fun updateToggleTextView() {
         if (collectionPageAdapter.isShowingAllItems()) {
-            toggleTextView.text = "ShowLess"
+            toggleTextView.text = "Show Less"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showless, 0, 0, 0)
         } else {
-            toggleTextView.text = "ShowMore"
+            toggleTextView.text = "Show More"
             toggleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.showmore, 0, 0, 0)
         }
     }
+
 
     private fun onCategoryClick() {
         categoryAdapter.onCategoryClick = object : CategoryAdapter.ClickListener {
@@ -118,5 +135,28 @@ class CollectionFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+            putString("source_fragment", "DressesDetails")
+
+        }
+
+        // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
+        val dialogFragment = CustomDialogFragment {
+            // Action to be executed when the user clicks in the dialog
+            val action = MarketFragmentDirections.actionMarketFragmentToProductDetails(productId.toInt())
+            findNavController().navigate(action)
+        }
+
+        // Set the arguments (product details) for the dialog
+        dialogFragment.arguments = bundle
+
+        // Show the dialog
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
     }
 }

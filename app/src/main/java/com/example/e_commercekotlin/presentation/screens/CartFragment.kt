@@ -7,13 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
+import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
+import com.example.e_commercekotlin.presentation.viewmodels.SharedCartViewModel
+
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
@@ -22,6 +28,7 @@ class CartFragment : Fragment() {
     private val viewModel: PurchaseViewModel by viewModels()
     private var cartData: CartItem? = null
     private var adapterPosition = -1
+    private val sharedCartViewModel: SharedCartViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +62,14 @@ class CartFragment : Fragment() {
         fetchCartItems()
 
         binding.continueToCheckout.setOnClickListener {
-            cartData?.let {
-                val action = CartFragmentDirections.actionCartToShippingAddressFragment2(it)
+            if (cartData != null && cartData!!.cartSize > 0) { // Ensure cartData is not null and not empty
+                val action = CartFragmentDirections.actionCartToShippingAddressFragment2(cartData!!)
                 findNavController().navigate(action)
-            } ?: run {
+            } else {
                 Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         observeDeleteProductStatus()
         observeOIncreaseQuantityStatus()
@@ -99,12 +107,13 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity += 1
                         productPrice=itemTotalPrice*quantity
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
@@ -119,12 +128,13 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Cart updated", Toast.LENGTH_SHORT).show()
+
                     cartData?.products?.get(adapterPosition)?.apply {
                         quantity -= 1
-                        productPrice=itemTotalPrice*quantity
+                        productPrice=productPrice-itemTotalPrice
                     }
                     cartAdapter.notifyItemChanged(adapterPosition)
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
@@ -139,14 +149,23 @@ class CartFragment : Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Product deleted", Toast.LENGTH_SHORT).show()
+
                     viewModel.fetchCartItems()
+                    updateTotalCartPrice()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+    private fun updateTotalCartPrice() {
+        var totalCartPrice = 0.0
+        cartData?.products?.forEach {
+            totalCartPrice += it.productPrice
+        }
+        binding.totalPriceTextView.text = "Total: $$totalCartPrice"
+        sharedCartViewModel.updateSubtotal(totalCartPrice)
     }
 
     override fun onDestroyView() {
