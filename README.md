@@ -28,6 +28,11 @@ The app has :three: screen destinations which use Compose Navigation to manage n
 |-------------------------------------|-------------------------------------|-------------------------------------|
 | ![](./readme-assets/gifs/feedandprofile.gif) | ![](./readme-assets/gifs/purchaseflow.gif) | ![](./readme-assets/gifs/searchandcart.gif) |
 
+
+| :feature:Featues&Collection    | :flow:Tags&Stores                          | :feature:Search&Cart                |
+|--------------------------------|--------------------------------------------|-------------------------------------|
+| ![](./readme-assets/gifs/featurescollection.gif) | ![](./readme-assets/gifs/tagsstores.gif) | ![](./readme-assets/gifs/searchandcart.gif) |
+
 - **Authentication Feature**: This feature focuses on user authentication and validation. It utilizes Google Sign-In to ensure that users can securely access their diary entries. By authenticating users, the app guarantees that only authorized individuals can interact with their personal diaries.
 
 - **Home Feature**: The Home feature is responsible for displaying and filtering diary entries based on the date. It provides a user-friendly interface to navigate through diary entries and quickly filter diaries by specific dates. Additional selections can be accessed through the Navigation Drawer.
