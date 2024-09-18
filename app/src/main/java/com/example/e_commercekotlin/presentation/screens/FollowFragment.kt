@@ -29,12 +29,12 @@ class FollowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFollowBinding.inflate(inflater, container, false)
-        activity?.setBottomNavVisibility(visible = false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setBottomNavVisibility(visible = false)
 
         val imageResId = args.imageResId
         val title = args.title
