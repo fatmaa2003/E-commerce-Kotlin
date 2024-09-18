@@ -25,6 +25,7 @@ import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
+import com.example.e_commercekotlin.presentation.LogoutConfirmationDialogFragment
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsViewModel
@@ -59,11 +60,13 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         activity?.setBottomNavVisibility(visible = true)
 
         handleSearchItem(binding = binding.feedFragmentToolBar, action = R.id.action_Feed_fragment_to_searchFragmente, fragment = this)
-       binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener{
-           SharedPreferencesHelper.removeToken()
-
-           findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
-       }
+        binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener {
+            val logoutDialog = LogoutConfirmationDialogFragment.newInstance {
+                SharedPreferencesHelper.removeToken()
+                findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
+            }
+            logoutDialog.show(parentFragmentManager, "LogoutConfirmationDialog")
+        }
         binding.feedFragmentToolBar.leftIcon.setOnClickListener {
             findNavController().navigate(R.id.action_Feed_fragment_to_cart)
         }
