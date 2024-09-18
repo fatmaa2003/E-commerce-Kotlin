@@ -34,7 +34,7 @@ The app has :three: screen destinations which use Compose Navigation to manage n
 
 - **Write Feature**: The Write feature enables users to create new diary entries or modify existing ones. It offers a seamless and intuitive interface for users to capture and document their thoughts, moments, and memories. DiaryApp empowers the users to personalize content by adding emojis and accompanying images
 
-# :memo: Authors :memo:
+# :memo: Contributor :memo:
 - [@fatmaa2003](https://github.com/fatmaa2003)
 - [@nadashahe](https://github.com/nadashahe)
 - [@sheehata](https://github.com/sheehata)
