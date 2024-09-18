@@ -1,5 +1,5 @@
-# Dairy-App
-DiaryApp allows users to write and save diary entries with the option to include photos and expressive emojis to capture the essence of each moment. 
+# Akhein-App
+AKHEINApp allows users to write and save diary entries with the option to include photos and expressive emojis to capture the essence of each moment. 
 
 
 <p align="center">
