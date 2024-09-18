@@ -3,9 +3,9 @@ DiaryApp allows users to write and save diary entries with the option to include
 
 
 <p align="center">
-<img img width="200" height="400" src="./readme-assets/screenshots/image1.jpeg"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="200" height="400" src="./readme-assets/screenshots/image2.jpeg"> &nbsp;&nbsp;&nbsp;&nbsp;   
-<img img width="200" height="400" src="./readme-assets/screenshots/image3.jpeg"> &nbsp;&nbsp;&nbsp;&nbsp; 
+<img img width="200" height="400" src="./readme-assets/screenshots/image1.jpeg"> &nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./readme-assets/screenshots/image2.jpeg"> &nbsp;&nbsp;&nbsp;   
+<img img width="200" height="400" src="./readme-assets/screenshots/image3.jpeg"> &nbsp;&nbsp;&nbsp; 
 
 
 </p>
