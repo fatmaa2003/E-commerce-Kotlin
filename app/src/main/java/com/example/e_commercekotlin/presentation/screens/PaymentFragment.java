@@ -64,7 +64,6 @@ public class PaymentFragment extends Fragment {
         binding.profileFollowingButton.getRoot().setOnClickListener(v -> showBottomSheet());
 
         binding.profileName.setText(ProfileUserDetails.INSTANCE.getFirstName()+ " " + ProfileUserDetails.INSTANCE.getLastName());
-//        Log.d("in payment fragment ",ProfileUserDetails.INSTANCE.getFirstName());
         binding.profileUsername.setText(ProfileUserDetails.INSTANCE.getUsername());
 
     }

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     tools:context=".presentation.screens.PaymentFragment">
 
     <LinearLayout
@@ -27,11 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mahmoud Ali"
-            android:textColor="@color/dark_surface"
             android:gravity="center_horizontal"
             android:fontFamily="@font/extrabold"
             android:textSize="32sp"
             />
+
         <TextView
             android:id="@+id/profile_username"
             android:layout_width="match_parent"
@@ -39,10 +38,9 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:text="mahmoud shehata"
+            android:textColor="#6E6E70"
             android:textSize="14dp"
-            android:textColor="@color/grey60"
             android:layout_marginTop="7dp"
-
             />
         <include
             android:id="@+id/profile_following_button"
@@ -52,8 +50,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="23dp"
              />
-
-
 
         <View
             android:layout_width="match_parent"
@@ -252,7 +248,6 @@
                 android:padding="15dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="10dp"
-                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:gravity="center" />
 
@@ -263,7 +258,6 @@
                 android:text="Add card"
                 android:background="@drawable/text"
                 android:padding="15dp"
-                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:layout_marginEnd="7dp"
                 android:gravity="center" />
@@ -275,13 +269,13 @@
             android:background="#EDE4E4"
             android:layout_marginTop="35dp"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
             >
-
             <!-- Title -->
             <TextView
                 android:layout_width="wrap_content"
@@ -289,7 +283,6 @@
                 android:text="Addresses"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#000000"
                 android:layout_marginBottom="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -298,11 +291,6 @@
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
-
-
         </LinearLayout>
-
-
-
     </LinearLayout>
 </ScrollView>

@@ -19,7 +19,6 @@
         android:text="Ava Johnson Home"
         android:textSize="20sp"
         android:fontFamily="@font/semibold"
-        android:textColor="@color/dark_surface"
         />
 
     <TextView
@@ -52,7 +51,6 @@
             android:text="$5 shipping"
             android:textSize="16sp"
             android:layout_marginStart="10dp"
-            android:textColor="@color/dark_surface"
             android:layout_toEndOf="@id/arrival_estimate_tv"/>
 
     </RelativeLayout>
