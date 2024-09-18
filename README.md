@@ -24,9 +24,9 @@ Here's an overview of the app's architectural modular components:
 ### Navigation
 The app has :three: screen destinations which use Compose Navigation to manage navigation.
 
-| :feature:Feed&Profile               | :feature:home                       | :feature:write                      |
+| :feature:Feed&Profile               | :flow:Purhcase Flow                 | :feature:write                      |
 |-------------------------------------|-------------------------------------|-------------------------------------|
-| ![](./readme-assets/gifs/feedandprofile.gif) | ![](./readme-assets/gifs/gif_2.gif) | ![](./readme-assets/gifs/gif_3.gif) |
+| ![](./readme-assets/gifs/feedandprofile.gif) | ![](./readme-assets/gifs/purchaseflow.gif) | ![](./readme-assets/gifs/gif_3.gif) |
 
 - **Authentication Feature**: This feature focuses on user authentication and validation. It utilizes Google Sign-In to ensure that users can securely access their diary entries. By authenticating users, the app guarantees that only authorized individuals can interact with their personal diaries.
 
