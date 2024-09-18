@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_market_fragment_to_product_details"
             app:destination="@id/product_details" />
+        <action
+            android:id="@+id/action_market_fragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/tagsFragment"

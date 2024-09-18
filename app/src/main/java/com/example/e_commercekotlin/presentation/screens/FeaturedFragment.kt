@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -186,10 +187,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener,CollectionsAda
             findNavController().navigate(action)
         }
 
-        // Set the arguments (product details) for the dialog
         dialogFragment.arguments = bundle
-
-        // Show the dialog
         dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
 
     }
