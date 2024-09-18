@@ -1,3 +1,6 @@
+package com.example.e_commercekotlin.presentation.adapter
+
+import Address
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +15,16 @@ class AddressAdapter(
 ) : RecyclerView.Adapter<AddressAdapter.MyViewHolder>() {
 
     private var selectedPosition: Int = if (addressList.isNotEmpty()) 0 else RecyclerView.NO_POSITION
+    private var isProfileAdapter = false
 
     fun setAddressList(addressList: List<Address>) {
         this.addressList = addressList
         selectedPosition = if (addressList.isNotEmpty()) 0 else RecyclerView.NO_POSITION
         notifyDataSetChanged()
+    }
+
+    fun setIsProfileAdapter(isProfileAdapter: Boolean) {
+        this.isProfileAdapter = isProfileAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -53,6 +61,13 @@ class AddressAdapter(
                 notifyItemChanged(previousSelectedPosition)
                 notifyItemChanged(selectedPosition)
             }
+        }
+        if (isProfileAdapter) {
+            holder.itemView.setOnClickListener(null)
+            holder.addressRadioButton.setOnClickListener(null)
+            holder.addressRadioButton.visibility = View.GONE
+        }else {
+            holder.addressRadioButton.visibility = View.VISIBLE
         }
     }
 

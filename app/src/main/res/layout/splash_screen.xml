@@ -7,7 +7,7 @@
     tools:context=".presentation.screens.SplashScreenActivity"
     tools:deviceIds="tv"
     tools:ignore="MergeRootFrame"
-    android:background="#F6F6F6"
+    android:background="@color/splash_screen_background"
     >
 
     <ImageView

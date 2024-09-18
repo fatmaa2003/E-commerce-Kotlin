@@ -14,14 +14,13 @@ import com.example.e_commercekotlin.data.model.ProductResponse
 import java.text.NumberFormat
 import java.util.Locale
 
-
-
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
+
     private var productList: List<ProductResponse.ProductResponseItem> = listOf()
     private var filteredProductList: List<ProductResponse.ProductResponseItem> = productList
 
     var onProductClick: ClickListener? = null
-    private var isFullWidth: Boolean = true // Default to match parent
+    private var isFullWidth: Boolean = true
 
     fun setProductList(productList: List<ProductResponse.ProductResponseItem>) {
         this.productList = productList
@@ -36,7 +35,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     // Method to set the width dynamically
     fun setFullWidth(fullWidth: Boolean) {
         isFullWidth = fullWidth
-        notifyDataSetChanged() // Refresh the adapter to apply the width changes
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -45,23 +44,25 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         return MyViewHolder(itemView)
     }
 
-    // Bind data to the views in the ViewHolder
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = filteredProductList[position]
 
-        // Set product name and formatted price
+
         holder.productName.text = currentItem.productName
         val priceAsDouble = currentItem.price?.toDouble() ?: 0.0 // Default to 0.0 if conversion fails
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US)
         val formattedPrice = currencyFormat.format(priceAsDouble)
         holder.productPrice.text = formattedPrice
 
-        // Use Glide to load the product image
+
         Glide.with(holder.productImage.context)
             .load(currentItem.imageUrl)
+            .placeholder(R.drawable.loading)
+            .error(R.drawable.error)
             .into(holder.productImage)
 
-        // Set the width of the root layout based on isFullWidth
+
         val layoutParams = holder.itemView.layoutParams as ViewGroup.LayoutParams
         layoutParams.width = if (isFullWidth) {
             ViewGroup.LayoutParams.MATCH_PARENT
@@ -109,6 +110,3 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
         fun onProductClick(productId: Long, productName: String, productImage: String)
     }
 }
-
-
-

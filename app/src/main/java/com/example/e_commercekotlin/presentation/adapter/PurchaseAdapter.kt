@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.databinding.FeaturedCollectionsBinding
 import com.example.e_commercekotlin.data.model.ProductItem
+import com.example.e_commercekotlin.databinding.CheckOutItemBinding
 
 class PurchaseAdapter(private var items: List<ProductItem>) : RecyclerView.Adapter<PurchaseAdapter.PurchaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
-        val binding = FeaturedCollectionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CheckOutItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PurchaseViewHolder(binding)
     }
 
@@ -30,5 +31,5 @@ class PurchaseAdapter(private var items: List<ProductItem>) : RecyclerView.Adapt
         notifyDataSetChanged()
     }
 
-    class PurchaseViewHolder(val binding: FeaturedCollectionsBinding) : RecyclerView.ViewHolder(binding.root)
+    class PurchaseViewHolder(val binding: CheckOutItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

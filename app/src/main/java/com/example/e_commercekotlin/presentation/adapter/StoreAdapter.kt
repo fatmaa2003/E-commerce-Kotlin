@@ -22,6 +22,8 @@ class StoreAdapter(private val stores: Stores) : RecyclerView.Adapter<StoreAdapt
 
         Glide.with(holder.binding.imageView.context)
             .load(store.marketImage)
+            .placeholder(R.drawable.loading)
+            .error(R.drawable.error)
             .into(storeImage)
         holder.binding.firstText.text = store.name ?: "Unknown"
        // holder.binding.secondText.text = store.description ?: "No description"

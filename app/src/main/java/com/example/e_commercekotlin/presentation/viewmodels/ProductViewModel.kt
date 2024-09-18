@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.DatabaseHelper
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.AllProdcutsDto
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.domain.Repository
@@ -23,6 +24,7 @@ class ProductViewModel : ViewModel() {
 
     init {
         fetchProduct()
+        getAllProduct()
     }
 
     fun fetchProduct(categoryId:String? = "19") {
@@ -60,7 +62,6 @@ class ProductViewModel : ViewModel() {
 
     fun getAllProduct() {
         viewModelScope.launch {
-            _allProduct.postValue(Resource.Loading(null))
             try {
                 val response = repository.getProducts()
                 _allProduct.postValue(response)
@@ -69,4 +70,19 @@ class ProductViewModel : ViewModel() {
             }
         }
     }
+
+    private val _cartSize = MutableLiveData<Resource<CartItem>>()
+    val cartSize: LiveData<Resource<CartItem>> get() = _cartSize
+
+    private fun fetchCartSize() {
+        viewModelScope.launch {
+            val response = repository.getCartItems()
+            _cartSize.postValue(response)
+        }
+    }
+
+    init {
+        fetchCartSize()
+    }
+
 }

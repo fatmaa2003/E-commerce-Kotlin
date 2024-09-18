@@ -18,11 +18,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.handleSearchItem
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.SharedPreferencesHelper
 import com.example.e_commercekotlin.data.model.Category
 import com.example.e_commercekotlin.databinding.FragmentFeedBinding
+import com.example.e_commercekotlin.presentation.LogoutConfirmationDialogFragment
 import com.example.e_commercekotlin.presentation.adapter.CategoryAdapter
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
 import com.example.e_commercekotlin.presentation.screens.Product_Details.ProductDetailsViewModel
@@ -51,17 +54,24 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         observeData()
         observeProducts()
         binding.feedFragmentToolBar.handleToolBarState(
-            toolBarTitle = "Feed", leftIconImage = R.drawable.disk, rightIconImage = R.drawable.logout_icon,
+            toolBarTitle = "Feed",
+            leftIconImage = R.drawable.cart_icon,
+            rightIconImage = R.drawable.logout_icon,
             rightIconVisibility = true
         )
         activity?.setBottomNavVisibility(visible = true)
 
         handleSearchItem(binding = binding.feedFragmentToolBar, action = R.id.action_Feed_fragment_to_searchFragmente, fragment = this)
-       binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener{
-           SharedPreferencesHelper.removeToken()
-
-           findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
-       }
+        binding.feedFragmentToolBar.placeHolderIcon.setOnClickListener {
+            val logoutDialog = LogoutConfirmationDialogFragment.newInstance {
+                SharedPreferencesHelper.removeToken()
+                findNavController().navigate(R.id.action_Feed_fragment_to_sign_in)
+            }
+            logoutDialog.show(parentFragmentManager, "LogoutConfirmationDialog")
+        }
+        binding.feedFragmentToolBar.leftIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_Feed_fragment_to_cart)
+        }
 
 
         binding.recyclerView.layoutManager =
@@ -104,16 +114,16 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
             categoryViewModel.data.observe(viewLifecycleOwner, Observer { resource ->
                 when (resource) {
                     is Resource.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.show()
                     }
 
                     is Resource.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                         resource.data?.let { categoryAdapter.updateCategories(it) }
                     }
 
                     is Resource.Error -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                     }
                 }
             })
@@ -140,7 +150,7 @@ class FeedFragment : Fragment(), ProductAdapter.ClickListener {
         }
 
         // Create an instance of CustomDialogFragment and pass the navigation action as a lambda
-        val dialogFragment = CustomDialogFragment.newInstance {
+        val dialogFragment = CustomDialogFragment {
             // Action to be executed when the user clicks in the dialog
             val action = FeedFragmentDirections.actionFeedFragmentToProductDetails(productId.toInt())
             findNavController().navigate(action)

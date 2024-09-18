@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +19,7 @@ import com.example.e_commercekotlin.databinding.FragmentPurchaseBinding
 import com.example.e_commercekotlin.presentation.adapter.PurchaseAdapter
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.ProductViewModel
+import com.example.e_commercekotlin.presentation.viewmodels.SharedCartViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -25,6 +27,7 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
 
     private lateinit var binding: FragmentPurchaseBinding
     val purchaseViewModel: PurchaseViewModel by viewModels()
+    private val sharedCartViewModel: SharedCartViewModel by activityViewModels() // Shared ViewModel for subtotal
     private lateinit var purchaseAdapter: PurchaseAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,16 +46,18 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
 
         purchaseAdapter.updateItems(cartItem.products)
 
-        val subtotal = cartItem.totalCartPrice
         val shipping = 5.0
-        val total = subtotal + shipping
+        updateTotalPrice(cartItem.totalCartPrice, shipping)
 
-        binding.totalPrice.text = "Subtotal: $${String.format("%.2f", subtotal)}\nTotal: $${String.format("%.2f", total)}"
+        binding.continueToCheckout.buttonTv.text = "Confirm and pay"
 
         observePurchaseOrder()
+        observeSubtotalUpdates(shipping) // Observe subtotal from SharedCartViewModel
 
-        binding.continueToCheckout.setOnClickListener {
-            val cartPurchaseData = cartItem.products.map {  AddToCartRequest.Product(productId = it.productId.toLong() , quantity = it.quantity )}
+        binding.continueToCheckout.root.setOnClickListener {
+            val cartPurchaseData = cartItem.products.map {
+                AddToCartRequest.Product(productId = it.productId.toLong(), quantity = it.quantity)
+            }
             if (cartPurchaseData.isNotEmpty()) {
                 purchaseViewModel.makePurchase(cartPurchaseData)
             } else {
@@ -76,9 +81,23 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
                     Toast.makeText(requireContext(), "Purchase failed: ${resource.message}", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
-
+                    // Show loading indicator if needed
                 }
             }
         }
+    }
+
+    // Function to observe subtotal changes from SharedCartViewModel
+    private fun observeSubtotalUpdates(shipping: Double) {
+        sharedCartViewModel.subtotal.observe(viewLifecycleOwner) { updatedSubtotal ->
+            updateTotalPrice(updatedSubtotal, shipping)
+        }
+    }
+
+    // Function to update subtotal and total prices
+    private fun updateTotalPrice(subtotal: Double, shipping: Double) {
+        binding.subtotalTv.text = String.format("%.2f", subtotal)
+        val total = subtotal + shipping
+        binding.totalPrice.text = String.format("%.2f", total)
     }
 }

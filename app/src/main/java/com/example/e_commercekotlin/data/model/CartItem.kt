@@ -8,7 +8,9 @@ data class CartItem(
     val products: List<ProductItem>,
     val totalCartPrice: Double,
     val cartSize: Int
-) : Parcelable
+) : Parcelable {
+
+}
 
 @Parcelize
 data class ProductItem(

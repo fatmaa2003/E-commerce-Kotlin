@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     tools:context=".presentation.screens.PaymentFragment">
 
     <LinearLayout
@@ -27,11 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mahmoud Ali"
-            android:textColor="@color/dark_surface"
             android:gravity="center_horizontal"
             android:fontFamily="@font/extrabold"
             android:textSize="32sp"
             />
+
         <TextView
             android:id="@+id/profile_username"
             android:layout_width="match_parent"
@@ -39,10 +38,9 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:text="mahmoud shehata"
+            android:textColor="#6E6E70"
             android:textSize="14dp"
-            android:textColor="@color/grey60"
             android:layout_marginTop="7dp"
-
             />
         <include
             android:id="@+id/profile_following_button"
@@ -52,8 +50,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="23dp"
              />
-
-
 
         <View
             android:layout_width="match_parent"
@@ -70,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My order and messages"
+                android:text="My Cart"
                 android:layout_marginTop="17dp"
                 android:layout_marginBottom="17dp"
                 android:layout_weight="1"
@@ -79,9 +75,10 @@
                 android:layout_marginStart="9dp" />
 
             <ImageView
+                android:id="@+id/goToCartButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/inbox"
+                android:src="@drawable/cartt"
                 android:layout_gravity="center"
                 android:layout_marginEnd="30dp" />
         </LinearLayout>
@@ -235,39 +232,6 @@
             android:layout_marginHorizontal="7dp"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="30dp"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Edit"
-                android:background="@drawable/text"
-                android:padding="15dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="10dp"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add card"
-                android:background="@drawable/text"
-                android:padding="15dp"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:layout_marginEnd="7dp"
-                android:gravity="center" />
-        </LinearLayout>
 
         <View
             android:layout_width="wrap_content"
@@ -275,15 +239,13 @@
             android:background="#EDE4E4"
             android:layout_marginTop="35dp"
             />
+
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
-
             >
-
             <!-- Title -->
             <TextView
                 android:layout_width="wrap_content"
@@ -291,90 +253,17 @@
                 android:text="Addresses"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#000000"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Address Item 1 -->
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="24dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3910 Crim Lane"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Greendale County, Colorado."
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zip Code 410348"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ava Johnson - Home"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="21 Yellow Av"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Greendale County, Colorado."
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="4dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zip Code 410236"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ava Johnson - Work"
-                    android:textSize="16sp"
-                    android:textColor="#6E6E70"
-                    android:layout_marginTop="2dp" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+        </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Adresse"
-            android:background="@drawable/text"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:padding="15dp"
-            android:layout_marginTop="16dp"/>
 
 
-    </LinearLayout>
 </ScrollView>

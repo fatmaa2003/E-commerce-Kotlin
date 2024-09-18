@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -19,17 +18,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.e_commercekotlin.R
+import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.Util.handleToolBarState
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
-import com.example.e_commercekotlin.data.model.ProductDetailsDto
-import com.example.e_commercekotlin.data.model.ProductResponse
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentProductDetailsBinding
 import com.example.e_commercekotlin.presentation.adapter.ProductAdapter
-import com.example.e_commercekotlin.presentation.model.Featured
 import com.example.e_commercekotlin.presentation.adapter.ProductImagesAdapter
+import com.example.e_commercekotlin.presentation.screens.CustomDialogFragment
+import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 
-class ProductDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment() , ProductAdapter.ClickListener{
 
     private var _binding: FragmentProductDetailsBinding? = null
     private val binding get() = _binding!!
@@ -41,6 +42,7 @@ class ProductDetailsFragment : Fragment() {
     private var tagsVisible3 = false
     private lateinit var productId : String
     private val viewModel: ProductDetailsViewModel by viewModels()
+    var isProductInCart = false
 
     override fun onCreateView(
 
@@ -48,6 +50,8 @@ class ProductDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = false)
+
         return binding.root
     }
 
@@ -60,14 +64,14 @@ class ProductDetailsFragment : Fragment() {
             val quantity = 1
             viewModel.addToCart(productId.toLong(), quantity)
         }
-        binding.productDetailsFragmentToolbar.handleToolBarState(leftIconVisibility = false)
-        observeData()
-        observeAddToCartStatus()
 
+        observeData()
+        cartObserver()
+        observeAddToCartStatus()
+        viewModel.fetchCartSize()
         viewModel.fetchProductDetails(productId.toLong())
         observeData()
         observeProducts()
-
         val sizeTextView: TextView = view?.findViewById(R.id.size) ?: return
         sizeTextView.setOnClickListener {
             showSizeDialog()
@@ -76,14 +80,13 @@ class ProductDetailsFragment : Fragment() {
         colorTextView.setOnClickListener {
             showColorDialog()
         }
-
-
         binding.apply {
             tvTagsHeader1.setOnClickListener { toggleTagsVisibility(llTagsContent1, tvTagsHeader1, 1) }
             tvTagsHeader2.setOnClickListener { toggleTagsVisibility(llTagsContent2, tvTagsHeader2, 2) }
             tvTagsHeader3.setOnClickListener { toggleTagsVisibility(llTagsContent3, tvTagsHeader3, 3) }
 
             productAdapter = ProductAdapter()
+            productAdapter.setFullWidth(false)
 
             productImagesAdapter = ProductImagesAdapter()
             clothes.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -92,21 +95,23 @@ class ProductDetailsFragment : Fragment() {
             completeOutfit.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             completeOutfit.adapter = productAdapter
         }
+        productAdapter.setListener(this)
     }
+
 
     private fun observeAddToCartStatus() {
         viewModel.addToCartStatus.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.progressBar.show()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
-                    showCartDialog()
+                    navigateToCart()
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     Toast.makeText(context, "Error adding item to cart", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -116,13 +121,17 @@ class ProductDetailsFragment : Fragment() {
     private fun observeProducts() {
         viewModel.allProducts.observe(viewLifecycleOwner){ resources ->
             when(resources){
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    binding.progressBar.progressBar.show()
+                }
                 is Resource.Success -> {
-                    Log.e("TAG123", "observeProducts: " + resources.data.orEmpty())
+                    binding.progressBar.progressBar.hide()
                     resources.data?.map { it.toProductItem() }
                         ?.let { productAdapter.setProductList(it) }
                 }
-                is Resource.Error -> {}
+                is Resource.Error -> {
+                    binding.progressBar.progressBar.hide()
+                }
             }
 
         }
@@ -172,11 +181,11 @@ class ProductDetailsFragment : Fragment() {
             when (resource) {
 
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.progressBar.show()
                 }
                 is Resource.Success -> {
                     val productDetails = resource.data?.products?.first()
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                     val image = productDetails?.mainImageUrl.orEmpty()
                     val shopName = productDetails?.name.orEmpty()
                     val description = productDetails?.description.orEmpty()
@@ -184,10 +193,11 @@ class ProductDetailsFragment : Fragment() {
                     val imageList = productDetails?.imageUrls
                     handleUiSuccessState(shopName, description, price, image, imageList.orEmpty())
                     productImagesAdapter.setProductImages(imageList)
+                    handleProductIsInCartVisibility()
                 }
 
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progressBar.hide()
                 }
             }
         }
@@ -198,35 +208,27 @@ class ProductDetailsFragment : Fragment() {
         binding.shopName.text = shopName
         binding.descriptiontext.text= description
         binding.price.text = "$$price"
-        // with -> context
-        // load -> image url
-        // into -> actual image view
         Glide.with(this).load(image).into(binding.shopImage.image)
         productImagesAdapter.setProductImages(imageRecycler)
-
     }
 
-    private fun showCartDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.cart_popup, null)
-        val cartSizeTextView = dialogView.findViewById<TextView>(R.id.cartSizeTextView)
-        val goToCartButton = dialogView.findViewById<Button>(R.id.goToCartButton)
-
-        viewModel.cartSize.observe(viewLifecycleOwner) { cartSize ->
-            Log.d("CartSize", "Observed cart size: ${cartSize.data}")
-            cartSizeTextView.text = " ${cartSize.data}"
+    fun cartObserver(){
+        val cartSizeTextView: TextView = view?.findViewById(R.id.cartSizeTextView) ?: return
+        viewModel.cartSize.observe(viewLifecycleOwner) { cart ->
+            cartSizeTextView.text = " ${cart.data?.cartSize}"
+            isProductInCart = cart.data?.products?.any{ it.productId.toString() == productId } == true
+            handleProductIsInCartVisibility()
         }
+    }
+
+    private fun navigateToCart() {
 
 
-        val alertDialog = AlertDialog.Builder(requireContext())
-            .setView(dialogView)
-            .create()
+        // Observe cart size and update cartSizeTextView
 
-        goToCartButton.setOnClickListener {
-            alertDialog.dismiss()
+        binding.popup.root.setOnClickListener {
             findNavController().navigate(R.id.action_product_details_to_cart)
         }
-
-        alertDialog.show()
     }
 
     private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
@@ -242,21 +244,38 @@ class ProductDetailsFragment : Fragment() {
         tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
     }
 
-//    private fun toggleTagsVisibility(tagsContent: LinearLayout, tagsHeader: TextView, section: Int) {
-//        val isVisible = when (section) {
-//            1 -> tagsVisible1.also { tagsVisible1 = !it }
-//            2 -> tagsVisible2.also { tagsVisible2 = !it }
-//            3 -> tagsVisible3.also { tagsVisible3 = !it }
-//            else -> false
-//        }
-//
-//        tagsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
-//        val drawable = if (isVisible) R.drawable.baseline_expand_more_24 else R.drawable.baseline_expand_less_24
-//        tagsHeader.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
-//    }
+    override fun onResume() {
+        super.onResume()
+        handleProductIsInCartVisibility()
+    }
+
+    private fun handleProductIsInCartVisibility() {
+        binding.popup.root.visibility = if (isProductInCart) View.VISIBLE else View.GONE
+        binding.addToCartButton.root.visibility = if (isProductInCart) View.GONE else View.VISIBLE
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+    override fun onProductClick(productId: Long, productName: String, productImage: String) {
+        val bundle = Bundle().apply {
+            putInt("productId", productId.toInt())
+            putString("product_name", productName)
+            putString("product_image", productImage)
+        }
+
+        viewModel.fetchProductDetails(productId)
+
+        val dialogFragment = CustomDialogFragment {
+            // Action to be executed when the user clicks in the dialog
+        }
+
+        // Set the arguments (product details) for the dialog
+        dialogFragment.arguments = bundle
+
+        // Show the dialog
+        dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
+    }
+
 }

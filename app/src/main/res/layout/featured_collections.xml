@@ -10,13 +10,11 @@
         android:id="@+id/ivcollection"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@drawable/error"
         android:scaleType="centerCrop"
         android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         app:shapeAppearanceOverlay="@style/CornerCut" />
 
 

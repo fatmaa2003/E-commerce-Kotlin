@@ -3,8 +3,6 @@ package com.example.e_commercekotlin.presentation.adapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
@@ -26,17 +24,12 @@ class TagsAdapter(
         val featuredItem = items[position]
         holder.bind(featuredItem)
 
-
-        holder.itemView.findViewById<ImageView>(R.id.tagIcon).setImageResource(featuredItem.imageResId)
-        holder.itemView.findViewById<TextView>(R.id.tagTitle).text = featuredItem.title
-
-
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt("imageResId", featuredItem.imageResId)
                 putString("title", featuredItem.title)
             }
-            fragment.findNavController().navigate(R.id.action_feature_fragment_to_follow, bundle)
+            fragment.findNavController().navigate(R.id.actionTagsFragmentToFollowFragment, bundle)
         }
     }
 
@@ -44,7 +37,6 @@ class TagsAdapter(
 
     inner class ViewHolder(private val binding: FeaturedTagsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Featured) {
-            // Bind data to the view
             binding.tagIcon.setImageResource(item.imageResId)
             binding.tagTitle.text = item.title
         }
