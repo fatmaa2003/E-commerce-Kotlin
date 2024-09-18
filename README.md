@@ -10,10 +10,10 @@ AKHEINApp allows users to write and save diary entries with the option to includ
 
 </p>
 
-Here's an overview of the app's architectural modular components:
-- **App Module**: This is the main module of the DiaryApp, whhich acts as the orchestrator of the different features and modules. It handles the navigation flow between the Authentication, Home, and the Write features, ensuring a cohesive and seamless user experience. The App Module integrates the dependencies from the feature modules and manages the overall lifecycle of the app.
+Here's an overview of the app's features:
+- **Market Feature**: The Market section is divided into four main categories: Featured, Collection, Stores, and Tags.
 
-- **buildSrc**: The buildSrc module serves as a central location for managing project configuration and dependencies. This module allows for a streamlined and standardized setup of project configurations, build scripts, and dependencies, simplifying the build process and ensuring consistency across the app.
+- **Profile Feature**: The Profile section contains essential user information and settings. It displays the user's profile name, username, and offers access to manage preferences, cards, and addresses. Users can update their personal details and control various aspects of their account
 
 - **Data Module**:The Data module in the Android Diary App is responsible for managing data storage and retrieval using both MongoDB and Room. It handles the setup and integration of Mongo Realm, allowing seamless connectivity to the MongoDB backend. The Data module provides functionalities for inserting, fetching, updating, and deleting diary entries in the MongoDB database. Additionally, DiaryApp leverages Room Librayto provide offline access and local caching of diary entries, enhancing the app's responsiveness and offline capabilities.
 
