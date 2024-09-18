@@ -108,7 +108,7 @@ class CartFragment : Fragment() {
                 }
                 is Resource.Success -> {
 
-                    cartData?.products?.get(adapterPosition)?.apply {
+                    cartData?.products?.getOrNull(adapterPosition)?.apply {
                         quantity += 1
                         productPrice=itemTotalPrice*quantity
                     }
