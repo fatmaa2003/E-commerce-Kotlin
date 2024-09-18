@@ -180,6 +180,9 @@
         <action
             android:id="@+id/action_collection_to_store"
             app:destination="@id/store" />
+        <action
+            android:id="@+id/action_collection_to_product_details"
+            app:destination="@id/product_details" />
     </fragment>
     <fragment
         android:id="@+id/store"
