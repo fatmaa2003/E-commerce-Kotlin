@@ -1,5 +1,7 @@
 package com.example.e_commercekotlin.presentation.screens;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +67,13 @@ public class PaymentFragment extends Fragment {
 
         binding.profileName.setText(ProfileUserDetails.INSTANCE.getFirstName()+ " " + ProfileUserDetails.INSTANCE.getLastName());
         binding.profileUsername.setText(ProfileUserDetails.INSTANCE.getUsername());
+
+        binding.goToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(view).navigate(R.id.action_paymentFragment2_to_cart);
+            }
+        });
 
     }
 

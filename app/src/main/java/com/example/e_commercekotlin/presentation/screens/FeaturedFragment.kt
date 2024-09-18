@@ -1,5 +1,6 @@
 package com.example.e_commercekotlin.presentation.screens
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.hide
+import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
@@ -45,6 +47,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener,CollectionsAda
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFeaturedBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = true)
         return binding.root
     }
 
@@ -186,10 +189,7 @@ class FeaturedFragment : Fragment() ,ProductAdapter.ClickListener,CollectionsAda
             findNavController().navigate(action)
         }
 
-        // Set the arguments (product details) for the dialog
         dialogFragment.arguments = bundle
-
-        // Show the dialog
         dialogFragment.show(parentFragmentManager, "CustomDialogFragment")
 
     }

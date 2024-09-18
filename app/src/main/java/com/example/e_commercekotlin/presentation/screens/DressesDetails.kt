@@ -42,6 +42,8 @@ class DressesDetails : Fragment(), ProductAdapter.ClickListener {
         categoryDetailsViewModel.fetchCategoryDetails(categoryId)
         _binding = FragmentDressesDetailsBinding.inflate(inflater, container, false)
         activity?.setBottomNavVisibility(visible = false)
+
+
         return binding.root
     }
 
@@ -58,7 +60,6 @@ class DressesDetails : Fragment(), ProductAdapter.ClickListener {
     }
 
     private fun setupUI(categoryName: String?) {
-        binding.fragmentDressDetailsToolbar.handleToolBarState(leftIconImage = R.drawable.back)
         binding.titleCategoryDetails.text = categoryName
         binding.verticalRecyclerView.layoutManager = GridLayoutManager(
             requireContext(),

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commercekotlin.data.Resource
+import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.data.model.ProductDetailsDto
 import com.example.e_commercekotlin.data.model.ProductResponse
@@ -21,8 +22,8 @@ class ProductDetailsViewModel : ViewModel() {
     private val _addToCartStatus = MutableLiveData<Resource<Unit>>()
     val addToCartStatus: LiveData<Resource<Unit>> get() = _addToCartStatus
 
-    private val _cartSize = MutableLiveData<Resource<Int>>()
-    val cartSize: LiveData<Resource<Int>> get() = _cartSize
+    private val _cartSize = MutableLiveData<Resource<CartItem>>()
+    val cartSize: LiveData<Resource<CartItem>> get() = _cartSize
 
     fun fetchProductDetails(productId: Long) {
         viewModelScope.launch {
@@ -41,9 +42,12 @@ class ProductDetailsViewModel : ViewModel() {
         }
     }
 
+
+
+
     fun fetchCartSize() {
         viewModelScope.launch {
-            val response = repository.getCartSize()
+            val response = repository.getCartItems()
             _cartSize.postValue(response)
         }
     }

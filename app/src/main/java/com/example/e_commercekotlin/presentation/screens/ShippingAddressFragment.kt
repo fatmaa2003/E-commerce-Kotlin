@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.model.CartItem
 import com.example.e_commercekotlin.databinding.FragmentShippingAddressBinding
 import com.example.e_commercekotlin.presentation.adapter.AddressAdapter
+import com.example.e_commercekotlin.presentation.viewmodels.SharedCartViewModel
 
 
 class ShippingAddressFragment : Fragment() {
@@ -31,6 +33,7 @@ class ShippingAddressFragment : Fragment() {
     private lateinit var addressList: MutableList<Address>
     private var _binding: FragmentShippingAddressBinding? = null
     private val binding get() = _binding!!
+    private val sharedCartViewModel: SharedCartViewModel by activityViewModels()
 
     private val args: ShippingAddressFragmentArgs by navArgs()
 
@@ -112,6 +115,12 @@ class ShippingAddressFragment : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sharedCartViewModel.subtotal.observe(viewLifecycleOwner) { updatedSubtotal ->
+            binding.totalPrice.text = "$${String.format("%.2f", updatedSubtotal)}"
+        }
     }
 
     override fun onDestroyView() {

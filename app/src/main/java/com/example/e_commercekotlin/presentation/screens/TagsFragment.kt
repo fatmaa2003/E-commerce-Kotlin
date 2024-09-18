@@ -30,9 +30,10 @@ class TagsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTagsBinding.inflate(inflater, container, false)
+        activity?.setBottomNavVisibility(visible = true)
         val view = binding.root
 
-        activity?.setBottomNavVisibility(visible = false)
+
 
         val adapter = FeaturedTagAdapter(this, items)
         binding.tagsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
