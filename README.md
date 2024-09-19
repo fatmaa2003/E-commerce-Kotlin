@@ -15,11 +15,30 @@ Here's an overview of the app's features:
 
 - **Profile Feature**: The Profile section contains essential user information and settings. It displays the user's profile name, username, and offers access to manage preferences, cards, and addresses. Users can update their personal details and control various aspects of their account
 
-- **Data Module**:The Data module in the Android Diary App is responsible for managing data storage and retrieval using both MongoDB and Room. It handles the setup and integration of Mongo Realm, allowing seamless connectivity to the MongoDB backend. The Data module provides functionalities for inserting, fetching, updating, and deleting diary entries in the MongoDB database. Additionally, DiaryApp leverages Room Librayto provide offline access and local caching of diary entries, enhancing the app's responsiveness and offline capabilities.
+- **Authentication Feature**: This feature handles user authentication, allowing users to sign in and create accounts securely. The app uses a secure authentication mechanism to ensure users can access their profiles and personalize their shopping experience.
 
-- **Common/Core Modules**: The app includes two core modules: *UI* and *Utils*. The UI module contains common Compose functions, components, and UI-related code that are shared across different features. This module promotes code reuse and consistency in the app's user interface. The Utils module provides essential utilities such as model classes, connectivity observers, constants, strings and drawable resources. It ensures a centralized and efficient management of commonly used resources and functionalities.
+- **Feed Feature**: The Feed section displays a variety of stores to users, enabling easy access to view and explore different store offerings. Each store can be selected, leading to a detailed view of its products. The bottom navigation allows users to quickly switch between the Feed, Market, and Profile sections.
 
-- **Feature Modules**: This module includes three destinations: Auth, Home and Write. 'Auth' handles the authentication with the users. 'Home' displays all the data/diaries in our application. And 'Write' module allows you to create a new diary note in your app.
+- **Purchase Flow Feature**:The app provides a seamless and intuitive purchase process to ensure a smooth shopping experience for users. The flow includes the following steps:
+
+Add to Cart:
+Users can browse products and add their desired items to the cart. This is the first step towards completing a purchase.
+
+Cart Overview:
+Once products are in the cart, users can review their selected items by navigating to the cart. The cart displays all chosen products, allowing users to make adjustments, such as changing quantities or removing items. When ready, users can click the "Continue to Checkout" button.
+
+Select or Add Address:
+After proceeding from the cart, users must either select a previously saved shipping address or add a new one. This ensures that products are shipped to the correct location.
+
+Final Order Summary:
+Once the address is confirmed, users are taken to the final page. This summary page displays:
+
+The items selected for purchase
+The subtotal of the products
+The shipping price based on the selected shipping method
+The total amount (subtotal + shipping)
+Confirm and Pay:
+At the final stage, users can confirm their order and proceed to payment. After confirming the details, they click "Confirm and Pay" to complete the transaction. Payment is processed securely to ensure user safety and privacy.
 
 ### Navigation
 The app has :three: screen destinations which use Compose Navigation to manage navigation.

@@ -1,7 +1,11 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +26,8 @@
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/extrabold"
             android:textSize="24sp" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,14 +51,20 @@
             android:layout_marginTop="16dp"
             android:nestedScrollingEnabled="false" />
 
+
         <!-- Keep this false when inside NestedScrollView -->
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="gone" />
     </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+        />
+</RelativeLayout>
+
 </androidx.core.widget.NestedScrollView>
