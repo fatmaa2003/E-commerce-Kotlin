@@ -2,6 +2,7 @@ package com.example.e_commercekotlin.presentation.screens
 
 import CartAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +10,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.e_commercekotlin.R
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.CartItem
-import com.example.e_commercekotlin.data.model.Product
 import com.example.e_commercekotlin.databinding.FragmentCartBinding
 import com.example.e_commercekotlin.presentation.viewmodel.PurchaseViewModel
 import com.example.e_commercekotlin.presentation.viewmodels.SharedCartViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class CartFragment : Fragment() {
 

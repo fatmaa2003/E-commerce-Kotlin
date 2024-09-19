@@ -51,9 +51,9 @@ class MarketFragment : Fragment() ,ProductAdapter.ClickListener {
             leftIconVisibility = false,
             searchVisibility = false
         )
-        if (savedInstanceState == null) {
+
             switchTab(FeaturedFragment(), binding.tabFeatured)
-        }
+
 
         binding.tabFeatured.setOnClickListener {
             if (currentFragment !is FeaturedFragment) {

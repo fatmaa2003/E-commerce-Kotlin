@@ -37,15 +37,13 @@
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="6dp" />
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/followrecycle"
+        <!-- Center the ProgressBar -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:nestedScrollingEnabled="false" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp">
 
-        <!-- Keep this false when inside NestedScrollView -->
+        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -54,5 +52,14 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/followrecycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false" />
+
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -32,7 +32,7 @@ class CollectionsAdapter() : RecyclerView.Adapter<CollectionsAdapter.CollectionV
             .error(R.drawable.error)
             .into(holder.binding.ivcollection)
         holder.binding.firstText.text = item?.productName
-        holder.binding.secondText.text = item?.description
+        //holder.binding.secondText.text = item?.description
 
         holder.itemView.setOnClickListener{
             item?.productId?.let { it1 ->

@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commercekotlin.Util.Constants
+import com.example.e_commercekotlin.Util.hide
 import com.example.e_commercekotlin.Util.setBottomNavVisibility
+import com.example.e_commercekotlin.Util.show
 import com.example.e_commercekotlin.data.Resource
 import com.example.e_commercekotlin.data.model.toProductItem
 import com.example.e_commercekotlin.databinding.FragmentFollowBinding
@@ -74,15 +76,17 @@ class FollowFragment : Fragment(), ProductAdapter.ClickListener {
         productsViewModel.allProduct.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility= View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
+                    binding.progressBar.hide()
                     handleLoadingState(false)
                     resource.data?.let {
                         productAdapter.setProductList(it.map { it.toProductItem() })}
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
+
                 }
             }
         }

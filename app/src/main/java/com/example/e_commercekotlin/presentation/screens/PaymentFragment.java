@@ -2,6 +2,8 @@ package com.example.e_commercekotlin.presentation.screens;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import static com.example.e_commercekotlin.Util.UtilKt.setBottomNavVisibility;
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import com.example.e_commercekotlin.databinding.FragmentPaymentBinding;
 import com.example.e_commercekotlin.presentation.adapter.AddressAdapter;
 import com.example.e_commercekotlin.presentation.adapter.PaymentAdapter;
 import com.example.e_commercekotlin.presentation.adapter.ProfileBottomSheetAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -43,12 +46,15 @@ public class PaymentFragment extends Fragment {
         binding = FragmentPaymentBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
-
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
+
         paymentAdapter = new PaymentAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.cardRecyclerView.setLayoutManager(layoutManager);
@@ -60,6 +66,7 @@ public class PaymentFragment extends Fragment {
         cardModels.add(new CardModel(CardModel.CardType.MASTER_CARD, "123988"));
         cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
         cardModels.add(new CardModel(CardModel.CardType.VISA, "18972"));
+
 
         paymentAdapter.setCardModels(cardModels);
         binding.profileFollowingButton.followingButtonTv.setPadding(UtilJava.dpToPx(20), UtilJava.dpToPx(10),UtilJava.dpToPx(20), UtilJava.dpToPx(10));
